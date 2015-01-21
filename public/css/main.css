@@ -1,0 +1,350 @@
+/* sitename main CSS file */
+/* foundation CSS overrides */
+body, p {
+	color:#2C3E50;
+	font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:300
+}
+	body {position:relative}
+h1, h2, h3, h4, h5, h6 {margin-top:0.75em}
+	h1, h2, h3 {
+		font-family:"Roboto Slab", serif;
+		font-weight:bold;
+	}
+	h4, h5, h6 {
+		font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight:500
+	}
+		h1 {font-size:2rem}
+		h2 {font-size:1.5rem}
+		h3 {font-size:1.125rem}
+		h4 {font-size:1.125rem}
+		h5 {font-size:1rem}
+.row {max-width:75em}
+.contain-to-grid, .top-bar, .top-bar ul li, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section li:not(.has-form) a:not(.button):hover {background:#ECF0F1}
+	.top-bar-section ul li > a {
+		font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:0.875em;
+		font-weight:300
+	}
+		.top-bar-section li:not(.has-form) a:not(.button) {
+			line-height:1.875rem;
+			padding:0 0.625rem;
+		}
+			.top-bar-section li:not(.has-form) a:not(.button):hover {
+				color:#3498DB; 
+				text-decoration:underline
+			}
+	.top-bar .toggle-topbar a {
+		font-size:0.875em;
+		font-weight:300;
+		text-transform: none
+	}
+		.top-bar.expanded .toggle-topbar a {color:#2E86C1}
+a, .top-bar-section ul li > a, .top-bar .toggle-topbar a, .reveal-modal .close-reveal-modal, dialog .close-reveal-modal, .side-nav li a:not(.button) {color:#3498DB}
+	a:hover, .close-reveal-modal:hover, .side-nav li a:not(.button):hover {
+		color:#2E86C1;
+		text-decoration: underline
+	}
+		.close-reveal-modal:hover, a.button:hover {text-decoration: none}
+	a:active, a:focus, .close-reveal-modal:active, .close-reveal-modal:focus, .side-nav li a:not(.button):focus {color:#2875A8}
+button, .button {
+	background-color:#3498DB;
+	border-color:#3498DB
+}
+	button:hover, .button:hover {background-color:#2E86C1}
+	button:focus, .button:focus {background-color:#2875A8}
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea, .prefix,
+.postfix, select {
+	font-size:1.125rem;
+	font-weight:300;
+	height:3.125rem;
+	line-height:3.125rem;
+}
+select {
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height:normal
+}
+label {font-size:1rem}
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="color"]:focus, textarea:focus, select:focus {
+	background:#fff;
+	border-color:#3498DB;
+	box-shadow: none;
+	outline:0
+}
+	button:focus, .button:focus {outline:none}
+
+.location-modal .small-6.large-4:first-child {padding-left:0}
+ul.pagination li a, ul.pagination li button {font-weight:300}
+.side-nav {
+	font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding:0.25rem 0 0.875rem 0;
+}
+	.side-nav li {
+		font-size:1rem;
+		font-weight:200
+	}
+		.side-nav li a:not(.button) {padding:0.4375rem 0}
+			.side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {background:none}
+label.inline {padding-top:0.4rem}
+.left-off-canvas-menu {background:#F4F8F9}
+.move-right .exit-off-canvas {box-shadow: -4px 0 4px rgba(0, 0, 0, 0.1), 2px 0 2px rgba(0, 0, 0, 0.1)}
+.reveal-modal-bg {position:fixed}
+/* typeahead CSS settings */
+.twitter-typeahead {width:100%} /* force input box to be 100% width */
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top:0;
+  padding:0.5rem 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height:275px;
+  overflow-y:auto
+}
+.tt-suggestion {
+  padding:0.25rem 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.6
+}
+	.tt-suggestion.tt-cursor {background-color:#3498DB}
+		.tt-suggestion.tt-cursor p {color:#fff}
+	.tt-suggestion p {margin: 0}
+.gist {font-size: 0.875rem}
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top: 0rem;
+  padding:0.25rem 0rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2)
+}
+/* sitename custom CSS */
+.secondary-text {color:#9EA7AF}
+.hint-text {color:#DEE2E2}
+::-webkit-input-placeholder {font-style: italic} :-moz-placeholder {font-style: italic}  ::-moz-placeholder {font-style: italic} :-ms-input-placeholder {font-style: italic}
+strong {font-weight:500}
+.not-visible {display:none}
+.column.no-left-pad, .columns.no-left-pad {padding-left:0}
+/* logo/tagline styles */
+.logo span:nth-child(1) {color:#98B548}
+.logo span:nth-child(2) {
+	color:#3498DB;
+	font-weight:300;
+}
+.logo span:nth-child(3) {
+	color:#3498DB;
+	font-size:0.5em;
+	font-weight:100
+}
+/* home page logo font size and positioning */
+.home .logo {
+	font-size:2.75rem;
+	margin:2rem 0 0 0;
+}
+/* home page search options */
+.search-options {
+	font-size:0.875rem;
+	margin-top:3rem;
+}
+/* srp page */
+.search-bkgrd {
+	background:#F4F8F9;
+	padding-top:1.5em
+}
+.subhead {margin:1.5rem 0 0 0}
+select.small {
+	font-size:1em;
+	height:2rem;
+	padding:0.25rem
+}
+section[role="main"] > .row {margin-top:-1rem}
+.vehicle {
+	border-bottom:1px solid #DEE2E2;
+	padding:0.5rem 0 1rem 0
+}
+	.vehicle img {
+		margin-bottom:0.75rem;
+		width:100% /* setup for responsive images */
+	} 
+	.vehicle .row + .row {margin-top:0.5rem}
+		.vehicle .row:nth-child(2) > .columns:nth-child(1) {padding-right:0}
+	.vehicle h2 {
+		font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:1.250rem;
+		font-weight:500;
+		margin-bottom:0.15rem
+	}
+	.vehicle .small {
+		font-size:0.750rem;
+		font-style:italic
+	}
+	.vehicle p {margin-bottom:0.6rem}
+	.vehicle .price {
+		color:#98B548;
+		font-size:1.5rem;
+		line-height:0;
+		margin-right:0.5em
+	}
+	.vehicle .detailed-description, .fa-icon.email-alerts + .secondary-text {font-size:0.857rem}
+	.vehicle .fa-icon.save {margin-right:1.5rem}
+.pagination {margin:2rem 0 4rem 0}
+.sidebar {
+	background:#F4F8F9;
+	padding:0 1.25rem
+}
+	.sidebar h3 {padding-top:1.25rem}
+	.sidebar p {line-height:1.2}
+	.fa-icon.email-alerts {display:block}
+/* filter modals */
+.filter-modal label {font-weight:300}
+.filter-modal p {margin-bottom:0.5rem}
+.filter-modal .border {
+	border-bottom:1px solid #DEE2E2;
+	margin:1rem 0;
+	padding-bottom:0.25rem
+}
+.filter-modal button {margin-top:0.75rem}
+.reveal-modal .close-reveal-modal.cancel, dialog .close-reveal-modal.cancel {
+	font-size: 1rem;
+	position: inherit;
+	top: 0rem;
+	right:0rem;
+	margin-left:1.75rem;
+	font-weight: 300;
+}
+/* footer section */
+footer {
+	border-top:1px solid #DEE2E2;
+	font-size:0.857em;
+	padding:1.5em 0
+}
+	footer span {display:block}
+	footer a:after, .search-options a:after {
+		color:#2C3E50;
+		content:"|";
+		display:inline-block;
+		padding:0 0.5em
+	}
+		footer a:last-child:after, .search-options a:last-child:after {
+			content:"";
+			padding:0
+		}	
+/* font icons */
+.fa-icon:before, .fa-icon:after {
+	display:inline-block;
+	font:normal normal normal 14px/1 FontAwesome;
+	font-size:inherit;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale
+}
+	.top-bar .toggle-topbar a.fa-icon:after {
+		content:"\f0d7";
+		margin-left:0.25em
+	}
+		.top-bar.expanded .toggle-topbar a.fa-icon:after {content:"\f0d8"}
+	.fa-icon.location:before {
+		content:"\f041";
+		margin-right:0.5em;
+	}
+	.fa-icon.search:before {
+		color:#3498DB;
+		content:"\f002";
+		font-size:1.75rem;
+		margin-top:0.75rem
+	}
+	.fa-icon.save:before {
+		content:"\f097";
+		margin-right:0.5em
+	}
+	.fa-icon.share:before {
+		content:"\f064";
+		margin-right:0.5em
+	}
+	.fa-icon.close:after, .fa-icon.plus:after {
+		content:"\f00d";
+		font-size:0.857em;
+		margin-left:0.5em;
+	}
+		.fa-icon.plus:after {content:"\f067"}
+	.fa-icon.email-alerts:before {
+		content:"\f0f3";
+		margin-right:0.25em
+	}
+/* media queries */
+@media only screen and (max-width:40em) { /* MOBILE ONLY */
+	/* home page overrides */
+	a.location > span, .search-options > span {display:block}
+	.location-modal .small-12 {
+		margin-top:-1rem;
+		padding-left:0
+	}
+	/* srp overrides */
+	.srp .logo {margin-top:0}
+	.search-bkgrd {padding-top:0em}
+	section[role="main"] header {margin-top:1.5rem}
+	section[role="main"] h1 {
+		font-size:1.125rem;
+		margin-top:0
+	}
+	.subhead {margin:0.75rem 0 0 0}
+	.vehicle {padding-top:0}
+		.vehicle h2 {font-size:1rem}
+		.vehicle p, .location-change {font-size:0.875rem}
+			.location-change a {display:block}
+		.vehicle .price {
+			font-size:1.125rem;
+			line-height:0;
+			margin-right:0.25em
+		}
+		.vehicle .fa-icon.save {
+			display:block;
+			margin-bottom:0.5rem
+		}
+	.pagination {margin:1rem 0}
+		ul.pagination li a, ul.pagination li button {padding:0.0625rem 0.5rem}
+	.mobile-sort p {margin-bottom:0.75rem}
+	.sidebar h3 {padding-top:0.5rem}
+	.side-nav li a:not(.button) {padding:0}
+	.reveal-modal .close-reveal-modal.cancel, dialog .close-reveal-modal.cancel {
+		display:block;
+		margin-left:0
+	}
+}
+@media only screen and (min-width: 40.063em) { /* MEDIUM AND UP */
+	/* home page overrides */
+	.home .logo {
+		font-size:3.375rem;
+		margin-top:4rem
+	}
+	.tagline {font-size:1.125rem}
+	.contain-to-grid .top-bar {max-width:75em}
+		.top-bar, .top-bar-section ul {height:1.875rem !important}
+	/* srp overrides */
+	.srp .logo {
+		font-size:2.7rem;
+		margin-top:0rem
+	}
+	/* make the footer stick to the bottom of the window on desktop applications */
+	.home footer {
+		bottom:0;
+		position:absolute;
+		width:100%
+	}
+}
+@media only screen and (min-width:64.063em) { /* LARGE AND UP */
+	/* srp overrides */
+	.srp .logo {
+		font-size:3.125rem;
+		margin-top:-0.45rem
+	}
+}
+
+
