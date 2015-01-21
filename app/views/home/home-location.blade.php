@@ -3,7 +3,7 @@
 		<a href="#" class="fa-icon location" data-reveal-id="locationModal">{{ $locationInfo }}</a>
 		<div id="locationModal" class="reveal-modal medium location-modal" data-reveal>
 			<h2>Change Location</h2>
-			{{ Form::open(array('action' => 'HomeController@index')) }}
+			{{ Form::open(array('route' => 'post.home')) }}
 			<div class="row">
 				<div class="small-6 medium-4 large-4 columns">
 					<label>Distance

@@ -9,20 +9,20 @@
 	<!-- CSS files -->
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,500,300italic|Roboto+Slab:700,300,100">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/foundation.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('css/foundation.min.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
 
 	<!-- script files -->
 	<script src="js/vendor/modernizr.js"></script>
 </head>
-<body class="{{ $bodyClass }}">
+<body class="{{ $body_class }}">
 	@yield('contents')
 	@include('footer')
 	<!-- script calls here -->
-	<script src="js/vendor/jquery.js"></script>
-	<script src="js/foundation.min.js"></script>
-	<script src="js/typeahead.bundle.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
+	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
+	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
+	<script src="{{ URL::asset('js/main.js') }}"></script>
 </body>
 </html>

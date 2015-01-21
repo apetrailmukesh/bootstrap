@@ -41,7 +41,8 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('login');
+
+		return Redirect::guest('user/login');
 	}
 });
 
@@ -64,7 +65,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::check()) return Redirect::to('/user/profile');
 });
 
 /*

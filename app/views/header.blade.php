@@ -7,9 +7,13 @@
 		<section class="top-bar-section">
 			<!-- right nav section -->
 			<ul class="right">
-				<li><a href="#">Saved Cars (0)</a></li>
-				<li><a href="#">Saved Searches (0)</a></li>
-				<li><a href="#">Sign In</a></li>
+				@if(Auth::check())
+                    <li>{{ HTML::linkRoute('get.user.profile', 'Profile' ) }}</li>
+                    <li>{{ HTML::linkRoute('get.user.logout', 'Logout') }}</li>
+                @else
+                    <li>{{ HTML::linkRoute('get.user.login', 'Sign In') }}</li>
+                    <li>{{ HTML::linkRoute('get.user.register', 'Register') }}</li>
+                @endif
 			</ul>
 		</section>
 	</nav>
