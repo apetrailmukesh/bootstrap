@@ -7,27 +7,34 @@ class HomeController extends BaseController {
 	public function index()
 	{
 		$this->layout->body_class = 'home';
+
 		$data = array(
-			'locationInfo' => 'change location'
+			'location_info' => 'change location'
 		);
+
 		$this->layout->contents = View::make('home/home', $data);
 	}
 
 	public function change()
 	{
 		$this->layout->body_class = 'home';
+
+		Input::flashOnly('zip_code', 'distance', 'search_text');
 		$input = Input::all();
-		Input::flashOnly('zipCodeInput', 'distanceInput', 'searchTextInput');
-		$zipCode = Input::get('zipCodeInput', '');
-		$distance = Input::get('distanceInput', '');
-		$searchText = Input::get('searchTextInput', '');
-		$locationInfo = 'change location';
-		if (!empty($zipCode) && !empty($distance)) {
-			$locationInfo = $distance . ' miles from ' . $zipCode . ' (change)';
+
+		$zip_code = Input::get('zip_code', '');
+		$distance = Input::get('distance', '');
+		$search_text = Input::get('search_text', '');
+		
+		$location_info = 'change location';
+		if (!empty($zip_code) && !empty($distance)) {
+			$location_info = $distance . ' miles from ' . $zip_code . ' (change)';
 		}
+
 		$data = array(
-			'locationInfo' => $locationInfo
+			'location_info' => $location_info
 		);	
+
 		$this->layout->contents = View::make('home/home', $data);
 	}
 }

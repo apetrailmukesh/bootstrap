@@ -7,23 +7,27 @@ class SearchController extends BaseController {
 	public function index()
 	{
 		$this->layout->body_class = 'srp';
+
 		$data = array(
-			'zipCode' => Input::get('zipCodeInput', ''),
-			'distance' => Input::get('distanceInput', ''),
-			'searchText' => Input::get('searchTextInput', '')
+			'zip_code' => Input::get('zip_code', ''),
+			'distance' => Input::get('distance', ''),
+			'search_text' => Input::get('search_text', '')
 		);
+
 		$this->layout->contents = View::make('search/search', $data);
 	}
 
 	public function search()
 	{
 		$this->layout->body_class = 'srp';
+
+		Input::flashOnly('zip_code', 'distance', 'search_text');
+
 		$input = Input::all();
-		Input::flashOnly('zipCodeInput', 'distanceInput', 'searchTextInput');
 		$data = array(
-			'zipCode' => Input::get('zipCodeInput', ''),
-			'distance' => Input::get('distanceInput', ''),
-			'searchText' => Input::get('searchTextInput', '')
+			'zip_code' => Input::get('zip_code', ''),
+			'distance' => Input::get('distance', ''),
+			'search_text' => Input::get('search_text', '')
 		);
 		$this->layout->contents = View::make('search/search', $data);
 	}

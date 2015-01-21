@@ -42,7 +42,7 @@ class UserController extends BaseController {
 				'password' => Input::get('password')
 			);
 	        if (Auth::attempt($data)) {
-	        	return Redirect::route('get.user.profile');
+	        	return Redirect::route('get.home');
 	        }
 	        else {
 				return Redirect::to('user/login')->with('message', 'Invalid email or password')->withInput();
