@@ -1,5 +1,5 @@
 <?php
 
-Route::get('/', 'HomeController@index');
+Route::match(array('GET', 'POST'), '/', 'HomeController@index');
 
-Route::get('/search', 'SearchController@index');
+Route::match(array('GET', 'POST'), '/search', 'SearchController@index');

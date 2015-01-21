@@ -14,7 +14,7 @@
 					<div class="small-9 columns">
 						<div class="row collapse">
 							<div class="small-10 medium-11 large-11 columns">
-								<input type="text" class="typeahead" placeholder="Start new search" />
+								<input type="text" class="typeahead" placeholder="{{ $searchText }}" />
 							</div>
 							<div class="small-2 medium-1 large-1 columns">
 								<a href="index.html" class="button postfix">GO</a>
