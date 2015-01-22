@@ -86,3 +86,20 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('admin', function()
+{
+	if (Auth::guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+
+		return Redirect::guest('user/login');
+	} 
+	else if (Auth::check() && Auth::user()->role != 1)
+	{
+		return Redirect::to('/user/profile');
+	}
+});

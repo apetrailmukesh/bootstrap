@@ -28,6 +28,20 @@ class UserController extends BaseController {
 		$this->layout->contents = View::make('user/user-profile', $data);
 	}
 
+	public function getSavedCars()
+	{
+		$this->layout->body_class = 'user';
+		$data = array();
+		$this->layout->contents = View::make('user/user-saved-cars', $data);
+	}
+
+	public function getSavedSearches()
+	{
+		$this->layout->body_class = 'user';
+		$data = array();
+		$this->layout->contents = View::make('user/user-saved-searches', $data);
+	}
+
 	public function login()
 	{
 		$this->layout->body_class = 'user';
