@@ -59,10 +59,10 @@ class UserController extends BaseController {
 	        	return Redirect::route('get.home');
 	        }
 	        else {
-				return Redirect::to('user/login')->with('message', 'Invalid email or password')->withInput();
+				return Redirect::route('get.user.login')->with('message', 'Invalid email or password')->withInput();
 	        }
 	    } else {
-	        return Redirect::to('user/login')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	        return Redirect::route('get.user.login')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 	    }
 	}
 
@@ -84,9 +84,9 @@ class UserController extends BaseController {
 		    $user->password = Hash::make(Input::get('password'));
 		    $user->role = 0;
 		    $user->save();
-    		return Redirect::to('user/login')->with('message', 'Thanks for registering! Please log in to continue.');
+    		return Redirect::route('get.user.login')->with('message', 'Thanks for registering! Please log in to continue.');
 	    } else {
-	        return Redirect::to('user/register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	        return Redirect::route('get.user.register')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 	    }
 	}
 
@@ -102,9 +102,9 @@ class UserController extends BaseController {
 		    Auth::user()->first_name = Input::get('first_name');
 		    Auth::user()->last_name = Input::get('last_name');
 		    Auth::user()->save();
-    		return Redirect::to('user/profile')->with('message', 'Profile updated successfully.');
+    		return Redirect::route('get.user.profile')->with('message', 'Profile updated successfully.');
 	    } else {
-	        return Redirect::to('user/profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	        return Redirect::route('get.user.profile')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 	    }
 	}
 

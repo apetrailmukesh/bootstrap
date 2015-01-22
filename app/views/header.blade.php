@@ -11,7 +11,6 @@
 					@if(Auth::user()->role == 1)
 						<li>{{ HTML::linkRoute('get.admin.specifications', 'Specifications' ) }}</li>
 						<li>{{ HTML::linkRoute('get.admin.upload', 'Upload' ) }}</li>
-						<li>{{ HTML::linkRoute('get.admin.history', 'History' ) }}</li>
 					@else
 						<li>{{ HTML::linkRoute('get.user.saved-cars', 'Saved Cars' ) }}</li>
 						<li>{{ HTML::linkRoute('get.user.saved-searches', 'Saved Searches' ) }}</li>
