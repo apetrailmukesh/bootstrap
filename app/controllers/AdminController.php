@@ -14,6 +14,13 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-specifications', $data);
 	}
 
+	public function getSpecificationsAdd()
+	{
+		$this->layout->body_class = 'user';
+		$data = array();
+		$this->layout->contents = View::make('admin/admin-specifications-add', $data);
+	}
+
 	public function getUpload()
 	{
 		$this->layout->body_class = 'user';
@@ -24,6 +31,37 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-upload', $data);
 	}
 
+	public function addSpecification()
+	{
+		$this->layout->body_class = 'user';
+		Input::flashOnly('name', 'display', 'type', 'enabled');
+		
+		$rules = array(
+		    'name'=>'required|alpha|min:2',
+			'display'=>'required|alpha|min:2',
+			'type'=>'required'
+	    );
+
+		$validator = Validator::make(Input::all(), $rules);
+	    if ($validator->passes()) {
+	        $specificationType = new SpecificationType;
+		    $specificationType->name = Input::get('name');
+		    $specificationType->display = Input::get('display');
+		    $specificationType->type = Input::get('type');
+
+		    if (Input::get('enabled') === 'true') {
+			    $specificationType->enabled = 1;
+			} else {
+			    $specificationType->enabled = 0;
+			}
+
+		    $specificationType->save();
+    		return Redirect::route('get.admin.specifications')->with('message', 'Specification type added successfully');
+	    } else {
+	        return Redirect::route('get.admin.specifications.add')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	    }
+	}
+
 	public function upload()
 	{
 		$this->layout->body_class = 'user';
@@ -31,14 +69,22 @@ class AdminController extends BaseController {
 		{
 			if (Input::file('file')->isValid())
 			{
-				$file = new DataFile;
-		    	$file->name = Input::file('file')->getClientOriginalName();
-		    	$file->status = 'Uploaded';
-		    	$file->logs = '';
-		    	$file->save();
+				$validExtensions = array('xls', 'xlsx', 'csv');
+				if (in_array(Input::file('file')->getClientOriginalExtension(), $validExtensions)) 
+				{
+					$file = new DataFile;
+			    	$file->name = Input::file('file')->getClientOriginalName();
+			    	$file->status = 'Uploaded';
+			    	$file->logs = '';
+			    	$file->save();
 
-    			Input::file('file')->move(storage_path().'/upload/', Input::file('file')->getClientOriginalName());
-    			return Redirect::route('get.admin.upload')->with('message', 'File uploaded successfully');
+	    			Input::file('file')->move(storage_path().'/upload/', $file->id.'.'.Input::file('file')->getClientOriginalExtension());
+	    			return Redirect::route('get.admin.upload')->with('message', 'File uploaded successfully');
+				}
+				else
+				{
+					return Redirect::route('get.admin.upload')->with('message', 'Only files with xls, xlsx or csv extension are allowed');
+				}	
     		}
     		else 
     		{
