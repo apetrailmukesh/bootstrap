@@ -13,4 +13,6 @@ class SpecificationType extends Eloquent {
 
 		return $value;
 	}
+
+	public $timestamps = false;
 }

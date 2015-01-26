@@ -18,10 +18,9 @@
 						{{ Form::text('display', Input::old('display'),  array('placeholder'=>'Specification type display name')) }}
 						{{ Form::select('type', [
 							'' => 'Select data type',
-							'Integer' => 'Integer',
-							'Boolean' => 'Boolean',
 							'String' => 'String',
-							'Double' => 'Double'], '')
+							'Boolean' => 'Boolean',
+							'Number' => 'Number'], '')
 						}}
 						{{ Form::checkbox('enabled', 'true', 1) }} Enabled
 						<button type="submit" class="button postfix">SAVE</button>

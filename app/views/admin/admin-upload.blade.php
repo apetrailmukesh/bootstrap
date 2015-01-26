@@ -26,16 +26,14 @@
 					<table width="100%">
 						<thead>
 							<tr>
-								<th width="25%">Timestamp</th>
-								<th width="25%">Name</th>
-								<th width="25%">Status</th>
-								<th width="25%">Logs</th>
+								<th width="30%">Name</th>
+								<th width="20%">Status</th>
+								<th width="50%">Logs</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($files->all() as $file)
 								<tr>
-									<td>{{ $file->created_at }}</td>
 									<td>{{ $file->name }}</td>
 									<td>{{ $file->status }}</td>
 									<td>{{ $file->logs }}</td>

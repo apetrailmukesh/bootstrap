@@ -75,10 +75,10 @@ class AdminController extends BaseController {
 					$file = new DataFile;
 			    	$file->name = Input::file('file')->getClientOriginalName();
 			    	$file->status = 'Uploaded';
-			    	$file->logs = '';
+			    	$file->logs = 'The file will be processed soon';
 			    	$file->save();
 
-	    			Input::file('file')->move(storage_path().'/upload/', $file->id.'.'.Input::file('file')->getClientOriginalExtension());
+	    			Input::file('file')->move(storage_path().'/uploads/', $file->id.'.'.Input::file('file')->getClientOriginalExtension());
 	    			return Redirect::route('get.admin.upload')->with('message', 'File uploaded successfully');
 				}
 				else
