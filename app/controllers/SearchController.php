@@ -20,6 +20,34 @@ class SearchController extends BaseController {
 			$location_info = $distance . ' miles from ' . $zip_code;
 		}
 
+		$results = $this->executeSearch();
+
+		$input = Input::all();
+		$data = array(
+			'search_text' => $search_text,
+			'location_info' => $location_info,
+			'results' => $results
+		);
+
+		$this->layout->contents = View::make('search/search', $data);
+	}
+
+	public function search()
+	{
+		$this->layout->body_class = 'srp';
+
+		$currentQuery = Input::query();
+		$queryToAdd = array(
+			'search_text' => Input::get('search_text', '')
+		);
+
+		$query = array_merge($queryToAdd, $currentQuery);
+
+		return Redirect::route('get.search', $query);
+	}
+
+	public function executeSearch()
+	{
 		$url = "http://localhost:9200/vehicles/vehicle/_search"; 
 		$query = array(
 		    "query" => array(
@@ -41,29 +69,50 @@ class SearchController extends BaseController {
 		$json_response = curl_exec($curl);
 		curl_close($curl);
 
-		$results = json_decode($json_response, true);
+		$search_results = json_decode($json_response, true);
 
-		$input = Input::all();
-		$data = array(
-			'search_text' => $search_text,
-			'location_info' => $location_info,
-			'results' => $results['hits']['hits']
-		);
+		$results = array();
+		foreach ($search_results['hits']['hits'] as $value) {
+			$year = $value['_source']['year'];
+			$make = $value['_source']['make'];
+			$model = $value['_source']['model'];
+			$url = $value['_source']['url'];
+			$dealer = $value['_source']['dealer'];
 
-		$this->layout->contents = View::make('search/search', $data);
-	}
+			$specifications = $value['_source']['specifications'];
 
-	public function search()
-	{
-		$this->layout->body_class = 'srp';
+			$price_specification = '20';
+			$price = '';
+			if (array_key_exists($price_specification, $specifications)) {
+				$price = '$ ' . $specifications[$price_specification];
+			}
 
-		$currentQuery = Input::query();
-		$queryToAdd = array(
-			'search_text' => Input::get('search_text', '')
-		);
+			$miles_specification = '4';
+			$miles = '';
+			if (array_key_exists($miles_specification, $specifications)) {
+				$miles = $specifications[$miles_specification] . ' mi.';
+			}
 
-		$query = array_merge($queryToAdd, $currentQuery);
+			$description_specification = '19';
+			$description = '';
+			if (array_key_exists($description_specification, $specifications)) {
+				$description = substr($specifications[$description_specification], 0, 250);
+			}
 
-		return Redirect::route('get.search', $query);
+			$result = array(
+				'year' => $year,
+				'make' => $make,
+				'model' => $model,
+				'url' => $url,
+				'dealer' => $dealer,
+				'price' => $price,
+				'miles' => $miles,
+				'description' => $description
+			);
+
+    		array_push($results, $result);
+		}
+
+		return $results;		
 	}
 }
