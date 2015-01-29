@@ -1,4 +1,4 @@
-{{ Form::open(array('route' => 'post.search')) }}
+{{ Form::open(array('route' => 'post.home.start')) }}
 	<div class="row">
 		<div class="small-12 medium-7 large-7 columns small-centered">
 			<div class="row collapse">

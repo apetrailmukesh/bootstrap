@@ -18,7 +18,9 @@
 							<p class="secondary-text subhead"><strong>FEATURED VEHICLES</strong></p>
 						</div>
 					</div>
-					@include('search/search-vehicle')
+					@foreach($results as $result)
+						@include('search/search-vehicle')
+					@endforeach
 					@include('search/search-pager')
 				</div>
 			</div>

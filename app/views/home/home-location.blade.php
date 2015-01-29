@@ -17,13 +17,13 @@
 						'200' => '200 Miles',
 						'250' => '250 Miles',
 						'500' => '500 Miles',
-						'0' => 'Unlimited'], '50')
+						'0' => 'Unlimited'], $distance)
 					}}
 				</label>
 			</div>
 			<div class="small-6 medium-4 large-4 columns">
 				<label>Zip Code
-					{{ Form::text('zip_code', Input::old('zip_code'),  array('placeholder'=>'12345')) }}
+					{{ Form::text('zip_code', $zip_code,  array('placeholder'=>'12345')) }}
 				</label>
 			</div>
 			<div class="small-12 medium-4 large-4 columns">
