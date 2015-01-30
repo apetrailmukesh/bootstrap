@@ -23,6 +23,8 @@
 	<script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
 	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
 	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
+	<script src="{{ URL::asset('js/jquery-1.11.2.min.js') }}"></script>
+	<script src="{{ URL::asset('js/application.js') }}"></script>
 	<script src="{{ URL::asset('js/main.js') }}"></script>
 </body>
 </html>

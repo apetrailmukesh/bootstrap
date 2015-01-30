@@ -20,31 +20,24 @@ class SearchController extends BaseController {
 			$location_info = $distance . ' miles from ' . $zip_code;
 		}
 
+		$title = $search_text;
+		if (!empty($zip_code)) {
+			$title = $title . ' near ' . $zip_code;
+		}
+
+
 		$response = $this->executeSearch();
 
 		$input = Input::all();
 		$data = array(
 			'search_text' => $search_text,
+			'title' => $title,
 			'location_info' => $location_info,
 			'total' => $response['total'],
 			'results' => $response['results']
 		);
 
 		$this->layout->contents = View::make('search/search', $data);
-	}
-
-	public function search()
-	{
-		$this->layout->body_class = 'srp';
-
-		$currentQuery = Input::query();
-		$queryToAdd = array(
-			'search_text' => Input::get('search_text', '')
-		);
-
-		$query = array_merge($queryToAdd, $currentQuery);
-
-		return Redirect::route('get.search', $query);
 	}
 
 	public function executeSearch()

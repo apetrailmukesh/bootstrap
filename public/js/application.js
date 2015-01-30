@@ -1,0 +1,21 @@
+(function ($) {
+
+	$( ".results-search-form" ).submit(function( event ) {
+  		var search_text = $(this).find('input[name="search_text"]').val();
+  		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
+	function updateQueryStringParameter(uri, key, value) {
+	  	var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+		var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+		if (uri.match(re)) {
+			return uri.replace(re, '$1' + key + "=" + value + '$2');
+		}
+		else {
+		    return uri + separator + key + "=" + value;
+		}
+	}
+
+})(jQuery);

@@ -49,7 +49,7 @@ class HomeController extends BaseController {
 		$this->layout->contents = View::make('home/home', $data);
 	}
 
-	public function start()
+	public function search()
 	{
 		$this->layout->body_class = 'srp';
 

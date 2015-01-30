@@ -5,16 +5,18 @@
 				<span>site</span><span>name</span><span>.com</span>
 			</h1>
 		</div>
-		<div class="small-9 columns">
-			<div class="row collapse">
-				<div class="small-10 medium-11 large-11 columns">
-					<input type="text" class="typeahead" placeholder="{{ $search_text }}" />
-				</div>
-				<div class="small-2 medium-1 large-1 columns">
-					<a href="index.html" class="button postfix">GO</a>
+		<form id="web_search" class="results-search-form">
+			<div class="small-9 columns">
+				<div class="row collapse">
+					<div class="small-10 medium-11 large-11 columns">
+						{{ Form::text('search_text', $search_text,  array('placeholder'=>'Enter make, model, or style', 'class' => 'typeahead')) }}
+					</div>
+					<div class="small-2 medium-1 large-1 columns">
+						<button type="submit" class="button postfix">GO</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 <div class="show-for-small search-bkgrd"> <!-- mobile version -->
@@ -29,15 +31,17 @@
 		</div>
 	</div>
 	<div class="row not-visible" id="mobile-search-box">
-		<div class="small-12 column small-centered">
-			<div class="row collapse">
-				<div class="small-10 columns">
-					<input type="text" class="typeahead" placeholder="{{ $search_text }}" />
-				</div>
-				<div class="small-2 columns">
-					<a href="index.html" class="button postfix">GO</a>
+		<form id="mobile_search" class="results-search-form">
+			<div class="small-12 column small-centered">
+				<div class="row collapse">
+					<div class="small-10 columns">
+						{{ Form::text('search_text', $search_text,  array('placeholder'=>'Enter make, model, or style', 'class' => 'typeahead')) }}
+					</div>
+					<div class="small-2 columns">
+						<button type="submit" class="button postfix">GO</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

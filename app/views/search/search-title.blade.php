@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="small-12 columns">
-		<h1>{InvType} {Make} {Model} for sale near {City Name}, {ST}</h1>
+		<h1>{{ $title }}</h1>
 	</div>
 </div>
 <div class="row">
