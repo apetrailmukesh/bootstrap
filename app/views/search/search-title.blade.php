@@ -41,5 +41,5 @@
 			<a class="close-reveal-modal">&#215</a>
 		</div>
 	</div>
-	@include('search/search-sort')
+	@include('search/search-large-sort')
 </div>

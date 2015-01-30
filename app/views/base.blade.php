@@ -21,12 +21,13 @@
 	@yield('contents')
 	@include('footer')
 	<!-- script calls here -->
+	<script src="{{ URL::asset('js/vendor/modernizr.js') }}"></script>
 	<script src="{{ URL::asset('js/vendor/jquery.js') }}"></script>
+	<script src="{{ URL::asset('js/vendor/fastclick.js') }}"></script>
 	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
 	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
-	<script src="{{ URL::asset('js/jquery-1.11.2.min.js') }}"></script>
 	<script src="{{ URL::asset('js/jquery.simplePagination.js') }}"></script>
-	<script src="{{ URL::asset('js/application.js') }}"></script>
 	<script src="{{ URL::asset('js/main.js') }}"></script>
+	<script src="{{ URL::asset('js/application.js') }}"></script>
 </body>
 </html>

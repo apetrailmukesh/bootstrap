@@ -128,7 +128,7 @@ class SearchController extends BaseController {
 			}
 
 			$image_specification = 'ImageUrls';
-			$image = 'images/vehicle-01.png';
+			$image = 'images/empty.png';
 			if (array_key_exists($image_specification, $specifications)) {
 				$image = $specifications[$image_specification];
 			}

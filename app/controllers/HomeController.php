@@ -61,7 +61,9 @@ class HomeController extends BaseController {
 			'zip_code' => $zip_code,
 			'distance' => $distance,
 			'search_text' => $search_text,
-			'page' => 1
+			'page' => 1,
+			'sort' => 'price',
+			'order' => 1
 		);
 
 		return Redirect::route('get.search', $query);

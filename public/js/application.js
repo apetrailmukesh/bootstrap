@@ -1,5 +1,7 @@
 (function ($) {
 
+	setupPager();
+
 	$( ".results-search-form" ).submit(function( event ) {
   		var search_text = $(this).find('input[name="search_text"]').val();
   		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);
@@ -18,26 +20,29 @@
 		}
 	}
 
-	function getParameterByName(name) {
+	function getQueryStringParameter(name) {
 	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-	        results = regex.exec(location.search);
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+	    var results = regex.exec(location.search);
+
 	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 
-	var total_results = $("#total_results").val();
-	var page = getParameterByName('page');
+	function setupPager() {
+		var total_results = $("#total_results").val();
+		var page = getQueryStringParameter('page');
 
-	$('#pagination').pagination({
-        items: total_results,
-        itemsOnPage: 10,
-        currentPage: page,
-        hrefTextPrefix: '#',
-        selectOnClick: false,
-        onPageClick : function (pageNumber, event) {
-	        var edited = updateQueryStringParameter(document.URL, 'page', pageNumber);
-  			window.location.href = edited;
-    	}
-    });
+		$('#pagination').pagination({
+	        items: total_results,
+	        itemsOnPage: 10,
+	        currentPage: page,
+	        hrefTextPrefix: '#',
+	        selectOnClick: false,
+	        onPageClick : function (pageNumber, event) {
+		        var edited = updateQueryStringParameter(document.URL, 'page', pageNumber);
+	  			window.location.href = edited;
+	    	}
+	    });
+	}
 
 })(jQuery);
