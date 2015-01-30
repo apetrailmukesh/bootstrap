@@ -62,8 +62,7 @@ class HomeController extends BaseController {
 			'distance' => $distance,
 			'search_text' => $search_text,
 			'page' => 1,
-			'sort' => 'price',
-			'order' => 1
+			'sort' => 'price-1'
 		);
 
 		return Redirect::route('get.search', $query);

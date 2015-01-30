@@ -1,10 +1,19 @@
 (function ($) {
 
 	setupPager();
+	selectSort();
 
 	$( ".results-search-form" ).submit(function( event ) {
   		var search_text = $(this).find('input[name="search_text"]').val();
   		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
+	$('#large-sort').on('change', function (e) {
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    var edited = updateQueryStringParameter(document.URL, 'sort', valueSelected);
   		window.location.href = edited;
   		event.preventDefault();
 	});
@@ -43,6 +52,11 @@
 	  			window.location.href = edited;
 	    	}
 	    });
+	}
+
+	function selectSort() {
+		var large_sort = getQueryStringParameter('sort');
+		$('#large-sort').val(large_sort);
 	}
 
 })(jQuery);

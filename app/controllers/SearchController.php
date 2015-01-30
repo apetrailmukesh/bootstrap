@@ -42,22 +42,9 @@ class SearchController extends BaseController {
 
 	public function executeSearch()
 	{
-		$from = (Input::get('page', '1') - 1 ) * 10;
-		$search_text = Input::get('search_text', '');
-
-		$url = "http://localhost:9200/vehicles/vehicle/_search"; 
-		$query = array(
-			'from' => $from,
-			'size' => 10,
-		    "query" => array(
-		        "term" => array(
-		        	"_all" => $search_text
-		        )
-		    )
-		);
-
-		$content = json_encode($query);
+		$content = json_encode($this->buildQuery());
 		
+		$url = "http://localhost:9200/vehicles/vehicle/_search";
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -70,6 +57,72 @@ class SearchController extends BaseController {
 
 		$search_results = json_decode($json_response, true);
 
+		$results = $this->decodeResults($search_results);
+		$total = $search_results['hits']['total'];
+
+		$response = array(
+			'total' => $total,
+			'results' => $results
+		);
+
+		return $response;		
+	}
+
+	public function buildQuery() 
+	{
+		$from = (Input::get('page', '1') - 1 ) * 10;
+		$search_text = Input::get('search_text', '');
+		$sort = $this->buildSortQuery();
+
+		$query = array(
+			"from" => $from,
+			"size" => 10,
+			"sort" => $sort,
+		    "query" => array(
+		        "term" => array(
+		        	"_all" => $search_text
+		        )
+		    )
+		);
+
+		return $query;
+	}
+
+	public function buildSortQuery() 
+	{
+		$sort = array();
+
+		$sort_parameters = explode("-", Input::get('sort', 'price-1'));
+		$sort_by = $sort_parameters[0];
+		$sort_order = $sort_parameters[1];
+
+		if ($sort_by == 'price') {
+			if ($sort_order == '1') {
+				array_push($sort, array("specifications.Price" => array("order" => "desc", "mode" => "min")));
+			} else if ($sort_order == 0) {
+				array_push($sort, array("specifications.Price" => array("order" => "asc", "mode" => "min")));
+			}
+		} else if ($sort_by == 'miles') {
+			if ($sort_order == '1') {
+				array_push($sort, array("specifications.Miles" => array("order" => "desc", "mode" => "min")));
+			} else if ($sort_order == 0) {
+				array_push($sort, array("specifications.Miles" => array("order" => "asc", "mode" => "min")));
+			}
+		} else if ($sort_by == 'year') {
+			if ($sort_order == '1') {
+				array_push($sort, array("year" => array("order" => "desc")));
+			} else if ($sort_order == 0) {
+				array_push($sort, array("year" => array("order" => "asc")));
+			}
+		}
+
+		array_push($sort, array("_score" => array("order" => "desc")));
+
+		return $sort;
+	}
+
+	public function decodeResults($search_results)
+	{
 		$results = array();
 		foreach ($search_results['hits']['hits'] as $value) {
 			$year = $value['_source']['year'];
@@ -152,13 +205,6 @@ class SearchController extends BaseController {
     		array_push($results, $result);
 		}
 
-		$total = $search_results['hits']['total'];
-
-		$response = array(
-			'total' => $total,
-			'results' => $results
-		);
-
-		return $response;		
+		return $results;
 	}
 }

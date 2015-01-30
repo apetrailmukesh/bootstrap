@@ -8,17 +8,17 @@
 				<div class="small-6 medium-4 large-4 columns">
 					<label>Distance
 						{{ Form::select('distance', [
-						'10' => '10 Miles',
-						'25' => '25 Miles',
-						'50' => '50 Miles',
-						'75' => '75 Miles',
-						'100' => '100 Miles',
-						'150' => '150 Miles',
-						'200' => '200 Miles',
-						'250' => '250 Miles',
-						'500' => '500 Miles',
-						'0' => 'Unlimited'], $distance)
-					}}
+							'10' => '10 Miles',
+							'25' => '25 Miles',
+							'50' => '50 Miles',
+							'75' => '75 Miles',
+							'100' => '100 Miles',
+							'150' => '150 Miles',
+							'200' => '200 Miles',
+							'250' => '250 Miles',
+							'500' => '500 Miles',
+							'0' => 'Unlimited'], $distance)
+						}}
 				</label>
 			</div>
 			<div class="small-6 medium-4 large-4 columns">

@@ -13,9 +13,9 @@
 						<option value="miles-0">Mileage - Lowest</option>
 						<option value="year-1">Year - Newest</option>
 						<option value="year-0">Year - Oldest</option>
-						<option value="distance-1">Distance - Nearest</option>
-						<option value="makemodel-1">Make/Model - A to Z</option>
-						<option value="date-1">Date Listed - Newest</option>
+						<!-- <option value="distance-1">Distance - Nearest</option> -->
+						<!-- <option value="makemodel-1">Make/Model - A to Z</option> -->
+						<!-- <option value="date-1">Date Listed - Newest</option> -->
 					</select>
 				</div>
 			</div>
