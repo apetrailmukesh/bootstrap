@@ -20,13 +20,14 @@ class SearchController extends BaseController {
 			$location_info = $distance . ' miles from ' . $zip_code;
 		}
 
-		$results = $this->executeSearch();
+		$response = $this->executeSearch();
 
 		$input = Input::all();
 		$data = array(
 			'search_text' => $search_text,
 			'location_info' => $location_info,
-			'results' => $results
+			'total' => $response['total'],
+			'results' => $response['results']
 		);
 
 		$this->layout->contents = View::make('search/search', $data);
@@ -81,22 +82,57 @@ class SearchController extends BaseController {
 
 			$specifications = $value['_source']['specifications'];
 
-			$price_specification = '20';
+			$price_specification = 'Price';
 			$price = '';
 			if (array_key_exists($price_specification, $specifications)) {
 				$price = '$ ' . $specifications[$price_specification];
 			}
 
-			$miles_specification = '4';
+			$miles_specification = 'Miles';
 			$miles = '';
 			if (array_key_exists($miles_specification, $specifications)) {
 				$miles = $specifications[$miles_specification] . ' mi.';
 			}
 
-			$description_specification = '19';
+			$description_specification = 'Description';
 			$description = '';
 			if (array_key_exists($description_specification, $specifications)) {
-				$description = substr($specifications[$description_specification], 0, 250);
+				$description = $specifications[$description_specification];
+				$description = strip_tags($description);
+				if (strlen($description) > 500) {
+				    $stringCut = substr($description, 0, 250);
+				    $description = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="#">Read More</a>'; 
+				}
+			}
+
+			$trim_specification = 'Trim';
+			$trim = '';
+			if (array_key_exists($trim_specification, $specifications)) {
+				$trim = $specifications[$trim_specification];
+			}
+
+			$transmission_specification = 'Transmission';
+			$transmission = '';
+			if (array_key_exists($transmission_specification, $specifications)) {
+				$transmission = $specifications[$transmission_specification];
+			}
+
+			$engine_specification = 'Engine';
+			$engine = '';
+			if (array_key_exists($engine_specification, $specifications)) {
+				$engine = $specifications[$engine_specification];
+			}
+
+			$dealer_address_specification = 'DealerAddress';
+			$dealer_address = '';
+			if (array_key_exists($dealer_address_specification, $specifications)) {
+				$dealer_address = 'in ' . $specifications[$dealer_address_specification];
+			}
+
+			$image_specification = 'ImageUrls';
+			$image = 'images/vehicle-01.png';
+			if (array_key_exists($image_specification, $specifications)) {
+				$image = $specifications[$image_specification];
 			}
 
 			$result = array(
@@ -107,12 +143,24 @@ class SearchController extends BaseController {
 				'dealer' => $dealer,
 				'price' => $price,
 				'miles' => $miles,
-				'description' => $description
+				'description' => $description,
+				'trim' => $trim,
+				'transmission' => $transmission,
+				'engine' => $engine,
+				'dealer_address' => $dealer_address,
+				'image' => $image
 			);
 
     		array_push($results, $result);
 		}
 
-		return $results;		
+		$total = $search_results['hits']['total'];
+
+		$response = array(
+			'total' => $total,
+			'results' => $results
+		);
+
+		return $response;		
 	}
 }

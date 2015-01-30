@@ -5,7 +5,7 @@
 </div>
 <div class="row">
 	<div class="small-12 medium-8 large-9 columns">
-		<p class="location-change">We found <strong>{00} cars for sale</strong> within <a href="#" data-reveal-id="locationModal"><strong>{{ $location_info }}</strong> (change)</a></p>
+		<p class="location-change">We found <strong>{{ $total }} cars for sale</strong> within <a href="#" data-reveal-id="locationModal"><strong>{{ $location_info }}</strong> (change)</a></p>
 		<div id="locationModal" class="reveal-modal medium location-modal" data-reveal>
 			<h2>Change Location</h2>
 			<form>
