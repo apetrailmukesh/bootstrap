@@ -76,8 +76,8 @@ class SearchController extends BaseController {
 			$specifications = $value['_source']['specifications'];
 
 			$price_specification = 'Price';
-			$price = '';
-			if (array_key_exists($price_specification, $specifications)) {
+			$price = 'Contact us for price';
+			if (array_key_exists($price_specification, $specifications) && is_numeric($specifications[$price_specification])) {
 				$price = '$ ' . $specifications[$price_specification];
 			}
 

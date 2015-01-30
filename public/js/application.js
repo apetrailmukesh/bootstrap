@@ -18,4 +18,26 @@
 		}
 	}
 
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	var total_results = $("#total_results").val();
+	var page = getParameterByName('page');
+
+	$('#pagination').pagination({
+        items: total_results,
+        itemsOnPage: 10,
+        currentPage: page,
+        hrefTextPrefix: '#',
+        selectOnClick: false,
+        onPageClick : function (pageNumber, event) {
+	        var edited = updateQueryStringParameter(document.URL, 'page', pageNumber);
+  			window.location.href = edited;
+    	}
+    });
+
 })(jQuery);

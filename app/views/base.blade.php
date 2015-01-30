@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/foundation.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('css/simplePagination.css') }}">
 
 	<!-- script files -->
 	<script src="js/vendor/modernizr.js"></script>
@@ -24,6 +25,7 @@
 	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
 	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ URL::asset('js/jquery-1.11.2.min.js') }}"></script>
+	<script src="{{ URL::asset('js/jquery.simplePagination.js') }}"></script>
 	<script src="{{ URL::asset('js/application.js') }}"></script>
 	<script src="{{ URL::asset('js/main.js') }}"></script>
 </body>

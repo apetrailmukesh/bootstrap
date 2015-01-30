@@ -1,7 +1,7 @@
 <article class="vehicle">
 	<div class="row">
 		<div class="small-12 columns">
-			<h2><a href="#">{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }}</a></h2>
+			<h2><a href="{{ $result['url'] }}">{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }}</a></h2>
 			<p class="small secondary-text">{{ $result['url'] }}</p>
 		</div>
 	</div>
