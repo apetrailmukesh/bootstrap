@@ -15,7 +15,7 @@ class SearchController extends BaseController {
 		Session::put('zip_code', $zip_code);
 		Session::put('distance', $distance);
 
-		$location_info = 'change location';
+		$location_info = '';
 		if (!empty($zip_code) && !empty($distance)) {
 			$location_info = $distance . ' miles from ' . $zip_code;
 		}
@@ -42,11 +42,16 @@ class SearchController extends BaseController {
 
 	public function executeSearch()
 	{
+		$from = (Input::get('page', '1') - 1 ) * 10;
+		$search_text = Input::get('search_text', '');
+
 		$url = "http://localhost:9200/vehicles/vehicle/_search"; 
 		$query = array(
+			'from' => $from,
+			'size' => 10,
 		    "query" => array(
 		        "term" => array(
-		        	"_all" => Input::get('search_text', '')
+		        	"_all" => $search_text
 		        )
 		    )
 		);
