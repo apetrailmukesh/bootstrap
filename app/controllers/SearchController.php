@@ -4,6 +4,15 @@ class SearchController extends BaseController {
 
 	protected $layout = 'base';
 
+	protected $price_specification = 'spec-20';
+	protected $miles_specification = 'spec-4';
+	protected $description_specification = 'spec-19';
+	protected $trim_specification = 'spec-1';
+	protected $transmission_specification = 'spec-15';
+	protected $engine_specification = 'spec-16';
+	protected $dealer_address_specification = 'spec-7';
+	protected $image_specification = 'spec-17';
+
 	public function index()
 	{
 		$this->layout->body_class = 'srp';
@@ -98,15 +107,15 @@ class SearchController extends BaseController {
 
 		if ($sort_by == 'price') {
 			if ($sort_order == '1') {
-				array_push($sort, array("specifications.Price" => array("order" => "desc", "mode" => "min")));
+				array_push($sort, array($this->price_specification => array("order" => "desc", "mode" => "min")));
 			} else if ($sort_order == 0) {
-				array_push($sort, array("specifications.Price" => array("order" => "asc", "mode" => "min")));
+				array_push($sort, array($this->price_specification => array("order" => "asc", "mode" => "min")));
 			}
 		} else if ($sort_by == 'miles') {
 			if ($sort_order == '1') {
-				array_push($sort, array("specifications.Miles" => array("order" => "desc", "mode" => "min")));
+				array_push($sort, array($this->miles_specification => array("order" => "desc", "mode" => "min")));
 			} else if ($sort_order == 0) {
-				array_push($sort, array("specifications.Miles" => array("order" => "asc", "mode" => "min")));
+				array_push($sort, array($this->miles_specification => array("order" => "asc", "mode" => "min")));
 			}
 		} else if ($sort_by == 'year') {
 			if ($sort_order == '1') {
@@ -125,30 +134,26 @@ class SearchController extends BaseController {
 	{
 		$results = array();
 		foreach ($search_results['hits']['hits'] as $value) {
-			$year = $value['_source']['year'];
-			$make = $value['_source']['make'];
-			$model = $value['_source']['model'];
-			$url = $value['_source']['url'];
-			$dealer = $value['_source']['dealer'];
+			$source = $value['_source'];
+			$year = $source['year'];
+			$make = $source['make'];
+			$model = $source['model'];
+			$url = $source['url'];
+			$dealer = $source['dealer'];
 
-			$specifications = $value['_source']['specifications'];
-
-			$price_specification = 'Price';
 			$price = 'Contact us for price';
-			if (array_key_exists($price_specification, $specifications) && is_numeric($specifications[$price_specification])) {
-				$price = '$ ' . $specifications[$price_specification];
+			if (array_key_exists($this->price_specification, $source) && is_numeric($source[$this->price_specification])) {
+				$price = '$ ' . $source[$this->price_specification];
 			}
 
-			$miles_specification = 'Miles';
 			$miles = '';
-			if (array_key_exists($miles_specification, $specifications)) {
-				$miles = $specifications[$miles_specification] . ' mi.';
+			if (array_key_exists($this->miles_specification, $source)) {
+				$miles = $source[$this->miles_specification] . ' mi.';
 			}
 
-			$description_specification = 'Description';
 			$description = '';
-			if (array_key_exists($description_specification, $specifications)) {
-				$description = $specifications[$description_specification];
+			if (array_key_exists($this->description_specification, $source)) {
+				$description = $source[$this->description_specification];
 				$description = strip_tags($description);
 				if (strlen($description) > 500) {
 				    $stringCut = substr($description, 0, 250);
@@ -156,34 +161,29 @@ class SearchController extends BaseController {
 				}
 			}
 
-			$trim_specification = 'Trim';
 			$trim = '';
-			if (array_key_exists($trim_specification, $specifications)) {
-				$trim = $specifications[$trim_specification];
+			if (array_key_exists($this->trim_specification, $source)) {
+				$trim = $source[$this->trim_specification];
 			}
 
-			$transmission_specification = 'Transmission';
 			$transmission = '';
-			if (array_key_exists($transmission_specification, $specifications)) {
-				$transmission = $specifications[$transmission_specification];
+			if (array_key_exists($this->transmission_specification, $source)) {
+				$transmission = $source[$this->transmission_specification];
 			}
 
-			$engine_specification = 'Engine';
 			$engine = '';
-			if (array_key_exists($engine_specification, $specifications)) {
-				$engine = $specifications[$engine_specification];
+			if (array_key_exists($this->engine_specification, $source)) {
+				$engine = $source[$this->engine_specification];
 			}
 
-			$dealer_address_specification = 'DealerAddress';
 			$dealer_address = '';
-			if (array_key_exists($dealer_address_specification, $specifications)) {
-				$dealer_address = 'in ' . $specifications[$dealer_address_specification];
+			if (array_key_exists($this->dealer_address_specification, $source)) {
+				$dealer_address = 'in ' . $source[$this->dealer_address_specification];
 			}
 
-			$image_specification = 'ImageUrls';
 			$image = 'images/empty.png';
-			if (array_key_exists($image_specification, $specifications)) {
-				$image = $specifications[$image_specification];
+			if (array_key_exists($this->image_specification, $source)) {
+				$image = $source[$this->image_specification];
 			}
 
 			$result = array(
