@@ -88,7 +88,7 @@ class SearchController extends BaseController {
 			"size" => 10,
 			"sort" => $sort,
 		    "query" => array(
-		        "term" => array(
+		        "match" => array(
 		        	"_all" => $search_text
 		        )
 		    )
@@ -123,6 +123,9 @@ class SearchController extends BaseController {
 			} else if ($sort_order == 0) {
 				array_push($sort, array("year" => array("order" => "asc")));
 			}
+		} else if ($sort_by == 'makemodel') {
+			array_push($sort, array("make.raw" => array("order" => "asc")));
+			array_push($sort, array("model.raw" => array("order" => "asc")));
 		}
 
 		array_push($sort, array("_score" => array("order" => "desc")));

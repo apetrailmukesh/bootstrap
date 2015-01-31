@@ -2,7 +2,7 @@
 	<nav class="top-bar" data-topbar role="navigation">
 		<ul class="title-area">
 			<li class="name"><!-- leave this empty --></li>
-			<li class="toggle-topbar"><a href="#" class="fa-icon"><span>Saved</span></a></li>
+			<li class="toggle-topbar"><a href="#" class="fa-icon"><span></span></a></li>
 		</ul>
 		<section class="top-bar-section">
 			<!-- right nav section -->
