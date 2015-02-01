@@ -28,8 +28,6 @@
 						<li><a class="fa-icon plus" data-reveal-id="priceModal">Price</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mileageModal">Mileage</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="yearModal">Year</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="certificationModal">Certification</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="exteriorColorModal">Exterior Color</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="transmissionModal">Transmission</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="photoModal">Has Photos</a></li>
 					</ul>
@@ -37,8 +35,6 @@
 				@include('search/large/search-large-filter-price')
 				@include('search/large/search-large-filter-mileage')
 				@include('search/large/search-large-filter-year')
-				@include('search/large/search-large-filter-certification')
-				@include('search/large/search-large-filter-exterior')
 				@include('search/large/search-large-filter-transmission')
 				@include('search/large/search-large-filter-photo')
 			</div>
