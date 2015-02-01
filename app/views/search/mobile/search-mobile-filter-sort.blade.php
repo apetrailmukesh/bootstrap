@@ -7,7 +7,7 @@
 				</div>
 				<div class="small-5 text-right columns">
 					<a href="#" data-reveal-id="mobileSort" class="button radius small">Sort</a>
-					@include('search/search-mobile-sort')
+					@include('search/mobile/search-mobile-sort')
 				</div>
 			</div>
 		</div>

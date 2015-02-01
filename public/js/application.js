@@ -69,8 +69,13 @@
 	}
 
 	function selectSort() {
-		var large_sort = getQueryStringParameter('sort');
-		$('#large-sort').val(large_sort);
+		var sort = getQueryStringParameter('sort');
+		$('#large-sort').val(sort);
+		
+		var mobile_radios = $('input:radio[name=sort-options]');
+	    if(mobile_radios.is(':checked') === false) {
+	        mobile_radios.filter('[value=' + sort + ']').prop('checked', true);
+	    }
 	}
 
 })(jQuery);
