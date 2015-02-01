@@ -3,21 +3,21 @@
 	<form id="filter-by-price">
 		<div class="row">
 			<div class="small-12 columns border">
-				<input type="checkbox" id="any" value="any" checked><label for="anyPrice">Any Price</label>
+				<input type="checkbox" id="any" value="0" checked><label for="anyPrice">Any Price</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="price-1" value="1"><label for="5kPrice">Up to $10,000 ({{ $prices['1'] }})</label></p>
-						<p><input type="checkbox" id="price-2" value="2"><label for="10kPrice">$10,100 - $20,000 ({{ $prices['2'] }})</label></p>
-						<p><input type="checkbox" id="price-3" value="3"><label for="15kPrice">$20,000 - $30,000 ({{ $prices['3'] }})</label></p>
+						<p><input type="checkbox" id="price-1" value="1"/><label for="price-1">Up to $10,000 ({{ $prices['1'] }})</label></p>
+						<p><input type="checkbox" id="price-2" value="2"/><label for="price-2">$10,100 - $20,000 ({{ $prices['2'] }})</label></p>
+						<p><input type="checkbox" id="price-3" value="3"/><label for="price-3">$20,000 - $30,000 ({{ $prices['3'] }})</label></p>
 					</div>
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="price-4" value="4"><label for="20kPrice">$30,000 - $40,000 ({{ $prices['4'] }})</label></p>
-						<p><input type="checkbox" id="price-5" value="5"><label for="25kPrice">$40,000 - $50,000 ({{ $prices['5'] }})</label></p>
-						<p><input type="checkbox" id="price-6" value="6"><label for="30kPrice">Over $50,000 ({{ $prices['6'] }})</label></p>
+						<p><input type="checkbox" id="price-4" value="4"/><label for="price-4">$30,000 - $40,000 ({{ $prices['4'] }})</label></p>
+						<p><input type="checkbox" id="price-5" value="5"/><label for="price-5">$40,000 - $50,000 ({{ $prices['5'] }})</label></p>
+						<p><input type="checkbox" id="price-6" value="6"/><label for="price-6">Over $50,000 ({{ $prices['6'] }})</label></p>
 					</div>
 				</div>
 				<div class="row">

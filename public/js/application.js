@@ -2,6 +2,7 @@
 
 	setupPager();
 	selectSort();
+	selectFilters();
 
 	$('.results-search-form').submit(function(event) {
   		var search_text = $(this).find('input[name="search_text"]').val();
@@ -24,6 +25,42 @@
 	    var valueSelected = $("div#mobileSort input:radio:checked").val();
 	    var edited = updateQueryStringParameter(document.URL, 'sort', valueSelected);
 	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
+	$('div#priceModal input:checkbox').change(function (event) {
+		var selected = $(this).val();
+		if($(this).is(":checked")) {
+			if (selected == 0) {
+		    	$('div#priceModal input:checkbox').prop('checked', false);
+		    	$('div#priceModal input:checkbox#any').prop('checked', true);
+		    } else {
+		    	$('div#priceModal input:checkbox#any').prop('checked', false);
+		    }
+		} else {
+			if (selected == 0) {
+		    	$('div#priceModal input:checkbox').prop('checked', false);
+		    	$('div#priceModal input:checkbox#any').prop('checked', true);
+		    } else if (!$('div#priceModal input:checkbox').is(':checked')){
+		    	$('div#priceModal input:checkbox#any').prop('checked', true);
+		    }
+		}
+	});
+
+	$('#filter-by-price').submit(function (event) {
+		var edited;
+		if ($('div#priceModal input:checkbox#any').is(':checked')) {
+			var edited = updateQueryStringParameter(document.URL, 'price', '');
+	    	edited = updateQueryStringParameter(edited, 'page', '1');
+		} else {
+			var checkedValues = $('div#priceModal input:checkbox:checked').map(function() {
+			    return this.value;
+			}).get();
+			var edited = updateQueryStringParameter(document.URL, 'price', checkedValues.join('-'));
+	    	edited = updateQueryStringParameter(edited, 'page', '1');
+		}
+
   		window.location.href = edited;
   		event.preventDefault();
 	});
@@ -76,6 +113,26 @@
 	    if(mobile_radios.is(':checked') === false) {
 	        mobile_radios.filter('[value=' + sort + ']').prop('checked', true);
 	    }
+	}
+
+	function selectFilters() {
+		var price = getQueryStringParameter('price');
+		if (price !== null && price !== undefined) {
+			if (price.length > 0) {
+				$('div#priceModal input:checkbox#any').prop('checked', false);
+				var prices = price.split('-');
+				$(prices).each(function(index, value) {
+					var checkbox = $('div#priceModal #price-' + value);
+					if (checkbox !== null && checkbox !== undefined) {
+				    	checkbox.prop('checked', true);
+					}
+				});
+			} else {
+				$('div#priceModal input:checkbox#any').prop('checked', true);
+			}
+		} else {
+			$('div#priceModal input:checkbox#any').prop('checked', true);
+		}
 	}
 
 })(jQuery);
