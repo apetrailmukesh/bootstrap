@@ -85,22 +85,71 @@ class SearchController extends BaseController {
 		$from = (Input::get('page', '1') - 1 ) * 10;
 		$search_text = Input::get('search_text', '');
 		
+		$filter = $this->buildFilterQuery();
 		$sort = $this->buildSortQuery();
 		$aggs = $this->buildAggregationsQuery();
+
+		$query = $this->buildSearchQuery($filter, $search_text);
 
 		$query = array(
 			"from" => $from,
 			"size" => 10,
 			"sort" => $sort,
-		    "query" => array(
-		        "match" => array(
-		        	"_all" => $search_text
-		        )
-		    ),
+		    "query" => $query,
 		    'aggs' => $aggs
 		);
 
 		return $query;
+	}
+
+	public function buildSearchQuery($filter, $search_text)
+	{
+		if ($filter == false) {
+			return array("match" => array("_all" => $search_text));
+		} else {
+			return array(
+		    	"filtered" => array(
+		    		"query" => array("match" => array("_all" => $search_text)),
+		    		"filter" => $filter
+		        )
+		    );
+		}
+	}
+
+	public function buildFilterQuery()
+	{
+		$and = array();
+
+		$price_filter = Input::get('price', '');
+		if (!empty($price_filter)) {
+			$or = array();
+			$price_ranges = explode("-", $price_filter);
+			foreach ($price_ranges as $price_range) {
+				if ($price_range == 1) {
+					array_push($or, array("range" => array($this->price_specification => array("lte" => 10000))));
+				} else if ($price_range == 2) {
+					array_push($or, array("range" => array($this->price_specification => array("gte" => 10000, "lte" => 20000))));
+				} else if ($price_range == 3) {
+					array_push($or, array("range" => array($this->price_specification => array("gte" => 20000, "lte" => 30000))));
+				} else if ($price_range == 4) {
+					array_push($or, array("range" => array($this->price_specification => array("gte" => 30000, "lte" => 40000))));
+				} else if ($price_range == 5) {
+					array_push($or, array("range" => array($this->price_specification => array("gte" => 40000, "lte" => 50000))));
+				} else if ($price_range == 6) {
+					array_push($or, array("range" => array($this->price_specification => array("gte" => 50000))));
+				}
+			}
+
+			array_push($and, array("or" => $or));
+		}
+
+		$filter = array();
+		if (sizeof($and) > 0) {
+			$filter['and'] = $and;
+			return $filter;
+		} else {
+			return false;
+		}
 	}
 
 	public function buildSortQuery() 
