@@ -3,19 +3,33 @@
 	setupPager();
 	selectSort();
 
-	$( ".results-search-form" ).submit(function( event ) {
+	$('.results-search-form').submit(function(event) {
   		var search_text = $(this).find('input[name="search_text"]').val();
   		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);
+  		edited = updateQueryStringParameter(edited, 'page', '1');
   		window.location.href = edited;
   		event.preventDefault();
 	});
 
-	$('#large-sort').on('change', function (e) {
+	$('#large-sort').change(function (event) {
 	    var optionSelected = $("option:selected", this);
 	    var valueSelected = this.value;
 	    var edited = updateQueryStringParameter(document.URL, 'sort', valueSelected);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
   		window.location.href = edited;
   		event.preventDefault();
+	});
+
+	$('.mobile-sort-form').submit(function (event) {
+	    var valueSelected = $("div#mobileSort input:radio:checked").val();
+	    var edited = updateQueryStringParameter(document.URL, 'sort', valueSelected);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
+	$('img').error(function(){
+        $(this).attr('src', 'images/empty.png');
 	});
 
 	function updateQueryStringParameter(uri, key, value) {

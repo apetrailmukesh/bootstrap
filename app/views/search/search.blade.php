@@ -13,11 +13,6 @@
 			<div class="row">
 				@include('search/search-large-filter')
 				<div class="large-9 medium-8 columns">
-					<div class="row">
-						<div class="small-12 columns">
-							<p class="secondary-text subhead"><strong>FEATURED VEHICLES</strong></p>
-						</div>
-					</div>
 					@foreach($results as $result)
 						@include('search/search-vehicle')
 					@endforeach
