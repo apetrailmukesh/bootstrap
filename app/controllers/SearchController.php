@@ -43,8 +43,7 @@ class SearchController extends BaseController {
 			'title' => $title,
 			'location_info' => $location_info,
 			'total' => $response['total'],
-			'results' => $response['results'],
-			'prices' => $response['prices']
+			'results' => $response['results']
 		);
 
 		$this->layout->contents = View::make('search/search', $data);
@@ -68,13 +67,11 @@ class SearchController extends BaseController {
 		$search_results = json_decode($json_response, true);
 
 		$results = $this->decodeResults($search_results);
-		$prices = $this->decodePriceAggregation($search_results);
 		$total = $search_results['hits']['total'];
 
 		$response = array(
 			'total' => $total,
-			'results' => $results,
-			'prices' => $prices
+			'results' => $results
 		);
 
 		return $response;		
@@ -87,7 +84,6 @@ class SearchController extends BaseController {
 		
 		$filter = $this->buildFilterQuery();
 		$sort = $this->buildSortQuery();
-		$aggs = $this->buildAggregationsQuery();
 
 		$query = $this->buildSearchQuery($filter, $search_text);
 
@@ -95,8 +91,7 @@ class SearchController extends BaseController {
 			"from" => $from,
 			"size" => 10,
 			"sort" => $sort,
-		    "query" => $query,
-		    'aggs' => $aggs
+		    "query" => $query
 		);
 
 		return $query;
@@ -195,23 +190,6 @@ class SearchController extends BaseController {
 		return $sort;
 	}
 
-	public function buildAggregationsQuery() 
-	{
-		$price_ranges = array();
-		array_push($price_ranges, array("key" => "1", "to" => "10000"));
-		array_push($price_ranges, array("key" => "2", "from" => "10001", "to" => "20000"));
-		array_push($price_ranges, array("key" => "3", "from" => "20001", "to" => "30000"));
-		array_push($price_ranges, array("key" => "4", "from" => "30001", "to" => "40000"));
-		array_push($price_ranges, array("key" => "5", "from" => "40001", "to" => "50000"));
-		array_push($price_ranges, array("key" => "6", "from" => "50001"));
-		$price_range = array("field" => $this->price_specification, "keyed" => true, "ranges" => $price_ranges);
-		$price = array("range" => $price_range);
-
-		$aggs = array("price" => $price);
-
-		return $aggs;
-	}
-
 	public function decodeResults($search_results)
 	{
 		$results = array();
@@ -288,21 +266,5 @@ class SearchController extends BaseController {
 		}
 
 		return $results;
-	}
-
-	public function decodePriceAggregation($search_results) 
-	{
-		$prices = $search_results['aggregations']['price']['buckets'];
-
-		$values = array(
-			'1' => $prices['1']['doc_count'],
-			'2' => $prices['2']['doc_count'],
-			'3' => $prices['3']['doc_count'],
-			'4' => $prices['4']['doc_count'],
-			'5' => $prices['5']['doc_count'],
-			'6' => $prices['6']['doc_count'],
-		);
-
-		return $values;
 	}
 }
