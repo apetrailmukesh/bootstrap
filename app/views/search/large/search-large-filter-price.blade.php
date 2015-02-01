@@ -11,7 +11,7 @@
 				<div class="row">
 					<div class="small-6 columns">
 						<p><input type="checkbox" id="price-1" value="1"/><label for="price-1">Up to $10,000 ({{ $prices['1'] }})</label></p>
-						<p><input type="checkbox" id="price-2" value="2"/><label for="price-2">$10,100 - $20,000 ({{ $prices['2'] }})</label></p>
+						<p><input type="checkbox" id="price-2" value="2"/><label for="price-2">$10,000 - $20,000 ({{ $prices['2'] }})</label></p>
 						<p><input type="checkbox" id="price-3" value="3"/><label for="price-3">$20,000 - $30,000 ({{ $prices['3'] }})</label></p>
 					</div>
 					<div class="small-6 columns">

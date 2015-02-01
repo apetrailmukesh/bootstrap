@@ -104,16 +104,23 @@ class SearchController extends BaseController {
 
 	public function buildSearchQuery($filter, $search_text)
 	{
-		if ($filter == false) {
-			return array("match" => array("_all" => $search_text));
+		$query;
+
+		if (empty($search_text)) {
+			if ($filter == false) {
+				$query = array("match_all" => array());
+			} else {
+				$query = array("constant_score" => array ("filter" => $filter));
+			}
 		} else {
-			return array(
-		    	"filtered" => array(
-		    		"query" => array("match" => array("_all" => $search_text)),
-		    		"filter" => $filter
-		        )
-		    );
+			if ($filter == false) {
+				$query = array("match" => array("_all" => $search_text));
+			} else {
+				$query = array("filtered" => array ("query" => array("match" => array("_all" => $search_text)), "filter" => $filter));
+			}
 		}
+
+		return $query;
 	}
 
 	public function buildFilterQuery()
@@ -128,15 +135,15 @@ class SearchController extends BaseController {
 				if ($price_range == 1) {
 					array_push($or, array("range" => array($this->price_specification => array("lte" => 10000))));
 				} else if ($price_range == 2) {
-					array_push($or, array("range" => array($this->price_specification => array("gte" => 10000, "lte" => 20000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 10000, "lte" => 20000))));
 				} else if ($price_range == 3) {
-					array_push($or, array("range" => array($this->price_specification => array("gte" => 20000, "lte" => 30000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 20000, "lte" => 30000))));
 				} else if ($price_range == 4) {
-					array_push($or, array("range" => array($this->price_specification => array("gte" => 30000, "lte" => 40000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 30000, "lte" => 40000))));
 				} else if ($price_range == 5) {
-					array_push($or, array("range" => array($this->price_specification => array("gte" => 40000, "lte" => 50000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 40000, "lte" => 50000))));
 				} else if ($price_range == 6) {
-					array_push($or, array("range" => array($this->price_specification => array("gte" => 50000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 50000))));
 				}
 			}
 
@@ -192,11 +199,11 @@ class SearchController extends BaseController {
 	{
 		$price_ranges = array();
 		array_push($price_ranges, array("key" => "1", "to" => "10000"));
-		array_push($price_ranges, array("key" => "2", "from" => "10000", "to" => "20000"));
-		array_push($price_ranges, array("key" => "3", "from" => "20000", "to" => "30000"));
-		array_push($price_ranges, array("key" => "4", "from" => "30000", "to" => "40000"));
-		array_push($price_ranges, array("key" => "5", "from" => "40000", "to" => "50000"));
-		array_push($price_ranges, array("key" => "6", "from" => "50000"));
+		array_push($price_ranges, array("key" => "2", "from" => "10001", "to" => "20000"));
+		array_push($price_ranges, array("key" => "3", "from" => "20001", "to" => "30000"));
+		array_push($price_ranges, array("key" => "4", "from" => "30001", "to" => "40000"));
+		array_push($price_ranges, array("key" => "5", "from" => "40001", "to" => "50000"));
+		array_push($price_ranges, array("key" => "6", "from" => "50001"));
 		$price_range = array("field" => $this->price_specification, "keyed" => true, "ranges" => $price_ranges);
 		$price = array("range" => $price_range);
 
