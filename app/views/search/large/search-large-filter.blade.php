@@ -5,9 +5,14 @@
 				<h3>Your Search</h3>
 				<nav>
 					<ul class="side-nav">
-						<li><a href="#" class="fa-icon close">{Selected Filter}</a></li>
-						<li><a href="#" class="fa-icon close">{Selected Filter}</a></li>
-						<li><a href="#" class="fa-icon close">{Selected Filter}</a></li>
+						@foreach($filters as $filter)
+							<li>{{ $filter['name'] }}</li>
+							@foreach($filter['values'] as $value)
+								<li>
+									<a class="fa-icon close" id="{{ $value['index'] }}">{{ $value['title'] }}</a>
+								</li>	
+							@endforeach	
+						@endforeach
 					</ul>
 				</nav>
 				<a href="#" class="button radius">Save Search</a>

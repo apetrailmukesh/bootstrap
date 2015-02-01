@@ -65,6 +65,15 @@
   		event.preventDefault();
 	});
 
+	$('[id*="price-remove-"]').click(function (event) {
+		var price_range = event.target.id.replace("price-remove-", ""); ;
+		var updated = removeItemFromList(getQueryStringParameter('price'), price_range);
+		var edited = updateQueryStringParameter(document.URL, 'price', updated);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
 	$('img').error(function(){
         $(this).attr('src', 'images/empty.png');
 	});
@@ -86,6 +95,19 @@
 	    var results = regex.exec(location.search);
 
 	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	function removeItemFromList(list, value) {
+	  	separator = "-";
+	  	var values = list.split(separator);
+	  	for(var i = 0 ; i < values.length ; i++) {
+	    	if(values[i] == value) {
+	      		values.splice(i, 1);
+	      		return values.join(separator);
+	    	}
+	  	}
+
+	  	return list;
 	}
 
 	function setupPager() {

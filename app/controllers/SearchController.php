@@ -34,7 +34,7 @@ class SearchController extends BaseController {
 			$title = $title . ' near ' . $zip_code;
 		}
 
-
+		$filters = $this->findSelectedFilters();
 		$response = $this->executeSearch();
 
 		$input = Input::all();
@@ -43,6 +43,7 @@ class SearchController extends BaseController {
 			'title' => $title,
 			'location_info' => $location_info,
 			'total' => $response['total'],
+			'filters' => $filters,
 			'results' => $response['results']
 		);
 
@@ -71,7 +72,7 @@ class SearchController extends BaseController {
 
 		$response = array(
 			'total' => $total,
-			'results' => $results
+			'results' => $results,
 		);
 
 		return $response;		
@@ -266,5 +267,35 @@ class SearchController extends BaseController {
 		}
 
 		return $results;
+	}
+
+	public function findSelectedFilters() 
+	{
+		$filters = array();
+
+		$price_filter = Input::get('price', '');
+		if (!empty($price_filter)) {
+			$values = array();
+			$price_ranges = explode("-", $price_filter);
+			foreach ($price_ranges as $price_range) {
+				if ($price_range == 1) {
+					array_push($values, array("title" => "Up to $10,000", "index" => 'price-remove-'.$price_range));
+				} else if ($price_range == 2) {
+					array_push($values, array("title" => "$10,000 - $20,000", "index" => 'price-remove-'.$price_range));
+				} else if ($price_range == 3) {
+					array_push($values, array("title" => "$20,000 - $30,000", "index" => 'price-remove-'.$price_range));
+				} else if ($price_range == 4) {
+					array_push($values, array("title" => "$30,000 - $40,000", "index" => 'price-remove-'.$price_range));
+				} else if ($price_range == 5) {
+					array_push($values, array("title" => "$40,000 - $50,000", "index" => 'price-remove-'.$price_range));
+				} else if ($price_range == 6) {
+					array_push($values, array("title" => "Over $50,000", "index" => 'price-remove-'.$price_range));
+				}
+			}
+
+			array_push($filters, array("name" => "Price", "values" => $values));
+		}
+
+		return $filters;
 	}
 }
