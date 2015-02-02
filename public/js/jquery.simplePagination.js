@@ -266,10 +266,10 @@
 			};
 		},
 
-		_appendItem: function(pageIndex, opts) {
+		_appendItem: function(originalPageIndex, opts) {
 			var self = this, options, $link, o = self.data('pagination'), $linkWrapper = $('<li></li>'), $ul = self.find('ul');
 
-			pageIndex = pageIndex < 0 ? 0 : (pageIndex < o.pages ? pageIndex : o.pages - 1);
+			var pageIndex = originalPageIndex < 0 ? 0 : (originalPageIndex < o.pages ? originalPageIndex : o.pages - 1);
 
 			options = {
 				text: pageIndex + 1,
@@ -284,13 +284,13 @@
 
 			if (pageIndex == o.currentPage || o.disabled) {
 				if (o.disabled) {
-					$linkWrapper.addClass('disabled');
-				} else {
-					$linkWrapper.addClass('active');
+					$linkWrapper.addClass('unavailable');
+				} else if (originalPageIndex >= 0 && originalPageIndex <= (o.pages - 1)){
+					$linkWrapper.addClass('current');
 				}
-				$link = $('<span class="current">' + (options.text) + '</span>');
+				$link = $('<a>' + (options.text) + '</a>');
 			} else {
-				$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '" class="page-link">' + (options.text) + '</a>');
+				$link = $('<a class="page-link">' + (options.text) + '</a>');
 				$link.click(function(event){
 					return methods._selectPage.call(self, pageIndex, event);
 				});

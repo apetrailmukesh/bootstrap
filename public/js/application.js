@@ -119,7 +119,10 @@
 	        itemsOnPage: 10,
 	        currentPage: page,
 	        hrefTextPrefix: '#',
+	        prevText: '&laquo;',
+	        nextText:'&raquo;',
 	        selectOnClick: false,
+	        cssStyle: 'pagination',
 	        onPageClick : function (pageNumber, event) {
 		        var edited = updateQueryStringParameter(document.URL, 'page', pageNumber);
 	  			window.location.href = edited;

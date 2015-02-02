@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/foundation.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-	<link rel="stylesheet" href="{{ URL::asset('css/simplePagination.css') }}">
 
 	<!-- script files -->
 	<script src="js/vendor/modernizr.js"></script>
