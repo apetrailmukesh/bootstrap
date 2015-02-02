@@ -217,8 +217,8 @@ class SearchController extends BaseController {
 				$description = $source[$this->description_specification];
 				$description = strip_tags($description);
 				if (strlen($description) > 500) {
-				    $stringCut = substr($description, 0, 250);
-				    $description = substr($stringCut, 0, strrpos($stringCut, ' ')).'... <a href="#">Read More</a>'; 
+				    $stringCut = substr($description, 0, 500);
+				    $description = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
 				}
 			}
 
