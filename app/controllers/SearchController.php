@@ -18,7 +18,7 @@ class SearchController extends BaseController {
 		$this->layout->body_class = 'srp';
 
 		$zip_code = Input::query('zip_code', '');
-		$distance = Input::query('distance', '50');
+		$distance = Input::query('distance', '');
 		$search_text = Input::query('search_text', '');
 
 		Session::put('zip_code', $zip_code);
@@ -45,7 +45,7 @@ class SearchController extends BaseController {
 			'total' => $response['total'],
 			'filters' => $filters,
 			'results' => $response['results']
-		);
+			);
 
 		$this->layout->contents = View::make('search/search', $data);
 	}
@@ -73,7 +73,7 @@ class SearchController extends BaseController {
 		$response = array(
 			'total' => $total,
 			'results' => $results,
-		);
+			);
 
 		return $response;		
 	}
@@ -85,17 +85,16 @@ class SearchController extends BaseController {
 		
 		$filter = $this->buildFilterQuery();
 		$sort = $this->buildSortQuery();
-
 		$query = $this->buildSearchQuery($filter, $search_text);
 
-		$query = array(
+		$search_query = array(
 			"from" => $from,
 			"size" => 10,
 			"sort" => $sort,
-		    "query" => $query
-		);
+			"query" => $query
+			);
 
-		return $query;
+		return $search_query;
 	}
 
 	public function buildSearchQuery($filter, $search_text)
@@ -217,8 +216,8 @@ class SearchController extends BaseController {
 				$description = $source[$this->description_specification];
 				$description = strip_tags($description);
 				if (strlen($description) > 500) {
-				    $stringCut = substr($description, 0, 500);
-				    $description = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
+					$stringCut = substr($description, 0, 500);
+					$description = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
 				}
 			}
 
@@ -261,9 +260,9 @@ class SearchController extends BaseController {
 				'engine' => $engine,
 				'dealer_address' => $dealer_address,
 				'image' => $image
-			);
+				);
 
-    		array_push($results, $result);
+			array_push($results, $result);
 		}
 
 		return $results;

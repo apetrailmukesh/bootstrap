@@ -11,9 +11,20 @@ class HomeController extends BaseController {
 		$zip_code = Session::get('zip_code', '');
 		$distance = Session::get('distance', '50');
 		
+		if (empty($zip_code)) {
+			$this->findLocation();
+			$zip_code = Session::get('zip_code', '');
+		}
+
 		$location_info = 'change location';
-		if (!empty($zip_code) && !empty($distance)) {
-			$location_info = $distance . ' miles from ' . $zip_code . ' (change)';
+		if (!empty($zip_code)) {
+			$city_name = Session::get('city_name', '');
+			$region_name = Session::get('region_name', '');
+			if (!empty($zip_code) && !empty($zip_code)) {
+				$location_info = $distance . ' miles from ' . $city_name . ', ' . $region_name . ' (change)';
+			} else {
+				$location_info = $distance . ' miles from ' . $zip_code . ' (change)';
+			}
 		}
 
 		$data = array(
@@ -66,5 +77,32 @@ class HomeController extends BaseController {
 		);
 
 		return Redirect::route('get.search', $query);
+	}
+
+	public function findLocation()
+	{
+		try {
+			$url = "http://api.ip2location.com/?ip=". $_SERVER['REMOTE_ADDR'] ."&key=demo&package=WS9&format=json";
+			
+			$curl = curl_init($url);
+			curl_setopt($curl, CURLOPT_HEADER, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
+
+			$json_response = curl_exec($curl);
+			curl_close($curl);
+
+			$location = json_decode($json_response, true);
+
+			if (!empty($location['zip_code'])) {
+				Session::put('zip_code', $location['zip_code']);
+				Session::put('city_name', $location['city_name']);
+				Session::put('region_name', $location['region_name']);
+				Session::put('latitude', $location['latitude']);
+				Session::put('longitude', $location['longitude']);
+			}
+		} catch(Exception $e) {
+			var_dump($e->getMessage());
+		}
 	}
 }
