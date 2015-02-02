@@ -18,20 +18,25 @@ class SearchController extends BaseController {
 		$this->layout->body_class = 'srp';
 
 		$zip_code = Input::query('zip_code', '');
-		$distance = Input::query('distance', '');
+		$distance = Input::query('distance', '50');
 		$search_text = Input::query('search_text', '');
 
 		Session::put('zip_code', $zip_code);
 		Session::put('distance', $distance);
 
-		$location_info = '';
-		if (!empty($zip_code) && !empty($distance)) {
-			$location_info = $distance . ' miles from ' . $zip_code;
-		}
-
 		$title = $search_text;
+		$location_info = 'change location';
 		if (!empty($zip_code)) {
-			$title = $title . ' near ' . $zip_code;
+			$locations = Location::where('zip_code' , '=', $zip_code);
+			if ($locations->count()) {
+				$location = Location::where('zip_code' , '=', $zip_code)->first();
+				$city = $location->city;
+				$state = $location->state;
+				if (!empty($city) && !empty($state)) {
+					$location_info = $distance . ' miles from ' . $city . ', ' . $state . ' (change)';
+					$title = $title . ' near ' . $city . ', ' . $state;
+				}
+			}
 		}
 
 		$filters = $this->findSelectedFilters();
@@ -39,6 +44,8 @@ class SearchController extends BaseController {
 
 		$input = Input::all();
 		$data = array(
+			'zip_code' => $zip_code,
+			'distance' => $distance,
 			'search_text' => $search_text,
 			'title' => $title,
 			'location_info' => $location_info,

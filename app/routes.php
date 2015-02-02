@@ -3,8 +3,8 @@
 Route::get('/', array('as' => 'get.home', 'uses' => 'HomeController@index'));
 Route::get('/search', array('as' => 'get.search', 'uses' => 'SearchController@index'));
 
-Route::post('/', array('as' => 'post.home', 'uses' => 'HomeController@change'));
-Route::post('/search', array('as' => 'post.home.start', 'uses' => 'HomeController@search'));
+Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@change'));
+Route::post('/search', array('as' => 'post.home.search', 'uses' => 'HomeController@search'));
 
 Route::get('/user/login', array('as' => 'get.user.login', 'uses' => 'UserController@getLogin'))->before('guest');
 Route::get('/user/register', array('as' => 'get.user.register', 'uses' => 'UserController@getRegister'))->before('guest');

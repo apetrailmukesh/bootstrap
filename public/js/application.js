@@ -65,6 +65,16 @@
   		event.preventDefault();
 	});
 
+	$('#change-search-location').submit(function (event) {
+		var zip_code = $(this).find("input[name='zip_code']").val();
+		var distance = $(this).find("select[name='distance']").val();
+		var edited = updateQueryStringParameter(document.URL, 'zip_code', zip_code);
+	    edited = updateQueryStringParameter(edited, 'distance', distance);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    window.location.href = edited;
+  		event.preventDefault();
+	});
+
 	$('[id*="price-remove-"]').click(function (event) {
 		var price_range = event.target.id.replace("price-remove-", ""); ;
 		var updated = removeItemFromList(getQueryStringParameter('price'), price_range);
