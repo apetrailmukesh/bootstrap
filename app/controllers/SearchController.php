@@ -115,10 +115,11 @@ class SearchController extends BaseController {
 				$query = array("constant_score" => array ("filter" => $filter));
 			}
 		} else {
+			$search_query = array("multi_match" => array("query" => $search_text, "operator" => "and", "fields" => array("_all")));
 			if ($filter == false) {
-				$query = array("match" => array("_all" => $search_text));
+				$query = $search_query;
 			} else {
-				$query = array("filtered" => array ("query" => array("match" => array("_all" => $search_text)), "filter" => $filter));
+				$query = array("filtered" => array ("query" => $search_query, "filter" => $filter));
 			}
 		}
 
