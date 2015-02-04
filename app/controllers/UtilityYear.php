@@ -43,11 +43,11 @@ class UtilityYear {
 	public function buildAggregationQuery()
 	{
 		$year_ranges = array();
-		array_push($year_ranges, array("key" => "1", "to" => "1990"));
-		array_push($year_ranges, array("key" => "2", "from" => "1991", "to" => "1995"));
-		array_push($year_ranges, array("key" => "3", "from" => "1996", "to" => "2000"));
-		array_push($year_ranges, array("key" => "4", "from" => "2001", "to" => "2005"));
-		array_push($year_ranges, array("key" => "5", "from" => "2006", "to" => "2010"));
+		array_push($year_ranges, array("key" => "1", "to" => "1991"));
+		array_push($year_ranges, array("key" => "2", "from" => "1991", "to" => "1996"));
+		array_push($year_ranges, array("key" => "3", "from" => "1996", "to" => "2001"));
+		array_push($year_ranges, array("key" => "4", "from" => "2001", "to" => "2006"));
+		array_push($year_ranges, array("key" => "5", "from" => "2006", "to" => "2011"));
 		array_push($year_ranges, array("key" => "6", "from" => "2011"));
 		$year_range = array("field" => "year", "keyed" => true, "ranges" => $year_ranges);
 		$year = array("range" => $year_range);

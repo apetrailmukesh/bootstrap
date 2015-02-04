@@ -55,11 +55,11 @@ class UtilityMileage {
 	public function buildAggregationQuery()
 	{
 		$mileage_ranges = array();
-		array_push($mileage_ranges, array("key" => "1", "to" => "100000"));
-		array_push($mileage_ranges, array("key" => "2", "from" => "100001", "to" => "200000"));
-		array_push($mileage_ranges, array("key" => "3", "from" => "200001", "to" => "300000"));
-		array_push($mileage_ranges, array("key" => "4", "from" => "300001", "to" => "400000"));
-		array_push($mileage_ranges, array("key" => "5", "from" => "400001", "to" => "500000"));
+		array_push($mileage_ranges, array("key" => "1", "to" => "100001"));
+		array_push($mileage_ranges, array("key" => "2", "from" => "100001", "to" => "200001"));
+		array_push($mileage_ranges, array("key" => "3", "from" => "200001", "to" => "300001"));
+		array_push($mileage_ranges, array("key" => "4", "from" => "300001", "to" => "400001"));
+		array_push($mileage_ranges, array("key" => "5", "from" => "400001", "to" => "500001"));
 		array_push($mileage_ranges, array("key" => "6", "from" => "500001"));
 		$mileage_range = array("field" => $this->mileage_specification, "keyed" => true, "ranges" => $mileage_ranges);
 		$mileage = array("range" => $mileage_range);

@@ -55,11 +55,11 @@ class UtilityPrice {
 	public function buildAggregationQuery()
 	{
 		$price_ranges = array();
-		array_push($price_ranges, array("key" => "1", "to" => "10000"));
-		array_push($price_ranges, array("key" => "2", "from" => "10001", "to" => "20000"));
-		array_push($price_ranges, array("key" => "3", "from" => "20001", "to" => "30000"));
-		array_push($price_ranges, array("key" => "4", "from" => "30001", "to" => "40000"));
-		array_push($price_ranges, array("key" => "5", "from" => "40001", "to" => "50000"));
+		array_push($price_ranges, array("key" => "1", "to" => "10001"));
+		array_push($price_ranges, array("key" => "2", "from" => "10001", "to" => "20001"));
+		array_push($price_ranges, array("key" => "3", "from" => "20001", "to" => "30001"));
+		array_push($price_ranges, array("key" => "4", "from" => "30001", "to" => "40001"));
+		array_push($price_ranges, array("key" => "5", "from" => "40001", "to" => "50001"));
 		array_push($price_ranges, array("key" => "6", "from" => "50001"));
 		$price_range = array("field" => $this->price_specification, "keyed" => true, "ranges" => $price_ranges);
 		$price = array("range" => $price_range);
