@@ -50,8 +50,9 @@ class SearchController extends BaseController {
 			}
 		}
 
-		$filters = $this->findSelectedFilters();
-		$response = $this->executeSearch();
+		$results = $this->executeSearch();
+		$aggregations = $this->executeAggregations();
+		$filters = $this->findSelectedFilters($aggregations);
 
 		$input = Input::all();
 		$data = array(
@@ -60,9 +61,10 @@ class SearchController extends BaseController {
 			'search_text' => $search_text,
 			'title' => $title,
 			'location_info' => $location_info,
-			'total' => $response['total'],
+			'total' => $results['total'],
 			'filters' => $filters,
-			'results' => $response['results']
+			'results' => $results['results'],
+			'aggregations' => $aggregations
 			);
 
 		$this->layout->contents = View::make('search/search', $data);
@@ -101,7 +103,7 @@ class SearchController extends BaseController {
 		$from = (Input::get('page', '1') - 1 ) * 10;
 		$search_text = Input::get('search_text', '');
 		
-		$filter = $this->buildFilterQuery();
+		$filter = $this->buildFilterQuery('none');
 		$sort = $this->buildSortQuery();
 		$query = $this->buildSearchQuery($filter, $search_text);
 
@@ -137,10 +139,13 @@ class SearchController extends BaseController {
 		return $query;
 	}
 
-	public function buildFilterQuery()
+	public function buildFilterQuery($exclude)
 	{
 		$and = array();
-		$and = $this->utility_price->buildFilterQuery($and, Input::get('price', ''));
+
+		if ($exclude != 'price') {
+			$and = $this->utility_price->buildFilterQuery($and, Input::get('price', ''));
+		}
 
 		$filter = array();
 		if (sizeof($and) > 0) {
@@ -221,10 +226,42 @@ class SearchController extends BaseController {
 		return $results;
 	}
 
-	public function findSelectedFilters() 
+	public function executeAggregations()
+	{
+		$search_text = Input::get('search_text', '');
+		
+		$filter = $this->buildFilterQuery('price');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_price->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$price_query = json_encode($search_query);
+
+		$content = "{}" . PHP_EOL. $price_query . PHP_EOL;
+		
+		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+		$json_response = curl_exec($curl);
+		curl_close($curl);
+
+		$results = json_decode($json_response, true);
+
+		$aggregations = array(
+			"price" => $this->utility_price->decodeAggregation($results['responses'][0])
+		);
+
+		return $aggregations;
+	}
+
+	public function findSelectedFilters($aggregations) 
 	{
 		$filters = array();
-		$filters = $this->utility_price->findSelectedFilter($filters, Input::get('price', ''));
+		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''));
 
 		return $filters;
 	}

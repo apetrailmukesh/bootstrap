@@ -16,10 +16,10 @@
 					</ul>
 				</nav>
 				<a class="button radius">Save Search</a>
-				<p>
+				<!-- <p>
 					<a class="fa-icon email-alerts">Get Email Alerts</a>
 					<span class="secondary-text">when we find new vehicles that match this search</span>
-				</p>
+				</p> -->
 			</div>
 			<div class="filters">
 				<h3>Refine Results</h3>

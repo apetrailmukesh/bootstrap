@@ -7,7 +7,7 @@
 		</header>
 		<section role="main">
 			<header>
-				@include('search/mobile/search-mobile-filter-sort')
+				@include('search/mobile/search-mobile-filter')
 				@include('search/search-title')
 			</header>
 			<div class="row">
