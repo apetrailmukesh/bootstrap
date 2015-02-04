@@ -100,22 +100,22 @@
 		$('#large-sort').val(sort);
 		
 		var mobile_radios = $('input:radio[name=sort-options]');
-	    if(mobile_radios.is(':checked') === false) {
+	    if(mobile_radios !== undefined && mobile_radios.length > 0 && mobile_radios.is(':checked') === false) {
 	        mobile_radios.filter('[value=' + sort + ']').prop('checked', true);
 	    }
 	}
 
 	function selectFilters() {
-		selectFilter($('div#mileageModal'), 'mileage', '');
-		selectFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
-		selectFilter($('div#photoModal'), 'photo', '');
-		selectFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
 		selectFilter($('div#priceModal'), 'price', '');
 		selectFilter($('div#mobilePriceModal'), 'price', 'mobile-');
-		selectFilter($('div#transmissionModal'), 'transmission', '');
-		selectFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
+		selectFilter($('div#mileageModal'), 'mileage', '');
+		selectFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
 		selectFilter($('div#yearModal'), 'year', '');
 		selectFilter($('div#mobileYearModal'), 'year', 'mobile-');
+		selectFilter($('div#transmissionModal'), 'transmission', '');
+		selectFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
+		selectFilter($('div#photoModal'), 'photo', '');
+		selectFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
 	}
 
 	function selectFilter(div, property, prefix) {

@@ -319,9 +319,9 @@ class SearchController extends BaseController {
 
 		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''));
 		$filters = $this->utility_mileage->findSelectedFilter($filters, $aggregations, Input::get('mileage', ''));
-		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
-		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
 		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''));
+		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
+		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 
 		return $filters;
 	}
