@@ -4,18 +4,24 @@ class SearchController extends BaseController {
 
 	protected $layout = 'base';
 
-	protected $miles_specification = 'spec-4';
-	protected $description_specification = 'spec-19';
-	protected $trim_specification = 'spec-1';
-	protected $transmission_specification = 'spec-15';
-	protected $engine_specification = 'spec-16';
-	protected $dealer_address_specification = 'spec-7';
-	protected $image_specification = 'spec-17';
-
-	protected $price_utility;
+	protected $utility_price;
+	protected $utility_miles;
+	protected $utility_description;
+	protected $utility_trim;
+	protected $utility_transmission;
+	protected $utility_engine;
+	protected $utility_dealer;
+	protected $utility_image;
 
 	public function __construct() {
-    	$this->price_utility = new PriceUtility();
+    	$this->utility_price = new UtilityPrice();
+    	$this->utility_miles = new UtilityMiles();
+    	$this->utility_description = new UtilityDescription();
+    	$this->utility_trim = new UtilityTrim();
+    	$this->utility_transmission = new UtilityTransmission();
+    	$this->utility_engine = new UtilityEngine();
+    	$this->utility_dealer = new UtilityDealer();
+    	$this->utility_image = new UtilityImage();
   	}
 
 	public function index()
@@ -134,8 +140,7 @@ class SearchController extends BaseController {
 	public function buildFilterQuery()
 	{
 		$and = array();
-
-		$and = $this->price_utility->buildFilterQuery($and, Input::get('price', ''));
+		$and = $this->utility_price->buildFilterQuery($and, Input::get('price', ''));
 
 		$filter = array();
 		if (sizeof($and) > 0) {
@@ -155,13 +160,9 @@ class SearchController extends BaseController {
 		$sort_order = $sort_parameters[1];
 
 		if ($sort_by == 'price') {
-			$sort = $this->price_utility->buildSortQuery($sort, $sort_order);
+			$sort = $this->utility_price->buildSortQuery($sort, $sort_order);
 		} else if ($sort_by == 'miles') {
-			if ($sort_order == '1') {
-				array_push($sort, array($this->miles_specification => array("order" => "desc", "mode" => "min")));
-			} else if ($sort_order == 0) {
-				array_push($sort, array($this->miles_specification => array("order" => "asc", "mode" => "min")));
-			}
+			$sort = $this->utility_miles->buildSortQuery($sort, $sort_order);
 		} else if ($sort_by == 'year') {
 			if ($sort_order == '1') {
 				array_push($sort, array("year" => array("order" => "desc")));
@@ -189,47 +190,14 @@ class SearchController extends BaseController {
 			$url = $source['url'];
 			$dealer = $source['dealer'];
 
-			$price = $this->price_utility->getValue($source);
-
-			$miles = '';
-			if (array_key_exists($this->miles_specification, $source)) {
-				$miles = $source[$this->miles_specification] . ' mi.';
-			}
-
-			$description = '';
-			if (array_key_exists($this->description_specification, $source)) {
-				$description = $source[$this->description_specification];
-				$description = strip_tags($description);
-				if (strlen($description) > 500) {
-					$stringCut = substr($description, 0, 500);
-					$description = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
-				}
-			}
-
-			$trim = '';
-			if (array_key_exists($this->trim_specification, $source)) {
-				$trim = $source[$this->trim_specification];
-			}
-
-			$transmission = '';
-			if (array_key_exists($this->transmission_specification, $source)) {
-				$transmission = $source[$this->transmission_specification];
-			}
-
-			$engine = '';
-			if (array_key_exists($this->engine_specification, $source)) {
-				$engine = $source[$this->engine_specification];
-			}
-
-			$dealer_address = '';
-			if (array_key_exists($this->dealer_address_specification, $source)) {
-				$dealer_address = 'in ' . $source[$this->dealer_address_specification];
-			}
-
-			$image = 'images/empty.png';
-			if (array_key_exists($this->image_specification, $source)) {
-				$image = $source[$this->image_specification];
-			}
+			$price = $this->utility_price->getValue($source);
+			$miles = $this->utility_miles->getValue($source);
+			$description = $this->utility_description->getValue($source);
+			$trim = $this->utility_trim->getValue($source);
+			$transmission = $this->utility_transmission->getValue($source);
+			$engine = $this->utility_engine->getValue($source);
+			$dealer_address = $this->utility_dealer->getValue($source);
+			$image = $this->utility_image->getValue($source);
 
 			$result = array(
 				'year' => $year,
@@ -256,88 +224,7 @@ class SearchController extends BaseController {
 	public function findSelectedFilters() 
 	{
 		$filters = array();
-
-		$filters = $this->price_utility->findSelectedFilter($filters, Input::get('price', ''));
-
-		return $filters;
-	}
-}
-
-class PriceUtility {
-
-	protected $price_specification = 'spec-20';
-
-	public function getValue($source)
-	{
-		$price = 'Contact us for price';
-		if (array_key_exists($this->price_specification, $source) && is_numeric($source[$this->price_specification])) {
-			$price = '$ ' . $source[$this->price_specification];
-		}
-
-		return $price;
-	}
-
-	public function buildSortQuery($sort, $sort_order)
-	{
-		if ($sort_order == '1') {
-			array_push($sort, array($this->price_specification => array("order" => "desc", "mode" => "min")));
-		} else if ($sort_order == 0) {
-			array_push($sort, array($this->price_specification => array("order" => "asc", "mode" => "min")));
-		}
-
-		return $sort;
-	}
-
-	public function buildFilterQuery($and, $price_filter)
-	{
-		if (!empty($price_filter)) {
-			$or = array();
-			$price_ranges = explode("-", $price_filter);
-			foreach ($price_ranges as $price_range) {
-				if ($price_range == 1) {
-					array_push($or, array("range" => array($this->price_specification => array("lte" => 10000))));
-				} else if ($price_range == 2) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 10000, "lte" => 20000))));
-				} else if ($price_range == 3) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 20000, "lte" => 30000))));
-				} else if ($price_range == 4) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 30000, "lte" => 40000))));
-				} else if ($price_range == 5) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 40000, "lte" => 50000))));
-				} else if ($price_range == 6) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 50000))));
-				}
-			}
-
-			array_push($and, array("or" => $or));
-		}
-
-		return $and;
-	}
-
-	public function findSelectedFilter($filters, $price_filter)
-	{
-		if (!empty($price_filter)) {
-			$values = array();
-			$price_ranges = explode("-", $price_filter);
-			foreach ($price_ranges as $price_range) {
-				if ($price_range == 1) {
-					array_push($values, array("title" => "Up to $10,000", "index" => 'price-remove-'.$price_range));
-				} else if ($price_range == 2) {
-					array_push($values, array("title" => "$10,000 - $20,000", "index" => 'price-remove-'.$price_range));
-				} else if ($price_range == 3) {
-					array_push($values, array("title" => "$20,000 - $30,000", "index" => 'price-remove-'.$price_range));
-				} else if ($price_range == 4) {
-					array_push($values, array("title" => "$30,000 - $40,000", "index" => 'price-remove-'.$price_range));
-				} else if ($price_range == 5) {
-					array_push($values, array("title" => "$40,000 - $50,000", "index" => 'price-remove-'.$price_range));
-				} else if ($price_range == 6) {
-					array_push($values, array("title" => "Over $50,000", "index" => 'price-remove-'.$price_range));
-				}
-			}
-
-			array_push($filters, array("name" => "Price", "values" => $values));
-		}
+		$filters = $this->utility_price->findSelectedFilter($filters, Input::get('price', ''));
 
 		return $filters;
 	}
