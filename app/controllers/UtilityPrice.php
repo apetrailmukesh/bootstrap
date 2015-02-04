@@ -91,7 +91,7 @@ class UtilityPrice {
 			$values = array();
 			$price_ranges = explode("-", $price_filter);
 			foreach ($price_ranges as $price_range) {
-				$title;
+				$title = '';
 				if ($price_range == 1) {
 					$title = "Up to $10,000";
 				} else if ($price_range == 2) {

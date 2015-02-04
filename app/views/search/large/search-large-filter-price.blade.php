@@ -3,7 +3,7 @@
 	<form id="filter-by-price">
 		<div class="row">
 			<div class="small-12 columns border">
-				<input type="checkbox" id="any" value="0" checked><label for="anyPrice">Any Price</label>
+				<input type="checkbox" id="price-any" value="0" checked><label for="price-any">Any Price</label>
 			</div>
 		</div>
 		<div class="row">

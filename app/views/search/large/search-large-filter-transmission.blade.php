@@ -1,23 +1,19 @@
 <div id="transmissionModal" class="reveal-modal medium filter-modal" data-reveal>
 	<h2>Filter by Transmission</h2>
-	<form>
+	<form id="filter-by-transmission">
 		<div class="row">
 			<div class="small-12 columns border">
-				<input type="checkbox" id="anyPrice" value="anyPrice" checked><label for="anyPrice">Any Price {00}</label>
+				<input type="checkbox" id="transmission-any" value="0" checked><label for="transmission-any">Any Transmission</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="5kPrice" value="5000"><label for="5kPrice">Up to $5,000 {00}</label></p>
-						<p><input type="checkbox" id="10kPrice" value="10000"><label for="10kPrice">$5,001-$10,000 {00}</label></p>
-						<p><input type="checkbox" id="15kPrice" value="15000"><label for="15kPrice">$10,001-$15,000 {00}</label></p>
+						<p><input type="checkbox" id="transmission-1" value="1"/><label for="transmission-1">Automatic ({{ $aggregations['price'][1]}})</label></p>
 					</div>
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="20kPrice" value="20000"><label for="20kPrice">$15,001-$20,000 {00}</label></p>
-						<p><input type="checkbox" id="25kPrice" value="25000"><label for="25kPrice">$20,001-$25,000 {00}</label></p>
-						<p><input type="checkbox" id="30kPrice" value="30000"><label for="30kPrice">$25,001-$30,000 {00}</label></p>
+						<p><input type="checkbox" id="transmission-2" value="4"/><label for="transmission-2">Manual ({{ $aggregations['price'][4]}})</label></p>
 					</div>
 				</div>
 				<div class="row">
