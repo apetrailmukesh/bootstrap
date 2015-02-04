@@ -106,8 +106,16 @@
 	}
 
 	function selectFilters() {
+		selectFilter($('div#mileageModal'), 'mileage', '');
+		selectFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
+		selectFilter($('div#photoModal'), 'photo', '');
+		selectFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
 		selectFilter($('div#priceModal'), 'price', '');
 		selectFilter($('div#mobilePriceModal'), 'price', 'mobile-');
+		selectFilter($('div#transmissionModal'), 'transmission', '');
+		selectFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
+		selectFilter($('div#yearModal'), 'year', '');
+		selectFilter($('div#mobileYearModal'), 'year', 'mobile-');
 	}
 
 	function selectFilter(div, property, prefix) {
@@ -153,6 +161,102 @@
 
 	$('[id*="mobile-price-remove-"]').click(function (event) {
 		filterRemoved(event.target.id.replace('mobile-price-remove-', ''), 'price');
+	});
+
+	$('div#mileageModal input:checkbox').change(function (event) {
+		filterChanged($('div#mileageModal'), $(this));
+	});
+
+	$('#filter-by-mileage').submit(function (event) {
+		filterSubmitted($('div#mileageModal'), 'mileage');
+	});
+
+	$('[id*="mileage-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mileage-remove-', ''), 'mileage');
+	});
+
+	$('div#mobileMileageModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobileMileageModal'), $(this));
+	});
+
+	$('#mobile-filter-by-mileage').submit(function (event) {
+		filterSubmitted($('div#mobileMileageModal'), 'mileage');
+	});
+
+	$('[id*="mobile-mileage-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-mileage-remove-', ''), 'mileage');
+	});
+
+	$('div#photoModal input:checkbox').change(function (event) {
+		filterChanged($('div#photoModal'), $(this));
+	});
+
+	$('#filter-by-photo').submit(function (event) {
+		filterSubmitted($('div#photoModal'), 'photo');
+	});
+
+	$('[id*="photo-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('photo-remove-', ''), 'photo');
+	});
+
+	$('div#mobilePhotoModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobilePhotoModal'), $(this));
+	});
+
+	$('#mobile-filter-by-photo').submit(function (event) {
+		filterSubmitted($('div#mobilePhotoModal'), 'photo');
+	});
+
+	$('[id*="mobile-photo-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-photo-remove-', ''), 'photo');
+	});
+
+	$('div#transmissionModal input:checkbox').change(function (event) {
+		filterChanged($('div#transmissionModal'), $(this));
+	});
+
+	$('#filter-by-transmission').submit(function (event) {
+		filterSubmitted($('div#transmissionModal'), 'transmission');
+	});
+
+	$('[id*="transmission-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('transmission-remove-', ''), 'transmission');
+	});
+
+	$('div#mobileTransmissionModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobileTransmissionModal'), $(this));
+	});
+
+	$('#mobile-filter-by-transmission').submit(function (event) {
+		filterSubmitted($('div#mobileTransmissionModal'), 'transmission');
+	});
+
+	$('[id*="mobile-transmission-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-transmission-remove-', ''), 'transmission');
+	});
+
+	$('div#yearModal input:checkbox').change(function (event) {
+		filterChanged($('div#yearModal'), $(this));
+	});
+
+	$('#filter-by-year').submit(function (event) {
+		filterSubmitted($('div#yearModal'), 'year');
+	});
+
+	$('[id*="year-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('year-remove-', ''), 'year');
+	});
+
+	$('div#mobileYearModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobileYearModal'), $(this));
+	});
+
+	$('#mobile-filter-by-year').submit(function (event) {
+		filterSubmitted($('div#mobileYearModal'), 'year');
+	});
+
+	$('[id*="mobile-year-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-year-remove-', ''), 'year');
 	});
 
 	function filterChanged(div, checkbox) {

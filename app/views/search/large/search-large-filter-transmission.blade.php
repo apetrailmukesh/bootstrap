@@ -13,7 +13,7 @@
 						<p><input type="checkbox" id="transmission-1" value="1"/><label for="transmission-1">Automatic ({{ $aggregations['price'][1]}})</label></p>
 					</div>
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="transmission-2" value="4"/><label for="transmission-2">Manual ({{ $aggregations['price'][4]}})</label></p>
+						<p><input type="checkbox" id="transmission-2" value="2"/><label for="transmission-2">Manual ({{ $aggregations['price'][4]}})</label></p>
 					</div>
 				</div>
 				<div class="row">
