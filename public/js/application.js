@@ -39,51 +39,6 @@
   		event.preventDefault();
 	});
 
-	$('div#priceModal input:checkbox').change(function (event) {
-		var selected = $(this).val();
-		if($(this).is(":checked")) {
-			if (selected == 0) {
-		    	$('div#priceModal input:checkbox').prop('checked', false);
-		    	$('div#priceModal input:checkbox#any').prop('checked', true);
-		    } else {
-		    	$('div#priceModal input:checkbox#any').prop('checked', false);
-		    }
-		} else {
-			if (selected == 0) {
-		    	$('div#priceModal input:checkbox').prop('checked', false);
-		    	$('div#priceModal input:checkbox#any').prop('checked', true);
-		    } else if (!$('div#priceModal input:checkbox').is(':checked')){
-		    	$('div#priceModal input:checkbox#any').prop('checked', true);
-		    }
-		}
-	});
-
-	$('#filter-by-price').submit(function (event) {
-		var edited;
-		if ($('div#priceModal input:checkbox#any').is(':checked')) {
-			var edited = updateQueryStringParameter(document.URL, 'price', '');
-	    	edited = updateQueryStringParameter(edited, 'page', '1');
-		} else {
-			var checkedValues = $('div#priceModal input:checkbox:checked').map(function() {
-			    return this.value;
-			}).get();
-			var edited = updateQueryStringParameter(document.URL, 'price', checkedValues.join('-'));
-	    	edited = updateQueryStringParameter(edited, 'page', '1');
-		}
-
-  		window.location.href = edited;
-  		event.preventDefault();
-	});
-
-	$('[id*="price-remove-"]').click(function (event) {
-		var price_range = event.target.id.replace("price-remove-", ""); ;
-		var updated = removeItemFromList(getQueryStringParameter('price'), price_range);
-		var edited = updateQueryStringParameter(document.URL, 'price', updated);
-	    edited = updateQueryStringParameter(edited, 'page', '1');
-  		window.location.href = edited;
-  		event.preventDefault();
-	});
-
 	$('img').error(function(){
         $(this).attr('src', 'images/empty.png');
 	});
@@ -151,23 +106,97 @@
 	}
 
 	function selectFilters() {
-		var price = getQueryStringParameter('price');
-		if (price !== null && price !== undefined) {
-			if (price.length > 0) {
-				$('div#priceModal input:checkbox#any').prop('checked', false);
-				var prices = price.split('-');
-				$(prices).each(function(index, value) {
-					var checkbox = $('div#priceModal #price-' + value);
+		selectFilter($('div#priceModal'), 'price', '');
+		selectFilter($('div#mobilePriceModal'), 'price', 'mobile-');
+	}
+
+	function selectFilter(div, property, prefix) {
+		var value = getQueryStringParameter(property);
+		if (value !== null && value !== undefined) {
+			if (value.length > 0) {
+				div.find('input:checkbox[id*="any"]').prop('checked', false);
+				var values = value.split('-');
+				$(values).each(function(index, value) {
+					var id = '#' + prefix + property + '-' + value;
+					var checkbox = div.find(id);
 					if (checkbox !== null && checkbox !== undefined) {
 				    	checkbox.prop('checked', true);
 					}
 				});
 			} else {
-				$('div#priceModal input:checkbox#any').prop('checked', true);
+				div.find('input:checkbox[id*="any"]').prop('checked', true);
 			}
 		} else {
-			$('div#priceModal input:checkbox#any').prop('checked', true);
+			div.find('input:checkbox[id*="any"]').prop('checked', true);
 		}
+	}
+
+	$('div#priceModal input:checkbox').change(function (event) {
+		filterChanged($('div#priceModal'), $(this));
+	});
+
+	$('#filter-by-price').submit(function (event) {
+		filterSubmitted($('div#priceModal'), 'price');
+	});
+
+	$('[id*="price-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('price-remove-', ''), 'price');
+	});
+
+	$('div#mobilePriceModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobilePriceModal'), $(this));
+	});
+
+	$('#mobile-filter-by-price').submit(function (event) {
+		filterSubmitted($('div#mobilePriceModal'), 'price');
+	});
+
+	$('[id*="mobile-price-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-price-remove-', ''), 'price');
+	});
+
+	function filterChanged(div, checkbox) {
+		var selected = checkbox.val();
+		if(checkbox.is(":checked")) {
+			if (selected == 0) {
+		    	div.find('input:checkbox').prop('checked', false);
+		    	div.find('input:checkbox[id*="any"]').prop('checked', true);
+		    } else {
+		    	div.find('input:checkbox[id*="any"]').prop('checked', false);
+		    }
+		} else {
+			if (selected == 0) {
+		    	div.find('input:checkbox').prop('checked', false);
+		    	div.find('input:checkbox[id*="any"]').prop('checked', true);
+		    } else if (!div.find('input:checkbox').is(':checked')){
+		    	$(div.find('input:checkbox[id*="any"]').prop('checked', true));
+		    }
+		}
+	}
+
+	function filterSubmitted(div, property) {
+		var edited;
+		if (div.find('input:checkbox[id*="any"]').is(':checked')) {
+			var edited = updateQueryStringParameter(document.URL, property, '');
+	    	edited = updateQueryStringParameter(edited, 'page', '1');
+		} else {
+			var checkedValues = div.find('input:checkbox:checked').map(function() {
+			    return this.value;
+			}).get();
+			var edited = updateQueryStringParameter(document.URL, property, checkedValues.join('-'));
+	    	edited = updateQueryStringParameter(edited, 'page', '1');
+		}
+
+  		window.location.href = edited;
+  		event.preventDefault();
+	}
+
+	function filterRemoved(id, property) {
+		var updated = removeItemFromList(getQueryStringParameter(property), id);
+		var edited = updateQueryStringParameter(document.URL, property, updated);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
 	}
 
 })(jQuery);
