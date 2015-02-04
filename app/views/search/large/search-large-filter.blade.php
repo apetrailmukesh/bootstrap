@@ -15,7 +15,7 @@
 						@endforeach
 					</ul>
 				</nav>
-				<a class="button radius">Save Search</a>
+				<!-- <a class="button radius">Save Search</a> -->
 				<!-- <p>
 					<a class="fa-icon email-alerts">Get Email Alerts</a>
 					<span class="secondary-text">when we find new vehicles that match this search</span>

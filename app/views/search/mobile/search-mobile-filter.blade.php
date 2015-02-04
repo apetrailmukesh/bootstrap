@@ -24,7 +24,7 @@
 						<li><a href="#" class="fa-icon close">{Selected Filter}</a></li>
 					</ul>
 				</nav>
-				<a href="#" class="button radius">Save Search</a>
+				<!-- <a href="#" class="button radius">Save Search</a> -->
 				<!-- <p>
 					<a href="#" class="fa-icon email-alerts">Get Email Alerts</a>
 					<span class="secondary-text">when we find new vehicles that match this search</span>
