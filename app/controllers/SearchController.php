@@ -5,23 +5,25 @@ class SearchController extends BaseController {
 	protected $layout = 'base';
 
 	protected $utility_price;
-	protected $utility_miles;
+	protected $utility_mileage;
 	protected $utility_description;
 	protected $utility_trim;
 	protected $utility_transmission;
 	protected $utility_engine;
 	protected $utility_dealer;
-	protected $utility_image;
+	protected $utility_photo;
+	protected $utility_year;
 
 	public function __construct() {
     	$this->utility_price = new UtilityPrice();
-    	$this->utility_miles = new UtilityMiles();
+    	$this->utility_mileage = new UtilityMileage();
     	$this->utility_description = new UtilityDescription();
     	$this->utility_trim = new UtilityTrim();
     	$this->utility_transmission = new UtilityTransmission();
     	$this->utility_engine = new UtilityEngine();
     	$this->utility_dealer = new UtilityDealer();
-    	$this->utility_image = new UtilityImage();
+    	$this->utility_photo = new UtilityPhoto();
+    	$this->utility_year = new UtilityYear();
   	}
 
 	public function index()
@@ -147,6 +149,22 @@ class SearchController extends BaseController {
 			$and = $this->utility_price->buildFilterQuery($and, Input::get('price', ''));
 		}
 
+		if ($exclude != 'mileage') {
+			$and = $this->utility_mileage->buildFilterQuery($and, Input::get('mileage', ''));
+		}
+
+		if ($exclude != 'photo') {
+			$and = $this->utility_photo->buildFilterQuery($and, Input::get('photo', ''));
+		}
+
+		if ($exclude != 'transmission') {
+			$and = $this->utility_transmission->buildFilterQuery($and, Input::get('transmission', ''));
+		}
+
+		if ($exclude != 'year') {
+			$and = $this->utility_year->buildFilterQuery($and, Input::get('year', ''));
+		}
+
 		$filter = array();
 		if (sizeof($and) > 0) {
 			$filter['and'] = $and;
@@ -166,14 +184,10 @@ class SearchController extends BaseController {
 
 		if ($sort_by == 'price') {
 			$sort = $this->utility_price->buildSortQuery($sort, $sort_order);
-		} else if ($sort_by == 'miles') {
-			$sort = $this->utility_miles->buildSortQuery($sort, $sort_order);
+		} else if ($sort_by == 'mileage') {
+			$sort = $this->utility_mileage->buildSortQuery($sort, $sort_order);
 		} else if ($sort_by == 'year') {
-			if ($sort_order == '1') {
-				array_push($sort, array("year" => array("order" => "desc")));
-			} else if ($sort_order == 0) {
-				array_push($sort, array("year" => array("order" => "asc")));
-			}
+			$sort = $this->utility_year->buildSortQuery($sort, $sort_order);
 		} else if ($sort_by == 'makemodel') {
 			array_push($sort, array("make.raw" => array("order" => "asc")));
 			array_push($sort, array("model.raw" => array("order" => "asc")));
@@ -196,13 +210,13 @@ class SearchController extends BaseController {
 			$dealer = $source['dealer'];
 
 			$price = $this->utility_price->getValue($source);
-			$miles = $this->utility_miles->getValue($source);
+			$mileage = $this->utility_mileage->getValue($source);
 			$description = $this->utility_description->getValue($source);
 			$trim = $this->utility_trim->getValue($source);
 			$transmission = $this->utility_transmission->getValue($source);
 			$engine = $this->utility_engine->getValue($source);
 			$dealer_address = $this->utility_dealer->getValue($source);
-			$image = $this->utility_image->getValue($source);
+			$image = $this->utility_photo->getValue($source);
 
 			$result = array(
 				'year' => $year,
@@ -211,7 +225,7 @@ class SearchController extends BaseController {
 				'url' => $url,
 				'dealer' => $dealer,
 				'price' => $price,
-				'miles' => $miles,
+				'mileage' => $mileage,
 				'description' => $description,
 				'trim' => $trim,
 				'transmission' => $transmission,
@@ -229,14 +243,51 @@ class SearchController extends BaseController {
 	public function executeAggregations()
 	{
 		$search_text = Input::get('search_text', '');
+
+		$content = '';
 		
 		$filter = $this->buildFilterQuery('price');
 		$query = $this->buildSearchQuery($filter, $search_text);
 		$aggs = $this->utility_price->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
-		$price_query = json_encode($search_query);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
-		$content = "{}" . PHP_EOL. $price_query . PHP_EOL;
+		$filter = $this->buildFilterQuery('mileage');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_mileage->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('photo');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_photo->buildAvailableAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+		$aggs = $this->utility_photo->buildNotAvailableAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('transmission');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_transmission->buildAutomaticAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+		$aggs = $this->utility_transmission->buildManualAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('year');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_year->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -252,7 +303,11 @@ class SearchController extends BaseController {
 		$results = json_decode($json_response, true);
 
 		$aggregations = array(
-			"price" => $this->utility_price->decodeAggregation($results['responses'][0])
+			"price" => $this->utility_price->decodeAggregation($results['responses'][0]),
+			"mileage" => $this->utility_mileage->decodeAggregation($results['responses'][1]),
+			"photo" => $this->utility_photo->decodeAggregation($results['responses'][2], $results['responses'][3]),
+			"transmission" => $this->utility_transmission->decodeAggregation($results['responses'][4], $results['responses'][5]),
+			"year" => $this->utility_year->decodeAggregation($results['responses'][6]),
 		);
 
 		return $aggregations;
@@ -261,7 +316,12 @@ class SearchController extends BaseController {
 	public function findSelectedFilters($aggregations) 
 	{
 		$filters = array();
+
 		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''));
+		$filters = $this->utility_mileage->findSelectedFilter($filters, $aggregations, Input::get('mileage', ''));
+		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
+		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
+		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''));
 
 		return $filters;
 	}

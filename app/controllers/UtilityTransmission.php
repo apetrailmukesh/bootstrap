@@ -13,4 +13,66 @@ class UtilityTransmission {
 
 		return $transmission;
 	}
+
+	public function buildFilterQuery($and, $transmission_filter)
+	{
+		if (!empty($transmission_filter)) {
+			$or = array();
+			$transmission_ranges = explode("-", $transmission_filter);
+			foreach ($transmission_ranges as $transmission_range) {
+				if ($transmission_range == 1) {
+					array_push($or, array("term" => array($this->transmission_specification.'raw' => "automatic")));
+				} else if ($transmission_range == 2) {
+					array_push($or, array("term" => array($this->transmission_specification.'raw' => "manual")));
+				}
+			}
+
+			array_push($and, array("or" => $or));
+		}
+
+		return $and;
+	}
+
+	public function buildAutomaticAggregationQuery()
+	{
+		return array("automatic" => array("filter" => array("term" => array($this->transmission_specification.'raw' => "automatic"))));
+	}
+
+	public function buildManualAggregationQuery()
+	{
+		return array("manual" => array("filter" => array("term" => array($this->transmission_specification.'raw' => "manual"))));
+	}
+
+	public function decodeAggregation($automatic, $manual)
+	{
+		$values = array(
+			'1' => $automatic['aggregations']['automatic']['doc_count'],
+			'2' => $manual['aggregations']['manual']['doc_count']
+		);
+
+		return $values;
+	}
+
+	public function findSelectedFilter($filters, $aggregations, $transmission_filter)
+	{
+		if (!empty($transmission_filter)) {
+			$values = array();
+			$transmission_ranges = explode("-", $transmission_filter);
+			foreach ($transmission_ranges as $transmission_range) {
+				$title = '';
+				if ($transmission_range == 1) {
+					$title = "Automatic";
+				} else if ($transmission_range == 2) {
+					$title = "Manual";
+				}
+
+				$title = $title . " (" . $aggregations['transmission'][$transmission_range] . ")";
+				array_push($values, array("title" => $title, "index" => 'transmission-remove-' . $transmission_range));
+			}
+
+			array_push($filters, array("name" => "Transmission", "values" => $values));
+		}
+
+		return $filters;
+	}
 }

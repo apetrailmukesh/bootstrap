@@ -10,10 +10,10 @@
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="photo-1" value="1"/><label for="photo-1">Available ({{ $aggregations['price'][1]}})</label></p>
+						<p><input type="checkbox" id="photo-1" value="1"/><label for="photo-1">Available ({{ $aggregations['photo'][1]}})</label></p>
 					</div>
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="photo-2" value="2"/><label for="photo-2">Not Available ({{ $aggregations['price'][4]}})</label></p>
+						<p><input type="checkbox" id="photo-2" value="2"/><label for="photo-2">Not Available ({{ $aggregations['photo'][2]}})</label></p>
 					</div>
 				</div>
 				<div class="row">

@@ -9,8 +9,8 @@
 					<select id="large-sort" class="small">
 						<option value="price-1" selected>Price - Highest</option>
 						<option value="price-0">Price - Lowest</option>
-						<option value="miles-1">Mileage - Highest</option>
-						<option value="miles-0">Mileage - Lowest</option>
+						<option value="mileage-1">Mileage - Highest</option>
+						<option value="mileage-0">Mileage - Lowest</option>
 						<option value="year-1">Year - Newest</option>
 						<option value="year-0">Year - Oldest</option>
 						<option value="makemodel-1">Make/Model - A to Z</option>

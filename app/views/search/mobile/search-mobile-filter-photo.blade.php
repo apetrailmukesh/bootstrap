@@ -8,8 +8,8 @@
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
-				<p><input type="checkbox" id="mobile-photo-1" value="1"/><label for="mobile-photo-1">Available ({{ $aggregations['price'][1]}})</label></p>
-				<p><input type="checkbox" id="mobile-photo-2" value="2"/><label for="mobile-photo-2">Not Available ({{ $aggregations['price'][2]}})</label></p>
+				<p><input type="checkbox" id="mobile-photo-1" value="1"/><label for="mobile-photo-1">Available ({{ $aggregations['photo'][1]}})</label></p>
+				<p><input type="checkbox" id="mobile-photo-2" value="2"/><label for="mobile-photo-2">Not Available ({{ $aggregations['photo'][2]}})</label></p>
 				<div class="row">
 					<div class="small 12 columns">
 						<button type="submit" class="radius">Update Results</button>
