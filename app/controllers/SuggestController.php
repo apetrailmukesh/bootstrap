@@ -6,10 +6,12 @@ class SuggestController extends BaseController {
 	{
 		$data = array();
 		$query = Input::get('query', '');
-		
-		array_push($data, array('value' => 'AA'));
-		array_push($data, array('value' => 'AAA'));
-		array_push($data, array('value' => 'AAAA'));
+
+		$suggestions = SearchSuggestion::where('suggestion' , 'LIKE', $query.'%')->orderBy('rank', 'asc')->take(10)->get();
+
+		foreach ($suggestions as $suggestion) {
+			array_push($data, array('value' => $suggestion->suggestion));
+		}
 
 		return Response::json($data);
 	}
