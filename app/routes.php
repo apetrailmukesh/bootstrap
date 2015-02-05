@@ -24,3 +24,6 @@ Route::post('/admin/specifications/add', array('as' => 'post.admin.specification
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');
 
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');
+
+Route::get('/suggest/vehicle', array('as' => 'get.suggest.vehicle', 'uses' => 'SuggestController@vehicle'));
+Route::get('/suggest/zip', array('as' => 'get.suggest.zip', 'uses' => 'SuggestController@zip'));

@@ -28,7 +28,7 @@
 			</div>
 			<div class="small-6 medium-4 large-4 columns">
 				<label>Zip Code
-					{{ Form::text('zip_code', $zip_code,  array('placeholder'=>'12345')) }}
+					{{ Form::text('zip_code', $zip_code,  array('placeholder'=>'12345', 'class' => 'zip-search')) }}
 				</label>
 			</div>
 			<div class="small-12 medium-4 large-4 columns">
