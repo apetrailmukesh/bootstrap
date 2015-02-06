@@ -133,6 +133,9 @@ strong {font-weight:500}
 .not-visible {display:none}
 .column.no-left-pad, .columns.no-left-pad {padding-left:0}
 /* logo/tagline styles */
+
+.logo { cursor: pointer; cursor: hand; }
+
 .logo span:nth-child(1) {color:#98B548}
 .logo span:nth-child(2) {
 	color:#3498DB;

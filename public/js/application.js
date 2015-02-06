@@ -4,6 +4,12 @@
 	selectSort();
 	selectFilters();
 
+	$('h1.logo').click(function() {
+		var home = location.protocol + '//' + location.hostname;
+		window.location.href = home;
+  		event.preventDefault();
+	});
+
 	$('.results-search-form').submit(function(event) {
   		var search_text = $(this).find('input[name="search_text"]').val();
   		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);

@@ -8,7 +8,7 @@ class UtilityPrice {
 	{
 		$price = 'Contact us for price';
 		if (array_key_exists($this->price_specification, $source) && is_numeric($source[$this->price_specification])) {
-			$price = '$ ' . $source[$this->price_specification];
+			$price = '$ ' . number_format($source[$this->price_specification]);
 		}
 
 		return $price;
