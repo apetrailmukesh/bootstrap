@@ -45,9 +45,13 @@
   		event.preventDefault();
 	});
 
-	$('img').error(function(){
-        $(this).attr('src', 'images/empty.png');
-	});
+	$('img')
+		.error(function(){
+        	$(this).attr('src', 'images/empty.png');
+		})
+		.each(function(){
+  			$(this).attr("src", $(this).attr("src"))
+  		});
 
 	function updateQueryStringParameter(uri, key, value) {
 	  	var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
