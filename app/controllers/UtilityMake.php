@@ -47,7 +47,13 @@ class UtilityMake {
 			foreach ($make_ranges as $make_range) {
 				$makes = Make::where('id' , '=', $make_range);
 				if ($makes->count()) {
-					$title = $makes->first()->make . ' (' .  $aggregations['make'][$make_range]['count'] . ')';
+					$title = '';
+					if (array_key_exists($make_range, $aggregations['make'])) {
+						$title = $makes->first()->make . ' (' .  $aggregations['make'][$make_range]['count'] . ')';
+					} else {
+						$title = $makes->first()->make . ' (0)';
+					}
+					
 					array_push($values, array("title" => $title, "index" => 'make-remove-' . $make_range));
 				}
 			}
