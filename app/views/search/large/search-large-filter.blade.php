@@ -25,6 +25,8 @@
 				<h3>Refine Results</h3>
 				<nav>
 					<ul class="side-nav">
+						<li><a class="fa-icon plus" data-reveal-id="makeModal">Make</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="modelModal">Model</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="priceModal">Price</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mileageModal">Mileage</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="yearModal">Year</a></li>
@@ -32,6 +34,8 @@
 						<li><a class="fa-icon plus" data-reveal-id="photoModal">Has Photos</a></li>
 					</ul>
 				</nav>
+				@include('search/large/search-large-filter-make')
+				@include('search/large/search-large-filter-model')
 				@include('search/large/search-large-filter-price')
 				@include('search/large/search-large-filter-mileage')
 				@include('search/large/search-large-filter-year')

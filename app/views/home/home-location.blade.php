@@ -19,7 +19,7 @@
 							'500' => '500 Miles',
 							'0' => 'Unlimited'], $distance)
 						}}
-				</label>
+					</label>
 			</div>
 			<div class="small-6 medium-4 large-4 columns">
 				<label>Zip Code

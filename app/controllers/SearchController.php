@@ -4,6 +4,8 @@ class SearchController extends BaseController {
 
 	protected $layout = 'base';
 
+	protected $utility_make;
+	protected $utility_model;
 	protected $utility_price;
 	protected $utility_mileage;
 	protected $utility_description;
@@ -15,6 +17,8 @@ class SearchController extends BaseController {
 	protected $utility_year;
 
 	public function __construct() {
+		$this->utility_make = new UtilityMake();
+		$this->utility_model = new UtilityModel();
     	$this->utility_price = new UtilityPrice();
     	$this->utility_mileage = new UtilityMileage();
     	$this->utility_description = new UtilityDescription();
@@ -130,7 +134,7 @@ class SearchController extends BaseController {
 				$query = array("constant_score" => array ("filter" => $filter));
 			}
 		} else {
-			$search_query = array("multi_match" => array("query" => $search_text, "operator" => "and", "fields" => array("_all")));
+			$search_query = array("multi_match" => array("query" => $search_text, "operator" => "and", "fields" => array("make", "model")));
 			if ($filter == false) {
 				$query = $search_query;
 			} else {
@@ -144,6 +148,14 @@ class SearchController extends BaseController {
 	public function buildFilterQuery($exclude)
 	{
 		$and = array();
+
+		if ($exclude != 'make') {
+			$and = $this->utility_make->buildFilterQuery($and, Input::get('make', ''));
+		}
+
+		if ($exclude != 'model') {
+			$and = $this->utility_model->buildFilterQuery($and, Input::get('model', ''));
+		}
 
 		if ($exclude != 'price') {
 			$and = $this->utility_price->buildFilterQuery($and, Input::get('price', ''));
@@ -288,6 +300,20 @@ class SearchController extends BaseController {
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('make');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_make->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('model');
+		$query = $this->buildSearchQuery($filter, $search_text);
+		$aggs = $this->utility_model->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -308,6 +334,8 @@ class SearchController extends BaseController {
 			"photo" => $this->utility_photo->decodeAggregation($results['responses'][2], $results['responses'][3]),
 			"transmission" => $this->utility_transmission->decodeAggregation($results['responses'][4], $results['responses'][5]),
 			"year" => $this->utility_year->decodeAggregation($results['responses'][6]),
+			"make" => $this->utility_make->decodeAggregation($results['responses'][7]),
+			"model" => $this->utility_model->decodeAggregation($results['responses'][8])
 		);
 
 		return $aggregations;
@@ -317,6 +345,8 @@ class SearchController extends BaseController {
 	{
 		$filters = array();
 
+		$filters = $this->utility_make->findSelectedFilter($filters, $aggregations, Input::get('make', ''));
+		$filters = $this->utility_model->findSelectedFilter($filters, $aggregations, Input::get('model', ''));
 		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''));
 		$filters = $this->utility_mileage->findSelectedFilter($filters, $aggregations, Input::get('mileage', ''));
 		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''));

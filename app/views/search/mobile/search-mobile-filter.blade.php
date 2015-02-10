@@ -39,6 +39,8 @@
 				<h3>Refine Results</h3>
 				<nav>
 					<ul class="side-nav">
+						<li><a class="fa-icon plus" data-reveal-id="mobileMakeModal">Make</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileModelModal">Model</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobilePriceModal">Price</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileMileageModal">Mileage</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileYearModal">Year</a></li>
@@ -46,6 +48,8 @@
 						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Has Photos</a></li>
 					</ul>
 				</nav>
+				@include('search/mobile/search-mobile-filter-make')
+				@include('search/mobile/search-mobile-filter-model')
 				@include('search/mobile/search-mobile-filter-price')
 				@include('search/mobile/search-mobile-filter-mileage')
 				@include('search/mobile/search-mobile-filter-year')

@@ -116,6 +116,10 @@
 	}
 
 	function selectFilters() {
+		selectFilter($('div#makeModal'), 'make', '');
+		selectFilter($('div#mobileMakeModal'), 'make', 'mobile-');
+		selectFilter($('div#modelModal'), 'model', '');
+		selectFilter($('div#mobileModelModal'), 'model', 'mobile-');
 		selectFilter($('div#priceModal'), 'price', '');
 		selectFilter($('div#mobilePriceModal'), 'price', 'mobile-');
 		selectFilter($('div#mileageModal'), 'mileage', '');
@@ -267,6 +271,54 @@
 
 	$('[id*="mobile-year-remove-"]').click(function (event) {
 		filterRemoved(event.target.id.replace('mobile-year-remove-', ''), 'year');
+	});
+
+	$('div#makeModal input:checkbox').change(function (event) {
+		filterChanged($('div#makeModal'), $(this));
+	});
+
+	$('#filter-by-make').submit(function (event) {
+		filterSubmitted($('div#makeModal'), 'make');
+	});
+
+	$('[id*="make-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('make-remove-', ''), 'make');
+	});
+
+	$('div#mobileMakeModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobileMakeModal'), $(this));
+	});
+
+	$('#mobile-filter-by-make').submit(function (event) {
+		filterSubmitted($('div#mobileMakeModal'), 'make');
+	});
+
+	$('[id*="mobile-make-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-make-remove-', ''), 'make');
+	});
+
+	$('div#modelModal input:checkbox').change(function (event) {
+		filterChanged($('div#modelModal'), $(this));
+	});
+
+	$('#filter-by-model').submit(function (event) {
+		filterSubmitted($('div#modelModal'), 'model');
+	});
+
+	$('[id*="model-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('model-remove-', ''), 'model');
+	});
+
+	$('div#mobileModelModal input:checkbox').change(function (event) {
+		filterChanged($('div#mobileModelModal'), $(this));
+	});
+
+	$('#mobile-filter-by-model').submit(function (event) {
+		filterSubmitted($('div#mobileModelModal'), 'model');
+	});
+
+	$('[id*="mobile-model-remove-"]').click(function (event) {
+		filterRemoved(event.target.id.replace('mobile-model-remove-', ''), 'model');
 	});
 
 	function filterChanged(div, checkbox) {

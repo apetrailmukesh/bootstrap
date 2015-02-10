@@ -8,7 +8,7 @@ class UtilityMileage {
 	{
 		$miles = '';
 		if (array_key_exists($this->mileage_specification, $source)) {
-			$miles = number_format($source[$this->mileage_specification], 0, '.', '') . ' mi.';
+			$miles = number_format($source[$this->mileage_specification], 0, '.', ',') . ' mi.';
 		}
 
 		return $miles;
