@@ -32,17 +32,17 @@ class UtilityMileage {
 			$mileage_ranges = explode("-", $mileage_filter);
 			foreach ($mileage_ranges as $mileage_range) {
 				if ($mileage_range == 1) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 100000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 10000))));
 				} else if ($mileage_range == 2) {
-					array_push($or, array("range" => array($this->mileage_specification => array("gt" => 100000, "lte" => 200000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 20000))));
 				} else if ($mileage_range == 3) {
-					array_push($or, array("range" => array($this->mileage_specification => array("gt" => 200000, "lte" => 300000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 30000))));
 				} else if ($mileage_range == 4) {
-					array_push($or, array("range" => array($this->mileage_specification => array("gt" => 300000, "lte" => 400000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 40000))));
 				} else if ($mileage_range == 5) {
-					array_push($or, array("range" => array($this->mileage_specification => array("gt" => 400000, "lte" => 500000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 50000))));
 				} else if ($mileage_range == 6) {
-					array_push($or, array("range" => array($this->mileage_specification => array("gt" => 500000))));
+					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 60000))));
 				}
 			}
 
@@ -55,12 +55,12 @@ class UtilityMileage {
 	public function buildAggregationQuery()
 	{
 		$mileage_ranges = array();
-		array_push($mileage_ranges, array("key" => "1", "to" => "100001"));
-		array_push($mileage_ranges, array("key" => "2", "from" => "100001", "to" => "200001"));
-		array_push($mileage_ranges, array("key" => "3", "from" => "200001", "to" => "300001"));
-		array_push($mileage_ranges, array("key" => "4", "from" => "300001", "to" => "400001"));
-		array_push($mileage_ranges, array("key" => "5", "from" => "400001", "to" => "500001"));
-		array_push($mileage_ranges, array("key" => "6", "from" => "500001"));
+		array_push($mileage_ranges, array("key" => "1", "to" => "10001"));
+		array_push($mileage_ranges, array("key" => "2", "to" => "20001"));
+		array_push($mileage_ranges, array("key" => "3", "to" => "30001"));
+		array_push($mileage_ranges, array("key" => "4", "to" => "40001"));
+		array_push($mileage_ranges, array("key" => "5", "to" => "50001"));
+		array_push($mileage_ranges, array("key" => "6", "to" => "60001"));
 		$mileage_range = array("field" => $this->mileage_specification, "keyed" => true, "ranges" => $mileage_ranges);
 		$mileage = array("range" => $mileage_range);
 
@@ -93,17 +93,17 @@ class UtilityMileage {
 			foreach ($mileage_ranges as $mileage_range) {
 				$title = '';
 				if ($mileage_range == 1) {
-					$title = "Up to 100,000";
+					$title = "10,000 or less";
 				} else if ($mileage_range == 2) {
-					$title = "100,000 - 200,000";
+					$title = "20,000 or less";
 				} else if ($mileage_range == 3) {
-					$title = "200,000 - 300,000";
+					$title = "30,000 or less";
 				} else if ($mileage_range == 4) {
-					$title = "300,000 - 400,000";
+					$title = "40,000 or less";
 				} else if ($mileage_range == 5) {
-					$title = "400,000 - 500,000";
+					$title = "50,000 or less";
 				} else if ($mileage_range == 6) {
-					$title = "Over 500,000";
+					$title = "60,000 or less";
 				}
 
 				$title = $title . " (" . $aggregations['mileage'][$mileage_range] . ")";
