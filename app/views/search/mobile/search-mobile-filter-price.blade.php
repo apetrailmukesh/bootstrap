@@ -8,12 +8,14 @@
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
-				<p><input type="checkbox" id="mobile-price-1" value="1"/><label for="mobile-price-1">Up to $10,000 ({{ $aggregations['price'][1]}})</label></p>
-				<p><input type="checkbox" id="mobile-price-2" value="2"/><label for="mobile-price-2">$10,000 - $20,000 ({{ $aggregations['price'][2]}})</label></p>
-				<p><input type="checkbox" id="mobile-price-3" value="3"/><label for="mobile-price-3">$20,000 - $30,000 ({{ $aggregations['price'][3]}})</label></p>
-				<p><input type="checkbox" id="mobile-price-4" value="4"/><label for="mobile-price-4">$30,000 - $40,000 ({{ $aggregations['price'][4]}})</label></p>
-				<p><input type="checkbox" id="mobile-price-5" value="5"/><label for="mobile-price-5">$40,000 - $50,000 ({{ $aggregations['price'][5]}})</label></p>
-				<p><input type="checkbox" id="mobile-price-6" value="6"/><label for="mobile-price-6">Over $50,000 ({{ $aggregations['price'][6]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-1" value="1"/><label for="mobile-price-1">Up to $5,000 ({{ $aggregations['price'][1]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-2" value="2"/><label for="mobile-price-2">$5,001 - $10,000 ({{ $aggregations['price'][2]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-3" value="3"/><label for="mobile-price-3">$10,001 - $15,000 ({{ $aggregations['price'][3]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-4" value="4"/><label for="mobile-price-4">$15,001 - $20,000 ({{ $aggregations['price'][4]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-5" value="5"/><label for="mobile-price-5">$20,001 - $30,000 ({{ $aggregations['price'][5]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-6" value="6"/><label for="mobile-price-6">$30,001 - $40,000 ({{ $aggregations['price'][6]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-7" value="7"/><label for="mobile-price-7">$40,001 - $50,000 ({{ $aggregations['price'][7]}})</label></p>
+				<p><input type="checkbox" id="mobile-price-8" value="8"/><label for="mobile-price-8">Over $50,000 ({{ $aggregations['price'][8]}})</label></p>
 				<div class="row">
 					<div class="small 12 columns">
 						<button type="submit" class="radius">Update Results</button>

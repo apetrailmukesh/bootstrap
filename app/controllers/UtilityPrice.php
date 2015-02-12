@@ -32,16 +32,20 @@ class UtilityPrice {
 			$price_ranges = explode("-", $price_filter);
 			foreach ($price_ranges as $price_range) {
 				if ($price_range == 1) {
-					array_push($or, array("range" => array($this->price_specification => array("lte" => 10000))));
+					array_push($or, array("range" => array($this->price_specification => array("lte" => 5000))));
 				} else if ($price_range == 2) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 10000, "lte" => 20000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 5000, "lte" => 10000))));
 				} else if ($price_range == 3) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 20000, "lte" => 30000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 10000, "lte" => 15000))));
 				} else if ($price_range == 4) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 30000, "lte" => 40000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 15000, "lte" => 20000))));
 				} else if ($price_range == 5) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 40000, "lte" => 50000))));
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 20000, "lte" => 30000))));
 				} else if ($price_range == 6) {
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 30000, "lte" => 40000))));
+				} else if ($price_range == 7) {
+					array_push($or, array("range" => array($this->price_specification => array("gt" => 40000, "lte" => 50000))));
+				} else if ($price_range == 8) {
 					array_push($or, array("range" => array($this->price_specification => array("gt" => 50000))));
 				}
 			}
@@ -55,12 +59,14 @@ class UtilityPrice {
 	public function buildAggregationQuery()
 	{
 		$price_ranges = array();
-		array_push($price_ranges, array("key" => "1", "to" => "10001"));
-		array_push($price_ranges, array("key" => "2", "from" => "10001", "to" => "20001"));
-		array_push($price_ranges, array("key" => "3", "from" => "20001", "to" => "30001"));
-		array_push($price_ranges, array("key" => "4", "from" => "30001", "to" => "40001"));
-		array_push($price_ranges, array("key" => "5", "from" => "40001", "to" => "50001"));
-		array_push($price_ranges, array("key" => "6", "from" => "50001"));
+		array_push($price_ranges, array("key" => "1", "to" => "5001"));
+		array_push($price_ranges, array("key" => "2", "from" => "5001", "to" => "10001"));
+		array_push($price_ranges, array("key" => "3", "from" => "10001", "to" => "15001"));
+		array_push($price_ranges, array("key" => "4", "from" => "15001", "to" => "20001"));
+		array_push($price_ranges, array("key" => "5", "from" => "20001", "to" => "30001"));
+		array_push($price_ranges, array("key" => "6", "from" => "30001", "to" => "40001"));
+		array_push($price_ranges, array("key" => "7", "from" => "40001", "to" => "50001"));
+		array_push($price_ranges, array("key" => "8", "from" => "50001"));
 		$price_range = array("field" => $this->price_specification, "keyed" => true, "ranges" => $price_ranges);
 		$price = array("range" => $price_range);
 
@@ -80,6 +86,8 @@ class UtilityPrice {
 			'4' => $prices['4']['doc_count'],
 			'5' => $prices['5']['doc_count'],
 			'6' => $prices['6']['doc_count'],
+			'7' => $prices['7']['doc_count'],
+			'8' => $prices['8']['doc_count'],
 		);
 
 		return $values;
@@ -93,16 +101,20 @@ class UtilityPrice {
 			foreach ($price_ranges as $price_range) {
 				$title = '';
 				if ($price_range == 1) {
-					$title = "Up to $10,000";
+					$title = "Up to $5,000";
 				} else if ($price_range == 2) {
-					$title = "$10,000 - $20,000";
+					$title = "$5,001 - $10,000";
 				} else if ($price_range == 3) {
-					$title = "$20,000 - $30,000";
+					$title = "$10,001 - $15,000";
 				} else if ($price_range == 4) {
-					$title = "$30,000 - $40,000";
+					$title = "$15,001 - $20,000";
 				} else if ($price_range == 5) {
-					$title = "$40,000 - $50,000";
+					$title = "$20,001 - $30,000";
 				} else if ($price_range == 6) {
+					$title = "$30,001 - $40,000";
+				} else if ($price_range == 7) {
+					$title = "$40,001 - $50,000";
+				} else if ($price_range == 8) {
 					$title = "Over $50,000";
 				}
 
