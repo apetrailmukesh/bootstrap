@@ -34,7 +34,7 @@ class UtilityModel {
 				$name = $entity->model;
 				$count = $model['doc_count'];
 				$title = $name . ' (' . $count . ')';
-				$sorted[$name] = array("key" => $model['key'], "title" => $title, "count" => $count, $name => $name, "index" => 0);
+				$sorted[$name] = array("key" => $model['key'], "title" => $title, "count" => $count);
 			}
 		}
 
