@@ -73,10 +73,20 @@ class HomeController extends BaseController {
 		$distance = Session::get('distance', '');
 		$search_text = Input::get('search_text', '');
 
+		$make = '';
+		$model = '';
+		$suggestion = SearchSuggestion::where('suggestion' , '=', strtoupper($search_text));
+		if ($suggestion->count()) {
+			$make = $suggestion->first()->make;
+			$model = $suggestion->first()->model;
+		}
+
 		$query = array(
+			'search_text' => $search_text,
 			'zip_code' => $zip_code,
 			'distance' => $distance,
-			'search_text' => $search_text,
+			'make' => $make,
+			'model' => $model,
 			'page' => 1,
 			'sort' => 'price-1'
 		);

@@ -25,6 +25,7 @@ class AdminController extends BaseController {
 	{
 		$this->layout->body_class = 'user';
 		$data = array(
+			'action' => 'Insert',
 			'files' => DataFile::all()
 		);
 
@@ -69,13 +70,13 @@ class AdminController extends BaseController {
 		{
 			if (Input::file('file')->isValid())
 			{
-				$validExtensions = array('xls', 'xlsx', 'csv');
+				$validExtensions = array('csv');
 				if (in_array(Input::file('file')->getClientOriginalExtension(), $validExtensions)) 
 				{
 					$file = new DataFile;
 			    	$file->name = Input::file('file')->getClientOriginalName();
-			    	$file->status = 'Uploaded';
-			    	$file->logs = 'The file will be processed soon';
+			    	$file->status = 'Pending';
+			    	$file->action = Input::get('action');
 			    	$file->save();
 
 	    			Input::file('file')->move(storage_path().'/uploads/', $file->id.'.'.Input::file('file')->getClientOriginalExtension());
@@ -83,7 +84,7 @@ class AdminController extends BaseController {
 				}
 				else
 				{
-					return Redirect::route('get.admin.upload')->with('message', 'Only files with xls, xlsx or csv extension are allowed');
+					return Redirect::route('get.admin.upload')->with('message', 'Only files csv extension are allowed');
 				}	
     		}
     		else 

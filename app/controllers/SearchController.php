@@ -107,11 +107,10 @@ class SearchController extends BaseController {
 	public function buildQuery() 
 	{
 		$from = (Input::get('page', '1') - 1 ) * 10;
-		$search_text = Input::get('search_text', '');
 		
 		$filter = $this->buildFilterQuery('none');
 		$sort = $this->buildSortQuery();
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 
 		$search_query = array(
 			"from" => $from,
@@ -123,23 +122,14 @@ class SearchController extends BaseController {
 		return $search_query;
 	}
 
-	public function buildSearchQuery($filter, $search_text)
+	public function buildSearchQuery($filter)
 	{
 		$query;
 
-		if (empty($search_text)) {
-			if ($filter == false) {
-				$query = array("match_all" => array());
-			} else {
-				$query = array("constant_score" => array ("filter" => $filter));
-			}
+		if ($filter == false) {
+			$query = array("match_all" => array());
 		} else {
-			$search_query = array("multi_match" => array("query" => $search_text, "operator" => "and", "fields" => array("make", "model")));
-			if ($filter == false) {
-				$query = $search_query;
-			} else {
-				$query = array("filtered" => array ("query" => $search_query, "filter" => $filter));
-			}
+			$query = array("constant_score" => array ("filter" => $filter));
 		}
 
 		return $query;
@@ -254,26 +244,24 @@ class SearchController extends BaseController {
 
 	public function executeAggregations()
 	{
-		$search_text = Input::get('search_text', '');
-
 		$content = '';
 		
 		$filter = $this->buildFilterQuery('price');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_price->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('mileage');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_mileage->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('photo');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_photo->buildAvailableAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
@@ -284,7 +272,7 @@ class SearchController extends BaseController {
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('transmission');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_transmission->buildAutomaticAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
@@ -295,21 +283,21 @@ class SearchController extends BaseController {
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('year');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_year->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('make');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_make->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
 		$filter = $this->buildFilterQuery('model');
-		$query = $this->buildSearchQuery($filter, $search_text);
+		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_model->buildAggregationQuery();
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);

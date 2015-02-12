@@ -29,4 +29,21 @@ class SuggestController extends BaseController {
 
 		return Response::json($data);
 	}
+
+	public function makemodel()
+	{
+		$query = Input::get('query', '');
+
+		$make = '';
+		$model = '';
+		$suggestion = SearchSuggestion::where('suggestion' , '=', strtoupper($query));
+		if ($suggestion->count()) {
+			$make = $suggestion->first()->make;
+			$model = $suggestion->first()->model;
+		}
+
+		$data = array("make" => $make, "model" => $model);
+
+		return Response::json($data);
+	}
 }

@@ -12,6 +12,10 @@
 					@if(Session::has('message'))
 					<p class="alert">{{ Session::get('message') }}</p>
 					@endif
+					{{ Form::select('action', [
+							'Insert' => 'Insert',
+							'Delete' => 'Delete'], $action)
+					}}
 					{{ Form::file('file', '', array('id'=>'','placeholder'=>'Select file')) }}
 					<button type="submit" class="button postfix">UPLOAD</button>
 				</div>
@@ -26,17 +30,17 @@
 					<table width="100%">
 						<thead>
 							<tr>
-								<th width="30%">Name</th>
-								<th width="20%">Status</th>
-								<th width="50%">Logs</th>
+								<th>Name</th>
+								<th>Action</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($files->all() as $file)
 								<tr>
 									<td>{{ $file->name }}</td>
+									<td>{{ $file->action }}</td>
 									<td>{{ $file->status }}</td>
-									<td>{{ $file->logs }}</td>
 								</tr>
 							@endforeach
 						</tbody>

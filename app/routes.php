@@ -27,3 +27,4 @@ Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserContr
 
 Route::get('/suggest/vehicle', array('as' => 'get.suggest.vehicle', 'uses' => 'SuggestController@vehicle'));
 Route::get('/suggest/zip', array('as' => 'get.suggest.zip', 'uses' => 'SuggestController@zip'));
+Route::get('/suggest/makemodel', array('as' => 'get.suggest.makemodel', 'uses' => 'SuggestController@makemodel'));

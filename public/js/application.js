@@ -12,9 +12,26 @@
 
 	$('.results-search-form').submit(function(event) {
   		var search_text = $(this).find('input[name="search_text"]').val();
-  		var edited = updateQueryStringParameter(document.URL, 'search_text', search_text);
-  		edited = updateQueryStringParameter(edited, 'page', '1');
-  		window.location.href = edited;
+
+  		$.ajax({
+			type: "GET",
+			url: "/suggest/makemodel",
+			data: {'query' : search_text},
+			dataType: "json",
+			success: function (data) {
+				var edited = updateQueryStringParameter(document.URL, 'make', data.make);
+				edited = updateQueryStringParameter(edited, 'model', data.model);
+				edited = updateQueryStringParameter(edited, 'search_text', search_text);
+  				edited = updateQueryStringParameter(edited, 'page', '1');
+  				edited = updateQueryStringParameter(edited, 'price', '');
+  				edited = updateQueryStringParameter(edited, 'mileage', '');
+  				edited = updateQueryStringParameter(edited, 'year', '');
+  				edited = updateQueryStringParameter(edited, 'transmission', '');
+  				edited = updateQueryStringParameter(edited, 'photo', '');
+  				window.location.href = edited;
+			}
+		});
+
   		event.preventDefault();
 	});
 
