@@ -45,7 +45,7 @@ class UtilityYear {
 			$sorted[$name] = array("key" => $name, "title" => $title, "count" => $count, "index" => 0);
 		}
 
-		ksort($sorted);
+		krsort($sorted);
 
 		$counter = 0;
 		foreach ($sorted as $value) {
