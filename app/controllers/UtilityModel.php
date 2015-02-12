@@ -24,16 +24,26 @@ class UtilityModel {
 
 	public function decodeAggregation($results)
 	{
+		$sorted = array();
 		$values = array();
-		
-		$counter = 0;
+
 		foreach ($results['aggregations']['model']['buckets'] as $model) {
 			$models = Model::where('id' , '=', $model['key']);
 			if ($models->count()) {
-				$title = $models->first()->model . ' (' . $model['doc_count'] . ')';
-				$values[$model['key']] = array("index" => $counter, "key" => $model['key'], "title" => $title, "count" => $model['doc_count']);
-				$counter++;
+				$entity = $models->first();
+				$name = $entity->model;
+				$count = $model['doc_count'];
+				$title = $name . ' (' . $count . ')';
+				$sorted[$name] = array("key" => $model['key'], "title" => $title, "count" => $count, $name => $name, "index" => 0);
 			}
+		}
+
+		ksort($sorted);
+
+		$counter = 0;
+		foreach ($sorted as $value) {
+			$values[$value['key']] = array('index' => $counter, 'key' => $value['key'], 'title' => $value['title'], 'count' => $value['count']);
+    		$counter++;
 		}
 
 		return $values;

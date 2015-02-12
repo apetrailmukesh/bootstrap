@@ -24,16 +24,26 @@ class UtilityMake {
 
 	public function decodeAggregation($results)
 	{
+		$sorted = array();
 		$values = array();
-		
-		$counter = 0;
+
 		foreach ($results['aggregations']['make']['buckets'] as $make) {
 			$makes = Make::where('id' , '=', $make['key']);
 			if ($makes->count()) {
-				$title = $makes->first()->make . ' (' . $make['doc_count'] . ')';
-				$values[$make['key']] = array("index" => $counter, "key" => $make['key'], "title" => $title, "count" => $make['doc_count']);
-				$counter++;
+				$entity = $makes->first();
+				$name = $entity->make;
+				$count = $make['doc_count'];
+				$title = $name . ' (' . $count . ')';
+				$sorted[$name] = array("key" => $make['key'], "title" => $title, "count" => $count, $name => $name, "index" => 0);
 			}
+		}
+
+		ksort($sorted);
+
+		$counter = 0;
+		foreach ($sorted as $value) {
+			$values[$value['key']] = array('index' => $counter, 'key' => $value['key'], 'title' => $value['title'], 'count' => $value['count']);
+    		$counter++;
 		}
 
 		return $values;
