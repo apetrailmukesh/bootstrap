@@ -28,7 +28,7 @@ class UtilityStatus {
 		$values = array();
 
 		foreach ($results['aggregations']['status']['buckets'] as $status) {
-			$statuss = status::where('id' , '=', $status['key']);
+			$statuss = Status::where('id' , '=', $status['key']);
 			if ($statuss->count()) {
 				$entity = $statuss->first();
 				$name = $entity->status;
