@@ -59,8 +59,8 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 	font-size:1.125rem;
 	font-weight:300;
 	height:3.125rem;
-	line-height:3.125rem;
 }
+	.postfix {line-height:3.125rem}
 select {
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height:normal
