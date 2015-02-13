@@ -7,7 +7,6 @@
 		<p><input type="radio" value="miles-0" id="mileage-0" name="sort-options"><label for="miles-0">Mileage - Lowest</label></p>
 		<p><input type="radio" value="year-1" id="year-1" name="sort-options"><label for="year-1">Year - Newest</label></p>
 		<p><input type="radio" value="year-0" id="year-0" name="sort-options"><label for="year-0">Year - Oldest</label></p>
-		<p><input type="radio" value="makemodel-1" id="makemodel-1" name="sort-options"><label for="makemodel-1">Make/Model - A to Z</label></p>
 		<button type="submit" class="radius">Update</button>
 	</form>
 	<a class="close-reveal-modal">&#215</a>

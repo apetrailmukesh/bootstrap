@@ -2,13 +2,26 @@
 
 class UtilityMake {
 
+	public function getValue($source)
+	{
+		$value = '';
+		if (array_key_exists('make', $source)) {
+			$values = make::where('make' , '=', $source['make']);
+			if ($values->count()) {
+				$value = $values->first()->make;
+			}
+		}
+
+		return $value;
+	}
+	
 	public function buildFilterQuery($and, $make_filter)
 	{
 		if (!empty($make_filter)) {
 			$or = array();
 			$makes = explode("-", $make_filter);
 			foreach ($makes as $make) {
-				array_push($or, array("term" => array("make_id" => $make)));
+				array_push($or, array("term" => array("make" => $make)));
 			}
 
 			array_push($and, array("or" => $or));
@@ -19,7 +32,7 @@ class UtilityMake {
 
 	public function buildAggregationQuery()
 	{
-		return array("make" => array("terms" => array("field" => "make_id", "size" => 0)));
+		return array("make" => array("terms" => array("field" => "make", "size" => 0)));
 	}
 
 	public function decodeAggregation($results)

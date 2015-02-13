@@ -2,13 +2,11 @@
 
 class UtilityPhoto {
 
-	protected $photo_specification = 'spec-17';
-
 	public function getValue($source)
 	{
 		$image = 'images/empty.png';
-		if (array_key_exists($this->photo_specification, $source)) {
-			$image = $source[$this->photo_specification];
+		if (array_key_exists('photo', $source)) {
+			$image = $source['photo'];
 		}
 
 		return $image;
@@ -21,9 +19,9 @@ class UtilityPhoto {
 			$photo_ranges = explode("-", $photo_filter);
 			foreach ($photo_ranges as $photo_range) {
 				if ($photo_range == 1) {
-					array_push($or, array("exists" => array("field" => $this->photo_specification)));
+					array_push($or, array("exists" => array("field" => 'photo')));
 				} else if ($photo_range == 2) {
-					array_push($or, array("missing" => array("field" => $this->photo_specification)));
+					array_push($or, array("missing" => array("field" => 'photo')));
 				}
 			}
 
@@ -35,12 +33,12 @@ class UtilityPhoto {
 
 	public function buildAvailableAggregationQuery()
 	{
-		return array("available" => array("filter" => array("exists" => array("field" => $this->photo_specification))));
+		return array("available" => array("filter" => array("exists" => array("field" => 'photo'))));
 	}
 
 	public function buildNotAvailableAggregationQuery()
 	{
-		return array("not_available" => array("filter" => array("missing" => array("field" => $this->photo_specification))));
+		return array("not_available" => array("filter" => array("missing" => array("field" => 'photo'))));
 	}
 
 	public function decodeAggregation($available, $not_available)

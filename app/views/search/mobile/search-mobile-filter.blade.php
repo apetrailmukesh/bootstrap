@@ -29,11 +29,6 @@
 						@endforeach
 					</ul>
 				</nav>
-				<!-- <a href="#" class="button radius">Save Search</a> -->
-				<!-- <p>
-					<a href="#" class="fa-icon email-alerts">Get Email Alerts</a>
-					<span class="secondary-text">when we find new vehicles that match this search</span>
-				</p> -->
 			</div>
 			<div class="filters">
 				<h3>Refine Results</h3>
@@ -46,7 +41,7 @@
 						<li><a class="fa-icon plus" data-reveal-id="mobileYearModal">Year</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileTransmissionModal">Transmission</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Has Photos</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileConditionModal">Condition</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileStatusModal">Condition</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileBodyModal">Body Style</a></li>
 					</ul>
 				</nav>
@@ -57,7 +52,7 @@
 				@include('search/mobile/search-mobile-filter-year')
 				@include('search/mobile/search-mobile-filter-transmission')
 				@include('search/mobile/search-mobile-filter-photo')
-				@include('search/mobile/search-mobile-filter-condition')
+				@include('search/mobile/search-mobile-filter-status')
 				@include('search/mobile/search-mobile-filter-body')
 			</div>
 		</div>

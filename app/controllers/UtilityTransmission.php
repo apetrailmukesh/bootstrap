@@ -2,29 +2,26 @@
 
 class UtilityTransmission {
 
-	protected $transmission_specification = 'spec-15';
-
 	public function getValue($source)
 	{
-		$transmission = '';
-		if (array_key_exists($this->transmission_specification, $source)) {
-			$transmission = $source[$this->transmission_specification];
+		$value = '';
+		if (array_key_exists('transmission', $source)) {
+			$values = Transmission::where('transmission' , '=', $source['transmission']);
+			if ($values->count()) {
+				$value = $values->first()->transmission;
+			}
 		}
 
-		return $transmission;
+		return $value;
 	}
 
 	public function buildFilterQuery($and, $transmission_filter)
 	{
 		if (!empty($transmission_filter)) {
 			$or = array();
-			$transmission_ranges = explode("-", $transmission_filter);
-			foreach ($transmission_ranges as $transmission_range) {
-				if ($transmission_range == 1) {
-					array_push($or, array("term" => array($this->transmission_specification.'.raw' => "Automatic")));
-				} else if ($transmission_range == 2) {
-					array_push($or, array("term" => array($this->transmission_specification.'.raw' => "Manual")));
-				}
+			$transmissions = explode("-", $transmission_filter);
+			foreach ($transmissions as $transmission) {
+				array_push($or, array("term" => array("transmission" => $transmission)));
 			}
 
 			array_push($and, array("or" => $or));
@@ -33,22 +30,34 @@ class UtilityTransmission {
 		return $and;
 	}
 
-	public function buildAutomaticAggregationQuery()
+	public function buildAggregationQuery()
 	{
-		return array("automatic" => array("filter" => array("term" => array($this->transmission_specification.'.raw' => "Automatic"))));
+		return array("transmission" => array("terms" => array("field" => "transmission", "size" => 0)));
 	}
 
-	public function buildManualAggregationQuery()
+	public function decodeAggregation($results)
 	{
-		return array("manual" => array("filter" => array("term" => array($this->transmission_specification.'.raw' => "Manual"))));
-	}
+		$sorted = array();
+		$values = array();
 
-	public function decodeAggregation($automatic, $manual)
-	{
-		$values = array(
-			'1' => $automatic['aggregations']['automatic']['doc_count'],
-			'2' => $manual['aggregations']['manual']['doc_count']
-		);
+		foreach ($results['aggregations']['transmission']['buckets'] as $transmission) {
+			$transmissions = Transmission::where('id' , '=', $transmission['key']);
+			if ($transmissions->count()) {
+				$entity = $transmissions->first();
+				$name = $entity->transmission;
+				$count = $transmission['doc_count'];
+				$title = $name . ' (' . $count . ')';
+				$sorted[$name] = array("key" => $transmission['key'], "title" => $title, "count" => $count);
+			}
+		}
+
+		ksort($sorted);
+
+		$counter = 0;
+		foreach ($sorted as $value) {
+			$values[$value['key']] = array('index' => $counter, 'key' => $value['key'], 'title' => $value['title'], 'count' => $value['count']);
+    		$counter++;
+		}
 
 		return $values;
 	}
@@ -59,18 +68,20 @@ class UtilityTransmission {
 			$values = array();
 			$transmission_ranges = explode("-", $transmission_filter);
 			foreach ($transmission_ranges as $transmission_range) {
-				$title = '';
-				if ($transmission_range == 1) {
-					$title = "Automatic";
-				} else if ($transmission_range == 2) {
-					$title = "Manual";
+				$transmissions = Transmission::where('id' , '=', $transmission_range);
+				if ($transmissions->count()) {
+					$title = '';
+					if (array_key_exists($transmission_range, $aggregations['transmission'])) {
+						$title = $transmissions->first()->transmission . ' (' .  $aggregations['transmission'][$transmission_range]['count'] . ')';
+					} else {
+						$title = $transmissions->first()->transmission . ' (0)';
+					}
+					
+					array_push($values, array("title" => $title, "index" => 'transmission-remove-' . $transmission_range));
 				}
-
-				$title = $title . " (" . $aggregations['transmission'][$transmission_range] . ")";
-				array_push($values, array("title" => $title, "index" => 'transmission-remove-' . $transmission_range));
 			}
 
-			array_push($filters, array("name" => "Transmission", "values" => $values));
+			array_push($filters, array("name" => "transmission", "values" => $values));
 		}
 
 		return $filters;

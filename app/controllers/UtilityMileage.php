@@ -2,13 +2,11 @@
 
 class UtilityMileage {
 
-	protected $mileage_specification = 'spec-4';
-
 	public function getValue($source)
 	{
 		$miles = '';
-		if (array_key_exists($this->mileage_specification, $source)) {
-			$miles = number_format($source[$this->mileage_specification], 0, '.', ',') . ' mi.';
+		if (array_key_exists('miles', $source)) {
+			$miles = number_format($source['miles'], 0, '.', ',') . ' mi.';
 		}
 
 		return $miles;
@@ -17,9 +15,9 @@ class UtilityMileage {
 	public function buildSortQuery($sort, $sort_order)
 	{
 		if ($sort_order == '1') {
-			array_push($sort, array($this->mileage_specification => array("order" => "desc", "mode" => "min")));
+			array_push($sort, array('miles' => array("order" => "desc", "mode" => "min")));
 		} else if ($sort_order == 0) {
-			array_push($sort, array($this->mileage_specification => array("order" => "asc", "mode" => "min")));
+			array_push($sort, array('miles' => array("order" => "asc", "mode" => "min")));
 		}
 
 		return $sort;
@@ -32,17 +30,17 @@ class UtilityMileage {
 			$mileage_ranges = explode("-", $mileage_filter);
 			foreach ($mileage_ranges as $mileage_range) {
 				if ($mileage_range == 1) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 10000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 10000))));
 				} else if ($mileage_range == 2) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 20000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 20000))));
 				} else if ($mileage_range == 3) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 30000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 30000))));
 				} else if ($mileage_range == 4) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 40000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 40000))));
 				} else if ($mileage_range == 5) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 50000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 50000))));
 				} else if ($mileage_range == 6) {
-					array_push($or, array("range" => array($this->mileage_specification => array("lte" => 60000))));
+					array_push($or, array("range" => array('miles' => array("lte" => 60000))));
 				}
 			}
 
@@ -61,7 +59,7 @@ class UtilityMileage {
 		array_push($mileage_ranges, array("key" => "4", "to" => "40001"));
 		array_push($mileage_ranges, array("key" => "5", "to" => "50001"));
 		array_push($mileage_ranges, array("key" => "6", "to" => "60001"));
-		$mileage_range = array("field" => $this->mileage_specification, "keyed" => true, "ranges" => $mileage_ranges);
+		$mileage_range = array("field" => 'miles', "keyed" => true, "ranges" => $mileage_ranges);
 		$mileage = array("range" => $mileage_range);
 
 		$aggs = array("mileage" => $mileage);

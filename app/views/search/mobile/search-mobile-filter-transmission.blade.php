@@ -8,8 +8,9 @@
 		</div>
 		<div class="row">
 			<div class="small-12 columns">
-				<p><input type="checkbox" id="mobile-transmission-1" value="1"/><label for="mobile-transmission-1">Automatic ({{ $aggregations['transmission'][1]}})</label></p>
-				<p><input type="checkbox" id="mobile-transmission-2" value="2"/><label for="mobile-transmission-2">Manual ({{ $aggregations['transmission'][2]}})</label></p>
+				@foreach($aggregations['transmission'] as $transmission)
+					<p><input type="checkbox" id="mobile-transmission-{{$transmission['key']}}" value="{{$transmission['key']}}"/><label for="mobile-transmission-{{$transmission['key']}}">{{ $transmission['title'] }}</label></p>
+				@endforeach
 				<div class="row">
 					<div class="small 12 columns">
 						<button type="submit" class="radius">Update Results</button>

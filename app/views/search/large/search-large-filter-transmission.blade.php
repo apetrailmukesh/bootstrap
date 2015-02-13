@@ -10,10 +10,18 @@
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="transmission-1" value="1"/><label for="transmission-1">Automatic ({{ $aggregations['transmission'][1]}})</label></p>
+						@foreach($aggregations['transmission'] as $transmission)
+							@if($transmission['index']%2 === 0)
+								<p><input type="checkbox" id="transmission-{{$transmission['key']}}" value="{{$transmission['key']}}"/><label for="transmission-{{$transmission['key']}}">{{ $transmission['title'] }}</label></p>
+							@endif
+						@endforeach
 					</div>
 					<div class="small-6 columns">
-						<p><input type="checkbox" id="transmission-2" value="2"/><label for="transmission-2">Manual ({{ $aggregations['transmission'][2]}})</label></p>
+						@foreach($aggregations['transmission'] as $transmission)
+							@if($transmission['index']%2 === 1)
+								<p><input type="checkbox" id="transmission-{{$transmission['key']}}" value="{{$transmission['key']}}"/><label for="transmission-{{$transmission['key']}}">{{ $transmission['title'] }}</label></p>
+							@endif
+						@endforeach
 					</div>
 				</div>
 				<div class="row">

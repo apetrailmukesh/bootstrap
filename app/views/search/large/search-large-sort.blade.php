@@ -13,7 +13,6 @@
 						<option value="mileage-0">Mileage - Lowest</option>
 						<option value="year-1">Year - Newest</option>
 						<option value="year-0">Year - Oldest</option>
-						<option value="makemodel-1">Make/Model - A to Z</option>
 					</select>
 				</div>
 			</div>

@@ -2,13 +2,26 @@
 
 class UtilityModel {
 
+	public function getValue($source)
+	{
+		$value = '';
+		if (array_key_exists('model', $source)) {
+			$values = Model::where('model' , '=', $source['model']);
+			if ($values->count()) {
+				$value = $values->first()->model;
+			}
+		}
+
+		return $value;
+	}
+	
 	public function buildFilterQuery($and, $model_filter)
 	{
 		if (!empty($model_filter)) {
 			$or = array();
 			$models = explode("-", $model_filter);
 			foreach ($models as $model) {
-				array_push($or, array("term" => array("model_id" => $model)));
+				array_push($or, array("term" => array("model" => $model)));
 			}
 
 			array_push($and, array("or" => $or));
@@ -19,7 +32,7 @@ class UtilityModel {
 
 	public function buildAggregationQuery()
 	{
-		return array("model" => array("terms" => array("field" => "model_id", "size" => 0)));
+		return array("model" => array("terms" => array("field" => "model", "size" => 0)));
 	}
 
 	public function decodeAggregation($results)

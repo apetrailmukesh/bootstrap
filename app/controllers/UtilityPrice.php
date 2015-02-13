@@ -2,13 +2,11 @@
 
 class UtilityPrice {
 
-	protected $price_specification = 'spec-20';
-
 	public function getValue($source)
 	{
 		$price = 'Call for price';
-		if (array_key_exists($this->price_specification, $source) && is_numeric($source[$this->price_specification])) {
-			$price = '$ ' . number_format($source[$this->price_specification]);
+		if (array_key_exists('price', $source) && is_numeric($source['price'])) {
+			$price = '$ ' . number_format($source['price']);
 		}
 
 		return $price;
@@ -17,9 +15,9 @@ class UtilityPrice {
 	public function buildSortQuery($sort, $sort_order)
 	{
 		if ($sort_order == '1') {
-			array_push($sort, array($this->price_specification => array("order" => "desc", "mode" => "min")));
+			array_push($sort, array('price' => array("order" => "desc", "mode" => "min")));
 		} else if ($sort_order == 0) {
-			array_push($sort, array($this->price_specification => array("order" => "asc", "mode" => "min")));
+			array_push($sort, array('price' => array("order" => "asc", "mode" => "min")));
 		}
 
 		return $sort;
@@ -32,21 +30,21 @@ class UtilityPrice {
 			$price_ranges = explode("-", $price_filter);
 			foreach ($price_ranges as $price_range) {
 				if ($price_range == 1) {
-					array_push($or, array("range" => array($this->price_specification => array("lte" => 5000))));
+					array_push($or, array("range" => array('price' => array("lte" => 5000))));
 				} else if ($price_range == 2) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 5000, "lte" => 10000))));
+					array_push($or, array("range" => array('price' => array("gt" => 5000, "lte" => 10000))));
 				} else if ($price_range == 3) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 10000, "lte" => 15000))));
+					array_push($or, array("range" => array('price' => array("gt" => 10000, "lte" => 15000))));
 				} else if ($price_range == 4) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 15000, "lte" => 20000))));
+					array_push($or, array("range" => array('price' => array("gt" => 15000, "lte" => 20000))));
 				} else if ($price_range == 5) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 20000, "lte" => 30000))));
+					array_push($or, array("range" => array('price' => array("gt" => 20000, "lte" => 30000))));
 				} else if ($price_range == 6) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 30000, "lte" => 40000))));
+					array_push($or, array("range" => array('price' => array("gt" => 30000, "lte" => 40000))));
 				} else if ($price_range == 7) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 40000, "lte" => 50000))));
+					array_push($or, array("range" => array('price' => array("gt" => 40000, "lte" => 50000))));
 				} else if ($price_range == 8) {
-					array_push($or, array("range" => array($this->price_specification => array("gt" => 50000))));
+					array_push($or, array("range" => array('price' => array("gt" => 50000))));
 				}
 			}
 
@@ -67,7 +65,7 @@ class UtilityPrice {
 		array_push($price_ranges, array("key" => "6", "from" => "30001", "to" => "40001"));
 		array_push($price_ranges, array("key" => "7", "from" => "40001", "to" => "50001"));
 		array_push($price_ranges, array("key" => "8", "from" => "50001"));
-		$price_range = array("field" => $this->price_specification, "keyed" => true, "ranges" => $price_ranges);
+		$price_range = array("field" => 'price', "keyed" => true, "ranges" => $price_ranges);
 		$price = array("range" => $price_range);
 
 		$aggs = array("price" => $price);
