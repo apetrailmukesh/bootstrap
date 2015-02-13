@@ -16,8 +16,6 @@ Route::post('/user/login', array('as' => 'post.user.login', 'uses' => 'UserContr
 Route::post('/user/register', array('as' => 'post.user.register', 'uses' => 'UserController@register'));
 Route::post('/user/profile', array('as' => 'post.user.profile', 'uses' => 'UserController@profile'))->before('auth');
 
-Route::get('/admin/specifications', array('as' => 'get.admin.specifications', 'uses' => 'AdminController@getSpecifications'))->before('admin');
-Route::get('/admin/specifications/add', array('as' => 'get.admin.specifications.add', 'uses' => 'AdminController@getSpecificationsAdd'))->before('admin');
 Route::get('/admin/upload', array('as' => 'get.admin.upload', 'uses' => 'AdminController@getUpload'))->before('admin');
 
 Route::post('/admin/specifications/add', array('as' => 'post.admin.specifications.add', 'uses' => 'AdminController@addSpecification'))->before('admin');

@@ -8,11 +8,7 @@
 			<ul class="right">
 				@if(Auth::check())
 					@if(Auth::user()->role == 1)
-						<li>{{ HTML::linkRoute('get.admin.specifications', 'Specifications' ) }}</li>
 						<li>{{ HTML::linkRoute('get.admin.upload', 'Upload' ) }}</li>
-					@else
-						<!-- <li>{{ HTML::linkRoute('get.user.saved-cars', 'Saved Cars' ) }}</li> -->
-						<!-- <li>{{ HTML::linkRoute('get.user.saved-searches', 'Saved Searches' ) }}</li> -->
 					@endif
                     <li>{{ HTML::linkRoute('get.user.profile', 'Profile') }}</li>
                     <li>{{ HTML::linkRoute('get.user.logout', 'Logout') }}</li>
