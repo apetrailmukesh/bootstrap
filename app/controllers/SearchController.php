@@ -124,7 +124,15 @@ class SearchController extends BaseController {
 
 	public function buildSearchQuery($filter)
 	{
-		return $query = array("constant_score" => array ("filter" => $filter));
+		$query;
+
+		if ($filter == false) {
+			$query = array("match_all" => array());
+		} else {
+			$query = array("constant_score" => array ("filter" => $filter));
+		}
+
+		return $query;
 	}
 
 	public function buildFilterQuery($exclude)
@@ -164,7 +172,7 @@ class SearchController extends BaseController {
 			$filter['and'] = $and;
 			return $filter;
 		} else {
-			return array("not" => array("exists" => array("field" => "vin")));
+			return false;
 		}
 	}
 
