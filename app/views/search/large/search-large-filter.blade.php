@@ -32,6 +32,7 @@
 						<li><a class="fa-icon plus" data-reveal-id="yearModal">Year</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="transmissionModal">Transmission</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="photoModal">Has Photos</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="conditionModal">Condition</a></li>
 					</ul>
 				</nav>
 				@include('search/large/search-large-filter-make')
@@ -41,6 +42,7 @@
 				@include('search/large/search-large-filter-year')
 				@include('search/large/search-large-filter-transmission')
 				@include('search/large/search-large-filter-photo')
+				@include('search/large/search-large-filter-condition')
 			</div>
 		</div>
 	</div>

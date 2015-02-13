@@ -28,6 +28,7 @@
   				edited = updateQueryStringParameter(edited, 'year', '');
   				edited = updateQueryStringParameter(edited, 'transmission', '');
   				edited = updateQueryStringParameter(edited, 'photo', '');
+  				edited = updateQueryStringParameter(edited, 'condition', '');
   				window.location.href = edited;
 			}
 		});
@@ -170,173 +171,40 @@
 		}
 	}
 
-	$('div#priceModal input:checkbox').change(function (event) {
-		filterChanged($('div#priceModal'), $(this));
-	});
+	applyFilterFunctions('price', 'Price');
+	applyFilterFunctions('mileage', 'Mileage');
+	applyFilterFunctions('photo', 'Photo');
+	applyFilterFunctions('transmission', 'Transmission');
+	applyFilterFunctions('year', 'Year');
+	applyFilterFunctions('make', 'Make');	
+	applyFilterFunctions('model', 'Model');
+	applyFilterFunctions('condition', 'Condition');
 
-	$('#filter-by-price').submit(function (event) {
-		filterSubmitted($('div#priceModal'), 'price');
-	});
+	function applyFilterFunctions(large, mobile) {
+		$('div#' + large + 'Modal input:checkbox').change(function (event) {
+			filterChanged($('div#' + large + 'Modal'), $(this));
+		});
 
-	$('[id*="price-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('price-remove-', ''), 'price');
-	});
+		$('#filter-by-' + large).submit(function (event) {
+			filterSubmitted($('div#' + large + 'Modal'), large);
+		});
 
-	$('div#mobilePriceModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobilePriceModal'), $(this));
-	});
+		$('[id*="' + large + '-remove-"]').click(function (event) {
+			filterRemoved(event.target.id.replace(large + '-remove-', ''), large);
+		});
 
-	$('#mobile-filter-by-price').submit(function (event) {
-		filterSubmitted($('div#mobilePriceModal'), 'price');
-	});
+		$('div#mobile' + mobile + 'Modal input:checkbox').change(function (event) {
+			filterChanged($('div#mobile' + mobile + 'Modal'), $(this));
+		});
 
-	$('[id*="mobile-price-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-price-remove-', ''), 'price');
-	});
+		$('#mobile-filter-by-' + large).submit(function (event) {
+			filterSubmitted($('div#mobile' + mobile + 'Modal'), large);
+		});
 
-	$('div#mileageModal input:checkbox').change(function (event) {
-		filterChanged($('div#mileageModal'), $(this));
-	});
-
-	$('#filter-by-mileage').submit(function (event) {
-		filterSubmitted($('div#mileageModal'), 'mileage');
-	});
-
-	$('[id*="mileage-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mileage-remove-', ''), 'mileage');
-	});
-
-	$('div#mobileMileageModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobileMileageModal'), $(this));
-	});
-
-	$('#mobile-filter-by-mileage').submit(function (event) {
-		filterSubmitted($('div#mobileMileageModal'), 'mileage');
-	});
-
-	$('[id*="mobile-mileage-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-mileage-remove-', ''), 'mileage');
-	});
-
-	$('div#photoModal input:checkbox').change(function (event) {
-		filterChanged($('div#photoModal'), $(this));
-	});
-
-	$('#filter-by-photo').submit(function (event) {
-		filterSubmitted($('div#photoModal'), 'photo');
-	});
-
-	$('[id*="photo-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('photo-remove-', ''), 'photo');
-	});
-
-	$('div#mobilePhotoModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobilePhotoModal'), $(this));
-	});
-
-	$('#mobile-filter-by-photo').submit(function (event) {
-		filterSubmitted($('div#mobilePhotoModal'), 'photo');
-	});
-
-	$('[id*="mobile-photo-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-photo-remove-', ''), 'photo');
-	});
-
-	$('div#transmissionModal input:checkbox').change(function (event) {
-		filterChanged($('div#transmissionModal'), $(this));
-	});
-
-	$('#filter-by-transmission').submit(function (event) {
-		filterSubmitted($('div#transmissionModal'), 'transmission');
-	});
-
-	$('[id*="transmission-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('transmission-remove-', ''), 'transmission');
-	});
-
-	$('div#mobileTransmissionModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobileTransmissionModal'), $(this));
-	});
-
-	$('#mobile-filter-by-transmission').submit(function (event) {
-		filterSubmitted($('div#mobileTransmissionModal'), 'transmission');
-	});
-
-	$('[id*="mobile-transmission-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-transmission-remove-', ''), 'transmission');
-	});
-
-	$('div#yearModal input:checkbox').change(function (event) {
-		filterChanged($('div#yearModal'), $(this));
-	});
-
-	$('#filter-by-year').submit(function (event) {
-		filterSubmitted($('div#yearModal'), 'year');
-	});
-
-	$('[id*="year-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('year-remove-', ''), 'year');
-	});
-
-	$('div#mobileYearModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobileYearModal'), $(this));
-	});
-
-	$('#mobile-filter-by-year').submit(function (event) {
-		filterSubmitted($('div#mobileYearModal'), 'year');
-	});
-
-	$('[id*="mobile-year-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-year-remove-', ''), 'year');
-	});
-
-	$('div#makeModal input:checkbox').change(function (event) {
-		filterChanged($('div#makeModal'), $(this));
-	});
-
-	$('#filter-by-make').submit(function (event) {
-		filterSubmitted($('div#makeModal'), 'make');
-	});
-
-	$('[id*="make-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('make-remove-', ''), 'make');
-	});
-
-	$('div#mobileMakeModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobileMakeModal'), $(this));
-	});
-
-	$('#mobile-filter-by-make').submit(function (event) {
-		filterSubmitted($('div#mobileMakeModal'), 'make');
-	});
-
-	$('[id*="mobile-make-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-make-remove-', ''), 'make');
-	});
-
-	$('div#modelModal input:checkbox').change(function (event) {
-		filterChanged($('div#modelModal'), $(this));
-	});
-
-	$('#filter-by-model').submit(function (event) {
-		filterSubmitted($('div#modelModal'), 'model');
-	});
-
-	$('[id*="model-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('model-remove-', ''), 'model');
-	});
-
-	$('div#mobileModelModal input:checkbox').change(function (event) {
-		filterChanged($('div#mobileModelModal'), $(this));
-	});
-
-	$('#mobile-filter-by-model').submit(function (event) {
-		filterSubmitted($('div#mobileModelModal'), 'model');
-	});
-
-	$('[id*="mobile-model-remove-"]').click(function (event) {
-		filterRemoved(event.target.id.replace('mobile-model-remove-', ''), 'model');
-	});
+		$('[id*="mobile-' + large + '-remove-"]').click(function (event) {
+			filterRemoved(event.target.id.replace('mobile-' + large + '-remove-', ''), large);
+		});
+	}
 
 	function filterChanged(div, checkbox) {
 		var selected = checkbox.val();

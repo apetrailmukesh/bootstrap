@@ -21,9 +21,9 @@ class UtilityTransmission {
 			$transmission_ranges = explode("-", $transmission_filter);
 			foreach ($transmission_ranges as $transmission_range) {
 				if ($transmission_range == 1) {
-					array_push($or, array("term" => array($this->transmission_specification => "automatic")));
+					array_push($or, array("term" => array($this->transmission_specification.'.raw' => "Automatic")));
 				} else if ($transmission_range == 2) {
-					array_push($or, array("term" => array($this->transmission_specification => "manual")));
+					array_push($or, array("term" => array($this->transmission_specification.'.raw' => "Manual")));
 				}
 			}
 
@@ -35,12 +35,12 @@ class UtilityTransmission {
 
 	public function buildAutomaticAggregationQuery()
 	{
-		return array("automatic" => array("filter" => array("term" => array($this->transmission_specification => "automatic"))));
+		return array("automatic" => array("filter" => array("term" => array($this->transmission_specification.'.raw' => "Automatic"))));
 	}
 
 	public function buildManualAggregationQuery()
 	{
-		return array("manual" => array("filter" => array("term" => array($this->transmission_specification => "manual"))));
+		return array("manual" => array("filter" => array("term" => array($this->transmission_specification.'.raw' => "Manual"))));
 	}
 
 	public function decodeAggregation($automatic, $manual)

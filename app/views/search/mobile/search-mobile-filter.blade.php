@@ -46,6 +46,7 @@
 						<li><a class="fa-icon plus" data-reveal-id="mobileYearModal">Year</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileTransmissionModal">Transmission</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Has Photos</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileConditionModal">Condition</a></li>
 					</ul>
 				</nav>
 				@include('search/mobile/search-mobile-filter-make')
@@ -55,6 +56,7 @@
 				@include('search/mobile/search-mobile-filter-year')
 				@include('search/mobile/search-mobile-filter-transmission')
 				@include('search/mobile/search-mobile-filter-photo')
+				@include('search/mobile/search-mobile-filter-condition')
 			</div>
 		</div>
 	</aside>
