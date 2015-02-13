@@ -39,7 +39,10 @@ class SuggestController extends BaseController {
 		$suggestion = SearchSuggestion::where('suggestion' , '=', strtoupper($query));
 		if ($suggestion->count()) {
 			$make = $suggestion->first()->make;
-			$model = $suggestion->first()->model;
+
+			if ($suggestion->first()->model > 0) {
+				$model = $suggestion->first()->model;
+			}
 		}
 
 		$data = array("make" => $make, "model" => $model);
