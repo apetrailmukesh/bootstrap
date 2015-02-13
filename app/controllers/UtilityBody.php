@@ -68,7 +68,7 @@ class UtilityBody {
 				}
 			}
 
-			array_push($filters, array("name" => "body", "values" => $values));
+			array_push($filters, array("name" => "Body Style", "values" => $values));
 		}
 
 		return $filters;

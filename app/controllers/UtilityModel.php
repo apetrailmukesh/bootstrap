@@ -6,7 +6,7 @@ class UtilityModel {
 	{
 		$value = '';
 		if (array_key_exists('model', $source)) {
-			$values = Model::where('model' , '=', $source['model']);
+			$values = Model::where('id' , '=', $source['model']);
 			if ($values->count()) {
 				$value = $values->first()->model;
 			}

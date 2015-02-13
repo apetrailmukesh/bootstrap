@@ -6,7 +6,7 @@ class UtilityFeature {
 	{
 		$value = '';
 		if (array_key_exists('feature', $source)) {
-			$values = Feature::where('feature' , '=', $source['feature']);
+			$values = Feature::where('id' , '=', $source['feature']);
 			if ($values->count()) {
 				$value = $values->first()->feature;
 			}

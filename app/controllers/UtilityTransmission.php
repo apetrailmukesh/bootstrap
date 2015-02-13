@@ -6,7 +6,7 @@ class UtilityTransmission {
 	{
 		$value = '';
 		if (array_key_exists('transmission', $source)) {
-			$values = Transmission::where('transmission' , '=', $source['transmission']);
+			$values = Transmission::where('id' , '=', $source['transmission']);
 			if ($values->count()) {
 				$value = $values->first()->transmission;
 			}
@@ -81,7 +81,7 @@ class UtilityTransmission {
 				}
 			}
 
-			array_push($filters, array("name" => "transmission", "values" => $values));
+			array_push($filters, array("name" => "Transmission", "values" => $values));
 		}
 
 		return $filters;

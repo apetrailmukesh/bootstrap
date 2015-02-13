@@ -6,7 +6,7 @@ class UtilityMake {
 	{
 		$value = '';
 		if (array_key_exists('make', $source)) {
-			$values = make::where('make' , '=', $source['make']);
+			$values = Make::where('id' , '=', $source['make']);
 			if ($values->count()) {
 				$value = $values->first()->make;
 			}

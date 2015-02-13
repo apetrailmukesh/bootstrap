@@ -68,7 +68,7 @@ class UtilityStatus {
 				}
 			}
 
-			array_push($filters, array("name" => "status", "values" => $values));
+			array_push($filters, array("name" => "Condition", "values" => $values));
 		}
 
 		return $filters;
