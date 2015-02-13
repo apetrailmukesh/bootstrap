@@ -29,6 +29,7 @@
   				edited = updateQueryStringParameter(edited, 'transmission', '');
   				edited = updateQueryStringParameter(edited, 'photo', '');
   				edited = updateQueryStringParameter(edited, 'condition', '');
+  				edited = updateQueryStringParameter(edited, 'body', '');
   				window.location.href = edited;
 			}
 		});
@@ -148,6 +149,10 @@
 		selectFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
 		selectFilter($('div#photoModal'), 'photo', '');
 		selectFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
+		selectFilter($('div#conditionModal'), 'condition', '');
+		selectFilter($('div#mobileConditionModal'), 'condition', 'mobile-');
+		selectFilter($('div#bodyModal'), 'body', '');
+		selectFilter($('div#mobileBodyModal'), 'body', 'mobile-');
 	}
 
 	function selectFilter(div, property, prefix) {
@@ -179,6 +184,7 @@
 	applyFilterFunctions('make', 'Make');	
 	applyFilterFunctions('model', 'Model');
 	applyFilterFunctions('condition', 'Condition');
+	applyFilterFunctions('body', 'Body');
 
 	function applyFilterFunctions(large, mobile) {
 		$('div#' + large + 'Modal input:checkbox').change(function (event) {

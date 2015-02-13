@@ -33,6 +33,7 @@
 						<li><a class="fa-icon plus" data-reveal-id="transmissionModal">Transmission</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="photoModal">Has Photos</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="conditionModal">Condition</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="bodyModal">Body Style</a></li>
 					</ul>
 				</nav>
 				@include('search/large/search-large-filter-make')
@@ -43,6 +44,7 @@
 				@include('search/large/search-large-filter-transmission')
 				@include('search/large/search-large-filter-photo')
 				@include('search/large/search-large-filter-condition')
+				@include('search/large/search-large-filter-body')
 			</div>
 		</div>
 	</div>

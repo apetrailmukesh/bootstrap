@@ -16,6 +16,7 @@ class SearchController extends BaseController {
 	protected $utility_photo;
 	protected $utility_year;
 	protected $utility_condition;
+	protected $utility_body;
 
 	public function __construct() {
 		$this->utility_make = new UtilityMake();
@@ -30,6 +31,7 @@ class SearchController extends BaseController {
     	$this->utility_photo = new UtilityPhoto();
     	$this->utility_year = new UtilityYear();
     	$this->utility_condition = new UtilityCondition();
+    	$this->utility_body = new UtilityBody();
   	}
 
 	public function index()
@@ -171,6 +173,10 @@ class SearchController extends BaseController {
 
 		if ($exclude != 'condition') {
 			$and = $this->utility_condition->buildFilterQuery($and, Input::get('condition', ''));
+		}
+
+		if ($exclude != 'body') {
+			$and = $this->utility_body->buildFilterQuery($and, Input::get('body', ''));
 		}
 
 		$filter = array();
@@ -319,6 +325,13 @@ class SearchController extends BaseController {
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('body');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_body->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -342,6 +355,7 @@ class SearchController extends BaseController {
 			"make" => $this->utility_make->decodeAggregation($results['responses'][7]),
 			"model" => $this->utility_model->decodeAggregation($results['responses'][8]),
 			"condition" => $this->utility_condition->decodeAggregation($results['responses'][9], $results['responses'][10]),
+			"body" => $this->utility_body->decodeAggregation($results['responses'][11]),
 		);
 
 		return $aggregations;
@@ -359,6 +373,7 @@ class SearchController extends BaseController {
 		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
 		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 		$filters = $this->utility_condition->findSelectedFilter($filters, $aggregations, Input::get('condition', ''));
+		$filters = $this->utility_body->findSelectedFilter($filters, $aggregations, Input::get('body', ''));
 
 		return $filters;
 	}

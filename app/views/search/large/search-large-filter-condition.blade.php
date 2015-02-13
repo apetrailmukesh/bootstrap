@@ -3,7 +3,7 @@
 	<form id="filter-by-condition">
 		<div class="row">
 			<div class="small-12 columns border">
-				<input type="checkbox" id="condition-any" value="0" checked><label for="condition-any">Any</label>
+				<input type="checkbox" id="condition-any" value="0" checked><label for="condition-any">Any Condition</label>
 			</div>
 		</div>
 		<div class="row">
