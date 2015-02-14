@@ -15,6 +15,13 @@ class SearchController extends BaseController {
 	protected $utility_year;
 	protected $utility_status;
 	protected $utility_body;
+	protected $utility_certified;
+	protected $utility_interior;
+	protected $utility_exterior;
+	protected $utility_doors;
+	protected $utility_cylinders;
+	protected $utility_fuel;
+	protected $utility_drive;
 
 	public function __construct() {
 		$this->utility_make = new UtilityMake();
@@ -27,6 +34,13 @@ class SearchController extends BaseController {
     	$this->utility_photo = new UtilityPhoto();
     	$this->utility_year = new UtilityYear();
     	$this->utility_status = new UtilityStatus();
+    	$this->utility_certified = new UtilityCertified();
+    	$this->utility_exterior = new UtilityExterior();
+    	$this->utility_interior = new UtilityInterior();
+    	$this->utility_drive = new UtilityDrive();
+    	$this->utility_fuel = new UtilityFuel();
+    	$this->utility_doors = new UtilityDoors();
+    	$this->utility_cylinders = new UtilityCylinders();
     	$this->utility_body = new UtilityBody();
   	}
 
@@ -175,6 +189,34 @@ class SearchController extends BaseController {
 			$and = $this->utility_body->buildFilterQuery($and, Input::get('body', ''));
 		}
 
+		if ($exclude != 'certified') {
+			$and = $this->utility_certified->buildFilterQuery($and, Input::get('certified', ''));
+		}
+
+		if ($exclude != 'doors') {
+			$and = $this->utility_doors->buildFilterQuery($and, Input::get('doors', ''));
+		}
+
+		if ($exclude != 'cylinders') {
+			$and = $this->utility_cylinders->buildFilterQuery($and, Input::get('cylinders', ''));
+		}
+
+		if ($exclude != 'fuel') {
+			$and = $this->utility_fuel->buildFilterQuery($and, Input::get('fuel', ''));
+		}
+
+		if ($exclude != 'drive') {
+			$and = $this->utility_drive->buildFilterQuery($and, Input::get('drive', ''));
+		}
+
+		if ($exclude != 'interior') {
+			$and = $this->utility_interior->buildFilterQuery($and, Input::get('interior', ''));
+		}
+
+		if ($exclude != 'exterior') {
+			$and = $this->utility_exterior->buildFilterQuery($and, Input::get('exterior', ''));
+		}
+
 		$filter = array();
 		if (sizeof($and) > 0) {
 			$filter['and'] = $and;
@@ -262,17 +304,6 @@ class SearchController extends BaseController {
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 
-		$filter = $this->buildFilterQuery('photo');
-		$query = $this->buildSearchQuery($filter);
-		$aggs = $this->utility_photo->buildAvailableAggregationQuery();
-		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
-		$sub_query = json_encode($search_query);
-		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
-		$aggs = $this->utility_photo->buildNotAvailableAggregationQuery();
-		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
-		$sub_query = json_encode($search_query);
-		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
-
 		$filter = $this->buildFilterQuery('transmission');
 		$query = $this->buildSearchQuery($filter);
 		$aggs = $this->utility_transmission->buildAggregationQuery();
@@ -314,6 +345,70 @@ class SearchController extends BaseController {
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('interior');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_interior->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('exterior');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_exterior->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('fuel');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_fuel->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('drive');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_drive->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('doors');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_doors->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('cylinders');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_cylinders->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('photo');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_photo->buildAvailableAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+		$aggs = $this->utility_photo->buildNotAvailableAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('certified');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_certified->buildCertifiedAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+		$aggs = $this->utility_certified->buildNotCertifiedAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -331,13 +426,20 @@ class SearchController extends BaseController {
 		$aggregations = array(
 			"price" => $this->utility_price->decodeAggregation($results['responses'][0]),
 			"mileage" => $this->utility_mileage->decodeAggregation($results['responses'][1]),
-			"photo" => $this->utility_photo->decodeAggregation($results['responses'][2], $results['responses'][3]),
-			"transmission" => $this->utility_transmission->decodeAggregation($results['responses'][4]),
-			"year" => $this->utility_year->decodeAggregation($results['responses'][5]),
-			"make" => $this->utility_make->decodeAggregation($results['responses'][6]),
-			"model" => $this->utility_model->decodeAggregation($results['responses'][7]),
-			"status" => $this->utility_status->decodeAggregation($results['responses'][8]),
-			"body" => $this->utility_body->decodeAggregation($results['responses'][9]),
+			"transmission" => $this->utility_transmission->decodeAggregation($results['responses'][2]),
+			"year" => $this->utility_year->decodeAggregation($results['responses'][3]),
+			"make" => $this->utility_make->decodeAggregation($results['responses'][4]),
+			"model" => $this->utility_model->decodeAggregation($results['responses'][5]),
+			"status" => $this->utility_status->decodeAggregation($results['responses'][6]),
+			"body" => $this->utility_body->decodeAggregation($results['responses'][7]),
+			"interior" => $this->utility_interior->decodeAggregation($results['responses'][8]),
+			"exterior" => $this->utility_exterior->decodeAggregation($results['responses'][9]),
+			"fuel" => $this->utility_fuel->decodeAggregation($results['responses'][10]),
+			"drive" => $this->utility_drive->decodeAggregation($results['responses'][11]),
+			"doors" => $this->utility_doors->decodeAggregation($results['responses'][12]),
+			"cylinders" => $this->utility_cylinders->decodeAggregation($results['responses'][13]),
+			"photo" => $this->utility_photo->decodeAggregation($results['responses'][14], $results['responses'][15]),
+			"certified" => $this->utility_certified->decodeAggregation($results['responses'][16], $results['responses'][17]),
 		);
 
 		return $aggregations;
@@ -356,6 +458,13 @@ class SearchController extends BaseController {
 		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 		$filters = $this->utility_status->findSelectedFilter($filters, $aggregations, Input::get('status', ''));
 		$filters = $this->utility_body->findSelectedFilter($filters, $aggregations, Input::get('body', ''));
+		$filters = $this->utility_interior->findSelectedFilter($filters, $aggregations, Input::get('interior', ''));
+		$filters = $this->utility_exterior->findSelectedFilter($filters, $aggregations, Input::get('exterior', ''));
+		$filters = $this->utility_fuel->findSelectedFilter($filters, $aggregations, Input::get('fuel', ''));
+		$filters = $this->utility_drive->findSelectedFilter($filters, $aggregations, Input::get('drive', ''));
+		$filters = $this->utility_doors->findSelectedFilter($filters, $aggregations, Input::get('doors', ''));
+		$filters = $this->utility_cylinders->findSelectedFilter($filters, $aggregations, Input::get('cylinders', ''));
+		$filters = $this->utility_certified->findSelectedFilter($filters, $aggregations, Input::get('certified', ''));
 
 		return $filters;
 	}

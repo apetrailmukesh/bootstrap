@@ -25,10 +25,17 @@
 						<li><a class="fa-icon plus" data-reveal-id="priceModal">Price</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mileageModal">Mileage</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="yearModal">Year</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="bodyModal">Style</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="certifiedModal">Certification</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="exteriorModal">Exterior Color</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="interiorModal">Interior Color</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="cylindersModal">Cylinders</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="transmissionModal">Transmission</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="photoModal">Has Photos</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="driveModal">Drivetrain</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="fuelModal">Fuel</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="doorsModal">Door Count</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="statusModal">Condition</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="bodyModal">Body Style</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="photoModal">Photos</a></li>
 					</ul>
 				</nav>
 				@include('search/large/search-large-filter-make')
@@ -36,10 +43,18 @@
 				@include('search/large/search-large-filter-price')
 				@include('search/large/search-large-filter-mileage')
 				@include('search/large/search-large-filter-year')
-				@include('search/large/search-large-filter-transmission')
-				@include('search/large/search-large-filter-photo')
-				@include('search/large/search-large-filter-status')
 				@include('search/large/search-large-filter-body')
+				@include('search/large/search-large-filter-certified')
+				@include('search/large/search-large-filter-exterior')
+				@include('search/large/search-large-filter-interior')
+				@include('search/large/search-large-filter-cylinders')
+				@include('search/large/search-large-filter-transmission')
+				@include('search/large/search-large-filter-drive')
+				@include('search/large/search-large-filter-fuel')
+				@include('search/large/search-large-filter-doors')
+				@include('search/large/search-large-filter-status')
+				@include('search/large/search-large-filter-photo')
+				
 			</div>
 		</div>
 	</div>

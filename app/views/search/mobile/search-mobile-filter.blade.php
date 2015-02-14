@@ -39,10 +39,17 @@
 						<li><a class="fa-icon plus" data-reveal-id="mobilePriceModal">Price</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileMileageModal">Mileage</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileYearModal">Year</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileBodyModal">Style</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileCertifiedModal">Certification</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileExteriorModal">Exterior Color</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileInteriorModal">Interior Color</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileCylindersModal">Cylinders</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileTransmissionModal">Transmission</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Has Photos</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileDriveModal">Drivetrain</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileFuelModal">Fuel</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobileDoorsModal">Door Count</a></li>
 						<li><a class="fa-icon plus" data-reveal-id="mobileStatusModal">Condition</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileBodyModal">Body Style</a></li>
+						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Photos</a></li>
 					</ul>
 				</nav>
 				@include('search/mobile/search-mobile-filter-make')
@@ -50,10 +57,17 @@
 				@include('search/mobile/search-mobile-filter-price')
 				@include('search/mobile/search-mobile-filter-mileage')
 				@include('search/mobile/search-mobile-filter-year')
-				@include('search/mobile/search-mobile-filter-transmission')
-				@include('search/mobile/search-mobile-filter-photo')
-				@include('search/mobile/search-mobile-filter-status')
 				@include('search/mobile/search-mobile-filter-body')
+				@include('search/mobile/search-mobile-filter-certified')
+				@include('search/mobile/search-mobile-filter-exterior')
+				@include('search/mobile/search-mobile-filter-interior')
+				@include('search/mobile/search-mobile-filter-cylinders')
+				@include('search/mobile/search-mobile-filter-transmission')
+				@include('search/mobile/search-mobile-filter-drive')
+				@include('search/mobile/search-mobile-filter-fuel')
+				@include('search/mobile/search-mobile-filter-doors')
+				@include('search/mobile/search-mobile-filter-status')
+				@include('search/mobile/search-mobile-filter-photo')
 			</div>
 		</div>
 	</aside>

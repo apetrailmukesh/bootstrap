@@ -30,6 +30,13 @@
   				edited = updateQueryStringParameter(edited, 'photo', '');
   				edited = updateQueryStringParameter(edited, 'status', '');
   				edited = updateQueryStringParameter(edited, 'body', '');
+  				edited = updateQueryStringParameter(edited, 'certified', '');
+  				edited = updateQueryStringParameter(edited, 'drive', '');
+  				edited = updateQueryStringParameter(edited, 'cylinders', '');
+  				edited = updateQueryStringParameter(edited, 'doors', '');
+  				edited = updateQueryStringParameter(edited, 'fuel', '');
+  				edited = updateQueryStringParameter(edited, 'interior', '');
+  				edited = updateQueryStringParameter(edited, 'exterior', '');
   				window.location.href = edited;
 			}
 		});
@@ -153,6 +160,20 @@
 		selectFilter($('div#mobileStatusModal'), 'condition', 'mobile-');
 		selectFilter($('div#bodyModal'), 'body', '');
 		selectFilter($('div#mobileBodyModal'), 'body', 'mobile-');
+		selectFilter($('div#certifiedModal'), 'certified', '');
+		selectFilter($('div#mobileCertifiedModal'), 'certified', 'mobile-');
+		selectFilter($('div#doorsModal'), 'doors', '');
+		selectFilter($('div#mobileDoorsModal'), 'doors', 'mobile-');
+		selectFilter($('div#cylindersModal'), 'cylinders', '');
+		selectFilter($('div#mobileCylindersModal'), 'cylinders', 'mobile-');
+		selectFilter($('div#interiorModal'), 'interior', '');
+		selectFilter($('div#mobileInteriorModal'), 'interior', 'mobile-');
+		selectFilter($('div#exteriorModal'), 'exterior', '');
+		selectFilter($('div#mobileExteriorModal'), 'exterior', 'mobile-');
+		selectFilter($('div#fuelModal'), 'fuel', '');
+		selectFilter($('div#mobileFuelModal'), 'fuel', 'mobile-');
+		selectFilter($('div#driveModal'), 'drive', '');
+		selectFilter($('div#mobileDriveModal'), 'drive', 'mobile-');
 	}
 
 	function selectFilter(div, property, prefix) {
@@ -185,6 +206,13 @@
 	applyFilterFunctions('model', 'Model');
 	applyFilterFunctions('status', 'Status');
 	applyFilterFunctions('body', 'Body');
+	applyFilterFunctions('certified', 'Certified');
+	applyFilterFunctions('interior', 'Interior');
+	applyFilterFunctions('exterior', 'Exterior');
+	applyFilterFunctions('doors', 'Doors');
+	applyFilterFunctions('cylinders', 'Cylinders');
+	applyFilterFunctions('fuel', 'Fuel');
+	applyFilterFunctions('drive', 'Drive');
 
 	function applyFilterFunctions(large, mobile) {
 		$('div#' + large + 'Modal input:checkbox').change(function (event) {
