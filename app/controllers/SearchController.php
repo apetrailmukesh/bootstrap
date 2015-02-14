@@ -153,6 +153,19 @@ class SearchController extends BaseController {
 	{
 		$and = array();
 
+		$zip_code = Input::query('zip_code', '');
+		$distance = Input::query('distance', '50');
+		if (!empty($zip_code) && !empty($distance)) {
+			$locations = Location::where('zip_code' , '=', $zip_code);
+			if ($locations->count()) {
+				$location = Location::where('zip_code' , '=', $zip_code)->first();
+				$latitude = $location->latitude;
+				$longitude = $location->longitude;
+				$distance = ($distance * 1.609344) . 'km';
+				array_push($and, array("geo_distance" => array("pin.location" => array("lat" => $latitude, "lon" => $longitude), "distance" => $distance)));
+			}	
+		}
+
 		if ($exclude != 'make') {
 			$and = $this->utility_make->buildFilterQuery($and, Input::get('make', ''));
 		}
