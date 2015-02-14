@@ -454,17 +454,17 @@ class SearchController extends BaseController {
 		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''));
 		$filters = $this->utility_mileage->findSelectedFilter($filters, $aggregations, Input::get('mileage', ''));
 		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''));
-		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
-		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
-		$filters = $this->utility_status->findSelectedFilter($filters, $aggregations, Input::get('status', ''));
 		$filters = $this->utility_body->findSelectedFilter($filters, $aggregations, Input::get('body', ''));
-		$filters = $this->utility_interior->findSelectedFilter($filters, $aggregations, Input::get('interior', ''));
-		$filters = $this->utility_exterior->findSelectedFilter($filters, $aggregations, Input::get('exterior', ''));
-		$filters = $this->utility_fuel->findSelectedFilter($filters, $aggregations, Input::get('fuel', ''));
-		$filters = $this->utility_drive->findSelectedFilter($filters, $aggregations, Input::get('drive', ''));
-		$filters = $this->utility_doors->findSelectedFilter($filters, $aggregations, Input::get('doors', ''));
-		$filters = $this->utility_cylinders->findSelectedFilter($filters, $aggregations, Input::get('cylinders', ''));
 		$filters = $this->utility_certified->findSelectedFilter($filters, $aggregations, Input::get('certified', ''));
+		$filters = $this->utility_exterior->findSelectedFilter($filters, $aggregations, Input::get('exterior', ''));
+		$filters = $this->utility_interior->findSelectedFilter($filters, $aggregations, Input::get('interior', ''));
+		$filters = $this->utility_cylinders->findSelectedFilter($filters, $aggregations, Input::get('cylinders', ''));
+		$filters = $this->utility_transmission->findSelectedFilter($filters, $aggregations, Input::get('transmission', ''));
+		$filters = $this->utility_drive->findSelectedFilter($filters, $aggregations, Input::get('drive', ''));
+		$filters = $this->utility_fuel->findSelectedFilter($filters, $aggregations, Input::get('fuel', ''));
+		$filters = $this->utility_doors->findSelectedFilter($filters, $aggregations, Input::get('doors', ''));
+		$filters = $this->utility_status->findSelectedFilter($filters, $aggregations, Input::get('status', ''));
+		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 
 		return $filters;
 	}
