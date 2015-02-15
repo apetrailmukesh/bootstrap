@@ -494,7 +494,7 @@ class SearchController extends BaseController {
 			$ip_address = $_SERVER['REMOTE_ADDR'];
 
 			if(!empty($ip_address) && filter_var($ip_address, FILTER_VALIDATE_IP)) {
-				$url = 'http://api.ip2location.com/?ip='. $ip_address . '&key=demo&package=WS9&format=json';
+				$url = 'http://www.telize.com/geoip/'. $ip_address;
 				$curl = curl_init($url);
 				curl_setopt($curl, CURLOPT_HEADER, false);
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -504,8 +504,8 @@ class SearchController extends BaseController {
 
 				$location = json_decode($json_response, true);
 				
-				if (array_key_exists('zip_code', $location)) {
-					$zip_code = $location['zip_code'];
+				if (array_key_exists('postal_code', $location)) {
+					$zip_code = $location['postal_code'];
 					Session::put('zip_code', $zip_code);
 				}
 			}
