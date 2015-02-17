@@ -69,7 +69,12 @@ class SearchController extends BaseController {
 				$city = $location->city;
 				$state = $location->state;
 				if (!empty($city) && !empty($state)) {
-					$location_info = $distance . ' miles from ' . $city . ', ' . $state . ' (change)';
+					if ($distance == 0) {
+						$location_info = 'unlimited miles from ' . $city . ', ' . $state . ' (change)';
+					} else {
+						$location_info = $distance . ' miles from ' . $city . ', ' . $state . ' (change)';
+					}
+
 					$title = $title . ' near ' . $city . ', ' . $state;
 				}
 			}
