@@ -20,20 +20,6 @@ var vehicleMatcher = function() {
 	};
 };
 
-var zipMatcher = function() {
-	return function findMatches(q, cb) {
-		jqNC.ajax({
-			type: "GET",
-			url: "/suggest/zip",
-			data: {'query' : q},
-			dataType: "json",
-			success: function (data) {
-				cb(data);
-			}
-		});
-	};
-};
-
 jqNC(document).ready(function() {
 	jqNC('.vehicle-search').typeahead({
 		hint: true,
@@ -44,16 +30,5 @@ jqNC(document).ready(function() {
 		name: 'vehicle_search',
 		displayKey: 'value',
 		source: vehicleMatcher()
-	});
-
-	jqNC('.zip-search').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-	},
-	{
-		name: 'zip_search',
-		displayKey: 'value',
-		source: zipMatcher()
 	});
 });

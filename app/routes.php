@@ -4,7 +4,6 @@ Route::get('/', array('as' => 'get.home', 'uses' => 'HomeController@index'));
 Route::get('/search', array('as' => 'get.search', 'uses' => 'SearchController@index'));
 
 Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@change'));
-Route::post('/search', array('as' => 'post.home.search', 'uses' => 'HomeController@search'));
 
 Route::get('/user/login', array('as' => 'get.user.login', 'uses' => 'UserController@getLogin'))->before('guest');
 Route::get('/user/register', array('as' => 'get.user.register', 'uses' => 'UserController@getRegister'))->before('guest');
@@ -24,5 +23,4 @@ Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'Admin
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');
 
 Route::get('/suggest/vehicle', array('as' => 'get.suggest.vehicle', 'uses' => 'SuggestController@vehicle'));
-Route::get('/suggest/zip', array('as' => 'get.suggest.zip', 'uses' => 'SuggestController@zip'));
 Route::get('/suggest/makemodel', array('as' => 'get.suggest.makemodel', 'uses' => 'SuggestController@makemodel'));

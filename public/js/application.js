@@ -10,39 +10,36 @@
   		event.preventDefault();
 	});
 
+	$('.vehicle-search').bind('typeahead:selected', function(obj, data) {
+        var search_text = data.value;
+  		startSearch(search_text);
+    });
+
 	$('.results-search-form').submit(function(event) {
   		var search_text = $(this).find('input[name="search_text"]').val();
+  		startSearch(search_text);
+  		event.preventDefault();
+	});
 
+	function startSearch(search_text) {
   		$.ajax({
 			type: "GET",
 			url: "/suggest/makemodel",
 			data: {'query' : search_text},
 			dataType: "json",
 			success: function (data) {
-				var edited = updateQueryStringParameter(document.URL, 'make', data.make);
+				var edited = location.protocol + '//' + location.hostname + '/search';
+				edited = updateQueryStringParameter(edited, 'make', data.make);
 				edited = updateQueryStringParameter(edited, 'model', data.model);
+				edited = updateQueryStringParameter(edited, 'zip_code', data.zip_code);
+				edited = updateQueryStringParameter(edited, 'distance', data.distance);
 				edited = updateQueryStringParameter(edited, 'search_text', search_text);
   				edited = updateQueryStringParameter(edited, 'page', '1');
-  				edited = updateQueryStringParameter(edited, 'price', '');
-  				edited = updateQueryStringParameter(edited, 'mileage', '');
-  				edited = updateQueryStringParameter(edited, 'year', '');
-  				edited = updateQueryStringParameter(edited, 'transmission', '');
-  				edited = updateQueryStringParameter(edited, 'photo', '');
-  				edited = updateQueryStringParameter(edited, 'status', '');
-  				edited = updateQueryStringParameter(edited, 'body', '');
-  				edited = updateQueryStringParameter(edited, 'certified', '');
-  				edited = updateQueryStringParameter(edited, 'drive', '');
-  				edited = updateQueryStringParameter(edited, 'cylinders', '');
-  				edited = updateQueryStringParameter(edited, 'doors', '');
-  				edited = updateQueryStringParameter(edited, 'fuel', '');
-  				edited = updateQueryStringParameter(edited, 'interior', '');
-  				edited = updateQueryStringParameter(edited, 'exterior', '');
+  				edited = updateQueryStringParameter(edited, 'sort', 'price-1');
   				window.location.href = edited;
 			}
 		});
-
-  		event.preventDefault();
-	});
+	}
 
 	$('#large-sort').change(function (event) {
 	    var optionSelected = $("option:selected", this);

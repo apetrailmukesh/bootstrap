@@ -70,35 +70,6 @@ class HomeController extends BaseController {
 		$this->layout->contents = View::make('home/home', $data);
 	}
 
-	public function search()
-	{
-		$this->layout->body_class = 'srp';
-
-		$zip_code = Session::get('zip_code', '');
-		$distance = Session::get('distance', '');
-		$search_text = Input::get('search_text', '');
-
-		$make = '';
-		$model = '';
-		$suggestion = SearchSuggestion::where('suggestion' , '=', strtoupper($search_text));
-		if ($suggestion->count()) {
-			$make = $suggestion->first()->make;
-			$model = $suggestion->first()->model;
-		}
-
-		$query = array(
-			'search_text' => $search_text,
-			'zip_code' => $zip_code,
-			'distance' => $distance,
-			'make' => $make,
-			'model' => $model,
-			'page' => 1,
-			'sort' => 'price-1'
-		);
-
-		return Redirect::route('get.search', $query);
-	}
-
 	public function findLocation()
 	{
 		$location_searched = Session::get('location_searched', '');
