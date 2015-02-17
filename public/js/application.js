@@ -139,41 +139,42 @@
 	}
 
 	function selectFilters() {
-		selectFilter($('div#makeModal'), 'make', '');
-		selectFilter($('div#mobileMakeModal'), 'make', 'mobile-');
-		selectFilter($('div#modelModal'), 'model', '');
-		selectFilter($('div#mobileModelModal'), 'model', 'mobile-');
-		selectFilter($('div#priceModal'), 'price', '');
-		selectFilter($('div#mobilePriceModal'), 'price', 'mobile-');
-		selectFilter($('div#mileageModal'), 'mileage', '');
-		selectFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
-		selectFilter($('div#yearModal'), 'year', '');
-		selectFilter($('div#mobileYearModal'), 'year', 'mobile-');
-		selectFilter($('div#transmissionModal'), 'transmission', '');
-		selectFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
-		selectFilter($('div#photoModal'), 'photo', '');
-		selectFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
-		selectFilter($('div#statusModal'), 'condition', '');
-		selectFilter($('div#mobileStatusModal'), 'condition', 'mobile-');
-		selectFilter($('div#bodyModal'), 'body', '');
-		selectFilter($('div#mobileBodyModal'), 'body', 'mobile-');
-		selectFilter($('div#certifiedModal'), 'certified', '');
-		selectFilter($('div#mobileCertifiedModal'), 'certified', 'mobile-');
-		selectFilter($('div#doorsModal'), 'doors', '');
-		selectFilter($('div#mobileDoorsModal'), 'doors', 'mobile-');
-		selectFilter($('div#cylindersModal'), 'cylinders', '');
-		selectFilter($('div#mobileCylindersModal'), 'cylinders', 'mobile-');
-		selectFilter($('div#interiorModal'), 'interior', '');
-		selectFilter($('div#mobileInteriorModal'), 'interior', 'mobile-');
-		selectFilter($('div#exteriorModal'), 'exterior', '');
-		selectFilter($('div#mobileExteriorModal'), 'exterior', 'mobile-');
-		selectFilter($('div#fuelModal'), 'fuel', '');
-		selectFilter($('div#mobileFuelModal'), 'fuel', 'mobile-');
-		selectFilter($('div#driveModal'), 'drive', '');
-		selectFilter($('div#mobileDriveModal'), 'drive', 'mobile-');
+		selectCheckboxFilter($('div#makeModal'), 'make', '');
+		selectCheckboxFilter($('div#mobileMakeModal'), 'make', 'mobile-');
+		selectCheckboxFilter($('div#modelModal'), 'model', '');
+		selectCheckboxFilter($('div#mobileModelModal'), 'model', 'mobile-');
+		selectCheckboxFilter($('div#priceModal'), 'price', '');
+		selectCheckboxFilter($('div#mobilePriceModal'), 'price', 'mobile-');
+		selectCheckboxFilter($('div#yearModal'), 'year', '');
+		selectCheckboxFilter($('div#mobileYearModal'), 'year', 'mobile-');
+		selectCheckboxFilter($('div#transmissionModal'), 'transmission', '');
+		selectCheckboxFilter($('div#mobileTransmissionModal'), 'transmission', 'mobile-');
+		selectCheckboxFilter($('div#photoModal'), 'photo', '');
+		selectCheckboxFilter($('div#mobilePhotoModal'), 'photo', 'mobile-');
+		selectCheckboxFilter($('div#statusModal'), 'condition', '');
+		selectCheckboxFilter($('div#mobileStatusModal'), 'condition', 'mobile-');
+		selectCheckboxFilter($('div#bodyModal'), 'body', '');
+		selectCheckboxFilter($('div#mobileBodyModal'), 'body', 'mobile-');
+		selectCheckboxFilter($('div#certifiedModal'), 'certified', '');
+		selectCheckboxFilter($('div#mobileCertifiedModal'), 'certified', 'mobile-');
+		selectCheckboxFilter($('div#doorsModal'), 'doors', '');
+		selectCheckboxFilter($('div#mobileDoorsModal'), 'doors', 'mobile-');
+		selectCheckboxFilter($('div#cylindersModal'), 'cylinders', '');
+		selectCheckboxFilter($('div#mobileCylindersModal'), 'cylinders', 'mobile-');
+		selectCheckboxFilter($('div#interiorModal'), 'interior', '');
+		selectCheckboxFilter($('div#mobileInteriorModal'), 'interior', 'mobile-');
+		selectCheckboxFilter($('div#exteriorModal'), 'exterior', '');
+		selectCheckboxFilter($('div#mobileExteriorModal'), 'exterior', 'mobile-');
+		selectCheckboxFilter($('div#fuelModal'), 'fuel', '');
+		selectCheckboxFilter($('div#mobileFuelModal'), 'fuel', 'mobile-');
+		selectCheckboxFilter($('div#driveModal'), 'drive', '');
+		selectCheckboxFilter($('div#mobileDriveModal'), 'drive', 'mobile-');
+
+		selectRadioFilter($('div#mileageModal'), 'mileage', '');
+		selectRadioFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
 	}
 
-	function selectFilter(div, property, prefix) {
+	function selectCheckboxFilter(div, property, prefix) {
 		var value = getQueryStringParameter(property);
 		if (value !== null && value !== undefined) {
 			if (value.length > 0) {
@@ -194,27 +195,60 @@
 		}
 	}
 
-	applyFilterFunctions('price', 'Price');
-	applyFilterFunctions('mileage', 'Mileage');
-	applyFilterFunctions('photo', 'Photo');
-	applyFilterFunctions('transmission', 'Transmission');
-	applyFilterFunctions('year', 'Year');
-	applyFilterFunctions('make', 'Make');	
-	applyFilterFunctions('model', 'Model');
-	applyFilterFunctions('status', 'Status');
-	applyFilterFunctions('body', 'Body');
-	applyFilterFunctions('certified', 'Certified');
-	applyFilterFunctions('interior', 'Interior');
-	applyFilterFunctions('exterior', 'Exterior');
-	applyFilterFunctions('doors', 'Doors');
-	applyFilterFunctions('cylinders', 'Cylinders');
-	applyFilterFunctions('fuel', 'Fuel');
-	applyFilterFunctions('drive', 'Drive');
+	function selectRadioFilter(div, property, prefix) {
+		var value = getQueryStringParameter(property);
+		if (value !== null && value !== undefined) {
+			if (value.length > 0) {
+				div.find('input:radio[id*="any"]').prop('checked', false);
+				var id = '#' + prefix + property + '-' + value;
+				var radio = div.find(id);
+				if (radio !== null && radio !== undefined) {
+				   	radio.prop('checked', true);
+				}
+			} else {
+				div.find('input:radio[id*="any"]').prop('checked', true);
+			}
+		} else {
+			div.find('input:radio[id*="any"]').prop('checked', true);
+		}
+	}
 
-	function applyFilterFunctions(large, mobile) {
-		$('div#' + large + 'Modal input:checkbox').change(function (event) {
-			filterChanged($('div#' + large + 'Modal'), $(this));
-		});
+	applyFilterFunctions('price', 'Price', 'checkbox');
+	applyFilterFunctions('photo', 'Photo', 'checkbox');
+	applyFilterFunctions('transmission', 'Transmission', 'checkbox');
+	applyFilterFunctions('year', 'Year', 'checkbox');
+	applyFilterFunctions('make', 'Make', 'checkbox');	
+	applyFilterFunctions('model', 'Model', 'checkbox');
+	applyFilterFunctions('status', 'Status', 'checkbox');
+	applyFilterFunctions('body', 'Body', 'checkbox');
+	applyFilterFunctions('certified', 'Certified', 'checkbox');
+	applyFilterFunctions('interior', 'Interior', 'checkbox');
+	applyFilterFunctions('exterior', 'Exterior', 'checkbox');
+	applyFilterFunctions('doors', 'Doors', 'checkbox');
+	applyFilterFunctions('cylinders', 'Cylinders', 'checkbox');
+	applyFilterFunctions('fuel', 'Fuel', 'checkbox');
+	applyFilterFunctions('drive', 'Drive', 'checkbox');
+
+	applyFilterFunctions('mileage', 'Mileage', 'radio');
+
+	function applyFilterFunctions(large, mobile, type) {
+		if (type == 'checkbox') {
+			$('div#mobile' + mobile + 'Modal input:checkbox').change(function (event) {
+				filterCheckboxChanged($('div#mobile' + mobile + 'Modal'), $(this));
+			});
+
+			$('div#' + large + 'Modal input:checkbox').change(function (event) {
+				filterCheckboxChanged($('div#' + large + 'Modal'), $(this));
+			});
+		} else if (type == 'radio') {
+			$('div#mobile' + mobile + 'Modal input:radio').click(function (event) {
+				filterRadioChanged($('div#mobile' + mobile + 'Modal'), $(this));
+			});
+
+			$('div#' + large + 'Modal input:radio').click(function (event) {
+				filterRadioChanged($('div#' + large + 'Modal'), $(this));
+			});
+		}
 
 		$('#filter-by-' + large).submit(function (event) {
 			filterSubmitted($('div#' + large + 'Modal'), large);
@@ -222,10 +256,6 @@
 
 		$('[id*="' + large + '-remove-"]').click(function (event) {
 			filterRemoved(event.target.id.replace(large + '-remove-', ''), large);
-		});
-
-		$('div#mobile' + mobile + 'Modal input:checkbox').change(function (event) {
-			filterChanged($('div#mobile' + mobile + 'Modal'), $(this));
 		});
 
 		$('#mobile-filter-by-' + large).submit(function (event) {
@@ -237,7 +267,7 @@
 		});
 	}
 
-	function filterChanged(div, checkbox) {
+	function filterCheckboxChanged(div, checkbox) {
 		var selected = checkbox.val();
 		if(checkbox.is(":checked")) {
 			if (selected == 0) {
@@ -256,13 +286,19 @@
 		}
 	}
 
+	function filterRadioChanged(div, radio) {
+		var selected = radio.val();
+		div.find('input:radio').prop('checked', false);
+		radio.prop('checked', true);
+	}
+
 	function filterSubmitted(div, property) {
 		var edited;
-		if (div.find('input:checkbox[id*="any"]').is(':checked')) {
+		if (div.find('input[id*="any"]').is(':checked')) {
 			var edited = updateQueryStringParameter(document.URL, property, '');
 	    	edited = updateQueryStringParameter(edited, 'page', '1');
 		} else {
-			var checkedValues = div.find('input:checkbox:checked').map(function() {
+			var checkedValues = div.find('input:checked').map(function() {
 			    return this.value;
 			}).get();
 			var edited = updateQueryStringParameter(document.URL, property, checkedValues.join('-'));

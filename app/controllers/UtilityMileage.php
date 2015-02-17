@@ -23,28 +23,22 @@ class UtilityMileage {
 		return $sort;
 	}
 
-	public function buildFilterQuery($and, $mileage_filter)
+	public function buildFilterQuery($and, $mileage_range)
 	{
-		if (!empty($mileage_filter)) {
-			$or = array();
-			$mileage_ranges = explode("-", $mileage_filter);
-			foreach ($mileage_ranges as $mileage_range) {
-				if ($mileage_range == 1) {
-					array_push($or, array("range" => array('miles' => array("lte" => 10000))));
-				} else if ($mileage_range == 2) {
-					array_push($or, array("range" => array('miles' => array("lte" => 20000))));
-				} else if ($mileage_range == 3) {
-					array_push($or, array("range" => array('miles' => array("lte" => 30000))));
-				} else if ($mileage_range == 4) {
-					array_push($or, array("range" => array('miles' => array("lte" => 40000))));
-				} else if ($mileage_range == 5) {
-					array_push($or, array("range" => array('miles' => array("lte" => 50000))));
-				} else if ($mileage_range == 6) {
-					array_push($or, array("range" => array('miles' => array("lte" => 60000))));
-				}
+		if (!empty($mileage_range)) {
+			if ($mileage_range == 1) {
+				array_push($and, array("range" => array('miles' => array("lte" => 10000))));
+			} else if ($mileage_range == 2) {
+				array_push($and, array("range" => array('miles' => array("lte" => 20000))));
+			} else if ($mileage_range == 3) {
+				array_push($and, array("range" => array('miles' => array("lte" => 30000))));
+			} else if ($mileage_range == 4) {
+				array_push($and, array("range" => array('miles' => array("lte" => 40000))));
+			} else if ($mileage_range == 5) {
+				array_push($and, array("range" => array('miles' => array("lte" => 50000))));
+			} else if ($mileage_range == 6) {
+				array_push($and, array("range" => array('miles' => array("lte" => 60000))));
 			}
-
-			array_push($and, array("or" => $or));
 		}
 
 		return $and;
@@ -83,30 +77,28 @@ class UtilityMileage {
 		return $values;
 	}
 
-	public function findSelectedFilter($filters, $aggregations, $mileage_filter)
+	public function findSelectedFilter($filters, $aggregations, $mileage_range)
 	{
-		if (!empty($mileage_filter)) {
+		if (!empty($mileage_range)) {
 			$values = array();
-			$mileage_ranges = explode("-", $mileage_filter);
-			foreach ($mileage_ranges as $mileage_range) {
-				$title = '';
-				if ($mileage_range == 1) {
-					$title = "10,000 or less";
-				} else if ($mileage_range == 2) {
-					$title = "20,000 or less";
-				} else if ($mileage_range == 3) {
-					$title = "30,000 or less";
-				} else if ($mileage_range == 4) {
-					$title = "40,000 or less";
-				} else if ($mileage_range == 5) {
-					$title = "50,000 or less";
-				} else if ($mileage_range == 6) {
-					$title = "60,000 or less";
-				}
-
-				$title = $title . " (" . $aggregations['mileage'][$mileage_range] . ")";
-				array_push($values, array("title" => $title, "index" => 'mileage-remove-' . $mileage_range));
+			
+			$title = '';
+			if ($mileage_range == 1) {
+				$title = "10,000 or less";
+			} else if ($mileage_range == 2) {
+				$title = "20,000 or less";
+			} else if ($mileage_range == 3) {
+				$title = "30,000 or less";
+			} else if ($mileage_range == 4) {
+				$title = "40,000 or less";
+			} else if ($mileage_range == 5) {
+				$title = "50,000 or less";
+			} else if ($mileage_range == 6) {
+				$title = "60,000 or less";
 			}
+
+			$title = $title . " (" . $aggregations['mileage'][$mileage_range] . ")";
+			array_push($values, array("title" => $title, "index" => 'mileage-remove-' . $mileage_range));
 
 			array_push($filters, array("name" => "Mileage", "values" => $values));
 		}
