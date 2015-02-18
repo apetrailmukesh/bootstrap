@@ -253,6 +253,8 @@ class SearchController extends BaseController {
 	{
 		$sort = array();
 
+		array_push($sort, array("paid" => array("order" => "desc")));
+
 		$sort_parameters = explode("-", Input::get('sort', 'price-1'));
 		$sort_by = $sort_parameters[0];
 		$sort_order = $sort_parameters[1];
@@ -265,8 +267,6 @@ class SearchController extends BaseController {
 			$sort = $this->utility_year->buildSortQuery($sort, $sort_order);
 		}
 
-		array_push($sort, array("_score" => array("order" => "desc")));
-
 		return $sort;
 	}
 
@@ -276,6 +276,7 @@ class SearchController extends BaseController {
 		foreach ($search_results['hits']['hits'] as $value) {
 			$source = $value['_source'];
 
+			$vin = $source['vin'];
 			$year = $source['year'];
 			$url = $source['url'];
 
@@ -290,6 +291,7 @@ class SearchController extends BaseController {
 			$image = $this->utility_photo->getValue($source);
 
 			$result = array(
+				'vin' => $vin,
 				'year' => $year,
 				'make' => $make,
 				'model' => $model,

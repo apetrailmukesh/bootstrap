@@ -1,0 +1,27 @@
+<?php
+
+class VehicleController extends BaseController {
+
+	protected $layout = 'base';
+
+	public function index()
+	{
+		$vin = Input::get('vin', '');
+		$vehicle = Vehicle::where('vin' , '=', $vin)->first();
+
+		$click = new Click;
+		$click->vin = $vehicle->vin;
+		$click->datetime = date("Y-m-d H:i:s");
+		$click->ip = $_SERVER['REMOTE_ADDR'];
+		$click->paid = $vehicle->paid;
+		$click->save();
+
+		$dealer = Dealer::where('id' , '=', $vehicle->dealer)->first();
+		$dealer->current_clicks = $dealer->current_clicks + 1;
+		$dealer->save();
+
+		$data = array("url" => $vehicle->url);
+
+		return Response::json($data);
+	}
+}

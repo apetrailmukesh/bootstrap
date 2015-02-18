@@ -10,6 +10,19 @@
   		event.preventDefault();
 	});
 
+	$('a[id*="vehicle-link"]').click(function() {
+		var vin = $(this).prop('class');
+        $.ajax({
+			type: "GET",
+			url: "/vehicle",
+			data: {'vin' : vin},
+			dataType: "json",
+			success: function (data) {
+  				window.location.href = data.url;
+			}
+		});
+    });
+
 	$('.vehicle-search').bind('typeahead:selected', function(obj, data) {
         var search_text = data.value;
   		startSearch(search_text);

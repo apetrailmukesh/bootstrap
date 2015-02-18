@@ -2,6 +2,7 @@
 
 Route::get('/', array('as' => 'get.home', 'uses' => 'HomeController@index'));
 Route::get('/search', array('as' => 'get.search', 'uses' => 'SearchController@index'));
+Route::get('/vehicle', array('as' => 'get.vehicle', 'uses' => 'VehicleController@index'));
 
 Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@change'));
 
