@@ -14,6 +14,66 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-upload', $data);
 	}
 
+	public function getDealers()
+	{
+		$this->layout->body_class = 'user';
+		$data = array(
+			'paid_dealers' => Dealer::where('paid' , '=', 1)->orderBy('dealer')->get(),
+			'free_dealers' => Dealer::where('paid' , '=', 0)->orderBy('dealer')->get()
+		);
+
+		$this->layout->contents = View::make('admin/admin-dealers', $data);
+	}
+
+	public function getEditDealers($id)
+	{
+		$this->layout->body_class = 'user';
+
+		$dealer = Dealer::find($id);
+
+		$paid = false;
+		if ($dealer->paid > 0) {
+			$paid = true;
+		}
+
+		$clicks = '';
+		if ($dealer->default_clicks > 0) {
+			$clicks = $dealer->default_clicks;
+		}
+
+		$data = array(
+			'id' => $dealer->id,
+			'name' => $dealer->dealer,
+			'paid' => $paid,
+			'clicks' => $clicks
+		);
+
+		$this->layout->contents = View::make('admin/admin-dealers-edit', $data);
+	}
+
+	public function editDealer()
+	{
+		$dealer = Dealer::find(Input::get('id'));
+
+		$clicks = Input::get('clicks', '0');
+		if (is_numeric($clicks)) {
+			$dealer->default_clicks = $clicks;
+		} else {
+			$dealer->default_clicks = 0;
+		}
+
+		$paid = Input::get('paid', 'free');
+		if ($paid === 'paid') {
+			$dealer->paid = true;
+		} else {
+			$dealer->paid = false;
+		}
+		
+		$dealer->save();
+
+    	return Redirect::route('get.admin.dealers');
+	}
+
 	public function upload()
 	{
 		$this->layout->body_class = 'user';

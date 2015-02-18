@@ -16,9 +16,11 @@ Route::post('/user/register', array('as' => 'post.user.register', 'uses' => 'Use
 Route::post('/user/profile', array('as' => 'post.user.profile', 'uses' => 'UserController@profile'))->before('auth');
 
 Route::get('/admin/upload', array('as' => 'get.admin.upload', 'uses' => 'AdminController@getUpload'))->before('admin');
+Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'AdminController@getDealers'))->before('admin');
+Route::get('/admin/dealers/edit/{id}', array('as' => 'get.admin.dealers.edit', 'uses' => 'AdminController@getEditDealers'))->before('admin');
 
-Route::post('/admin/specifications/add', array('as' => 'post.admin.specifications.add', 'uses' => 'AdminController@addSpecification'))->before('admin');
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');
+Route::post('/admin/dealers/edit/{id}', array('as' => 'post.admin.dealers.edit', 'uses' => 'AdminController@editDealer'))->before('admin');
 
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');
 
