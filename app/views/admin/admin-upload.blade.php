@@ -12,10 +12,6 @@
 					@if(Session::has('message'))
 					<p class="alert">{{ Session::get('message') }}</p>
 					@endif
-					{{ Form::select('action', [
-							'Insert' => 'Insert',
-							'Delete' => 'Delete'], $action)
-					}}
 					{{ Form::file('file', '', array('id'=>'','placeholder'=>'Select file')) }}
 					<button type="submit" class="button postfix">UPLOAD</button>
 				</div>
@@ -31,7 +27,6 @@
 						<thead>
 							<tr>
 								<th>Name</th>
-								<th>Action</th>
 								<th>Status</th>
 							</tr>
 						</thead>
@@ -39,7 +34,6 @@
 							@foreach($files->all() as $file)
 								<tr>
 									<td>{{ $file->name }}</td>
-									<td>{{ $file->action }}</td>
 									<td>{{ $file->status }}</td>
 								</tr>
 							@endforeach

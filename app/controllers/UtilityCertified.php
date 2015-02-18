@@ -9,9 +9,9 @@ class UtilityCertified {
 			$certified_ranges = explode("-", $certified_filter);
 			foreach ($certified_ranges as $certified_range) {
 				if ($certified_range == 1) {
-					array_push($or, array("term" => array("certified" => true)));
+					array_push($or, array("term" => array("certified" => 1)));
 				} else if ($certified_range == 2) {
-					array_push($or, array("term" => array("certified" => false)));
+					array_push($or, array("term" => array("certified" => 0)));
 				}
 			}
 
@@ -23,12 +23,12 @@ class UtilityCertified {
 
 	public function buildCertifiedAggregationQuery()
 	{
-		return array("certified" => array("filter" => array("term" => array("certified" => true))));
+		return array("certified" => array("filter" => array("term" => array("certified" => 1))));
 	}
 
 	public function buildNotCertifiedAggregationQuery()
 	{
-		return array("not_certified" => array("filter" => array("term" => array("certified" => false))));
+		return array("not_certified" => array("filter" => array("term" => array("certified" => 0))));
 	}
 
 	public function decodeAggregation($available, $not_available)

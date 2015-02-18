@@ -278,7 +278,6 @@ class SearchController extends BaseController {
 
 			$year = $source['year'];
 			$url = $source['url'];
-			$dealer = $source['dealer'];
 
 			$make = $this->utility_make->getValue($source);
 			$model = $this->utility_model->getValue($source);
@@ -286,7 +285,8 @@ class SearchController extends BaseController {
 			$mileage = $this->utility_mileage->getValue($source);
 			$trim = $this->utility_feature->getValue($source);
 			$transmission = $this->utility_transmission->getValue($source);
-			$dealer_address = $this->utility_dealer->getValue($source);
+			$dealer = $this->utility_dealer->getName($source);
+			$dealer_address = $this->utility_dealer->getAddress($source);
 			$image = $this->utility_photo->getValue($source);
 
 			$result = array(

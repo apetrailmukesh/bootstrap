@@ -8,7 +8,6 @@ class AdminController extends BaseController {
 	{
 		$this->layout->body_class = 'user';
 		$data = array(
-			'action' => 'Insert',
 			'files' => DataFile::all()
 		);
 
@@ -28,7 +27,6 @@ class AdminController extends BaseController {
 					$file = new DataFile;
 			    	$file->name = Input::file('file')->getClientOriginalName();
 			    	$file->status = 'Pending';
-			    	$file->action = Input::get('action');
 			    	$file->save();
 
 	    			Input::file('file')->move(storage_path().'/uploads/', $file->id.'.'.Input::file('file')->getClientOriginalExtension());
