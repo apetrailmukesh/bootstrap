@@ -64,12 +64,14 @@ class AdminController extends BaseController {
 
 		$paid = Input::get('paid', 'free');
 		if ($paid === 'paid') {
-			$dealer->paid = true;
+			$dealer->paid = 1;
 		} else {
-			$dealer->paid = false;
+			$dealer->paid = 0;
 		}
 		
 		$dealer->save();
+
+		DB::table('vehicle')->where('dealer', $dealer->id)->update(array('modified' => 1, 'paid' => $dealer->paid));
 
     	return Redirect::route('get.admin.dealers');
 	}
