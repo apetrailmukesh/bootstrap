@@ -17,18 +17,20 @@
 							<table width="100%">
 								<thead>
 									<tr>
-										<th width="60%">Name</th>
-										<th width="15%">Total Clicks</th>
+										<th width="50%">Name</th>
+										<th width="15%">Monthly Clicks</th>
 										<th width="15%">Current Clicks</th>
-										<th width="10%">Edit</th>
+										<th width="15%">Paid Clicks</th>
+										<th width="5%">Edit</th>
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($paid_dealers as $dealer)
 										<tr>
 											<td>{{ $dealer->dealer }}</td>
-											<td>{{ $dealer->default_clicks }}</td>
+											<td>{{ $dealer->monthly_clicks }}</td>
 											<td>{{ $dealer->current_clicks }}</td>
+											<td>{{ $dealer->paid_clicks }}</td>
 											<td>{{ HTML::linkRoute('get.admin.dealers.edit', 'Edit', array($dealer->id)) }}</td>
 										</tr>
 									@endforeach
@@ -43,18 +45,20 @@
 							<table width="100%">
 								<thead>
 									<tr>
-										<th width="60%">Name</th>
-										<th width="15%">Total Clicks</th>
+										<th width="50%">Name</th>
+										<th width="15%">Monthly Clicks</th>
 										<th width="15%">Current Clicks</th>
-										<th width="10%">Edit</th>
+										<th width="15%">Paid Clicks</th>
+										<th width="5%">Edit</th>
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($free_dealers as $dealer)
 										<tr>
 											<td>{{ $dealer->dealer }}</td>
-											<td>{{ $dealer->default_clicks }}</td>
+											<td>{{ $dealer->monthly_clicks }}</td>
 											<td>{{ $dealer->current_clicks }}</td>
+											<td>{{ $dealer->paid_clicks }}</td>
 											<td>{{ HTML::linkRoute('get.admin.dealers.edit', 'Edit', array($dealer->id)) }}</td>
 										</tr>
 									@endforeach

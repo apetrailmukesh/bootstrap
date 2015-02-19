@@ -18,6 +18,16 @@ class VehicleController extends BaseController {
 
 		$dealer = Dealer::where('id' , '=', $vehicle->dealer)->first();
 		$dealer->current_clicks = $dealer->current_clicks + 1;
+		if ($vehicle->paid > 0) {
+			$dealer->paid_clicks = $dealer->paid_clicks + 1;
+		}
+
+		if ($dealer->monthly_clicks <= $dealer->paid_clicks) {
+			$dealer->active = 0;
+
+			DB::table('vehicle')->where('dealer', $dealer->id)->update(array('paid' => 0, 'modified' => 1));
+		}
+
 		$dealer->save();
 
 		$data = array("url" => $vehicle->url);

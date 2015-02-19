@@ -37,8 +37,8 @@ class AdminController extends BaseController {
 		}
 
 		$clicks = '';
-		if ($dealer->default_clicks > 0) {
-			$clicks = $dealer->default_clicks;
+		if ($dealer->monthly_clicks > 0) {
+			$clicks = $dealer->monthly_clicks;
 		}
 
 		$data = array(
@@ -57,21 +57,23 @@ class AdminController extends BaseController {
 
 		$clicks = Input::get('clicks', '0');
 		if (is_numeric($clicks)) {
-			$dealer->default_clicks = $clicks;
+			$dealer->monthly_clicks = $clicks;
 		} else {
-			$dealer->default_clicks = 0;
+			$dealer->monthly_clicks = 0;
 		}
 
 		$paid = Input::get('paid', 'free');
 		if ($paid === 'paid') {
 			$dealer->paid = 1;
+			$dealer->active = 1;
 		} else {
 			$dealer->paid = 0;
+			$dealer->active = 0;
 		}
 		
 		$dealer->save();
 
-		DB::table('vehicle')->where('dealer', $dealer->id)->update(array('modified' => 1, 'paid' => $dealer->paid));
+		DB::table('vehicle')->where('dealer', $dealer->id)->update(array('modified' => 1, 'paid' => $dealer->active));
 
     	return Redirect::route('get.admin.dealers');
 	}
