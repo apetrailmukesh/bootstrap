@@ -22,8 +22,8 @@
 							<tr>
 								<td>{{ HTML::linkRoute('get.admin.dealers.edit', $dealer->dealer, array($dealer->id)) }}</td>
 								<td class="number-column">{{ $dealer->monthly_clicks }}</td>
-								<td class="number-column">{{ $dealer->current_clicks }}</td>
 								<td class="number-column">{{ $dealer->paid_clicks }}</td>
+								<td class="number-column">{{ $dealer->current_clicks }}</td>
 							</tr>
 						@endforeach
 					</tbody>

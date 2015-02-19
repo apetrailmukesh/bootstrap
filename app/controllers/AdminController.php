@@ -41,11 +41,14 @@ class AdminController extends BaseController {
 			$clicks = $dealer->monthly_clicks;
 		}
 
+		$history = DealerHistory::where('dealer' , '=', $dealer->id)->orderBy('year', 'desc')->orderBy('month', 'desc')->get();
+
 		$data = array(
 			'id' => $dealer->id,
 			'name' => $dealer->dealer,
 			'paid' => $paid,
-			'clicks' => $clicks
+			'clicks' => $clicks,
+			'dealer_history' => $history
 		);
 
 		$this->layout->contents = View::make('admin/admin-dealers-edit', $data);
@@ -54,6 +57,8 @@ class AdminController extends BaseController {
 	public function editDealer()
 	{
 		$dealer = Dealer::find(Input::get('id'));
+
+		$previous_status = $dealer->paid;
 
 		$clicks = Input::get('clicks', '0');
 		if (is_numeric($clicks)) {
@@ -70,10 +75,16 @@ class AdminController extends BaseController {
 			$dealer->paid = 0;
 			$dealer->active = 0;
 		}
+
+		if ($previous_status != $dealer->paid) {
+			if ($dealer->paid == 1) {
+				$dealer->paid_clicks = 0;
+			}
+
+			DB::table('vehicle')->where('dealer', $dealer->id)->update(array('modified' => 1, 'paid' => $dealer->active));
+		}
 		
 		$dealer->save();
-
-		DB::table('vehicle')->where('dealer', $dealer->id)->update(array('modified' => 1, 'paid' => $dealer->active));
 
     	return Redirect::route('get.admin.dealers');
 	}
