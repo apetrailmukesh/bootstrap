@@ -10,6 +10,7 @@
 					@if(Auth::user()->role == 1)
 						<li>{{ HTML::linkRoute('get.admin.upload', 'Upload' ) }}</li>
 						<li>{{ HTML::linkRoute('get.admin.dealers', 'Dealers' ) }}</li>
+						<li>{{ HTML::linkRoute('get.admin.clicks', 'Clicks' ) }}</li>
 					@endif
                     <li>{{ HTML::linkRoute('get.user.profile', 'Profile') }}</li>
                     <li>{{ HTML::linkRoute('get.user.logout', 'Logout') }}</li>

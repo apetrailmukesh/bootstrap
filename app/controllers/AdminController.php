@@ -25,6 +25,25 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-dealers', $data);
 	}
 
+	public function getClicks()
+	{
+		$this->layout->body_class = 'user';
+		
+		$page = Input::query('page', '1');
+		$size = 100;
+		$skip = ($page - 1) * $size;
+
+		$clicks = DB::table('click')->skip($skip)->take($size)->get();
+		$total = DB::table('click')->count();
+		
+		$data = array(
+			'clicks' => $clicks,
+			'total' => $total
+		);
+
+		$this->layout->contents = View::make('admin/admin-clicks', $data);
+	}
+
 	public function getEditDealers($id)
 	{
 		$this->layout->body_class = 'user';

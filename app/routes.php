@@ -18,6 +18,7 @@ Route::post('/user/profile', array('as' => 'post.user.profile', 'uses' => 'UserC
 
 Route::get('/admin/upload', array('as' => 'get.admin.upload', 'uses' => 'AdminController@getUpload'))->before('admin');
 Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'AdminController@getDealers'))->before('admin');
+Route::get('/admin/clicks', array('as' => 'get.admin.clicks', 'uses' => 'AdminController@getClicks'))->before('admin');
 Route::get('/admin/dealers/edit/{id}', array('as' => 'get.admin.dealers.edit', 'uses' => 'AdminController@getEditDealers'))->before('admin');
 
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');

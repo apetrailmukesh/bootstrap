@@ -126,6 +126,21 @@
 	  			window.location.href = edited;
 	    	}
 	    });
+
+	    $('#click-pagination').pagination({
+	        items: total_results,
+	        itemsOnPage: 100,
+	        currentPage: page,
+	        hrefTextPrefix: '#',
+	        prevText: '&laquo;',
+	        nextText:'&raquo;',
+	        selectOnClick: false,
+	        cssStyle: 'pagination',
+	        onPageClick : function (pageNumber, event) {
+		        var edited = updateQueryStringParameter(document.URL, 'page', pageNumber);
+	  			window.location.href = edited;
+	    	}
+	    });
 	}
 
 	function selectSort() {
