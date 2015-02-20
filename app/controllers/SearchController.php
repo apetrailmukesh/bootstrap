@@ -84,6 +84,21 @@ class SearchController extends BaseController {
 		$aggregations = $this->executeAggregations();
 		$filters = $this->findSelectedFilters($aggregations);
 
+		$paid = $aggregations['paid'];
+		$page = Input::get('page', '1');
+		$from = ($page - 1 ) * 10;
+		$featured = -1;
+		$standard = -1;
+		if ($paid > 0 && $page == 1) {
+			$featured = 0;
+		}
+
+		if ($from == $paid) {
+			$standard = 0;
+		} else if ($paid - $from < 9) {
+			$standard = $paid - $from;
+		}
+
 		$input = Input::all();
 		$data = array(
 			'zip_code' => $zip_code,
@@ -94,7 +109,9 @@ class SearchController extends BaseController {
 			'total' => $results['total'],
 			'filters' => $filters,
 			'results' => $results['results'],
-			'aggregations' => $aggregations
+			'aggregations' => $aggregations,
+			'standard' => $standard,
+			'featured' => $featured
 			);
 
 		$this->layout->contents = View::make('search/search', $data);
@@ -434,6 +451,13 @@ class SearchController extends BaseController {
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('none');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = array("paid" => array("filter" => array("term" => array("paid" => 1))));
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -465,6 +489,7 @@ class SearchController extends BaseController {
 			"cylinders" => $this->utility_cylinders->decodeAggregation($results['responses'][13]),
 			"photo" => $this->utility_photo->decodeAggregation($results['responses'][14], $results['responses'][15]),
 			"certified" => $this->utility_certified->decodeAggregation($results['responses'][16], $results['responses'][17]),
+			"paid" => $results['responses'][18]['aggregations']['paid']['doc_count']
 		);
 
 		return $aggregations;

@@ -13,7 +13,21 @@
 			<div class="row">
 				@include('search/large/search-large-filter')
 				<div class="large-9 medium-8 columns">
-					@foreach($results as $result)
+					@foreach($results as $key=>$result)
+						@if($featured == $key)
+							<div class="row">
+								<div class="small-12 columns">
+									<p class="secondary-text subhead"><strong>FEATURED VEHICLES</strong></p>
+								</div>
+							</div>
+						@endif
+						@if($standard == $key)
+							<div class="row">
+								<div class="small-12 columns">
+									<p class="secondary-text subhead"><strong>STANDARD VEHICLES</strong></p>
+								</div>
+							</div>
+						@endif
 						@include('search/search-vehicle')
 					@endforeach
 					@include('search/search-pager')
