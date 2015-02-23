@@ -1,5 +1,6 @@
 (function ($) {
 
+	setupDatePicker();	
 	setupPager();
 	selectSort();
 	selectFilters();
@@ -106,6 +107,34 @@
 	  	}
 
 	  	return list;
+	}
+
+	function setupDatePicker() {
+		var from = $('#datepicker-clicks-from')[0];
+		var to = $('#datepicker-clicks-to')[0];
+
+		$(from).val(getQueryStringParameter('from'));
+		$(to).val(getQueryStringParameter('to'));
+
+		var picker = new Pikaday({
+	        field: from,
+	        format: 'YYYY-MM-DD',
+	        onSelect: function() {
+	        	var edited = updateQueryStringParameter(document.URL, 'from', this.getMoment().format('YYYY-MM-DD'));
+	    		edited = updateQueryStringParameter(edited, 'page', '1');
+  				window.location.href = edited;
+	        }
+    	});
+
+    	var picker = new Pikaday({
+	        field: to,
+	        format: 'YYYY-MM-DD',
+	        onSelect: function() {
+	        	var edited = updateQueryStringParameter(document.URL, 'to', this.getMoment().format('YYYY-MM-DD'));
+	    		edited = updateQueryStringParameter(edited, 'page', '1');
+  				window.location.href = edited;
+	        }
+    	});
 	}
 
 	function setupPager() {

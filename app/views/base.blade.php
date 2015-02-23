@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,500,300italic|Roboto+Slab:700,300,100">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('css/pikaday.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/foundation.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
 </head>
@@ -23,6 +24,8 @@
 	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
 	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ URL::asset('js/jquery.simplePagination.js') }}"></script>
+	<script src="{{ URL::asset('js/moment.min.js') }}"></script>
+	<script src="{{ URL::asset('js/pikaday.js') }}"></script>
 	<script src="{{ URL::asset('js/main.js') }}"></script>
 	<script src="{{ URL::asset('js/application.js') }}"></script>
 </body>

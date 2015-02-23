@@ -32,9 +32,14 @@ class AdminController extends BaseController {
 		$page = Input::query('page', '1');
 		$size = 100;
 		$skip = ($page - 1) * $size;
+		$from = Input::query('from', '0000-00-00');
+		$to = Input::query('to', '3000-00-00');
 
-		$clicks = DB::table('click')->skip($skip)->take($size)->get();
-		$total = DB::table('click')->count();
+		$from = $from . ' 00:00:00';
+		$to = $to . ' 23:59:59';
+
+		$clicks = DB::table('click')->whereBetween('datetime', [$from, $to])->skip($skip)->take($size)->get();
+		$total = DB::table('click')->whereBetween('datetime', [$from, $to])->count();
 		
 		$data = array(
 			'clicks' => $clicks,
