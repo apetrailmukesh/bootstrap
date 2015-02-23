@@ -22,6 +22,7 @@ Route::get('/admin/clicks', array('as' => 'get.admin.clicks', 'uses' => 'AdminCo
 Route::get('/admin/dealers/edit/{id}', array('as' => 'get.admin.dealers.edit', 'uses' => 'AdminController@getEditDealers'))->before('admin');
 
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');
+Route::post('/admin/clicks', array('as' => 'post.admin.clicks', 'uses' => 'AdminController@downloadClicks'))->before('admin');
 Route::post('/admin/dealers/edit/{id}', array('as' => 'post.admin.dealers.edit', 'uses' => 'AdminController@editDealer'))->before('admin');
 
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');

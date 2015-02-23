@@ -15,7 +15,9 @@
 						<label for="datepicker-clicks-to">To<input type="text" id="datepicker-clicks-to"></label>
 					</div>
 				</div>
+				{{ Form::open(array('route' => 'post.admin.clicks')) }}
 				<button class="button postfix">DOWNLOAD</button>
+				{{ Form::close() }}
 			</div>
 			<table width="100%">
 				<thead>

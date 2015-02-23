@@ -146,4 +146,30 @@ class AdminController extends BaseController {
 			return Redirect::route('get.admin.upload')->with('message', 'Please select a file to be uploaded');
 		}
 	}
+
+	public function downloadClicks()
+	{
+		$filename = "Vehicle_Clicks_" . time() . ".csv";
+    	$handle = fopen($filename, 'w+');
+
+		$from = Input::query('from', '0000-00-00');
+		$to = Input::query('to', '3000-00-00');
+		$from = $from . ' 00:00:00';
+		$to = $to . ' 23:59:59';
+
+		fputcsv($handle, array('VIN', 'Date', 'IP Address', 'Status'));
+
+		$clicks = DB::table('click')->whereBetween('datetime', [$from, $to])->get();
+		foreach ($clicks as $click) {
+			fputcsv($handle, array($click->vin, $click->datetime, $click->ip, $click->paid == 0 ? 'Free' : 'Paid'));
+		}
+
+		fclose($handle);
+
+		$headers = array(
+            'Content-Type' => 'text/csv'
+        );
+
+        return Response::download($filename, 'VehicleClicksDetails.csv', $headers);
+	}
 }
