@@ -149,7 +149,7 @@ class AdminController extends BaseController {
 
 	public function downloadClicks()
 	{
-		$filename = "Vehicle_Clicks_" . time() . ".csv";
+		$filename = storage_path() . '/downloads/' . "vehicle_clicks_" . time() . ".csv";
     	$handle = fopen($filename, 'w+');
 
 		$from = Input::query('from', '0000-00-00');
