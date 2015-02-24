@@ -22,16 +22,20 @@
 			<table width="100%">
 				<thead>
 					<tr>
-						<th width="30%" class="number-column">VIN</th>
-						<th width="30%" class="number-column">Date</th>
-						<th width="25%" class="number-column">IP Address</th>
-						<th width="15%" class="number-column">Status</th>
+						<th width="25%" class="number-column">VIN</th>
+						<th width="30%" class="number-column">Dealer</th>
+						<th width="10%" class="number-column">State</th>
+						<th width="15%" class="number-column">Date</th>
+						<th width="10%" class="number-column">IP Address</th>
+						<th width="10%" class="number-column">Status</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($clicks as $click)
 					<tr>
 						<td class="number-column">{{ $click->vin }}</td>
+						<td class="number-column">{{ $click->dealer }}</td>
+						<td class="number-column">{{ $click->state }}</td>
 						<td class="number-column">{{ $click->datetime }}</td>
 						<td class="number-column">{{ $click->ip }}</td>
 						<td class="number-column">{{ $click->paid == 0 ? 'Free' : 'Paid' }}</td>

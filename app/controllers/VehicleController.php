@@ -8,15 +8,17 @@ class VehicleController extends BaseController {
 	{
 		$vin = Input::get('vin', '');
 		$vehicle = Vehicle::where('vin' , '=', $vin)->first();
+		$dealer = Dealer::where('id' , '=', $vehicle->dealer)->first();
 
 		$click = new Click;
 		$click->vin = $vehicle->vin;
+		$click->dealer = $dealer->dealer;
+		$click->state = $vehicle->state;
 		$click->datetime = date("Y-m-d H:i:s");
 		$click->ip = $_SERVER['REMOTE_ADDR'];
 		$click->paid = $vehicle->paid;
 		$click->save();
-
-		$dealer = Dealer::where('id' , '=', $vehicle->dealer)->first();
+		
 		$dealer->current_clicks = $dealer->current_clicks + 1;
 		if ($vehicle->paid > 0) {
 			$dealer->paid_clicks = $dealer->paid_clicks + 1;
