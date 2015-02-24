@@ -60,7 +60,36 @@ class SearchController extends BaseController {
 		Session::put('zip_code', $zip_code);
 		Session::put('distance', $distance);
 
-		$title = $search_text;
+		$title = '';
+
+		$make_filter = Input::get('make', '');
+		$makes = explode("-", $make_filter);
+
+		$model_filter = Input::get('model', '');
+		$models = explode("-", $model_filter);
+
+		if (sizeof($makes) > 0) {
+			foreach ($makes as $make) {
+				$entities = Make::where('id' , '=', $make);
+				if ($entities->count()) {
+					$entity = $entities->first();
+					$title = $title . $entity->make . ' ';
+				}
+			}
+		}
+
+		if (sizeof($models) > 0) {
+			foreach ($models as $model) {
+				$entities = Model::where('id' , '=', $model);
+				if ($entities->count()) {
+					$entity = $entities->first();
+					$title = $title . $entity->model . ' - ';
+				}
+			}
+
+			$title = substr($title, 0, -2);
+		}
+
 		$location_info = 'change location';
 		if (!empty($zip_code)) {
 			$locations = Location::where('zip_code' , '=', $zip_code);
@@ -75,7 +104,9 @@ class SearchController extends BaseController {
 						$location_info = $distance . ' miles from ' . $city . ', ' . $state . ' (change)';
 					}
 
-					$title = $title . ' near ' . $city . ', ' . $state;
+					if (strlen($title) > 0) {
+						$title = $title . ' near ' . $city . ', ' . $state;
+					}
 				}
 			}
 		}
