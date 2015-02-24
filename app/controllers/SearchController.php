@@ -50,7 +50,6 @@ class SearchController extends BaseController {
 
 		$zip_code = Input::query('zip_code', '');
 		$distance = Input::query('distance', '50');
-		$search_text = Input::query('search_text', '');
 
 		if (empty($zip_code)) {
 			$this->findLocation();
@@ -88,6 +87,23 @@ class SearchController extends BaseController {
 			}
 
 			$title = substr($title, 0, -2);
+		}
+
+		$search_text = '';
+		if (sizeof($makes) == 1 && sizeof($models) <= 1) {
+			$entities = Make::where('id' , '=', $makes[0]);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$search_text = $entity->make;
+
+				if (sizeof($models) == 1) {
+					$entities = Model::where('id' , '=', $models[0]);
+					if ($entities->count()) {
+						$entity = $entities->first();
+						$search_text = $search_text . ' ' .$entity->model;						
+					}
+				}
+			}
 		}
 
 		$location_info = 'change location';
