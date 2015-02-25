@@ -116,11 +116,10 @@ class UtilityPrice {
 					$title = "Over $50,000";
 				}
 
-				$title = $title . " (" . $aggregations['price'][$price_range] . ")";
 				array_push($values, array("title" => $title, "index" => 'price-remove-' . $price_range));
 			}
 
-			array_push($filters, array("name" => "Price", "values" => $values));
+			array_push($filters, array("name" => "Price", "values" => $values, "modal" => "price"));
 		}
 
 		return $filters;

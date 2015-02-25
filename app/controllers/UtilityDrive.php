@@ -57,18 +57,13 @@ class UtilityDrive {
 			foreach ($drive_ranges as $drive_range) {
 				$drives = Drive::where('id' , '=', $drive_range);
 				if ($drives->count()) {
-					$title = '';
-					if (array_key_exists($drive_range, $aggregations['drive'])) {
-						$title = $drives->first()->drive . ' (' .  $aggregations['drive'][$drive_range]['count'] . ')';
-					} else {
-						$title = $drives->first()->drive . ' (0)';
-					}
+					$title = $drives->first()->drive;
 					
 					array_push($values, array("title" => $title, "index" => 'drive-remove-' . $drive_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Drivetrain", "values" => $values));
+			array_push($filters, array("name" => "Drivetrain", "values" => $values, "modal" => "drive"));
 		}
 
 		return $filters;

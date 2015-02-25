@@ -57,18 +57,12 @@ class UtilityBody {
 			foreach ($body_ranges as $body_range) {
 				$bodies = Body::where('id' , '=', $body_range);
 				if ($bodies->count()) {
-					$title = '';
-					if (array_key_exists($body_range, $aggregations['body'])) {
-						$title = $bodies->first()->body . ' (' .  $aggregations['body'][$body_range]['count'] . ')';
-					} else {
-						$title = $bodies->first()->body . ' (0)';
-					}
-					
+					$title = $bodies->first()->body;
 					array_push($values, array("title" => $title, "index" => 'body-remove-' . $body_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Body Style", "values" => $values));
+			array_push($filters, array("name" => "Body Style", "values" => $values, "modal" => "body"));
 		}
 
 		return $filters;

@@ -57,18 +57,13 @@ class UtilityFuel {
 			foreach ($fuel_ranges as $fuel_range) {
 				$fuels = Fuel::where('id' , '=', $fuel_range);
 				if ($fuels->count()) {
-					$title = '';
-					if (array_key_exists($fuel_range, $aggregations['fuel'])) {
-						$title = $fuels->first()->fuel . ' (' .  $aggregations['fuel'][$fuel_range]['count'] . ')';
-					} else {
-						$title = $fuels->first()->fuel . ' (0)';
-					}
+					$title = $fuels->first()->fuel;
 					
 					array_push($values, array("title" => $title, "index" => 'fuel-remove-' . $fuel_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Fuel", "values" => $values));
+			array_push($filters, array("name" => "Fuel", "values" => $values, "modal" => "fuel"));
 		}
 
 		return $filters;

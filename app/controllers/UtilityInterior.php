@@ -57,18 +57,13 @@ class UtilityInterior {
 			foreach ($interior_ranges as $interior_range) {
 				$interiors = Interior::where('id' , '=', $interior_range);
 				if ($interiors->count()) {
-					$title = '';
-					if (array_key_exists($interior_range, $aggregations['interior'])) {
-						$title = $interiors->first()->interior . ' (' .  $aggregations['interior'][$interior_range]['count'] . ')';
-					} else {
-						$title = $interiors->first()->interior . ' (0)';
-					}
+					$title = $interiors->first()->interior;
 					
 					array_push($values, array("title" => $title, "index" => 'interior-remove-' . $interior_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Interior Color", "values" => $values));
+			array_push($filters, array("name" => "Interior Color", "values" => $values, "modal" => "interior"));
 		}
 
 		return $filters;

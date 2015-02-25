@@ -97,10 +97,9 @@ class UtilityMileage {
 				$title = "60,000 or less";
 			}
 
-			$title = $title . " (" . $aggregations['mileage'][$mileage_range] . ")";
 			array_push($values, array("title" => $title, "index" => 'mileage-remove-' . $mileage_range));
 
-			array_push($filters, array("name" => "Mileage", "values" => $values));
+			array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
 		}
 
 		return $filters;

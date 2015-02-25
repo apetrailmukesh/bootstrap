@@ -62,17 +62,12 @@ class UtilityYear {
 			$values = array();
 			$year_ranges = explode("-", $year_filter);
 			foreach ($year_ranges as $year_range) {
-				$title = '';
-				if (array_key_exists($year_range, $aggregations['year'])) {
-					$title = $year_range . ' (' .  $aggregations['year'][$year_range]['count'] . ')';
-				} else {
-					$title = $year_range . ' (0)';
-				}
+				$title = $year_range;
 					
 				array_push($values, array("title" => $title, "index" => 'year-remove-' . $year_range));
 			}
 
-			array_push($filters, array("name" => "Year", "values" => $values));
+			array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
 		}
 
 		return $filters;

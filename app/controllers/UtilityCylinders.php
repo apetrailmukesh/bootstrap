@@ -51,17 +51,12 @@ class UtilityCylinders {
 			$values = array();
 			$cylinders_ranges = explode("-", $cylinders_filter);
 			foreach ($cylinders_ranges as $cylinders_range) {
-				$title = '';
-				if (array_key_exists($cylinders_range, $aggregations['cylinders'])) {
-					$title = $cylinders_range . ' (' .  $aggregations['cylinders'][$cylinders_range]['count'] . ')';
-				} else {
-					$title = $cylinders_range . ' (0)';
-				}
+				$title = $cylinders_range;
 					
 				array_push($values, array("title" => $title, "index" => 'cylinders-remove-' . $cylinders_range));
 			}
 
-			array_push($filters, array("name" => "Cylinders", "values" => $values));
+			array_push($filters, array("name" => "Cylinders", "values" => $values, "modal" => "cylinders"));
 		}
 
 		return $filters;

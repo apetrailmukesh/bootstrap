@@ -70,18 +70,13 @@ class UtilityModel {
 			foreach ($model_ranges as $model_range) {
 				$models = Model::where('id' , '=', $model_range);
 				if ($models->count()) {
-					$title = '';
-					if (array_key_exists($model_range, $aggregations['model'])) {
-						$title = $models->first()->model . ' (' .  $aggregations['model'][$model_range]['count'] . ')';
-					} else {
-						$title = $models->first()->model . ' (0)';
-					}
+					$title = $models->first()->model;
 
 					array_push($values, array("title" => $title, "index" => 'model-remove-' . $model_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Model", "values" => $values));
+			array_push($filters, array("name" => "Model", "values" => $values, "modal" => "model"));
 		}
 
 		return $filters;

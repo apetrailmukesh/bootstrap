@@ -6,7 +6,10 @@
 				<nav>
 					<ul class="side-nav">
 						@foreach($filters as $filter)
-							<li>{{ $filter['name'] }}</li>
+							<li>
+								<span>{{ $filter['name'] }}</span>
+								<a class="edit" data-reveal-id="{{ $filter['modal'] }}Modal">(edit)</a>
+							</li>
 							@foreach($filter['values'] as $value)
 								<li>
 									<a class="fa-icon close" id="{{ $value['index'] }}">{{ $value['title'] }}</a>

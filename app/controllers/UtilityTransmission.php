@@ -70,18 +70,13 @@ class UtilityTransmission {
 			foreach ($transmission_ranges as $transmission_range) {
 				$transmissions = Transmission::where('id' , '=', $transmission_range);
 				if ($transmissions->count()) {
-					$title = '';
-					if (array_key_exists($transmission_range, $aggregations['transmission'])) {
-						$title = $transmissions->first()->transmission . ' (' .  $aggregations['transmission'][$transmission_range]['count'] . ')';
-					} else {
-						$title = $transmissions->first()->transmission . ' (0)';
-					}
+					$title = $transmissions->first()->transmission;
 					
 					array_push($values, array("title" => $title, "index" => 'transmission-remove-' . $transmission_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Transmission", "values" => $values));
+			array_push($filters, array("name" => "Transmission", "values" => $values, "modal" => "transmission"));
 		}
 
 		return $filters;

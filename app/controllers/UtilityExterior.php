@@ -57,18 +57,13 @@ class UtilityExterior {
 			foreach ($exterior_ranges as $exterior_range) {
 				$exteriors = Exterior::where('id' , '=', $exterior_range);
 				if ($exteriors->count()) {
-					$title = '';
-					if (array_key_exists($exterior_range, $aggregations['exterior'])) {
-						$title = $exteriors->first()->exterior . ' (' .  $aggregations['exterior'][$exterior_range]['count'] . ')';
-					} else {
-						$title = $exteriors->first()->exterior . ' (0)';
-					}
-					
+					$title = $exteriors->first()->exterior;
+
 					array_push($values, array("title" => $title, "index" => 'exterior-remove-' . $exterior_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Exterior Color", "values" => $values));
+			array_push($filters, array("name" => "Exterior Color", "values" => $values, "modal" => "exterior"));
 		}
 
 		return $filters;

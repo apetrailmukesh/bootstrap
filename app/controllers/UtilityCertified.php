@@ -54,11 +54,10 @@ class UtilityCertified {
 					$title = "Not Certified";
 				}
 
-				$title = $title . " (" . $aggregations['certified'][$certified_range] . ")";
 				array_push($values, array("title" => $title, "index" => 'certified-remove-' . $certified_range));
 			}
 
-			array_push($filters, array("name" => "Certification", "values" => $values));
+			array_push($filters, array("name" => "Certification", "values" => $values, "modal" => "certified"));
 		}
 
 		return $filters;

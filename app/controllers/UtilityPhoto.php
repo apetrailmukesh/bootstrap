@@ -64,11 +64,10 @@ class UtilityPhoto {
 					$title = "Not Available";
 				}
 
-				$title = $title . " (" . $aggregations['photo'][$photo_range] . ")";
 				array_push($values, array("title" => $title, "index" => 'photo-remove-' . $photo_range));
 			}
 
-			array_push($filters, array("name" => "Has Photo", "values" => $values));
+			array_push($filters, array("name" => "Has Photo", "values" => $values, "modal" => "photo"));
 		}
 
 		return $filters;

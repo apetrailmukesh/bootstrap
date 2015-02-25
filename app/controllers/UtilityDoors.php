@@ -51,17 +51,12 @@ class UtilityDoors {
 			$values = array();
 			$doors_ranges = explode("-", $doors_filter);
 			foreach ($doors_ranges as $doors_range) {
-				$title = '';
-				if (array_key_exists($doors_range, $aggregations['doors'])) {
-					$title = $doors_range . ' (' .  $aggregations['doors'][$doors_range]['count'] . ')';
-				} else {
-					$title = $doors_range . ' (0)';
-				}
+				$title = $doors_range;
 					
 				array_push($values, array("title" => $title, "index" => 'doors-remove-' . $doors_range));
 			}
 
-			array_push($filters, array("name" => "Doors", "values" => $values));
+			array_push($filters, array("name" => "Doors", "values" => $values, "modal" => "doors"));
 		}
 
 		return $filters;

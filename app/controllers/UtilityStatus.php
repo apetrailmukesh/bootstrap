@@ -57,18 +57,13 @@ class UtilityStatus {
 			foreach ($status_ranges as $status_range) {
 				$statuses = Status::where('id' , '=', $status_range);
 				if ($statuses->count()) {
-					$title = '';
-					if (array_key_exists($status_range, $aggregations['status'])) {
-						$title = $statuses->first()->status . ' (' .  $aggregations['status'][$status_range]['count'] . ')';
-					} else {
-						$title = $statuses->first()->status . ' (0)';
-					}
+					$title = $statuses->first()->status;
 					
 					array_push($values, array("title" => $title, "index" => 'status-remove-' . $status_range));
 				}
 			}
 
-			array_push($filters, array("name" => "Condition", "values" => $values));
+			array_push($filters, array("name" => "Condition", "values" => $values, "modal" => "status"));
 		}
 
 		return $filters;
