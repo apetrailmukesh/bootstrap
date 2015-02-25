@@ -5,7 +5,7 @@
 				<h3>Your Search</h3>
 				<nav>
 					<ul class="side-nav">
-						@foreach($filters as $filter)
+						@foreach($selected_filters as $filter)
 							<li>
 								<span>{{ $filter['name'] }}</span>
 								<a class="edit" data-reveal-id="{{ $filter['modal'] }}Modal">(edit)</a>
@@ -23,22 +23,9 @@
 				<h3>Refine Results</h3>
 				<nav>
 					<ul class="side-nav">
-						<li><a class="fa-icon plus" data-reveal-id="makeModal">Make</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="modelModal">Model</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="priceModal">Price</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mileageModal">Mileage</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="yearModal">Year</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="bodyModal">Style</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="certifiedModal">Certification</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="exteriorModal">Exterior Color</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="interiorModal">Interior Color</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="cylindersModal">Cylinders</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="transmissionModal">Transmission</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="driveModal">Drivetrain</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="fuelModal">Fuel</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="doorsModal">Door Count</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="statusModal">Condition</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="photoModal">Photos</a></li>
+						@foreach($remaining_filters as $filter)
+							<li><a class="fa-icon plus" data-reveal-id="{{ $filter['modal'] }}Modal">{{ $filter['name'] }}</a></li>
+						@endforeach
 					</ul>
 				</nav>
 				@include('search/large/search-large-filter-make')

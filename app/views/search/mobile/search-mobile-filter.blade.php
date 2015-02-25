@@ -19,7 +19,7 @@
 				<h3>Your Search</h3>
 				<nav>
 					<ul class="side-nav">
-						@foreach($filters as $filter)
+						@foreach($selected_filters as $filter)
 							<li>
 								<span>{{ $filter['name'] }}</span>
 								<a class="edit" data-reveal-id="mobile{{ ucwords($filter['modal']) }}Modal">(edit)</a>
@@ -37,22 +37,9 @@
 				<h3>Refine Results</h3>
 				<nav>
 					<ul class="side-nav">
-						<li><a class="fa-icon plus" data-reveal-id="mobileMakeModal">Make</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileModelModal">Model</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobilePriceModal">Price</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileMileageModal">Mileage</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileYearModal">Year</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileBodyModal">Style</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileCertifiedModal">Certification</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileExteriorModal">Exterior Color</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileInteriorModal">Interior Color</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileCylindersModal">Cylinders</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileTransmissionModal">Transmission</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileDriveModal">Drivetrain</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileFuelModal">Fuel</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileDoorsModal">Door Count</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobileStatusModal">Condition</a></li>
-						<li><a class="fa-icon plus" data-reveal-id="mobilePhotoModal">Photos</a></li>
+						@foreach($remaining_filters as $filter)
+							<li><a class="fa-icon plus" data-reveal-id="mobile{{ ucwords($filter['modal']) }}Modal">{{ $filter['name'] }}</a></li>
+						@endforeach
 					</ul>
 				</nav>
 				@include('search/mobile/search-mobile-filter-make')

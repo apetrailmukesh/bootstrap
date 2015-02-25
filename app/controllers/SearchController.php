@@ -129,7 +129,8 @@ class SearchController extends BaseController {
 
 		$results = $this->executeSearch();
 		$aggregations = $this->executeAggregations();
-		$filters = $this->findSelectedFilters($aggregations);
+		$selected_filters = $this->findSelectedFilters($aggregations);
+		$remaining_filters = $this->findRemainingFilters();
 
 		$paid = $aggregations['paid'];
 		$page = Input::get('page', '1');
@@ -154,7 +155,8 @@ class SearchController extends BaseController {
 			'title' => $title,
 			'location_info' => $location_info,
 			'total' => $results['total'],
-			'filters' => $filters,
+			'selected_filters' => $selected_filters,
+			'remaining_filters' => $remaining_filters,
 			'results' => $results['results'],
 			'aggregations' => $aggregations,
 			'standard' => $standard,
@@ -564,6 +566,30 @@ class SearchController extends BaseController {
 		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 
 		return $filters;
+	}
+
+	public function findRemainingFilters()
+	{
+		$remaining = array();
+
+		if (empty(Input::get('make', ''))) array_push($remaining, array('name' => "Make", "modal" => "make"));
+		if (empty(Input::get('model', ''))) array_push($remaining, array('name' => "Model", "modal" => "model"));
+		if (empty(Input::get('price', ''))) array_push($remaining, array('name' => "Price", "modal" => "price"));
+		if (empty(Input::get('mileage', ''))) array_push($remaining, array('name' => "Mileage", "modal" => "mileage"));
+		if (empty(Input::get('year', ''))) array_push($remaining, array('name' => "Year", "modal" => "year"));
+		if (empty(Input::get('body', ''))) array_push($remaining, array('name' => "Style", "modal" => "body"));
+		if (empty(Input::get('certified', ''))) array_push($remaining, array('name' => "Certification", "modal" => "certified"));
+		if (empty(Input::get('exterior', ''))) array_push($remaining, array('name' => "Exterior Color", "modal" => "exterior"));
+		if (empty(Input::get('interior', ''))) array_push($remaining, array('name' => "Interior Color", "modal" => "interior"));
+		if (empty(Input::get('cylinders', ''))) array_push($remaining, array('name' => "Cylinders", "modal" => "cylinders"));
+		if (empty(Input::get('transmission', ''))) array_push($remaining, array('name' => "Transmission", "modal" => "transmission"));
+		if (empty(Input::get('drive', ''))) array_push($remaining, array('name' => "Drivetrain", "modal" => "drive"));
+		if (empty(Input::get('fuel', ''))) array_push($remaining, array('name' => "Fuel", "modal" => "fuel"));
+		if (empty(Input::get('doors', ''))) array_push($remaining, array('name' => "Door Count", "modal" => "doors"));
+		if (empty(Input::get('status', ''))) array_push($remaining, array('name' => "Condition", "modal" => "status"));
+		if (empty(Input::get('photo', ''))) array_push($remaining, array('name' => "Photos", "modal" => "photo"));
+
+		return $remaining;
 	}
 
 	public function findLocation()
