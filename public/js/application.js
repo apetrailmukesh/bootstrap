@@ -77,6 +77,14 @@
   		event.preventDefault();
 	});
 
+	$('.tab-link').click(function (event) {
+		var status = $(this).attr('id');
+	    var edited = updateQueryStringParameter(document.URL, 'status', status);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    window.location.href = edited;
+  		event.preventDefault();
+	});
+
 	$('img')
 		.error(function(){
         	$(this).attr('src', 'images/empty.png');

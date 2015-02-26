@@ -13,6 +13,11 @@
 			<div class="row">
 				@include('search/large/search-large-filter')
 				<div class="large-9 medium-8 columns">
+					<ul class="tabs">
+						<li><a class="tab-link {{$tab['all_class']}}" id="{{$tab['all_link']}}">All Cars {{$tab['all_count']}}</a></li>
+						<li><a class="tab-link {{$tab['used_class']}}" id="{{$tab['used_link']}}">Used Cars {{$tab['used_count']}}</a></li>
+						<li><a class="tab-link {{$tab['new_class']}}" id="{{$tab['new_link']}}">New Cars {{$tab['new_count']}}</a></li>
+					</ul>
 					@if(sizeof($results) > 0)
 						@foreach($results as $key=>$result)
 							@if($featured == $key)

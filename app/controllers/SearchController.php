@@ -147,6 +147,48 @@ class SearchController extends BaseController {
 			$standard = $paid - $from;
 		}
 
+		$new_status_id = '';
+		$used_status_id = '';
+		$statuses = Status::all();
+		foreach ($statuses as $status) {
+			if ($status->status == 'PreOwned') {
+				$used_status_id = $status->id;
+			} else if ($status->status == 'New') {
+				$new_status_id = $status->id;
+			}
+		}
+
+		$tab = array();
+		$tab['all_link'] = '';
+		$tab['new_link'] = $new_status_id;
+		$tab['used_link'] = $used_status_id;
+
+		$tab['all_count'] = '(' . $results['total'] . ')';
+ 		$tab['new_count'] = '(0)';
+		$tab['used_count'] = '(0)';
+
+		$status_aggs = $aggregations['status'];
+		if (array_key_exists($new_status_id, $status_aggs)) {
+			$tab['new_count'] = '(' . $status_aggs[$new_status_id]['count'] . ')';
+		}
+ 		
+		if (array_key_exists($used_status_id, $status_aggs)) {
+			$tab['used_count'] = '(' . $status_aggs[$used_status_id]['count'] . ')';
+		}
+
+		$tab['all_class'] = 'inactive';
+		$tab['new_class'] = 'inactive';
+		$tab['used_class'] = 'inactive';
+
+		$selected_status = Input::get('status', '');
+		if ($selected_status == $new_status_id) {
+			$tab['new_class'] = 'active';
+		} else if ($selected_status == $used_status_id) {
+			$tab['used_class'] = 'active';
+		} else {
+			$tab['all_class'] = 'active';
+		}
+
 		$input = Input::all();
 		$data = array(
 			'zip_code' => $zip_code,
@@ -160,7 +202,8 @@ class SearchController extends BaseController {
 			'results' => $results['results'],
 			'aggregations' => $aggregations,
 			'standard' => $standard,
-			'featured' => $featured
+			'featured' => $featured,
+			'tab' => $tab
 			);
 
 		$this->layout->contents = View::make('search/search', $data);
