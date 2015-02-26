@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{{ URL::asset('css/pikaday.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/foundation.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+	<link rel="stylesheet" href="{{ URL::asset('css/custom.css') }}">
 </head>
 <body class="{{ $body_class }}">
 	@yield('contents')
