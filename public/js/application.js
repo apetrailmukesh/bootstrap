@@ -69,6 +69,14 @@
   		event.preventDefault();
 	});
 
+	$('.distance_no_results').change(function (event) {
+		var distance = $(this).val();
+	    var edited = updateQueryStringParameter(document.URL, 'distance', distance);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    window.location.href = edited;
+  		event.preventDefault();
+	});
+
 	$('img')
 		.error(function(){
         	$(this).attr('src', 'images/empty.png');
