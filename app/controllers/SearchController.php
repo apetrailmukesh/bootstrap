@@ -163,18 +163,24 @@ class SearchController extends BaseController {
 		$tab['new_link'] = $new_status_id;
 		$tab['used_link'] = $used_status_id;
 
-		$tab['all_count'] = '(' . $results['total'] . ')';
- 		$tab['new_count'] = '(0)';
-		$tab['used_count'] = '(0)';
+		$all_count = 0;
+		$new_count = 0;
+		$used_count = 0;
 
 		$status_aggs = $aggregations['status'];
 		if (array_key_exists($new_status_id, $status_aggs)) {
-			$tab['new_count'] = '(' . $status_aggs[$new_status_id]['count'] . ')';
+			$new_count = $status_aggs[$new_status_id]['count'];
 		}
  		
 		if (array_key_exists($used_status_id, $status_aggs)) {
-			$tab['used_count'] = '(' . $status_aggs[$used_status_id]['count'] . ')';
+			$used_count = $status_aggs[$used_status_id]['count'];
 		}
+
+		$all_count = $new_count + $used_count;
+
+		$tab['all_count'] = '(' . $all_count . ')';
+ 		$tab['new_count'] = '(' . $new_count . ')';
+		$tab['used_count'] = '(' . $used_count . ')';
 
 		$tab['all_class'] = 'inactive';
 		$tab['new_class'] = 'inactive';
