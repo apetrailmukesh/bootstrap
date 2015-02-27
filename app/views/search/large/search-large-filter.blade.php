@@ -7,14 +7,18 @@
 					<ul class="side-nav">
 						@foreach($selected_filters as $filter)
 							<li>
-								<span>{{ $filter['name'] }}</span>
-								<a class="edit" data-reveal-id="{{ $filter['modal'] }}Modal">(edit)</a>
-							</li>
-							@foreach($filter['values'] as $value)
-								<li>
-									<a class="fa-icon close" id="{{ $value['index'] }}">{{ $value['title'] }}</a>
-								</li>	
-							@endforeach	
+                          		<ul>
+                            		<li>
+                            			<span>{{ $filter['name'] }}</span>
+                            			<a class="edit" data-reveal-id="{{ $filter['modal'] }}Modal">(edit)</a>
+                            		</li>
+                            		@foreach($filter['values'] as $value)
+										<li>
+											<a class="fa-icon close" id="{{ $value['index'] }}">{{ $value['title'] }}</a>
+										</li>	
+									@endforeach	
+                          		</ul>
+                        	</li>	
 						@endforeach
 					</ul>
 				</nav>
@@ -44,7 +48,6 @@
 				@include('search/large/search-large-filter-doors')
 				@include('search/large/search-large-filter-status')
 				@include('search/large/search-large-filter-photo')
-				
 			</div>
 		</div>
 	</div>

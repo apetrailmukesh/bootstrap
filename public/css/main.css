@@ -90,6 +90,36 @@ label.inline {padding-top:0.4rem}
 .left-off-canvas-menu {background:#F4F8F9}
 .move-right .exit-off-canvas {box-shadow: -4px 0 4px rgba(0, 0, 0, 0.1), 2px 0 2px rgba(0, 0, 0, 0.1)}
 .reveal-modal-bg {position:fixed}
+
+.tabs {
+	border-left:1px solid #CCD1D1;
+	border-bottom:1px solid #CCD1D1;
+	margin-top:1rem
+}
+	.tabs dd > a, .tabs .tab-title > a {
+		background-color:#F4F8F9;
+		border:1px solid #CCD1D1;
+		border-left-width:0;
+		color:#3498DB;
+		font-family: "Roboto Medium", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:1.125em;
+		margin-bottom:-1px;
+	}
+		.tabs dd > a .count, .tabs .tab-title > a .count {
+			color:#9ea7af;
+			font-size:0.875em;
+			font-weight:300;
+		}
+		.tabs dd > a:hover, .tabs .tab-title > a:hover {
+			background-color: #ECF0F1;
+			text-decoration:none 
+		}
+	.tabs dd.active a, .tabs .tab-title.active a {
+		background-color: #FFFFFF;
+		border-bottom:1px solid #fff;
+		color: #222222;
+		font-weight:500;
+	}	
 /* typeahead CSS settings */
 .twitter-typeahead {width:100%} /* force input box to be 100% width */
 .tt-dropdown-menu {
@@ -133,35 +163,56 @@ strong {font-weight:500}
 .not-visible {display:none}
 .column.no-left-pad, .columns.no-left-pad {padding-left:0}
 /* logo/tagline styles */
-
-.logo { cursor: pointer; cursor: hand; }
-.number-column {text-align: center !important; float: none !important;}
-
-.logo span:nth-child(1) {color:#98B548}
-.logo span:nth-child(2) {
-	color:#3498DB;
-	font-weight:300;
-}
-.logo span:nth-child(3) {
-	color:#3498DB;
-	font-size:0.5em;
-	font-weight:100
-}
+.logo {margin:0}
+	.logo span:nth-child(1) {color:#98B548}
+	.logo span:nth-child(2) {
+		color:#3498DB;
+		font-weight:300;
+	}
+	.logo span:nth-child(3) {
+		color:#3498DB;
+		font-size:0.593em;
+		font-weight:100
+	}
+	.logo:before {
+		background:url(../images/fido.svg) no-repeat;
+		content:""
+	}		
 /* home page logo font size and positioning */
 .home .logo {
 	font-size:2.75rem;
-	margin:2rem 0 0 0;
+	margin-top:2rem;
+	position:relative;
 }
+	.home .logo:before {
+		display:block;
+		height:112px;
+		margin:0 auto;
+		padding-right:2em;
+		position:relative;
+		width:78px
+	}
 /* home page search options */
 .search-options {
 	font-size:0.875rem;
 	margin-top:3rem;
 }
 /* srp page */
+.srp .logo {padding-top:0.3em}
+	.srp .logo:before {
+		display:inline-block;
+		height: 91px;
+		margin-right:0.25em;
+		margin-top:-0.35em;
+		vertical-align:middle;
+		width: 62px
+	}
+.logo-link:hover, .logo-link:focus {text-decoration:none}
 .search-bkgrd {
 	background:#F4F8F9;
 	padding-top:1.5em
 }
+.mobile-search-box {margin-top:1em}
 .subhead {margin:1.5rem 0 0 0}
 select.small {
 	font-size:1em;
@@ -198,14 +249,27 @@ section[role="main"] > .row {margin-top:-1rem}
 	}
 	.vehicle .detailed-description, .fa-icon.email-alerts + .secondary-text {font-size:0.857rem}
 	.vehicle .fa-icon.save {margin-right:1.5rem}
-.pagination {margin:2rem 0 4rem 0}
+.pagination {margin:2rem 0}
 .sidebar {
 	background:#F4F8F9;
+	margin-top:1rem;
 	padding:0 1.25rem
 }
-	.sidebar h3 {padding-top:1.25rem}
+	.sidebar > div:first-child > h3 {padding-top:1.25rem}
+		.sidebar h3 {margin:0}
 	.sidebar p {line-height:1.2}
+	.filters-selected {padding-bottom:1rem}
 	.fa-icon.email-alerts {display:block}
+	/* selected section */
+	.side-nav li > ul {
+		list-style:none;
+		margin-left:0
+	}
+		.side-nav li > ul span {font-weight:500}
+		.side-nav li > ul .edit {
+			display:inline-block;
+			font-size:0.750em
+		}
 /* filter modals */
 .filter-modal label {font-weight:300}
 .filter-modal p {margin-bottom:0.5rem}
@@ -223,10 +287,15 @@ section[role="main"] > .row {margin-top:-1rem}
 	margin-left:1.75rem;
 	font-weight: 300;
 }
+/* no results page */
+.no-results {padding-top:1.5rem}
+	.no-results h1 {margin-bottom:0}
+	.no-results p {margin-bottom:0.75em}
 /* footer section */
 footer {
 	border-top:1px solid #DEE2E2;
 	font-size:0.857em;
+	margin-top:2rem;
 	padding:1.5em 0
 }
 	footer span {display:block}
@@ -290,8 +359,13 @@ footer {
 		margin-top:-1rem;
 		padding-left:0
 	}
+	.home .logo:before {padding-right:2.35em}
 	/* srp overrides */
-	.srp .logo {margin-top:0}
+	.tabs dd > a, .tabs .tab-title > a {padding:0.75rem 1.9rem}
+	.srp .logo:before {
+		height:52px;
+		width:36px
+	}
 	.search-bkgrd {padding-top:0em}
 	section[role="main"] header {margin-top:1.5rem}
 	section[role="main"] h1 {
@@ -316,11 +390,13 @@ footer {
 		ul.pagination li a, ul.pagination li button {padding:0.0625rem 0.5rem}
 	.mobile-sort p {margin-bottom:0.75rem}
 	.sidebar h3 {padding-top:0.5rem}
-	.side-nav li a:not(.button) {padding:0}
+	.side-nav li a:not(.button) {padding:0.25em 0}
 	.reveal-modal .close-reveal-modal.cancel, dialog .close-reveal-modal.cancel {
 		display:block;
 		margin-left:0
 	}
+	/* no results overrides */
+	.no-results h1 {font-size:1.5rem !important}
 }
 @media only screen and (min-width: 40.063em) { /* MEDIUM AND UP */
 	/* home page overrides */
@@ -332,9 +408,10 @@ footer {
 	.contain-to-grid .top-bar {max-width:75em}
 		.top-bar, .top-bar-section ul {height:1.875rem !important}
 	/* srp overrides */
+	.tabs dd > a .hide-for-small-only, .tabs .tab-title > a .hide-for-small-only {display:inline !important}
 	.srp .logo {
 		font-size:2.7rem;
-		margin-top:0rem
+		margin-top:-0.5em
 	}
 	/* make the footer stick to the bottom of the window on desktop applications */
 	.home footer {
@@ -343,11 +420,16 @@ footer {
 		width:100%
 	}
 }
+@media only screen and (min-width:40.063em) and (max-width: 64.063em) { /* MEDIUM ONLY */
+	/* srp overrides */
+	.srp .logo {padding-top:0.5em}
+		.srp .logo:before {margin-top:-0.5em}
+}
 @media only screen and (min-width:64.063em) { /* LARGE AND UP */
 	/* srp overrides */
 	.srp .logo {
 		font-size:3.125rem;
-		margin-top:-0.45rem
+		margin-top:-0.45em;
 	}
 }
 

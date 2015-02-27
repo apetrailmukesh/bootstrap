@@ -1,12 +1,12 @@
 <div class="hide-for-small search-bkgrd"> <!-- show for everything 640px and above -->
 	<div class="row">
-		<div class="small-3 columns">
+		<div class="small-4 columns">
 			<h1 class="logo">
-				<span>site</span><span>name</span><span>.com</span>
+				<span>car</span><span>fetch</span><span>.com</span>
 			</h1>
 		</div>
 		<form id="web_search" class="results-search-form">
-			<div class="small-9 columns">
+			<div class="small-8 columns">
 				<div class="row collapse">
 					<div class="small-10 medium-11 large-11 columns">
 						{{ Form::text('search_text', $search_text,  array('placeholder'=>'Enter make, model, or style', 'class' => 'vehicle-search')) }}
@@ -23,14 +23,14 @@
 	<div class="row">
 		<div class="small-10 columns">
 			<h1 class="logo">
-				<span>site</span><span>name</span><span>.com</span>
+				<span>car</span><span>fetch</span><span>.com</span>
 			</h1>
 		</div>
 		<div class="small-2 text-right columns">
-			<span class="fa-icon search" id="open-mobile-search"></span>
+			<span class="fa-icon search noSwipe" id="open-mobile-search"></span>
 		</div>
 	</div>
-	<div class="row not-visible" id="mobile-search-box">
+	<div class="row not-visible mobile-search-box" id="mobile-search-box">
 		<form id="mobile_search" class="results-search-form">
 			<div class="small-12 column small-centered">
 				<div class="row collapse">

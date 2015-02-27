@@ -25,6 +25,7 @@
 	<script src="{{ URL::asset('js/foundation.min.js') }}"></script>
 	<script src="{{ URL::asset('js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ URL::asset('js/jquery.simplePagination.js') }}"></script>
+	<script src="{{ URL::asset('js/jquery.touchSwipe.min.js') }}"></script>
 	<script src="{{ URL::asset('js/moment.min.js') }}"></script>
 	<script src="{{ URL::asset('js/pikaday.js') }}"></script>
 	<script src="{{ URL::asset('js/main.js') }}"></script>

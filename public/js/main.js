@@ -32,3 +32,17 @@ jqNC(document).ready(function() {
 		source: vehicleMatcher()
 	});
 });
+
+if (Modernizr.mq('only screen and (max-width:40em)')) {
+  jqNC(document).swipe({
+    swipeLeft: function (event, direction, distance, duration, fingerCount, fingerData) {
+      jqNC('.off-canvas-wrap').removeClass('move-right');
+    },
+    threshold: 0
+  });
+  jqNC(".exit-off-canvas").swipe({
+    tap: function(event, direction, distance, duration, fingerCount, fingerData) {
+      jqNC('.off-canvas-wrap').removeClass('move-right');
+    }
+  })
+}

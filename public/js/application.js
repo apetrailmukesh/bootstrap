@@ -77,7 +77,7 @@
   		event.preventDefault();
 	});
 
-	$('.tab-link').click(function (event) {
+	$('.tab-title').click(function (event) {
 		var status = $(this).attr('id');
 	    var edited = updateQueryStringParameter(document.URL, 'status', status);
 	    edited = updateQueryStringParameter(edited, 'page', '1');

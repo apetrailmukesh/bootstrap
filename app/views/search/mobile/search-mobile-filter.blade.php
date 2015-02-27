@@ -21,14 +21,18 @@
 					<ul class="side-nav">
 						@foreach($selected_filters as $filter)
 							<li>
-								<span>{{ $filter['name'] }}</span>
-								<a class="edit" data-reveal-id="mobile{{ ucwords($filter['modal']) }}Modal">(edit)</a>
+								<ul>
+									<li>
+										<span>{{ $filter['name'] }}</span>
+										<a class="edit" data-reveal-id="mobile{{ ucwords($filter['modal']) }}Modal">(edit)</a>
+									</li>
+									@foreach($filter['values'] as $value)
+										<li>
+											<a class="fa-icon close" id="mobile-{{ $value['index'] }}">{{ $value['title'] }}</a>
+										</li>	
+									@endforeach
+								</ul>
 							</li>
-							@foreach($filter['values'] as $value)
-								<li>
-									<a class="fa-icon close" id="mobile-{{ $value['index'] }}">{{ $value['title'] }}</a>
-								</li>	
-							@endforeach	
 						@endforeach
 					</ul>
 				</nav>
