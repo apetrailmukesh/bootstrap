@@ -67,25 +67,26 @@ class SearchController extends BaseController {
 		$model_filter = Input::get('model', '');
 		$models = explode("-", $model_filter);
 
-		if (sizeof($makes) > 0) {
-			foreach ($makes as $make) {
-				$entities = Make::where('id' , '=', $make);
-				if ($entities->count()) {
-					$entity = $entities->first();
-					$title = $title . $entity->make . ' ';
-				}
+		foreach ($makes as $make) {
+			$entities = Make::where('id' , '=', $make);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$title = $title . $entity->make . ' ';
 			}
 		}
 
-		if (sizeof($models) > 0) {
-			foreach ($models as $model) {
-				$entities = Model::where('id' , '=', $model);
-				if ($entities->count()) {
-					$entity = $entities->first();
-					$title = $title . $entity->model . ' - ';
-				}
-			}
+		$models_available = false;
+		foreach ($models as $model) {
+			$entities = Model::where('id' , '=', $model);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$title = $title . $entity->model . ' - ';
 
+				$models_available = true;
+			}
+		}
+
+		if ($models_available == true) {
 			$title = substr($title, 0, -2);
 		}
 
