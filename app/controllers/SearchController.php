@@ -605,7 +605,6 @@ class SearchController extends BaseController {
 		$filters = $this->utility_drive->findSelectedFilter($filters, $aggregations, Input::get('drive', ''));
 		$filters = $this->utility_fuel->findSelectedFilter($filters, $aggregations, Input::get('fuel', ''));
 		$filters = $this->utility_doors->findSelectedFilter($filters, $aggregations, Input::get('doors', ''));
-		$filters = $this->utility_status->findSelectedFilter($filters, $aggregations, Input::get('status', ''));
 		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
 
 		return $filters;
@@ -629,7 +628,6 @@ class SearchController extends BaseController {
 		if (empty(Input::get('drive', ''))) array_push($remaining, array('name' => "Drivetrain", "modal" => "drive"));
 		if (empty(Input::get('fuel', ''))) array_push($remaining, array('name' => "Fuel", "modal" => "fuel"));
 		if (empty(Input::get('doors', ''))) array_push($remaining, array('name' => "Door Count", "modal" => "doors"));
-		if (empty(Input::get('status', ''))) array_push($remaining, array('name' => "Condition", "modal" => "status"));
 		if (empty(Input::get('photo', ''))) array_push($remaining, array('name' => "Photos", "modal" => "photo"));
 
 		return $remaining;
