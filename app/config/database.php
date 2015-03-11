@@ -50,7 +50,7 @@ return array(
 			'host'      => '127.0.0.1',
 			'database'  => 'automotive-search-engine',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'd3v1ls',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
