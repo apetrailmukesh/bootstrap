@@ -24,6 +24,7 @@ class AdvancedController extends BaseController {
 			'zip_code' => $zip_code,
 			'distance' => $distance,
 			'status' => $this->getStatus(),
+			'makes' => $this->getPropertiesList(Make::orderBy('make')->get(), 'make'),
 			'bodies' => $this->getPropertiesList(Body::orderBy('body')->get(), 'body'),
 			'transmissions' => $this->getPropertiesList(Transmission::orderBy('transmission')->get(), 'transmission'),
 			'drives' => $this->getPropertiesList(Drive::orderBy('drive')->get(), 'drive'),

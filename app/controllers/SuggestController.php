@@ -16,6 +16,18 @@ class SuggestController extends BaseController {
 		return Response::json($data);
 	}
 
+	public function model()
+	{
+		$data = array();
+		$make = Input::get('make', '');
+
+		$models = DB::select( DB::raw("SELECT * FROM model WHERE id in (SELECT model FROM search_suggestion WHERE make = :make)"), array(
+   			'make' => $make
+ 		));
+
+		return Response::json($models);
+	}
+
 	public function makemodel()
 	{
 		$query = Input::get('query', '');

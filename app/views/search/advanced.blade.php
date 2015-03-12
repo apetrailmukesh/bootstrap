@@ -56,13 +56,16 @@
 				</div>
 				<div class="row">
 					<div class="small-12 medium-3 large-2 columns">
-						<select>
-							<option value="0">Any Make</option>
+						<select id="advanced-make">
+							<option value="">Any Make</option>
+							@foreach($makes as $make)
+								<option value="{{ $make['class'] }}">{{ $make['name']}}</option>
+							@endforeach
 						</select>
 					</div>
 					<div class="small-12 medium-5 large-4 columns end">
-						<select>
-							<option value="0">Any Model</option>
+						<select id="advanced-model">
+							<option value="">Any Model</option>
 						</select>
 					</div>
 				</div>

@@ -29,4 +29,5 @@ Route::post('/admin/dealers/edit/{id}', array('as' => 'post.admin.dealers.edit',
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');
 
 Route::get('/suggest/vehicle', array('as' => 'get.suggest.vehicle', 'uses' => 'SuggestController@vehicle'));
+Route::get('/suggest/model', array('as' => 'get.suggest.model', 'uses' => 'SuggestController@model'));
 Route::get('/suggest/makemodel', array('as' => 'get.suggest.makemodel', 'uses' => 'SuggestController@makemodel'));

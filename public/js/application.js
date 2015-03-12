@@ -95,6 +95,16 @@
 
 		var distance = $('#advanced-location').find("select[name='distance']").val();
 		edited = updateQueryStringParameter(edited, 'distance', distance);
+
+		var make = $('#advanced-make').val();
+		if (make !== undefined) {
+			edited = updateQueryStringParameter(edited, 'make', make);
+		}
+
+		var model = $('#advanced-model').val();
+		if (model !== undefined) {
+			edited = updateQueryStringParameter(edited, 'model', model);
+		}
   		
   		var statusValues = $('#advanced-status').find('input:checked').map(function() {
 			return $(this).attr('class');
@@ -143,6 +153,23 @@
 
   		window.location.href = edited;
   		event.preventDefault();
+	});
+
+	$('#advanced-make').change(function (event) {
+	    var make = this.value;
+	    
+	    $.ajax({
+			type: "GET",
+			url: "/suggest/model",
+			data: {'make' : make},
+			dataType: "json",
+			success: function (data) {
+				$('#advanced-model').find('option').remove().end().append($("<option></option>").attr("value", '').text('Any Model'));
+				$.each(data, function(key, value) {   
+				    $('#advanced-model').append($("<option></option>").attr("value", value.id).text(value.model)); 
+				});
+			}
+		});
 	});
 
 	$('img')
