@@ -24,7 +24,14 @@ class AdvancedController extends BaseController {
 			'zip_code' => $zip_code,
 			'distance' => $distance,
 			'status' => $this->getStatus(),
-			'bodies' => $this->getBodyStyles()
+			'bodies' => $this->getPropertiesList(Body::orderBy('body')->get(), 'body'),
+			'transmissions' => $this->getPropertiesList(Transmission::orderBy('transmission')->get(), 'transmission'),
+			'drives' => $this->getPropertiesList(Drive::orderBy('drive')->get(), 'drive'),
+			'interiors' => $this->getPropertiesList(Interior::orderBy('interior', 'DESC')->take(10)->get(), 'interior'),
+			'exteriors' => $this->getPropertiesList(Exterior::orderBy('exterior', 'DESC')->take(10)->get(), 'exterior'),
+			'fuels' => $this->getPropertiesList(Fuel::orderBy('fuel')->get(), 'fuel'),
+			'doors_count' => $this->getDoorsCounts(),
+			'cylinders_count' => $this->getCylindersCounts()
 		);
 
 		$this->layout->contents = View::make('search/advanced', $data);
@@ -49,27 +56,48 @@ class AdvancedController extends BaseController {
 		return $status;
 	}
 
-	public function getBodyStyles() {
-		$bodies = array();
+	public function getDoorsCounts() {
+		$entities = array();
 
-		$body_styles = Body::orderBy('body')->get();
-		foreach ($body_styles as $body_style) {
-			$body = array();
-			$body['id'] = 'advanced-body-' . $body_style->id;
-			$body['class'] = $body_style->id;
-			$body['name'] = $body_style->body;
-			$body['end'] = '';
-			array_push($bodies, $body);
+		$doors = Vehicle::distinct()->select('doors')->orderBy('doors')->where('doors', '>', 0)->get();
+		foreach ($doors as $door) {
+			array_push($entities, (object)['id' => $door->doors, 'doors' => $door->doors . ' Doors']);
 		}
 
-		if(!empty($bodies)) {
-			end($bodies);
-			$key = key($bodies);
-			$bodies[$key]['end'] = 'end';
-			reset($bodies);
+		return $this->getPropertiesList($entities, 'doors');
+	}
+
+	public function getCylindersCounts() {
+		$entities = array();
+
+		$cylinders = Vehicle::distinct()->select('cylinders')->orderBy('cylinders')->where('cylinders', '>', 0)->get();
+		foreach ($cylinders as $cylinder) {
+			array_push($entities, (object)['id' => $cylinder->cylinders, 'cylinders' => $cylinder->cylinders . ' Cylinders']);
 		}
 
-		return $bodies;
+		return $this->getPropertiesList($entities, 'cylinders');
+	}
+
+	public function getPropertiesList($entities, $column) {
+		$properties = array();
+
+		foreach ($entities as $entity) {
+			$property = array();
+			$property['id'] = 'advanced-' . $column . '-' . $entity->id;
+			$property['class'] = $entity->id;
+			$property['name'] = $entity->$column;
+			$property['end'] = '';
+			array_push($properties, $property);
+		}
+
+		if(!empty($properties)) {
+			end($properties);
+			$key = key($properties);
+			$properties[$key]['end'] = 'end';
+			reset($properties);
+		}
+
+		return $properties;
 	}
 
 	public function findLocation()

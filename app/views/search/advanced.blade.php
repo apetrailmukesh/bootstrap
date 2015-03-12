@@ -123,49 +123,15 @@
 						<legend>Exterior Color</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-exterior">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorAny" checked><label for="extcolorAny">Any Color</label>
+						<input type="checkbox" id="advanced-exterior-any" value="0" checked><label for="advanced-exterior-any">Any Exterior Color</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorBeige"><label for="extcolorBeige">Beige</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorBlack"><label for="extcolorBlack">Black</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorBlue"><label for="extcolorBlue">Blue</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorBrown"><label for="extcolorBrown">Brown</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorGold"><label for="extcolorGold">Gold</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorGray"><label for="extcolorGray">Gray</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorGreen"><label for="extcolorGreen">Green</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorOrange"><label for="extcolorOrange">Orange</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorPurple"><label for="extcolorPurple">Purple</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorRed"><label for="extcolorRed">Red</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorSilver"><label for="extcolorSilver">Silver</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="extcolorWhite"><label for="extcolorWhite">White</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="extcolorYellow"><label for="extcolorYellow">Yellow</label>
-					</div>
+					@foreach($exteriors as $exterior)
+						<div class="small-12 medium-3 large-2 columns {{$exterior['end']}}">
+							<input type="checkbox" id="{{$exterior['id']}}" class="{{$exterior['class']}}"><label for="{{$exterior['id']}}">{{$exterior['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -174,43 +140,15 @@
 						<legend>Interior Color</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-interior">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorAny" checked><label for="intcolorAny">Any Color</label>
+						<input type="checkbox" id="advanced-interior-any" value="0" checked><label for="advanced-interior-any">Any Interior Color</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorBeige"><label for="intcolorBeige">Beige</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorBlack"><label for="intcolorBlack">Black</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorBlue"><label for="intcolorBlue">Blue</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorBrown"><label for="intcolorBrown">Brown</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorGray"><label for="intcolorGray">Gray</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorGreen"><label for="intcolorGreen">Green</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorOrange"><label for="intcolorOrange">Orange</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorRed"><label for="intcolorRed">Red</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorSilver"><label for="intcolorSilver">Silver</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorWhite"><label for="intcolorWhite">White</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="intcolorYellow"><label for="intcolorYellow">Yellow</label>
-					</div>
+					@foreach($interiors as $interior)
+						<div class="small-12 medium-3 large-2 columns {{$interior['end']}}">
+							<input type="checkbox" id="{{$interior['id']}}" class="{{$interior['class']}}"><label for="{{$interior['id']}}">{{$interior['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -219,31 +157,15 @@
 						<legend>Engine</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-cylinders">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engineAny" checked><label for="engineAny">Any Engine</label>
+						<input type="checkbox" id="advanced-cylinders-any" value="0" checked><label for="advanced-cylinders-any">Any Engine</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine3Cyl"><label for="engine3Cyl">3 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine4Cyl"><label for="engine4Cyl">4 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine5Cyl"><label for="engine5Cyl">5 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine6Cyl"><label for="engine6Cyl">6 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine8Cyl"><label for="engine8Cyl">8 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="engine10Cyl"><label for="engine10Cyl">10 Cylinders</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="engine12Cyl"><label for="engine12Cyl">12 Cylinders</label>
-					</div>
+					@foreach($cylinders_count as $cylinders)
+						<div class="small-12 medium-3 large-2 columns {{$cylinders['end']}}">
+							<input type="checkbox" id="{{$cylinders['id']}}" class="{{$cylinders['class']}}"><label for="{{$cylinders['id']}}">{{$cylinders['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -252,16 +174,15 @@
 						<legend>Transmission</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-transmission">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="transAny" checked><label for="transAny">Any Trans.</label>
+						<input type="checkbox" id="advanced-transmission-any" value="0" checked><label for="advanced-transmission-any">Any Transmission</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="transAuto"><label for="transAuto">Automatic</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="transMan"><label for="transMan">Manual</label>
-					</div>
+					@foreach($transmissions as $transmission)
+						<div class="small-12 medium-3 large-2 columns {{$transmission['end']}}">
+							<input type="checkbox" id="{{$transmission['id']}}" class="{{$transmission['class']}}"><label for="{{$transmission['id']}}">{{$transmission['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -270,22 +191,15 @@
 						<legend>Drivetrain</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-drive">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="drivetrainAny" checked><label for="drivetrainAny">Any Drivetrain</label>
+						<input type="checkbox" id="advanced-drive-any" value="0" checked><label for="advanced-drive-any">Any Drivetrain</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="drivetrain4WD"><label for="drivetrain4WD">4WD</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="drivetrainAWD"><label for="drivetrainAWD">AWD</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="drivetrainFWD"><label for="drivetrainFWD">FWD</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="drivetrainRWD"><label for="drivetrainRWD">RWD</label>
-					</div>
+					@foreach($drives as $drive)
+						<div class="small-12 medium-3 large-2 columns {{$drive['end']}}">
+							<input type="checkbox" id="{{$drive['id']}}" class="{{$drive['class']}}"><label for="{{$drive['id']}}">{{$drive['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -294,25 +208,15 @@
 						<legend>Fuel Type</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-fuel">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="fuelTypeAny" checked><label for="fuelTypeAny">Any Fuel Type</label>
+						<input type="checkbox" id="advanced-fuel-any" value="0" checked><label for="advanced-fuel-any">Any Fuel Type</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="fuelTypeDiesel"><label for="fuelTypeDiesel">Diesel</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="fuelTypeE85"><label for="fuelTypeE85">E-85/Gasoline</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="fuelTypeElectric"><label for="fuelTypeElectric">Electric</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="fuelTypeGas"><label for="fuelTypeGas">Gasoline</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="fuelTypeHybrid"><label for="fuelTypeHybrid">Hybrid/Gasoline</label>
-					</div>
+					@foreach($fuels as $fuel)
+						<div class="small-12 medium-3 large-2 columns {{$fuel['end']}}">
+							<input type="checkbox" id="{{$fuel['id']}}" class="{{$fuel['class']}}"><label for="{{$fuel['id']}}">{{$fuel['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>
@@ -321,22 +225,15 @@
 						<legend>Door Count</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-doors">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="doorCountAny" checked><label for="doorCountAny">Any Door Count</label>
+						<input type="checkbox" id="advanced-doors-any" value="0" checked><label for="advanced-doors-any">Any Door Count</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="doorCount2"><label for="doorCountAny">2 Doors</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="doorCount3"><label for="doorCountAny">3 Doors</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="doorCount4"><label for="doorCountAny">4 Doors</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="doorCount5"><label for="doorCountAny">5 Doors</label>
-					</div>
+					@foreach($doors_count as $doors)
+						<div class="small-12 medium-3 large-2 columns {{$doors['end']}}">
+							<input type="checkbox" id="{{$doors['id']}}" class="{{$doors['class']}}"><label for="{{$doors['id']}}">{{$doors['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>

@@ -106,6 +106,41 @@
 		}).get();
 		edited = updateQueryStringParameter(edited, 'body', bodyValues.join('-'));
 
+		var interiorValues = $('#advanced-interior').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'interior', interiorValues.join('-'));
+
+		var exteriorValues = $('#advanced-exterior').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'exterior', exteriorValues.join('-'));
+
+		var fuelValues = $('#advanced-fuel').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'fuel', fuelValues.join('-'));
+
+		var transmissionValues = $('#advanced-transmission').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'transmission', transmissionValues.join('-'));
+
+		var driveValues = $('#advanced-drive').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'drive', driveValues.join('-'));
+
+		var doorsValues = $('#advanced-doors').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'doors', doorsValues.join('-'));
+
+		var cylindersValues = $('#advanced-cylinders').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'cylinders', cylindersValues.join('-'));
+
   		window.location.href = edited;
   		event.preventDefault();
 	});
@@ -353,6 +388,13 @@
 
 	applyAdvancedFilterFunctions('status', 'radio');
 	applyAdvancedFilterFunctions('body', 'checkbox');
+	applyAdvancedFilterFunctions('interior', 'checkbox');
+	applyAdvancedFilterFunctions('exterior', 'checkbox');
+	applyAdvancedFilterFunctions('transmission', 'checkbox');
+	applyAdvancedFilterFunctions('drive', 'checkbox');
+	applyAdvancedFilterFunctions('doors', 'checkbox');
+	applyAdvancedFilterFunctions('cylinders', 'checkbox');
+	applyAdvancedFilterFunctions('fuel', 'checkbox');
 
 	function applyAdvancedFilterFunctions(div, type) {
 		if (type == 'checkbox') {
