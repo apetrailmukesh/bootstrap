@@ -313,7 +313,6 @@
 	applyFilterFunctions('cylinders', 'Cylinders', 'checkbox');
 	applyFilterFunctions('fuel', 'Fuel', 'checkbox');
 	applyFilterFunctions('drive', 'Drive', 'checkbox');
-
 	applyFilterFunctions('mileage', 'Mileage', 'radio');
 
 	function applyFilterFunctions(large, mobile, type) {
@@ -350,6 +349,21 @@
 		$('[id*="mobile-' + large + '-remove-"]').click(function (event) {
 			filterRemoved(event.target.id.replace('mobile-' + large + '-remove-', ''), large);
 		});
+	}
+
+	applyAdvancedFilterFunctions('status', 'radio');
+	applyAdvancedFilterFunctions('body', 'checkbox');
+
+	function applyAdvancedFilterFunctions(div, type) {
+		if (type == 'checkbox') {
+			$('div#advanced-' + div + ' input:checkbox').change(function (event) {
+				filterCheckboxChanged($('div#advanced-' + div), $(this));
+			});
+		} else if (type == 'radio') {
+			$('div#advanced-' + div + ' input:radio').change(function (event) {
+				filterRadioChanged($('div#advanced-' + div), $(this));
+			});
+		}
 	}
 
 	function filterCheckboxChanged(div, checkbox) {

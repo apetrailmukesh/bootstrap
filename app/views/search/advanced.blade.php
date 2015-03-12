@@ -21,7 +21,7 @@
 				</div>
 				<div class="row" id="advanced-status">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="radio" name="condition" id="advanced-status-any" checked><label for="advanced-status-any">Any Condition</label>
+						<input type="radio" name="condition" id="advanced-status-any" value="0" checked><label for="advanced-status-any">Any Condition</label>
 					</div>
 					<div class="small-12 medium-3 large-2 columns">
 						<input type="radio" name="condition" id="advanced-status-new" class="{{$status['new_id']}}"><label for="advanced-status-new">New</label>
@@ -39,7 +39,7 @@
 				</div>
 				<div class="row" id="advanced-body">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="advanced-body-any" checked><label for="advanced-body-any">Any Body Style</label>
+						<input type="checkbox" id="advanced-body-any" value="0" checked><label for="advanced-body-any">Any Body Style</label>
 					</div>
 					@foreach($bodies as $body)
 						<div class="small-12 medium-3 large-2 columns {{$body['end']}}">
