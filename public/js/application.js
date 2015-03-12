@@ -85,6 +85,26 @@
   		event.preventDefault();
 	});
 
+	$('#advanced-search-submit').click(function (event) {
+		var edited = location.protocol + '//' + location.hostname + '/search';
+		edited = updateQueryStringParameter(edited, 'page', '1');
+  		edited = updateQueryStringParameter(edited, 'sort', 'price-1');
+
+  		var zip_code = $('#advanced-location').find("input[name='zip_code']").val();
+		edited = updateQueryStringParameter(edited, 'zip_code', zip_code);
+
+		var distance = $('#advanced-location').find("select[name='distance']").val();
+		edited = updateQueryStringParameter(edited, 'distance', distance);
+  		
+  		var statusValues = $('#advanced-status').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'status', statusValues.join('-'));
+
+  		window.location.href = edited;
+  		event.preventDefault();
+	});
+
 	$('img')
 		.error(function(){
         	$(this).attr('src', 'images/empty.png');

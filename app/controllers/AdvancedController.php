@@ -4,46 +4,6 @@ class AdvancedController extends BaseController {
 
 	protected $layout = 'base';
 
-	protected $utility_make;
-	protected $utility_model;
-	protected $utility_price;
-	protected $utility_mileage;
-	protected $utility_feature;
-	protected $utility_transmission;
-	protected $utility_dealer;
-	protected $utility_photo;
-	protected $utility_year;
-	protected $utility_status;
-	protected $utility_body;
-	protected $utility_certified;
-	protected $utility_interior;
-	protected $utility_exterior;
-	protected $utility_doors;
-	protected $utility_cylinders;
-	protected $utility_fuel;
-	protected $utility_drive;
-
-	public function __construct() {
-		$this->utility_make = new UtilityMake();
-		$this->utility_model = new UtilityModel();
-    	$this->utility_price = new UtilityPrice();
-    	$this->utility_mileage = new UtilityMileage();
-    	$this->utility_feature = new UtilityFeature();
-    	$this->utility_transmission = new UtilityTransmission();
-    	$this->utility_dealer = new UtilityDealer();
-    	$this->utility_photo = new UtilityPhoto();
-    	$this->utility_year = new UtilityYear();
-    	$this->utility_status = new UtilityStatus();
-    	$this->utility_certified = new UtilityCertified();
-    	$this->utility_exterior = new UtilityExterior();
-    	$this->utility_interior = new UtilityInterior();
-    	$this->utility_drive = new UtilityDrive();
-    	$this->utility_fuel = new UtilityFuel();
-    	$this->utility_doors = new UtilityDoors();
-    	$this->utility_cylinders = new UtilityCylinders();
-    	$this->utility_body = new UtilityBody();
-  	}
-
 	public function index()
 	{
 		$this->layout->body_class = 'srp';
@@ -60,10 +20,32 @@ class AdvancedController extends BaseController {
 		Session::put('distance', $distance);
 
 		$data = array(
-			'search_text' => ''
+			'search_text' => '',
+			'zip_code' => $zip_code,
+			'distance' => $distance,
+			'status' => $this->getStatus()
 		);
 
 		$this->layout->contents = View::make('search/advanced', $data);
+	}
+
+	public function getStatus() {
+		$new_status_id = '';
+		$used_status_id = '';
+		$statuses = Status::all();
+		foreach ($statuses as $status) {
+			if ($status->status == 'PreOwned') {
+				$used_status_id = $status->id;
+			} else if ($status->status == 'New') {
+				$new_status_id = $status->id;
+			}
+		}
+
+		$status = array();
+		$status['new_id'] = $new_status_id;
+		$status['used_id'] = $used_status_id;
+
+		return $status;
 	}
 
 	public function findLocation()
