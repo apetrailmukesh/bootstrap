@@ -101,6 +101,11 @@
 		}).get();
 		edited = updateQueryStringParameter(edited, 'status', statusValues.join('-'));
 
+		var bodyValues = $('#advanced-body').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'body', bodyValues.join('-'));
+
   		window.location.href = edited;
   		event.preventDefault();
 	});

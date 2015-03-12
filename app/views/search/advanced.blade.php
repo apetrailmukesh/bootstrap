@@ -37,37 +37,15 @@
 						<legend>Body Style</legend>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="advanced-body">
 					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleAny" checked><label for="bodystyleAny">Any Body Style</label>
+						<input type="checkbox" id="advanced-body-any" checked><label for="advanced-body-any">Any Body Style</label>
 					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleConvertible"><label for="bodystyleConvertible">Convertible</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleCoupe"><label for="bodystyleCoupe">Coupe</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleVan"><label for="bodystyleVan">Full-size Van</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleHatchback"><label for="bodystyleHatchback">Hatchback</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleMinivan"><label for="bodystyleMinivan">Minivan</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleSUV"><label for="bodystyleSUV">SUV</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleSedan"><label for="bodystyleSedan">Sedan</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns">
-						<input type="checkbox" id="bodystyleTruck"><label for="bodystyleTruck">Truck</label>
-					</div>
-					<div class="small-12 medium-3 large-2 columns end">
-						<input type="checkbox" id="bodystyleWagon"><label for="bodystyleWagon">Wagon</label>
-					</div>
+					@foreach($bodies as $body)
+						<div class="small-12 medium-3 large-2 columns {{$body['end']}}">
+							<input type="checkbox" id="{{$body['id']}}" class="{{$body['class']}}"><label for="{{$body['id']}}">{{$body['name']}}</label>
+						</div>
+					@endforeach
 				</div>
 			</fieldset>
 			<fieldset>

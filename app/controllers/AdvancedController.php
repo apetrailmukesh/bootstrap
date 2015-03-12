@@ -23,7 +23,8 @@ class AdvancedController extends BaseController {
 			'search_text' => '',
 			'zip_code' => $zip_code,
 			'distance' => $distance,
-			'status' => $this->getStatus()
+			'status' => $this->getStatus(),
+			'bodies' => $this->getBodyStyles()
 		);
 
 		$this->layout->contents = View::make('search/advanced', $data);
@@ -46,6 +47,29 @@ class AdvancedController extends BaseController {
 		$status['used_id'] = $used_status_id;
 
 		return $status;
+	}
+
+	public function getBodyStyles() {
+		$bodies = array();
+
+		$body_styles = Body::orderBy('body')->get();
+		foreach ($body_styles as $body_style) {
+			$body = array();
+			$body['id'] = 'advanced-body-' . $body_style->id;
+			$body['class'] = $body_style->id;
+			$body['name'] = $body_style->body;
+			$body['end'] = '';
+			array_push($bodies, $body);
+		}
+
+		if(!empty($bodies)) {
+			end($bodies);
+			$key = key($bodies);
+			$bodies[$key]['end'] = 'end';
+			reset($bodies);
+		}
+
+		return $bodies;
 	}
 
 	public function findLocation()
