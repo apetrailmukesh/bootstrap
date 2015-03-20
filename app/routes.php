@@ -5,6 +5,14 @@ Route::get('/search', array('as' => 'get.search', 'uses' => 'SearchController@in
 Route::get('/advanced', array('as' => 'get.advanced', 'uses' => 'AdvancedController@index'));
 Route::get('/vehicle', array('as' => 'get.vehicle', 'uses' => 'VehicleController@index'));
 
+Route::get('/browse/make', array('as' => 'get.browse.make', 'uses' => 'BrowseController@make'));
+Route::get('/browse/make/model/{id}', array('as' => 'get.browse.make.model', 'uses' => 'BrowseController@makeModel'));
+Route::get('/browse/make/model/state/{id}', array('as' => 'get.browse.make.model.state', 'uses' => 'BrowseController@makeModelState'));
+Route::get('/browse/make/model/state/city/{id}', array('as' => 'get.browse.make.model.state.city', 'uses' => 'BrowseController@makeModelStateCity'));
+
+Route::get('/browse/body', array('as' => 'get.browse.body', 'uses' => 'BrowseController@body'));
+Route::get('/browse/location', array('as' => 'get.browse.location', 'uses' => 'BrowseController@location'));
+
 Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@change'));
 
 Route::get('/user/login', array('as' => 'get.user.login', 'uses' => 'UserController@getLogin'))->before('guest');

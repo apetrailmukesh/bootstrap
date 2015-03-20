@@ -6,7 +6,7 @@ class AdvancedController extends BaseController {
 
 	public function index()
 	{
-		$this->layout->body_class = 'srp';
+		$this->layout->body_class = '';
 
 		$zip_code = Input::query('zip_code', '');
 		$distance = Input::query('distance', '50');
