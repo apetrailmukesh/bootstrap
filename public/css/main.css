@@ -306,8 +306,8 @@ select.small {
 		line-height:0;
 		margin-right:0.5em
 	}
-	.vehicle .detailed-description, .fa-icon.email-alerts + .secondary-text {font-size:0.857rem}
-	.vehicle .fa-icon.save {margin-right:1.5rem}
+	.vehicle .detailed-description, .fa-icon.email-alerts + .secondary-text {font-size:0.875rem}
+	.vehicle .fa-icon.save, .vehicle .fa-icon.saved {margin-right:1.5rem}
 .pagination {margin:2rem 0}
 .sidebar {
 	background:#F4F8F9;
@@ -355,6 +355,68 @@ select.small {
 	display:block;
 	font-size:0.875rem;
 	padding:1em 0 0 0
+}
+/* favourites section */
+.favourite-sort {padding-top:1.25em}
+/* saved vehicles/searches */
+.card-wrapper {
+	display:table;
+	margin-bottom:1.75em
+}
+	.vehicle-card, .search-card {
+		border:1px solid #DEE2E2;
+		display:table-cell;
+		height:100%;
+		padding:1em 1em 0.5em 1em
+	}
+		.vehicle-card h3, .search-card h3 {margin:0 0 0.75em 0}
+		.vehicle-card .fa-icon, .search-card .fa-icon.remove {font-size:0.875em}
+			.vehicle-card .fa-icon.remove, .search-card .fa-icon.remove {color:#3498DB}
+				.vehicle-card .fa-icon.remove:hover, .search-card .fa-icon.remove:hover {
+					color:#2E86C1;
+					cursor:pointer;
+					text-decoration:underline
+				}
+		.vehicle-card img {
+			border:1px solid #9EA7AF;
+			display:block;
+			width:100% /* responsive images */
+		}
+		.vehicle-card .badge.sold {
+			background:#98B548;
+			color:#fff;
+			display:block;
+			font-weight:bold;
+			margin-top:-2rem;
+			padding:0.25em 0;
+			position:relative;
+			text-align:center;
+			text-transform:uppercase;
+		}
+		.vehicle-card p, .search-card p {margin-bottom:0.5em}
+		.vehicle-card .price {
+			color:#98B548;
+			font-size:1.5rem;
+			line-height:0;
+			margin-right:0.5em
+		}
+		.vehicle-card .small, .search-card .small {font-size:0.875rem}
+		.search-card .fa-icon:before {
+			font-size:0.25em;
+			vertical-align:middle
+		}
+			.search-card .fa-icon.dot:first-child:before {
+				content:"";
+				margin-right:0
+			}
+		.search-card .button {margin-top:0.75em}
+/* save modal */
+.save-modal .close-reveal-modal.small {
+	display:block;
+	font-size:1rem;
+	font-weight:300;
+	position:relative;
+	right:0
 }
 /* footer section */
 footer {
@@ -419,6 +481,10 @@ footer {
 		content:"\f097";
 		margin-right:0.5em
 	}
+	.fa-icon.saved:before {
+		content:"\f02e";
+		margin-right:0.5em
+	}
 	.fa-icon.share:before {
 		content:"\f064";
 		margin-right:0.5em
@@ -437,6 +503,14 @@ footer {
 		content:"\f015";
 		color:#3498DB;
 		top:0	
+	}
+	.fa-icon.remove:after {
+		content:"\f00d";
+		margin-left:0.5em
+	}
+	.fa-icon.dot:before {
+		content:"\f111";
+		margin-right:0.5em
 	}
 /* media queries */
 @media only screen and (max-width:40em) { /* MOBILE ONLY */
@@ -467,7 +541,7 @@ footer {
 			line-height:0;
 			margin-right:0.25em
 		}
-		.vehicle .fa-icon.save {
+		.vehicle .fa-icon.save, .vehicle .fa-icon.saved {
 			display:block;
 			margin-bottom:0.5rem
 		}
@@ -480,6 +554,7 @@ footer {
 		display:block;
 		margin-left:0
 	}
+	.reveal-modal .tabs-content {margin-bottom:0}
 	/* no results overrides */
 	.no-results h1 {font-size:1.5rem !important}
 	/* SEO page overrides */
@@ -487,6 +562,18 @@ footer {
 	section[role="main"] h2 {font-size:1rem}
 	.block-list a {padding: 0.25em 0 1em 0}
 	.sub-nav dt a, .sub-nav dd a, .sub-nav li a, .sub-nav dt.active a, .sub-nav dd.active a, .sub-nav li.active a {padding:0.1875rem 1rem}
+	/* saved vehicles/searches */ 
+	.vehicle-card .show-for-small, .search-card .show-for-small {display:block !important}
+	.vehicle-card h3, .search-card h3 {margin-top:0.5em}
+	.vehicle-card p:first-child {margin-top:1em}
+	/* login page */
+	.login section[role="main"] h1 {
+		font-size:1.5rem;
+		margin-top:3rem
+	}
+	/* save modal */
+	.save-modal img {margin-bottom:1.25rem}
+	.save-modal .row .columns + .columns {padding-left:0}
 }
 @media only screen and (min-width: 40.063em) { /* MEDIUM AND UP */
 	/* logo overrides */
@@ -504,11 +591,23 @@ footer {
 		.top-bar, .top-bar-section ul {height:1.875rem !important}
 	/* srp overrides */
 	.tabs dd > a .hide-for-small-only, .tabs .tab-title > a .hide-for-small-only {display:inline !important}
+	/* saved vehicles/searches */
+	.vehicle-card .fa-icon.share {padding-top:0.75em}
+	.vehicle-card > .row > .medium-4 + .medium-8 {padding-left:0}
+	.search-card .date {
+		margin-top:20%;
+		position:relative;
+		text-align:right
+	}
+	/* login page */
+	.login section[role="main"] h1 {margin-top:4rem}
 }
 @media only screen and (min-width:40.063em) and (max-width: 64.063em) { /* MEDIUM ONLY */
 	/* logo overrides */
 	.logo {padding-top:0.5em}
 		.logo:before {margin-top:-0.5em}
+	/* save modal */
+	.save-modal {width:50%}
 }
 @media only screen and (min-width:40.063em) and (max-width:64.063em) and (orientation:portrait) { /* MEDIUM PORTRAIT ONLY */
 	/* search header overrides/ home page overrides */
@@ -523,11 +622,13 @@ footer {
 			width:60px
 		}
 	/* srp overrides */
-	.srp .tabs dd > a > span.hide-for-small-only, .srp .tabs .tab-title > a > span.hide-for-small-only {display:none !important}
+	.tabs dd > a > span.hide-for-small-only, .tabs .tab-title > a > span.hide-for-small-only {display:none !important}
 	.vehicle .fa-icon.save {
 		display:block;
 		margin-bottom:0.5rem
 	}
+	/* modal overrides */
+	.reveal-modal.medium, dialog.medium, .save-modal {width:70%}
 }
 @media only screen and (min-width:64.063em) { /* LARGE AND UP */
 	/* logo overrides */
@@ -535,6 +636,10 @@ footer {
 		font-size:3.125rem;
 		margin-top:-0.45em
 	}
+	/* login page */
+	.login section[role="main"] h1 {margin-top:6rem}
+	/* modal overrides */
+	.reveal-modal.medium, dialog.medium, .save-modal {width:40%}
 }
 
 
