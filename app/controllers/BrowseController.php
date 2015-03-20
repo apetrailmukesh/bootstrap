@@ -215,40 +215,32 @@ class BrowseController extends BaseController {
 	{
 		$this->layout->body_class = '';
 
-		$make = Make::find(explode("-", $id)[0]);
-		$model = Model::find(explode("-", $id)[1]);
-
 		$columns = array(array(), array(), array());
 
 		$states = $this->getStates();
 
 		foreach($states as $key=>$value) {
-			$link =  '/browse/make/model/state/city/' . $id . '-' . $value['code'];
-			$title = $make->make . ' ' . $model->model . ' for sale in ' . $value['name'];
+			$link =  '/browse/state/city/' . $value['code'];
+			$title = 'Cars for sale in ' . $value['name'];
 			$state = array('link' => $link, 'title' => $title);
 			array_push($columns[$key % 3], $state);
 		}
 
 		$data = array(
 			'search_text' => '',
-			'make' => $make,
-			'model' => $model,
 			'columns' => $columns
 		);
 
-		$this->layout->contents = View::make('browse/make-model-state', $data);
+		$this->layout->contents = View::make('browse/state', $data);
 	}
 
 	public function stateCity($id)
 	{
 		$this->layout->body_class = '';
 
-		$make = Make::find(explode("-", $id)[0]);
-		$model = Model::find(explode("-", $id)[1]);
-
 		$state = null;
 		foreach($this->getStates() as $entity) {
-    		if (explode("-", $id)[2] == $entity['code']) {
+    		if (explode("-", $id)[0] == $entity['code']) {
         		$state = $entity;
         		break;
     		}
@@ -256,9 +248,7 @@ class BrowseController extends BaseController {
 
 		$columns = array(array(), array(), array());
 
-		$cities = DB::select( DB::raw("SELECT DISTINCT city FROM vehicle WHERE make = :make AND model = :model AND state = :state ORDER BY city"), array(
-			'make' => $make->id,
-			'model' => $model->id,
+		$cities = DB::select( DB::raw("SELECT DISTINCT city FROM vehicle WHERE state = :state ORDER BY city"), array(
 			'state' => $state['code']
 		));
 
@@ -266,9 +256,8 @@ class BrowseController extends BaseController {
 			$location = Location::where('state' , '=', $state['code'])->where('city' , '=', $value->city);
 			if ($location->count()) {
 				$zip = $location->first()->zip_code;
-				$search = $make->make . ' ' . $model->model;
-				$link =  '/search?make='.$make->id.'&model='.$model->id.'&zip_code='.$zip.'&search_text='.$search.'&distance=50&page=1&sort=price-1';
-				$title = $make->make . ' ' . $model->model . ' for sale near ' . $value->city . ', ' . $state['code'];
+				$link =  '/search?zip_code='.$zip.'&distance=50&page=1&sort=price-1';
+				$title = 'Cars for sale near ' . $value->city . ', ' . $state['code'];
 				$city = array('link' => $link, 'title' => $title);
 				array_push($columns[$key % 3], $city);
 			}
@@ -276,13 +265,11 @@ class BrowseController extends BaseController {
 
 		$data = array(
 			'search_text' => '',
-			'make' => $make,
-			'model' => $model,
 			'state' => $state,
 			'columns' => $columns
 		);
 
-		$this->layout->contents = View::make('browse/make-model-state-city', $data);
+		$this->layout->contents = View::make('browse/state-city', $data);
 	}
 
 	public function getStates() {

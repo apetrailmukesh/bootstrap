@@ -9,11 +9,9 @@
 			<div class="small-12 columns">
 				<nav class="breadcrumbs" role="navigation">
 					<a href="/" class="fa-icon home"></a>
-					<a href="/browse/make">Makes</a>
-					<a href="/browse/make/model/{{ $make->id }}">{{ $make->make}}</a>
-					<a class="current">{{ $model->model}}</a>
+					<a class="current">Locations</a>
 				</nav>
-				<h1>{{ $make->make }} {{ $model->model }}</h1>
+				<h1>Locations</h1>
 			</div>
 		</div>
 	</header>
