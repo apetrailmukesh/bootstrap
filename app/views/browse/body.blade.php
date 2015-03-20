@@ -9,85 +9,42 @@
 			<div class="small-12 columns">
 				<nav class="breadcrumbs" role="navigation">
 					<a href="/" class="fa-icon home"></a>
-					<a href="#" class="current">Makes</a>
+					<a class="current">Body Styles</a>
 				</nav>
-				<h1>Makes</h1>
+				<h1>Body Styles</h1>
 			</div>
 		</div>
 	</header>
 	<div class="row">
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[0] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[1] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[2] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[3] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[4] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 		<div class="small-12 medium-2 large-2 columns block-list">
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
-			<a href="make-selection.html">{Make}</a>
+			@foreach($columns[5] as $column)
+				<a href="{{ $column['link'] }}">{{ $column['title'] }}</a>
+			@endforeach
 		</div>
 	</div>
 </section>

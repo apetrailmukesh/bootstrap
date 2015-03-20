@@ -125,24 +125,164 @@ class BrowseController extends BaseController {
 
 	public function body()
 	{
-		$this->layout->body_class = 'srp';
+		$this->layout->body_class = '';
+
+		$columns = array(array(), array(), array(), array(), array(), array());
+
+		$bodies = Body::orderBy('body')->get();
+		foreach($bodies as $key=>$value) {
+			$body = array('link' => '/browse/body/state/' . $value->id, 'title' => $value->body);
+			array_push($columns[$key % 6], $body);
+		}
 
 		$data = array(
-			'search_text' => ''
+			'search_text' => '',
+			'columns' => $columns
 			);
 
 		$this->layout->contents = View::make('browse/body', $data);
 	}
 
-	public function location()
+	public function bodyState($id)
 	{
-		$this->layout->body_class = 'srp';
+		$this->layout->body_class = '';
+
+		$body = Body::find($id);
+
+		$columns = array(array(), array(), array());
+
+		$states = $this->getStates();
+
+		foreach($states as $key=>$value) {
+			$link =  '/browse/body/state/city/' . $id . '-' . $value['code'];
+			$title = $body->body . ' for sale in ' . $value['name'];
+			$state = array('link' => $link, 'title' => $title);
+			array_push($columns[$key % 3], $state);
+		}
 
 		$data = array(
-			'search_text' => ''
-			);
+			'search_text' => '',
+			'body' => $body,
+			'columns' => $columns
+		);
 
-		$this->layout->contents = View::make('browse/location', $data);
+		$this->layout->contents = View::make('browse/body-state', $data);
+	}
+
+	public function bodyStateCity($id)
+	{
+		$this->layout->body_class = '';
+
+		$body = Body::find(explode("-", $id)[0]);
+
+		$state = null;
+		foreach($this->getStates() as $entity) {
+    		if (explode("-", $id)[1] == $entity['code']) {
+        		$state = $entity;
+        		break;
+    		}
+		}
+
+		$columns = array(array(), array(), array());
+
+		$cities = DB::select( DB::raw("SELECT DISTINCT city FROM vehicle WHERE body = :body AND state = :state ORDER BY city"), array(
+			'body' => $body->id,
+			'state' => $state['code']
+		));
+
+		foreach($cities as $key=>$value) {
+			$location = Location::where('state' , '=', $state['code'])->where('city' , '=', $value->city);
+			if ($location->count()) {
+				$zip = $location->first()->zip_code;
+				$link =  '/search?body='.$body->id.'&zip_code='.$zip.'&distance=50&page=1&sort=price-1';
+				$title = $body->body . ' for sale near ' . $value->city . ', ' . $state['code'];
+				$city = array('link' => $link, 'title' => $title);
+				array_push($columns[$key % 3], $city);
+			}
+		}
+
+		$data = array(
+			'search_text' => '',
+			'body' => $body,
+			'state' => $state,
+			'columns' => $columns
+		);
+
+		$this->layout->contents = View::make('browse/body-state-city', $data);
+	}
+
+	public function state()
+	{
+		$this->layout->body_class = '';
+
+		$make = Make::find(explode("-", $id)[0]);
+		$model = Model::find(explode("-", $id)[1]);
+
+		$columns = array(array(), array(), array());
+
+		$states = $this->getStates();
+
+		foreach($states as $key=>$value) {
+			$link =  '/browse/make/model/state/city/' . $id . '-' . $value['code'];
+			$title = $make->make . ' ' . $model->model . ' for sale in ' . $value['name'];
+			$state = array('link' => $link, 'title' => $title);
+			array_push($columns[$key % 3], $state);
+		}
+
+		$data = array(
+			'search_text' => '',
+			'make' => $make,
+			'model' => $model,
+			'columns' => $columns
+		);
+
+		$this->layout->contents = View::make('browse/make-model-state', $data);
+	}
+
+	public function stateCity($id)
+	{
+		$this->layout->body_class = '';
+
+		$make = Make::find(explode("-", $id)[0]);
+		$model = Model::find(explode("-", $id)[1]);
+
+		$state = null;
+		foreach($this->getStates() as $entity) {
+    		if (explode("-", $id)[2] == $entity['code']) {
+        		$state = $entity;
+        		break;
+    		}
+		}
+
+		$columns = array(array(), array(), array());
+
+		$cities = DB::select( DB::raw("SELECT DISTINCT city FROM vehicle WHERE make = :make AND model = :model AND state = :state ORDER BY city"), array(
+			'make' => $make->id,
+			'model' => $model->id,
+			'state' => $state['code']
+		));
+
+		foreach($cities as $key=>$value) {
+			$location = Location::where('state' , '=', $state['code'])->where('city' , '=', $value->city);
+			if ($location->count()) {
+				$zip = $location->first()->zip_code;
+				$search = $make->make . ' ' . $model->model;
+				$link =  '/search?make='.$make->id.'&model='.$model->id.'&zip_code='.$zip.'&search_text='.$search.'&distance=50&page=1&sort=price-1';
+				$title = $make->make . ' ' . $model->model . ' for sale near ' . $value->city . ', ' . $state['code'];
+				$city = array('link' => $link, 'title' => $title);
+				array_push($columns[$key % 3], $city);
+			}
+		}
+
+		$data = array(
+			'search_text' => '',
+			'make' => $make,
+			'model' => $model,
+			'state' => $state,
+			'columns' => $columns
+		);
+
+		$this->layout->contents = View::make('browse/make-model-state-city', $data);
 	}
 
 	public function getStates() {

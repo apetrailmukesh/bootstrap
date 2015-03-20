@@ -10,8 +10,12 @@ Route::get('/browse/make/model/{id}', array('as' => 'get.browse.make.model', 'us
 Route::get('/browse/make/model/state/{id}', array('as' => 'get.browse.make.model.state', 'uses' => 'BrowseController@makeModelState'));
 Route::get('/browse/make/model/state/city/{id}', array('as' => 'get.browse.make.model.state.city', 'uses' => 'BrowseController@makeModelStateCity'));
 
+Route::get('/browse/state/', array('as' => 'get.browse.state', 'uses' => 'BrowseController@state'));
+Route::get('/browse/state/city/{id}', array('as' => 'get.browse.state.city', 'uses' => 'BrowseController@stateCity'));
+
 Route::get('/browse/body', array('as' => 'get.browse.body', 'uses' => 'BrowseController@body'));
-Route::get('/browse/location', array('as' => 'get.browse.location', 'uses' => 'BrowseController@location'));
+Route::get('/browse/body/state/{id}', array('as' => 'get.browse.body.state', 'uses' => 'BrowseController@bodyState'));
+Route::get('/browse/body/state/city/{id}', array('as' => 'get.browse.body.state.city', 'uses' => 'BrowseController@bodyStateCity'));
 
 Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@change'));
 

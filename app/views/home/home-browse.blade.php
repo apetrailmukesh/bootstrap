@@ -4,7 +4,7 @@
 			{{ HTML::linkRoute('get.advanced', 'Advanced Search') }}
 			{{ HTML::linkRoute('get.browse.make', 'Browse by Make') }}
 			{{ HTML::linkRoute('get.browse.body', 'Browse by Body Style') }}
-			{{ HTML::linkRoute('get.browse.location', 'Browse by Location') }}
+			{{ HTML::linkRoute('get.browse.state', 'Browse by Location') }}
 		</p>
 	</div>
 </div>
