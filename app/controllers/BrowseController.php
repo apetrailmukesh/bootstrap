@@ -106,7 +106,7 @@ class BrowseController extends BaseController {
 				$zip = $location->first()->zip_code;
 				$search = $make->make . ' ' . $model->model;
 				$link =  '/search?make='.$make->id.'&model='.$model->id.'&zip_code='.$zip.'&search_text='.$search.'&distance=50&page=1&sort=price-1';
-				$title = $make->make . ' ' . $model->model . ' for sale in ' . $value->city . ', ' . $state['code'];
+				$title = $make->make . ' ' . $model->model . ' for sale near ' . $value->city . ', ' . $state['code'];
 				$city = array('link' => $link, 'title' => $title);
 				array_push($columns[$key % 3], $city);
 			}
