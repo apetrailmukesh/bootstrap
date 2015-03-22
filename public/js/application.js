@@ -77,7 +77,7 @@
   		event.preventDefault();
 	});
 
-	$('.tab-title').click(function (event) {
+	$('ul.status-tabs li.tab-title').click(function (event) {
 		var status = $(this).attr('id');
 	    var edited = updateQueryStringParameter(document.URL, 'status', status);
 	    edited = updateQueryStringParameter(edited, 'page', '1');
@@ -360,7 +360,8 @@
 		}
 	}
 
-	applyFilterFunctions('price', 'Price', 'checkbox');
+	applyCustomFilterFunctions('price', 'Price', 'checkbox');
+
 	applyFilterFunctions('photo', 'Photo', 'checkbox');
 	applyFilterFunctions('transmission', 'Transmission', 'checkbox');
 	applyFilterFunctions('year', 'Year', 'checkbox');
@@ -410,6 +411,60 @@
 
 		$('[id*="mobile-' + large + '-remove-"]').click(function (event) {
 			filterRemoved(event.target.id.replace('mobile-' + large + '-remove-', ''), large);
+		});
+	}
+
+	function applyCustomFilterFunctions(large, mobile, type) {
+		if (type == 'checkbox') {
+			$('div#mobile' + mobile + 'Modal input:checkbox').change(function (event) {
+				filterCheckboxChanged($('div#mobile' + mobile + 'Modal'), $(this));
+			});
+
+			$('div#' + large + 'Modal input:checkbox').change(function (event) {
+				filterCheckboxChanged($('div#' + large + 'Modal'), $(this));
+			});
+		} else if (type == 'radio') {
+			$('div#mobile' + mobile + 'Modal input:radio').click(function (event) {
+				filterRadioChanged($('div#mobile' + mobile + 'Modal'), $(this));
+			});
+
+			$('div#' + large + 'Modal input:radio').click(function (event) {
+				filterRadioChanged($('div#' + large + 'Modal'), $(this));
+			});
+		}
+
+		$('#filter-by-' + large).submit(function (event) {
+			var selectedTab = $('div#' + large + 'Modal div.active').attr('id');
+			if (selectedTab.indexOf("basic") >= 0) {
+				filterSubmitted($('div#' + large + 'Modal'), large);
+			} else if (selectedTab.indexOf("custom") >= 0) {
+				filterCustomSubmitted($('div#' + large + 'Modal'), large);
+			}	
+		});
+
+		$('#mobile-filter-by-' + large).submit(function (event) {
+			var selectedTab = $('div#mobile' + large + 'Modal div.active').attr('id');
+			if (selectedTab.indexOf("basic") >= 0) {
+				filterSubmitted($('div#mobile' + mobile + 'Modal'), large);
+			} else if (selectedTab.indexOf("custom") >= 0) {
+				filterCustomSubmitted($('div#mobile' + mobile + 'Modal'), large);
+			}
+		});
+
+		$('[id*="' + large + '-remove-"]').click(function (event) {
+			filterRemoved(event.target.id.replace(large + '-remove-', ''), large);
+		});
+
+		$('[id*="mobile-' + large + '-remove-"]').click(function (event) {
+			filterRemoved(event.target.id.replace('mobile-' + large + '-remove-', ''), large);
+		});
+
+		$('[id*="' + large + 'custom-remove-"]').click(function (event) {
+			filterCustomRemoved(large + '-custom');
+		});
+
+		$('[id*="mobile-' + large + 'custom-remove-"]').click(function (event) {
+			filterCustomRemoved(large + '-custom');
 		});
 	}
 
@@ -477,9 +532,32 @@
   		event.preventDefault();
 	}
 
+	function filterCustomSubmitted(div, property) {
+		var min = div.find('.' + property + 'Min').val();
+		var max = div.find('.' + property + 'Max').val();
+
+		var edited = updateQueryStringParameter(edited, property, '');
+		if ($.isNumeric(min) && $.isNumeric(max)) {
+			edited = updateQueryStringParameter(edited, property + '-custom', min + '-' + max);
+		} else {
+			edited = updateQueryStringParameter(edited, property + '-custom', '');
+		}
+		
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
+	}
+
 	function filterRemoved(id, property) {
 		var updated = removeItemFromList(getQueryStringParameter(property), id);
 		var edited = updateQueryStringParameter(document.URL, property, updated);
+	    edited = updateQueryStringParameter(edited, 'page', '1');
+  		window.location.href = edited;
+  		event.preventDefault();
+	}
+
+	function filterCustomRemoved(property) {
+		var edited = updateQueryStringParameter(document.URL, property, '');
 	    edited = updateQueryStringParameter(edited, 'page', '1');
   		window.location.href = edited;
   		event.preventDefault();

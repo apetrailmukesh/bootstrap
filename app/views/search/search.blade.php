@@ -13,7 +13,7 @@
 			<div class="row">
 				@include('search/large/search-large-filter')
 				<div class="large-9 medium-8 columns">
-					<ul class="tabs">
+					<ul class="tabs status-tabs">
 						<li class="tab-title {{$tab['all_class']}}" id="{{$tab['all_link']}}"><a>All<span class="hide-for-small-only"> Cars <span class="count">{{$tab['all_count']}}</span></span></a></li>
 						<li class="tab-title {{$tab['used_class']}}" id="{{$tab['used_link']}}"><a>Used<span class="hide-for-small-only"> Cars <span class="count">{{$tab['used_count']}}</span></span></a></li>
 						<li class="tab-title {{$tab['new_class']}}" id="{{$tab['new_link']}}"><a>New<span class="hide-for-small-only"> Cars <span class="count">{{$tab['new_count']}}</span></span></a></li>
