@@ -319,6 +319,9 @@
 
 		selectRadioFilter($('div#mileageModal'), 'mileage', '');
 		selectRadioFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
+
+		selectCustomFilter($('div#priceModal'), 'price');
+		selectCustomFilter($('div#mobilePriceModal'), 'price');
 	}
 
 	function selectCheckboxFilter(div, property, prefix) {
@@ -357,6 +360,32 @@
 			}
 		} else {
 			div.find('input:radio[id*="any"]').prop('checked', true);
+		}
+	}
+
+	function selectCustomFilter(div, property) {
+		var value = getQueryStringParameter(property + '-custom');
+		if (value !== null && value !== undefined && value.length > 0) {
+			var min = '';
+			var max = '';
+
+			var values = value.split('-');
+			if (values.length > 0) {
+				min = values[0];
+			}
+
+			if (values.length > 1) {
+				max = values[1];
+			}
+
+			div.find('.' + property + 'Min').val(min);
+			div.find('.' + property + 'Max').val(max);
+
+			div.find('input:checkbox').prop('checked', false);
+			div.find('input:checkbox[id*="any"]').prop('checked', true);
+
+			div.find('li.tab-title').toggleClass('active');
+			div.find('div.content').toggleClass('active');
 		}
 	}
 
@@ -436,18 +465,18 @@
 		$('#filter-by-' + large).submit(function (event) {
 			var selectedTab = $('div#' + large + 'Modal div.active').attr('id');
 			if (selectedTab.indexOf("basic") >= 0) {
-				filterSubmitted($('div#' + large + 'Modal'), large);
+				filterCustomSubmitted($('div#' + large + 'Modal'), large, false);
 			} else if (selectedTab.indexOf("custom") >= 0) {
-				filterCustomSubmitted($('div#' + large + 'Modal'), large);
+				filterCustomSubmitted($('div#' + large + 'Modal'), large, true);
 			}	
 		});
 
 		$('#mobile-filter-by-' + large).submit(function (event) {
-			var selectedTab = $('div#mobile' + large + 'Modal div.active').attr('id');
+			var selectedTab = $('div#mobile' + mobile + 'Modal div.active').attr('id');
 			if (selectedTab.indexOf("basic") >= 0) {
-				filterSubmitted($('div#mobile' + mobile + 'Modal'), large);
+				filterCustomSubmitted($('div#mobile' + mobile + 'Modal'), large, false);
 			} else if (selectedTab.indexOf("custom") >= 0) {
-				filterCustomSubmitted($('div#mobile' + mobile + 'Modal'), large);
+				filterCustomSubmitted($('div#mobile' + mobile + 'Modal'), large, true);
 			}
 		});
 
@@ -532,20 +561,34 @@
   		event.preventDefault();
 	}
 
-	function filterCustomSubmitted(div, property) {
-		var min = div.find('.' + property + 'Min').val();
-		var max = div.find('.' + property + 'Max').val();
+	function filterCustomSubmitted(div, property, custom) {
+		var edited;
 
-		var edited = updateQueryStringParameter(edited, property, '');
-		if ($.isNumeric(min) && $.isNumeric(max)) {
-			edited = updateQueryStringParameter(edited, property + '-custom', min + '-' + max);
-		} else {
-			edited = updateQueryStringParameter(edited, property + '-custom', '');
-		}
-		
-	    edited = updateQueryStringParameter(edited, 'page', '1');
-  		window.location.href = edited;
-  		event.preventDefault();
+		if (custom == true) {
+			var min = div.find('.' + property + 'Min').val();
+			var max = div.find('.' + property + 'Max').val();
+
+			edited = updateQueryStringParameter(document.URL, property, '');
+			if ($.isNumeric(min) && $.isNumeric(max)) {
+				edited = updateQueryStringParameter(edited, property + '-custom', min + '-' + max);
+			} else {
+				edited = updateQueryStringParameter(edited, property + '-custom', '');
+			}
+  		} else {
+  			edited = updateQueryStringParameter(document.URL, property + '-custom', '');
+			if (div.find('input[id*="any"]').is(':checked')) {
+				edited = updateQueryStringParameter(edited, property, '');
+			} else {
+				var checkedValues = div.find('input:checked').map(function() {
+				    return this.value;
+				}).get();
+				edited = updateQueryStringParameter(edited, property, checkedValues.join('-'));
+			}
+  		}
+
+  		edited = updateQueryStringParameter(edited, 'page', '1');
+	  	window.location.href = edited;
+	  	event.preventDefault();
 	}
 
 	function filterRemoved(id, property) {

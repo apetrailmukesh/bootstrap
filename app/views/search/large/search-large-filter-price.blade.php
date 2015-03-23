@@ -5,13 +5,13 @@
 		<li class="tab-title"><a href="#customPrice">Custom</a></li>
 	</ul>
 	<form id="filter-by-price">
-		<div class="row">
-			<div class="small-12 columns border">
-				<input type="checkbox" id="price-any" value="0" checked><label for="price-any">Any Price</label>
-			</div>
-		</div>
 		<div class="tabs-content">
 			<div class="content active" id="basicPrice">
+				<div class="row">
+					<div class="small-12 columns border">
+						<input type="checkbox" id="price-any" value="0" checked><label for="price-any">Any Price</label>
+					</div>
+				</div>
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="row">

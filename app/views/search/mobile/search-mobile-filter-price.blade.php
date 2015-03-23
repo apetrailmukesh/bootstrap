@@ -4,14 +4,14 @@
 		<li class="tab-title active"><a href="#basicPriceMobile">Basic</a></li>
 		<li class="tab-title"><a href="#customPriceMobile">Custom</a></li>
 	</ul>
-	<form id="mobile-filter-by-price">
-		<div class="row">
-			<div class="small-12 columns border">
-				<input type="checkbox" id="mobile-price-any" value="0" checked><label for="mobile-price-any">Any Price</label>
-			</div>
-		</div>
+	<form id="mobile-filter-by-price">		
 		<div class="tabs-content">
 			<div class="content active" id="basicPriceMobile">
+				<div class="row">
+					<div class="small-12 columns border">
+						<input type="checkbox" id="mobile-price-any" value="0" checked><label for="mobile-price-any">Any Price</label>
+					</div>
+				</div>
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="row">
@@ -33,11 +33,11 @@
 				<div class="row">
 					<div class="small-7 medium-6 columns">
 						<label><strong>Min Price</strong></label>
-						<input type="text" placeholder="No Minimum" />
+						<input type="text" placeholder="No Minimum" class="priceMin"/>
 					</div>
 					<div class="small-7 medium-6 columns end">
 						<label><strong>Max Price</strong></label>
-						<input type="text" placeholder="No Maximum" />
+						<input type="text" placeholder="No Maximum" class="priceMax"/>
 					</div>
 				</div>
 			</div>
