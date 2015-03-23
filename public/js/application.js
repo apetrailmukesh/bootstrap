@@ -488,11 +488,11 @@
 			filterRemoved(event.target.id.replace('mobile-' + large + '-remove-', ''), large);
 		});
 
-		$('[id*="' + large + 'custom-remove-"]').click(function (event) {
+		$('[id*="' + large + '-custom-remove"]').click(function (event) {
 			filterCustomRemoved(large + '-custom');
 		});
 
-		$('[id*="mobile-' + large + 'custom-remove-"]').click(function (event) {
+		$('[id*="mobile-' + large + '-custom-remove"]').click(function (event) {
 			filterCustomRemoved(large + '-custom');
 		});
 	}

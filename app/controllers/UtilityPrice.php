@@ -54,6 +54,23 @@ class UtilityPrice {
 		return $and;
 	}
 
+	public function buildCustomFilterQuery($and, $price_filter)
+	{
+		if (!empty($price_filter)) {
+			$price_ranges = explode("-", $price_filter);
+			if (count($price_ranges) == 2) {
+				$min = $price_ranges[0];
+				$max = $price_ranges[1];
+
+				if ($min < $max) {
+					array_push($and, array("range" => array('price' => array("gt" => $min, "lte" => $max))));
+				}
+			}
+		}
+
+		return $and;
+	}
+
 	public function buildAggregationQuery()
 	{
 		$price_ranges = array();
@@ -91,7 +108,7 @@ class UtilityPrice {
 		return $values;
 	}
 
-	public function findSelectedFilter($filters, $aggregations, $price_filter)
+	public function findSelectedFilter($filters, $aggregations, $price_filter, $price_custom_filter)
 	{
 		if (!empty($price_filter)) {
 			$values = array();
@@ -120,6 +137,19 @@ class UtilityPrice {
 			}
 
 			array_push($filters, array("name" => "Price", "values" => $values, "modal" => "price"));
+		} else if (!empty($price_custom_filter)) {
+			$price_ranges = explode("-", $price_custom_filter);
+			if (count($price_ranges) == 2) {
+				$min = $price_ranges[0];
+				$max = $price_ranges[1];
+
+				if ($min < $max) {
+					$title = '$' . number_format($min) . ' - $' . number_format($max);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'price-custom-remove'));
+					array_push($filters, array("name" => "Price", "values" => $values, "modal" => "price"));
+				}
+			}
 		}
 
 		return $filters;
