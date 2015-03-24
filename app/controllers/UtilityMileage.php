@@ -133,7 +133,7 @@ class UtilityMileage {
 					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
 					array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
 				} else if (!empty($min) && empty($max)) {
-					$title = 'From - ' . number_format($min);
+					$title = 'From ' . number_format($min);
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
 					array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));

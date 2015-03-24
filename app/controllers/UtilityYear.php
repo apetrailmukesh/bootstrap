@@ -96,12 +96,12 @@ class UtilityYear {
 				$max = $year_ranges[1];
 
 				if (empty($min) && !empty($max)) {
-					$title = 'To - ' . $max;
+					$title = 'To ' . $max;
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
 					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
 				} else if (!empty($min) && empty($max)) {
-					$title = 'From - ' . $min;
+					$title = 'From ' . $min;
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
 					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
