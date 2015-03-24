@@ -31,11 +31,11 @@
 				<div class="row">
 					<div class="small-7 medium-6 columns">
 						<label><strong>Min Mileage</strong></label>
-						<input type="text" placeholder="No Minimum" class="mileageMin"/>
+						<input type="text" class="mileageMin"/>
 					</div>
 					<div class="small-7 medium-6 columns end">
 						<label><strong>Max Mileage</strong></label>
-						<input type="text" placeholder="No Maximum" class="mileageMax"/>
+						<input type="text" class="mileageMax"/>
 					</div>
 				</div>
 			</div>

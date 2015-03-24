@@ -37,11 +37,11 @@
 				<div class="row">
 					<div class="small-7 medium-6 columns">
 						<label><strong>From</strong></label>
-						<input type="text" placeholder="No Minimum" class="yearMin"/>
+						<input type="text" class="yearMin"/>
 					</div>
 					<div class="small-7 medium-6 columns end">
 						<label><strong>To</strong></label>
-						<input type="text" placeholder="No Maximum" class="yearMax"/>
+						<input type="text" class="yearMax"/>
 					</div>
 				</div>
 			</div>

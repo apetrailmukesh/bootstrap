@@ -79,11 +79,11 @@
 				<div class="row">
 					<div class="small-7 medium-3 large-2 columns">
 						<label>Min Price</label>
-						<input type="text" placeholder="No Minimum" id="advanced-price-min"/>
+						<input type="text" id="advanced-price-min"/>
 					</div>
 					<div class="small-7 medium-3 large-2 columns end">
 						<label>Max Price</label>
-						<input type="text" placeholder="No Maximum" id="advanced-price-max"/>
+						<input type="text" id="advanced-price-max"/>
 					</div>
 				</div>
 			</fieldset>
@@ -96,11 +96,11 @@
 				<div class="row">
 					<div class="small-7 medium-3 large-2 columns">
 						<label>Min Mileage</label>
-						<input type="text" placeholder="No Minimum" id="advanced-mileage-min"/>
+						<input type="text" id="advanced-mileage-min"/>
 					</div>
 					<div class="small-7 medium-3 large-2 columns end">
 						<label>Max Mileage</label>
-						<input type="text" placeholder="No Maximum" id="advanced-mileage-max"/>
+						<input type="text" id="advanced-mileage-max"/>
 					</div>
 				</div>
 			</fieldset>
@@ -113,11 +113,11 @@
 				<div class="row">
 					<div class="small-7 medium-3 large-2 columns">
 						<label>From</label>
-						<input type="text" placeholder="No Minimum" id="advanced-year-min"/>
+						<input type="text" id="advanced-year-min"/>
 					</div>
 					<div class="small-7 medium-3 large-2 columns end">
 						<label>To</label>
-						<input type="text" placeholder="No Maximum" id="advanced-year-max"/>
+						<input type="text" id="advanced-year-max"/>
 					</div>
 				</div>
 			</fieldset>

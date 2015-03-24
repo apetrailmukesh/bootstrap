@@ -33,11 +33,11 @@
 				<div class="row">
 					<div class="small-7 medium-6 columns">
 						<label><strong>Min Price</strong></label>
-						<input type="text" placeholder="No Minimum" class="priceMin"/>
+						<input type="text" class="priceMin"/>
 					</div>
 					<div class="small-7 medium-6 columns end">
 						<label><strong>Max Price</strong></label>
-						<input type="text" placeholder="No Maximum" class="priceMax"/>
+						<input type="text" class="priceMax"/>
 					</div>
 				</div>
 			</div>
