@@ -108,19 +108,19 @@
 
 		var price_min = $('#advanced-price-min').val();
 		var price_max = $('#advanced-price-max').val();
-		if ($.isNumeric(price_min) && $.isNumeric(price_max)) {
+		if ((price_min == '' || $.isNumeric(price_min)) && (price_max == '' || $.isNumeric(price_max))) {
 			edited = updateQueryStringParameter(edited, 'price-custom', price_min + '-' + price_max);
 		}
 
 		var mileage_min = $('#advanced-mileage-min').val();
 		var mileage_max = $('#advanced-mileage-max').val();
-		if ($.isNumeric(mileage_min) && $.isNumeric(mileage_max)) {
+		if ((mileage_min == '' || $.isNumeric(mileage_min)) && (mileage_max == '' || $.isNumeric(mileage_max))) {
 			edited = updateQueryStringParameter(edited, 'mileage-custom', mileage_min + '-' + mileage_max);
 		}
 
 		var year_min = $('#advanced-year-min').val();
 		var year_max = $('#advanced-year-max').val();
-		if ($.isNumeric(year_min) && $.isNumeric(year_max)) {
+		if ((year_min == '' || $.isNumeric(year_min)) && (year_max == '' || $.isNumeric(year_max))) {
 			edited = updateQueryStringParameter(edited, 'year-custom', year_min + '-' + year_max);
 		}
   		
@@ -403,11 +403,12 @@
 			div.find('.' + property + 'Min').val(min);
 			div.find('.' + property + 'Max').val(max);
 
-			div.find('input:checkbox').prop('checked', false);
-			div.find('input:checkbox[id*="any"]').prop('checked', true);
-
-			div.find('li.tab-title').toggleClass('active');
-			div.find('div.content').toggleClass('active');
+			if (min != '' && max != '') {
+				div.find('input:checkbox').prop('checked', false);
+				div.find('input:checkbox[id*="any"]').prop('checked', true);
+				div.find('li.tab-title').toggleClass('active');
+				div.find('div.content').toggleClass('active');
+			}
 		}
 	}
 
@@ -591,7 +592,7 @@
 			var max = div.find('.' + property + 'Max').val();
 
 			edited = updateQueryStringParameter(document.URL, property, '');
-			if ($.isNumeric(min) && $.isNumeric(max)) {
+			if ((min == '' || $.isNumeric(min)) && (max == '' || $.isNumeric(max))) {
 				edited = updateQueryStringParameter(edited, property + '-custom', min + '-' + max);
 			} else {
 				edited = updateQueryStringParameter(edited, property + '-custom', '');

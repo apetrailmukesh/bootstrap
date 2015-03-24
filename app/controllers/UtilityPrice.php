@@ -62,7 +62,11 @@ class UtilityPrice {
 				$min = $price_ranges[0];
 				$max = $price_ranges[1];
 
-				if ($min < $max) {
+				if (empty($min) && !empty($max)) {
+					array_push($and, array("range" => array('price' => array("lte" => $max))));
+				} else if (!empty($min) && empty($max)) {
+					array_push($and, array("range" => array('price' => array("gte" => $min))));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
 					array_push($and, array("range" => array('price' => array("gte" => $min, "lte" => $max))));
 				}
 			}
@@ -143,7 +147,17 @@ class UtilityPrice {
 				$min = $price_ranges[0];
 				$max = $price_ranges[1];
 
-				if ($min < $max) {
+				if (empty($min) && !empty($max)) {
+					$title = 'To $' . number_format($max);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'price-custom-remove'));
+					array_push($filters, array("name" => "Price", "values" => $values, "modal" => "price"));
+				} else if (!empty($min) && empty($max)) {
+					$title = 'From $' . number_format($min);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'price-custom-remove'));
+					array_push($filters, array("name" => "Price", "values" => $values, "modal" => "price"));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
 					$title = '$' . number_format($min) . ' - $' . number_format($max);
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'price-custom-remove'));
