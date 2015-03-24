@@ -320,6 +320,7 @@ class SearchController extends BaseController {
 
 		if ($exclude != 'year') {
 			$and = $this->utility_year->buildFilterQuery($and, Input::get('year', ''));
+			$and = $this->utility_year->buildCustomFilterQuery($and, Input::get('year-custom', ''));
 		}
 
 		if ($exclude != 'status') {
@@ -604,7 +605,7 @@ class SearchController extends BaseController {
 		$filters = $this->utility_model->findSelectedFilter($filters, $aggregations, Input::get('model', ''));
 		$filters = $this->utility_price->findSelectedFilter($filters, $aggregations, Input::get('price', ''), Input::get('price-custom', ''));
 		$filters = $this->utility_mileage->findSelectedFilter($filters, $aggregations, Input::get('mileage', ''), Input::get('mileage-custom', ''));
-		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''));
+		$filters = $this->utility_year->findSelectedFilter($filters, $aggregations, Input::get('year', ''), Input::get('year-custom', ''));
 		$filters = $this->utility_body->findSelectedFilter($filters, $aggregations, Input::get('body', ''));
 		$filters = $this->utility_certified->findSelectedFilter($filters, $aggregations, Input::get('certified', ''));
 		$filters = $this->utility_exterior->findSelectedFilter($filters, $aggregations, Input::get('exterior', ''));
@@ -627,7 +628,7 @@ class SearchController extends BaseController {
 		if (empty(Input::get('model', ''))) array_push($remaining, array('name' => "Model", "modal" => "model"));
 		if (empty(Input::get('price', '')) && empty(Input::get('price-custom', ''))) array_push($remaining, array('name' => "Price", "modal" => "price"));
 		if (empty(Input::get('mileage', '')) && empty(Input::get('mileage-custom', ''))) array_push($remaining, array('name' => "Mileage", "modal" => "mileage"));
-		if (empty(Input::get('year', ''))) array_push($remaining, array('name' => "Year", "modal" => "year"));
+		if (empty(Input::get('year', '')) && empty(Input::get('year-custom', ''))) array_push($remaining, array('name' => "Year", "modal" => "year"));
 		if (empty(Input::get('body', ''))) array_push($remaining, array('name' => "Style", "modal" => "body"));
 		if (empty(Input::get('certified', ''))) array_push($remaining, array('name' => "Certification", "modal" => "certified"));
 		if (empty(Input::get('exterior', ''))) array_push($remaining, array('name' => "Exterior Color", "modal" => "exterior"));

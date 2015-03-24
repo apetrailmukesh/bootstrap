@@ -322,9 +322,10 @@
 
 		selectCustomFilter($('div#priceModal'), 'price');
 		selectCustomFilter($('div#mobilePriceModal'), 'price');
-
 		selectCustomFilter($('div#mileageModal'), 'mileage');
 		selectCustomFilter($('div#mobileMileageModal'), 'mileage');
+		selectCustomFilter($('div#yearModal'), 'year');
+		selectCustomFilter($('div#mobileYearModal'), 'year');
 	}
 
 	function selectCheckboxFilter(div, property, prefix) {
@@ -394,10 +395,10 @@
 
 	applyCustomFilterFunctions('price', 'Price', 'checkbox');
 	applyCustomFilterFunctions('mileage', 'Mileage', 'radio');
+	applyCustomFilterFunctions('year', 'Year', 'checkbox');
 
 	applyFilterFunctions('photo', 'Photo', 'checkbox');
 	applyFilterFunctions('transmission', 'Transmission', 'checkbox');
-	applyFilterFunctions('year', 'Year', 'checkbox');
 	applyFilterFunctions('make', 'Make', 'checkbox');	
 	applyFilterFunctions('model', 'Model', 'checkbox');
 	applyFilterFunctions('status', 'Status', 'checkbox');

@@ -53,7 +53,7 @@ class UtilityMileage {
 				$max = $mileage_ranges[1];
 
 				if ($min < $max) {
-					array_push($and, array("range" => array('miles' => array("gt" => $min, "lte" => $max))));
+					array_push($and, array("range" => array('miles' => array("gte" => $min, "lte" => $max))));
 				}
 			}
 		}

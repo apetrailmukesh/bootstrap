@@ -28,6 +28,23 @@ class UtilityYear {
 		return $and;
 	}
 
+	public function buildCustomFilterQuery($and, $year_filter)
+	{
+		if (!empty($year_filter)) {
+			$year_ranges = explode("-", $year_filter);
+			if (count($year_ranges) == 2) {
+				$min = $year_ranges[0];
+				$max = $year_ranges[1];
+
+				if ($min < $max) {
+					array_push($and, array("range" => array('year' => array("gte" => $min, "lte" => $max))));
+				}
+			}
+		}
+
+		return $and;
+	}
+
 	public function buildAggregationQuery()
 	{
 		return array("year" => array("terms" => array("field" => "year", "size" => 0)));
@@ -56,7 +73,7 @@ class UtilityYear {
 		return $values;
 	}
 
-	public function findSelectedFilter($filters, $aggregations, $year_filter)
+	public function findSelectedFilter($filters, $aggregations, $year_filter, $year_custom_filter)
 	{
 		if (!empty($year_filter)) {
 			$values = array();
@@ -68,6 +85,19 @@ class UtilityYear {
 			}
 
 			array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
+		} else if (!empty($year_custom_filter)) {
+			$year_ranges = explode("-", $year_custom_filter);
+			if (count($year_ranges) == 2) {
+				$min = $year_ranges[0];
+				$max = $year_ranges[1];
+
+				if ($min < $max) {
+					$title = number_format($min) . ' - ' . number_format($max);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
+					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
+				}
+			}
 		}
 
 		return $filters;

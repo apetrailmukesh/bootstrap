@@ -63,7 +63,7 @@ class UtilityPrice {
 				$max = $price_ranges[1];
 
 				if ($min < $max) {
-					array_push($and, array("range" => array('price' => array("gt" => $min, "lte" => $max))));
+					array_push($and, array("range" => array('price' => array("gte" => $min, "lte" => $max))));
 				}
 			}
 		}
