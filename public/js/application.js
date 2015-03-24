@@ -322,6 +322,9 @@
 
 		selectCustomFilter($('div#priceModal'), 'price');
 		selectCustomFilter($('div#mobilePriceModal'), 'price');
+
+		selectCustomFilter($('div#mileageModal'), 'mileage');
+		selectCustomFilter($('div#mobileMileageModal'), 'mileage');
 	}
 
 	function selectCheckboxFilter(div, property, prefix) {
@@ -390,6 +393,7 @@
 	}
 
 	applyCustomFilterFunctions('price', 'Price', 'checkbox');
+	applyCustomFilterFunctions('mileage', 'Mileage', 'radio');
 
 	applyFilterFunctions('photo', 'Photo', 'checkbox');
 	applyFilterFunctions('transmission', 'Transmission', 'checkbox');
@@ -405,7 +409,6 @@
 	applyFilterFunctions('cylinders', 'Cylinders', 'checkbox');
 	applyFilterFunctions('fuel', 'Fuel', 'checkbox');
 	applyFilterFunctions('drive', 'Drive', 'checkbox');
-	applyFilterFunctions('mileage', 'Mileage', 'radio');
 
 	function applyFilterFunctions(large, mobile, type) {
 		if (type == 'checkbox') {

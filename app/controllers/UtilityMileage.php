@@ -44,6 +44,23 @@ class UtilityMileage {
 		return $and;
 	}
 
+	public function buildCustomFilterQuery($and, $mileage_filter)
+	{
+		if (!empty($mileage_filter)) {
+			$mileage_ranges = explode("-", $mileage_filter);
+			if (count($mileage_ranges) == 2) {
+				$min = $mileage_ranges[0];
+				$max = $mileage_ranges[1];
+
+				if ($min < $max) {
+					array_push($and, array("range" => array('miles' => array("gt" => $min, "lte" => $max))));
+				}
+			}
+		}
+
+		return $and;
+	}
+
 	public function buildAggregationQuery()
 	{
 		$mileage_ranges = array();
@@ -77,7 +94,7 @@ class UtilityMileage {
 		return $values;
 	}
 
-	public function findSelectedFilter($filters, $aggregations, $mileage_range)
+	public function findSelectedFilter($filters, $aggregations, $mileage_range, $mileage_custom_filter)
 	{
 		if (!empty($mileage_range)) {
 			$values = array();
@@ -100,6 +117,19 @@ class UtilityMileage {
 			array_push($values, array("title" => $title, "index" => 'mileage-remove-' . $mileage_range));
 
 			array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
+		} else if (!empty($mileage_custom_filter)) {
+			$mileage_ranges = explode("-", $mileage_custom_filter);
+			if (count($mileage_ranges) == 2) {
+				$min = $mileage_ranges[0];
+				$max = $mileage_ranges[1];
+
+				if ($min < $max) {
+					$title = number_format($min) . ' - ' . number_format($max);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
+					array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
+				}
+			}
 		}
 
 		return $filters;
