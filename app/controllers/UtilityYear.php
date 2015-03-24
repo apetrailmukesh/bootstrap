@@ -36,7 +36,11 @@ class UtilityYear {
 				$min = $year_ranges[0];
 				$max = $year_ranges[1];
 
-				if ($min < $max) {
+				if (empty($min) && !empty($max)) {
+					array_push($and, array("range" => array('year' => array("lte" => $max))));
+				} else if (!empty($min) && empty($max)) {
+					array_push($and, array("range" => array('year' => array("gte" => $min))));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
 					array_push($and, array("range" => array('year' => array("gte" => $min, "lte" => $max))));
 				}
 			}
@@ -91,8 +95,18 @@ class UtilityYear {
 				$min = $year_ranges[0];
 				$max = $year_ranges[1];
 
-				if ($min < $max) {
-					$title = number_format($min) . ' - ' . number_format($max);
+				if (empty($min) && !empty($max)) {
+					$title = 'To - ' . $max;
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
+					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
+				} else if (!empty($min) && empty($max)) {
+					$title = 'From - ' . $min;
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
+					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
+					$title = $min . ' - ' . $max;
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'year-custom-remove'));
 					array_push($filters, array("name" => "Year", "values" => $values, "modal" => "year"));

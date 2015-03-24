@@ -52,7 +52,11 @@ class UtilityMileage {
 				$min = $mileage_ranges[0];
 				$max = $mileage_ranges[1];
 
-				if ($min < $max) {
+				if (empty($min) && !empty($max)) {
+					array_push($and, array("range" => array('miles' => array("lte" => $max))));
+				} else if (!empty($min) && empty($max)) {
+					array_push($and, array("range" => array('miles' => array("gte" => $min))));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
 					array_push($and, array("range" => array('miles' => array("gte" => $min, "lte" => $max))));
 				}
 			}
@@ -123,7 +127,17 @@ class UtilityMileage {
 				$min = $mileage_ranges[0];
 				$max = $mileage_ranges[1];
 
-				if ($min < $max) {
+				if (empty($min) && !empty($max)) {
+					$title = 'To ' . number_format($max);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
+					array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
+				} else if (!empty($min) && empty($max)) {
+					$title = 'From - ' . number_format($min);
+					$values = array();
+					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
+					array_push($filters, array("name" => "Mileage", "values" => $values, "modal" => "mileage"));
+				} else if (!empty($max) && !empty($max) && $min <= $max) {
 					$title = number_format($min) . ' - ' . number_format($max);
 					$values = array();
 					array_push($values, array("title" => $title, "index" => 'mileage-custom-remove'));
