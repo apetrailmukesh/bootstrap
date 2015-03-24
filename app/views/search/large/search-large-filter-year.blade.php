@@ -36,11 +36,11 @@
 			<div class="content" id="customYear">
 				<div class="row">
 					<div class="small-7 medium-6 columns">
-						<label><strong>Min Year</strong></label>
+						<label><strong>From</strong></label>
 						<input type="text" placeholder="No Minimum" class="yearMin"/>
 					</div>
 					<div class="small-7 medium-6 columns end">
-						<label><strong>Max Year</strong></label>
+						<label><strong>To</strong></label>
 						<input type="text" placeholder="No Maximum" class="yearMax"/>
 					</div>
 				</div>

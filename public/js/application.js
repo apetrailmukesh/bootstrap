@@ -105,6 +105,24 @@
 		if (model !== undefined) {
 			edited = updateQueryStringParameter(edited, 'model', model);
 		}
+
+		var price_min = $('#advanced-price-min').val();
+		var price_max = $('#advanced-price-max').val();
+		if ($.isNumeric(price_min) && $.isNumeric(price_max)) {
+			edited = updateQueryStringParameter(edited, 'price-custom', price_min + '-' + price_max);
+		}
+
+		var mileage_min = $('#advanced-mileage-min').val();
+		var mileage_max = $('#advanced-mileage-max').val();
+		if ($.isNumeric(mileage_min) && $.isNumeric(mileage_max)) {
+			edited = updateQueryStringParameter(edited, 'mileage-custom', mileage_min + '-' + mileage_max);
+		}
+
+		var year_min = $('#advanced-year-min').val();
+		var year_max = $('#advanced-year-max').val();
+		if ($.isNumeric(year_min) && $.isNumeric(year_max)) {
+			edited = updateQueryStringParameter(edited, 'year-custom', year_min + '-' + year_max);
+		}
   		
   		var statusValues = $('#advanced-status').find('input:checked').map(function() {
 			return $(this).attr('class');
