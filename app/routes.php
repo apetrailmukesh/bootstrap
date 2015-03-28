@@ -28,6 +28,8 @@ Route::get('/user/saved/searches', array('as' => 'get.user.saved.searches', 'use
 Route::post('/user/login', array('as' => 'post.user.login', 'uses' => 'UserController@login'));
 Route::post('/user/register', array('as' => 'post.user.register', 'uses' => 'UserController@register'));
 Route::post('/user/profile', array('as' => 'post.user.profile', 'uses' => 'UserController@profile'))->before('auth');
+Route::post('/user/save/car', array('as' => 'post.user.save.car', 'uses' => 'UserController@saveCar'));
+Route::post('/user/save/search', array('as' => 'post.user.save.search', 'uses' => 'UserController@saveSearch'));
 
 Route::get('/admin/upload', array('as' => 'get.admin.upload', 'uses' => 'AdminController@getUpload'))->before('admin');
 Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'AdminController@getDealers'))->before('admin');

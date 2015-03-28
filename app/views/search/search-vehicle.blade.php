@@ -10,7 +10,7 @@
 			<a href="/vehicle/?vin={{ $result['vin'] }}">
 				<img src="{{ $result['image'] }}" title="{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }}">
 				<p>
-					<a class="fa-icon save" data-reveal-id="{{ $save_vehicle_popup }}">Save</a>
+					<a class="fa-icon save" data-reveal-id="{{ $save_vehicle_popup }}" id="save-vehicle-{{$result['vin']}}">Save</a>
 				</p>
 			</a>
 		</div>

@@ -85,6 +85,16 @@
   		event.preventDefault();
 	});
 
+	$('[id*="save-vehicle-"]').click(function (event) {
+		var vin = event.target.id.replace("save-vehicle-", "");;
+		
+		$.ajax({
+			type: "POST",
+			url: "/user/save/car",
+			data: {'vin' : vin}
+		});
+	});
+
 	$('#advanced-search-submit').click(function (event) {
 		var edited = location.protocol + '//' + location.hostname + '/search';
 		edited = updateQueryStringParameter(edited, 'page', '1');

@@ -121,4 +121,25 @@ class UserController extends BaseController {
 		Auth::logout();
     	return Redirect::route('get.home');
 	}
+
+	public function saveCar()
+	{
+		$this->layout->body_class = 'user';
+		$vin = Input::get('vin', '');
+		if (Auth::check() && !empty($vin)) {
+			$values = Vehicle::where('vin' , '=', $vin);
+			if ($values->count()) {
+				$car = new SavedCar;
+				$car->vehicle = $values->first()->vin;
+				$car->user =  Auth::user()->id;
+				$car->datetime = date("Y-m-d H:i:s");
+				$car->save();
+			}
+		}
+	}
+
+	public function saveSearch()
+	{
+		$this->layout->body_class = 'user';
+	}
 }
