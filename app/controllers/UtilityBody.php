@@ -2,6 +2,19 @@
 
 class UtilityBody {
 
+	public function getValue($source)
+	{
+		$value = '';
+		if (array_key_exists('body', $source)) {
+			$values = Body::where('id' , '=', $source['body']);
+			if ($values->count()) {
+				$value = $values->first()->body;
+			}
+		}
+
+		return $value;
+	}
+
 	public function buildFilterQuery($and, $body_filter)
 	{
 		if (!empty($body_filter)) {

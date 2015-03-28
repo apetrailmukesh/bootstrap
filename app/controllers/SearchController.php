@@ -416,6 +416,9 @@ class SearchController extends BaseController {
 			$dealer = $this->utility_dealer->getName($source);
 			$dealer_address = $this->utility_dealer->getAddress($source);
 			$image = $this->utility_photo->getValue($source);
+			$body = $this->utility_body->getValue($source);
+			$feature = $this->utility_feature->getValue($source);
+			$drive = $this->utility_drive->getValue($source);
 
 			$result = array(
 				'vin' => $vin,
@@ -429,8 +432,11 @@ class SearchController extends BaseController {
 				'trim' => $trim,
 				'transmission' => $transmission,
 				'dealer_address' => $dealer_address,
-				'image' => $image
-				);
+				'image' => $image,
+				'body' => $body,
+				'feature' => $feature,
+				'drive' => $drive
+			);
 
 			array_push($results, $result);
 		}

@@ -2,6 +2,19 @@
 
 class UtilityDrive {
 
+	public function getValue($source)
+	{
+		$value = '';
+		if (array_key_exists('drive', $source)) {
+			$values = Drive::where('id' , '=', $source['drive']);
+			if ($values->count()) {
+				$value = $values->first()->drive;
+			}
+		}
+
+		return $value;
+	}
+
 	public function buildFilterQuery($and, $drive_filter)
 	{
 		if (!empty($drive_filter)) {

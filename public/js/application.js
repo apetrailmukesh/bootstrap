@@ -95,6 +95,20 @@
 		});
 	});
 
+	$('[id*="saved-vehicle-remove-"]').click(function (event) {
+		var vin = event.target.id.replace("saved-vehicle-remove-", "");;
+		
+		$.ajax({
+			type: "GET",
+			url: "/user/remove/car",
+			data: {'vin' : vin},
+			dataType: "json",
+			success: function (data) {
+  				window.location.href = document.URL;
+			}
+		});
+	});
+
 	$('#advanced-search-submit').click(function (event) {
 		var edited = location.protocol + '//' + location.hostname + '/search';
 		edited = updateQueryStringParameter(edited, 'page', '1');

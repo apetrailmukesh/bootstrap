@@ -16,7 +16,7 @@
 		</div>
 		<div class="small-7 medium-9 large-9 columns" data-equalizer-watch>
 			<p><span class="price"><strong>{{ $result['price'] }}</strong></span>{{ $result['mileage'] }}</p>
-			<p>{{ $result['trim'] }} {{ $result['transmission'] }}</p>
+			<p>{{ $result['trim'] }} {{ $result['transmission'] }} {{ $result['body'] }} {{ $result['feature'] }} {{ $result['drive'] }}</p>
 			<p><strong>{{ $result['dealer'] }}</strong> <span class="secondary-text">{{ $result['dealer_address'] }}</span></p>
 		</div>
 	</div>

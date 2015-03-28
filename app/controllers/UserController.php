@@ -4,6 +4,46 @@ class UserController extends BaseController {
 
 	protected $layout = 'base';
 
+	protected $utility_make;
+	protected $utility_model;
+	protected $utility_price;
+	protected $utility_mileage;
+	protected $utility_feature;
+	protected $utility_transmission;
+	protected $utility_dealer;
+	protected $utility_photo;
+	protected $utility_year;
+	protected $utility_status;
+	protected $utility_body;
+	protected $utility_certified;
+	protected $utility_interior;
+	protected $utility_exterior;
+	protected $utility_doors;
+	protected $utility_cylinders;
+	protected $utility_fuel;
+	protected $utility_drive;
+
+	public function __construct() {
+		$this->utility_make = new UtilityMake();
+		$this->utility_model = new UtilityModel();
+    	$this->utility_price = new UtilityPrice();
+    	$this->utility_mileage = new UtilityMileage();
+    	$this->utility_feature = new UtilityFeature();
+    	$this->utility_transmission = new UtilityTransmission();
+    	$this->utility_dealer = new UtilityDealer();
+    	$this->utility_photo = new UtilityPhoto();
+    	$this->utility_year = new UtilityYear();
+    	$this->utility_status = new UtilityStatus();
+    	$this->utility_certified = new UtilityCertified();
+    	$this->utility_exterior = new UtilityExterior();
+    	$this->utility_interior = new UtilityInterior();
+    	$this->utility_drive = new UtilityDrive();
+    	$this->utility_fuel = new UtilityFuel();
+    	$this->utility_doors = new UtilityDoors();
+    	$this->utility_cylinders = new UtilityCylinders();
+    	$this->utility_body = new UtilityBody();
+  	}
+
 	public function getLogin()
 	{
 		$this->layout->body_class = 'user';
@@ -32,8 +72,76 @@ class UserController extends BaseController {
 	public function getSavedCars()
 	{
 		$this->layout->body_class = 'srp';
+		$saved_car_count = 0;
+		$saved_search_count = 0;
+
+		$results = array();
+		if (Auth::check()) {
+			$cars = SavedCar::where('user' , '=', Auth::user()->id)->get();
+			$saved_car_count = count($cars);
+			foreach ($cars as $car) {
+				$vehicle = Vehicle::where('vin' , '=', $car->vehicle)->first();
+
+				$vin = $vehicle->vin;
+				$year = $vehicle->year;
+				$url = $vehicle->url;
+
+				$source = array();
+				$source['make'] = $vehicle->make;
+				$source['model'] = $vehicle->model;
+				$source['price'] = $vehicle->price;
+				$source['miles'] = $vehicle->miles;
+				$source['trim'] = $vehicle->trim;
+				$source['transmission'] = $vehicle->transmission;
+				$source['dealer'] = $vehicle->dealer;
+				$source['address'] = $vehicle->address;
+				$source['city'] = $vehicle->city;
+				$source['state'] = $vehicle->state;
+				$source['photo'] = $vehicle->photo;
+				$source['body'] = $vehicle->body;
+				$source['feature'] = $vehicle->feature;
+				$source['drive'] = $vehicle->drive;
+
+				$make = $this->utility_make->getValue($source);
+				$model = $this->utility_model->getValue($source);
+				$price = $this->utility_price->getValue($source);
+				$mileage = $this->utility_mileage->getValue($source);
+				$trim = $this->utility_feature->getValue($source);
+				$transmission = $this->utility_transmission->getValue($source);
+				$dealer = $this->utility_dealer->getName($source);
+				$dealer_address = $this->utility_dealer->getAddress($source);
+				$image = $this->utility_photo->getValue($source);
+				$body = $this->utility_body->getValue($source);
+				$feature = $this->utility_feature->getValue($source);
+				$drive = $this->utility_drive->getValue($source);
+
+				$result = array(
+					'vin' => $vin,
+					'year' => $year,
+					'make' => $make,
+					'model' => $model,
+					'url' => $url,
+					'dealer' => $dealer,
+					'price' => $price,
+					'mileage' => $mileage,
+					'trim' => $trim,
+					'transmission' => $transmission,
+					'dealer_address' => $dealer_address,
+					'image' => $image,
+					'body' => $body,
+					'feature' => $feature,
+					'drive' => $drive
+				);
+
+				array_push($results, $result);
+			}			
+		}
+
 		$data = array(
 			'search_text' => '',
+			'results' => $results,
+			'saved_car_count' => $saved_car_count,
+			'saved_search_count' => $saved_search_count
 		);
 
 		$this->layout->contents = View::make('user/user-saved-cars', $data);
@@ -42,8 +150,16 @@ class UserController extends BaseController {
 	public function getSavedSearches()
 	{
 		$this->layout->body_class = 'srp';
+		$saved_car_count = 0;
+		$saved_search_count = 0;
+
+		$results = array();
+
 		$data = array(
 			'search_text' => '',
+			'results' => $results,
+			'saved_car_count' => $saved_car_count,
+			'saved_search_count' => $saved_search_count
 		);
 
 		$this->layout->contents = View::make('user/user-saved-searches', $data);
@@ -141,5 +257,15 @@ class UserController extends BaseController {
 	public function saveSearch()
 	{
 		$this->layout->body_class = 'user';
+	}
+
+	public function removeSavedCar() {
+		$this->layout->body_class = 'user';
+		$vin = Input::get('vin', '');
+		if (Auth::check() && !empty($vin)) {
+			DB::table('saved_car')->where('vehicle' , '=', $vin)->where('user' , '=', Auth::user()->id)->delete();
+		}
+
+		return Response::json(array('success' => true));
 	}
 }

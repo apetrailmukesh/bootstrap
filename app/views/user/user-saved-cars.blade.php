@@ -14,15 +14,15 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<ul class="tabs">
-				<li class="tab-title active"><a href="/user/saved/cars"><span class="hide-for-small-only">Saved </span>Cars<span class="hide-for-small-only count"> (0)</span></a></li>
-				<li class="tab-title"><a href="/user/saved/searches"><span class="hide-for-small-only">Saved </span>Searches<span class="hide-for-small-only count"> (0)</span></a></li>
+				<li class="tab-title active"><a href="/user/saved/cars"><span class="hide-for-small-only">Saved </span>Cars<span class="hide-for-small-only count"> ({{ $saved_car_count }})</span></a></li>
+				<li class="tab-title"><a href="/user/saved/searches"><span class="hide-for-small-only">Saved </span>Searches<span class="hide-for-small-only count"> ({{ $saved_search_count }})</span></a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="content favorites-div">
 		<div class="show-for-small row">
 			<div class="small-7 columns">
-				<h2>{00} Saved Cars</h2>
+				<h2>{{ $saved_car_count }} Saved Cars</h2>
 			</div>
 			<div class="small-5 text-right columns">
 				<a data-reveal-id="mobileSavedCarsSort" class="button radius small">Sort</a>
@@ -45,7 +45,7 @@
 		</div>
 		<div class="hide-for-small row">
 			<div class="medium-7 large-8 columns">
-				<h2>{00} Saved Cars</h2>
+				<h2>{{ $saved_car_count }} Saved Cars</h2>
 			</div>
 			<div class="medium-5 large-4 columns">
 				<form>
@@ -70,39 +70,37 @@
 			</div>
 		</div>
 		<div class="row" data-equalizer>
-			@for ($i = 0; $i < 5; $i++)
+			@foreach ($results as $result)
 			<div class="small-12 medium-6 columns card-wrapper" data-equalizer-watch>
 				<div class="vehicle-card">
 					<div class="show-for-small row">
 						<div class="small-6 columns">
-							<a href="#" class="fa-icon share">Share</a>
 						</div>
 						<div class="small-6 text-right columns">
-							<span class="fa-icon remove">Remove</span>
+							<span class="fa-icon remove" id="saved-vehicle-remove-{{$result['vin']}}">Remove</span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-12 medium-8 columns">
-							<h3><a href="#">{InvType} {Year} {Make} {Model} {Trim}</a></h3>
+							<h3><a href="/vehicle/?vin={{ $result['vin'] }}">{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }} {{ $result['trim'] }}</a></h3>
 						</div>
 						<div class="hide-for-small medium-4 text-right columns">
-							<span class="fa-icon remove">Remove</span>
+							<span class="fa-icon remove" id="saved-vehicle-remove-{{$result['vin']}}">Remove</span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-12 medium-4 columns">
-							<img src="images/vehicle-01.png" title="{YYYY} {Make} {Model} {Trim}">
-							<a href="#" class="fa-icon share hide-for-small text-center">Share</a>
+							<img src="{{ $result['image'] }}" title="{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }}">
 						</div>
 						<div class="small-12 medium-8 columns">
-							<p><span class="price"><strong>${00,000}</strong></span> {00,000} mi.</p>
-							<p class="small secondary-text">{Color}, {# of doors}, {Drivetrain}, {Body Style}, {Transmission}, {Engine}, {Stock # 00000000}</p>
-							<p><strong>{Dealership Name}</strong> <span class="secondary-text">in {City Name}, {ST} ~ {00} mi. away</span></p>
+							<p><span class="price"><strong>{{ $result['price'] }}</strong></span>{{ $result['mileage'] }}</p>
+							<p class="small secondary-text">{{ $result['trim'] }} {{ $result['transmission'] }} {{ $result['body'] }} {{ $result['feature'] }} {{ $result['drive'] }}</p>
+							<p><strong>{{ $result['dealer'] }}</strong> <span class="secondary-text">{{ $result['dealer_address'] }}</span></p>
 						</div>
 					</div>
 				</div>
 			</div>
-			@endfor
+			@endforeach
 		</div>
 	</div>
 </section>

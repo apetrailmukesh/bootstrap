@@ -24,6 +24,8 @@ Route::get('/user/register', array('as' => 'get.user.register', 'uses' => 'UserC
 Route::get('/user/profile', array('as' => 'get.user.profile', 'uses' => 'UserController@getProfile'))->before('auth');
 Route::get('/user/saved/cars', array('as' => 'get.user.saved.cars', 'uses' => 'UserController@getSavedCars'))->before('auth');
 Route::get('/user/saved/searches', array('as' => 'get.user.saved.searches', 'uses' => 'UserController@getSavedSearches'))->before('auth');
+Route::get('/user/remove/car', array('as' => 'get.user.remove.car', 'uses' => 'UserController@removeSavedCar'));
+Route::get('/user/remove/search', array('as' => 'get.user.remove.search', 'uses' => 'UserController@removeSavedSearch'));
 
 Route::post('/user/login', array('as' => 'post.user.login', 'uses' => 'UserController@login'));
 Route::post('/user/register', array('as' => 'post.user.register', 'uses' => 'UserController@register'));

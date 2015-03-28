@@ -14,15 +14,15 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<ul class="tabs">
-				<li class="tab-title"><a href="/user/saved/cars"><span class="hide-for-small-only">Saved </span>Cars<span class="hide-for-small-only count"> (0)</span></a></li>
-				<li class="tab-title active"><a href="/user/saved/searches"><span class="hide-for-small-only">Saved </span>Searches<span class="hide-for-small-only count"> (0)</span></a></li>
+				<li class="tab-title"><a href="/user/saved/cars"><span class="hide-for-small-only">Saved </span>Cars<span class="hide-for-small-only count"> ({{ $saved_car_count }})</span></a></li>
+				<li class="tab-title active"><a href="/user/saved/searches"><span class="hide-for-small-only">Saved </span>Searches<span class="hide-for-small-only count"> ({{ $saved_search_count }})</span></a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="content favorites-div">
 		<div class="show-for-small row">
 			<div class="small-7 columns">
-				<h2>{00} Saved Searches</h2>
+				<h2>{{ $saved_search_count }} Saved Searches</h2>
 			</div>
 			<div class="small-5 text-right columns">
 				<a href="#" data-reveal-id="mobileSavedSearchesSort" class="button radius small">Sort</a>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="hide-for-small row">
 			<div class="medium-7 large-8 columns">
-				<h2>{00} Saved Searches</h2>
+				<h2>{{ $saved_search_count }} Saved Searches</h2>
 			</div>
 			<div class="medium-5 large-4 columns">
 				<form>
