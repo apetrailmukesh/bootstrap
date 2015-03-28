@@ -2,7 +2,7 @@
 <header>
 	@include('header')
 </header>
-<section>
+<section class="user-header">
 	@include('logo')
 	<div class="row">
 		<div class="small-12 medium-7 large-7 columns small-centered">
