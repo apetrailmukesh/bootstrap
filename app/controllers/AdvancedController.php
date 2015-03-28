@@ -35,7 +35,7 @@ class AdvancedController extends BaseController {
 			'cylinders_count' => $this->getCylindersCounts()
 		);
 
-		$this->layout->contents = View::make('search/advanced', $data);
+		$this->layout->contents = View::make('search/search-advanced', $data);
 	}
 
 	public function getStatus() {

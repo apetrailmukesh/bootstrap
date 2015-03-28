@@ -82,7 +82,7 @@
 			<p>You may view all your saved cars from below.</p>
           	<div id="interfacecontainerdiv" class="interfacecontainerdiv"></div>
 			<p>
-				<a class="small">Saved Cars</a>
+				{{ HTML::linkRoute('get.user.saved.cars', 'Saved Cars', array(), array('class' => 'small')) }}
 			</p>
 		</div>
 	</div>
@@ -103,7 +103,7 @@
 			<p>You may view all your saved searches from below.</p>
           	<div id="interfacecontainerdiv" class="interfacecontainerdiv"></div>
 			<p>
-				<a class="small">Saved Searches</a>
+				{{ HTML::linkRoute('get.user.saved.searches', 'Saved Searches', array(), array('class' => 'small')) }}
 			</p>
 		</div>
 	</div>
@@ -124,8 +124,8 @@
 			<p>Please login or register to continue.</p>
           	<div id="interfacecontainerdiv" class="interfacecontainerdiv"></div>
 			<p>
-				<a class="small">Login</a> or 
-				<a class="small">Register</a>
+				{{ HTML::linkRoute('get.user.login', 'Login', array(), array('class' => 'small')) }} or 
+				{{ HTML::linkRoute('get.user.register', 'Register', array(), array('class' => 'small')) }}
 			</p>
 		</div>
 	</div>
@@ -146,8 +146,8 @@
 			<p>Please login or register to continue.</p>
           	<div id="interfacecontainerdiv" class="interfacecontainerdiv"></div>
 			<p>
-				<a class="small">Login</a> or 
-				<a class="small">Register</a>
+				{{ HTML::linkRoute('get.user.login', 'Login', array(), array('class' => 'small')) }} or 
+				{{ HTML::linkRoute('get.user.register', 'Register', array(), array('class' => 'small')) }}
 			</p>
 		</div>
 	</div>

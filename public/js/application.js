@@ -192,7 +192,7 @@
 
 	$('img')
 		.error(function(){
-        	$(this).attr('src', 'images/empty.png');
+        	$(this).attr('src', '/images/empty.png');
 		})
 		.each(function(){
   			$(this).attr("src", $(this).attr("src"))
@@ -295,12 +295,15 @@
 
 	function selectSort() {
 		var sort = getQueryStringParameter('sort');
-		$('#large-sort').val(sort);
+		if (sort == undefined || sort == '') {
+			sort = 'date-1';
+		}
 		
+		$('#large-sort').val(sort);
 		var mobile_radios = $('input:radio[name=sort-options]');
-	    if(mobile_radios !== undefined && mobile_radios.length > 0 && mobile_radios.is(':checked') === false) {
-	        mobile_radios.filter('[value=' + sort + ']').prop('checked', true);
-	    }
+		if(mobile_radios !== undefined && mobile_radios.length > 0 && mobile_radios.is(':checked') === false) {
+		    mobile_radios.filter('[value=' + sort + ']').prop('checked', true);
+		}
 	}
 
 	function selectFilters() {

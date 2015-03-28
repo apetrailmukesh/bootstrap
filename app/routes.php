@@ -22,8 +22,8 @@ Route::post('/', array('as' => 'post.home.change', 'uses' => 'HomeController@cha
 Route::get('/user/login', array('as' => 'get.user.login', 'uses' => 'UserController@getLogin'))->before('guest');
 Route::get('/user/register', array('as' => 'get.user.register', 'uses' => 'UserController@getRegister'))->before('guest');
 Route::get('/user/profile', array('as' => 'get.user.profile', 'uses' => 'UserController@getProfile'))->before('auth');
-Route::get('/user/saved-cars', array('as' => 'get.user.saved-cars', 'uses' => 'UserController@getSavedCars'))->before('auth');
-Route::get('/user/saved-searches', array('as' => 'get.user.saved-searches', 'uses' => 'UserController@getSavedSearches'))->before('auth');
+Route::get('/user/saved/cars', array('as' => 'get.user.saved.cars', 'uses' => 'UserController@getSavedCars'))->before('auth');
+Route::get('/user/saved/searches', array('as' => 'get.user.saved.searches', 'uses' => 'UserController@getSavedSearches'))->before('auth');
 
 Route::post('/user/login', array('as' => 'post.user.login', 'uses' => 'UserController@login'));
 Route::post('/user/register', array('as' => 'post.user.register', 'uses' => 'UserController@register'));

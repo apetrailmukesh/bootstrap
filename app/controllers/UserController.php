@@ -25,7 +25,28 @@ class UserController extends BaseController {
 			'first_name' => Auth::user()->first_name,
 			'last_name' => Auth::user()->last_name
 		);
+
 		$this->layout->contents = View::make('user/user-profile', $data);
+	}
+
+	public function getSavedCars()
+	{
+		$this->layout->body_class = 'srp';
+		$data = array(
+			'search_text' => '',
+		);
+
+		$this->layout->contents = View::make('user/user-saved-cars', $data);
+	}
+
+	public function getSavedSearches()
+	{
+		$this->layout->body_class = 'srp';
+		$data = array(
+			'search_text' => '',
+		);
+
+		$this->layout->contents = View::make('user/user-saved-searches', $data);
 	}
 
 	public function login()
