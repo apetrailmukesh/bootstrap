@@ -196,7 +196,13 @@ class SearchController extends BaseController {
 			$tab['all_class'] = 'active';
 		}
 
-		$input = Input::all();
+		$save_search_popup = 'saveSearchModalGuest';
+		$save_vehicle_popup = 'saveVehicleModalGuest';
+		if(Auth::check()){
+			$save_search_popup = 'saveSearchModalUser';
+			$save_vehicle_popup = 'saveVehicleModalUser';			
+		}
+
 		$data = array(
 			'zip_code' => $zip_code,
 			'distance' => $distance,
@@ -210,7 +216,9 @@ class SearchController extends BaseController {
 			'aggregations' => $aggregations,
 			'standard' => $standard,
 			'featured' => $featured,
-			'tab' => $tab
+			'tab' => $tab,
+			'save_search_popup' => $save_search_popup,
+			'save_vehicle_popup' => $save_vehicle_popup
 			);
 
 		$this->layout->contents = View::make('search/search', $data);

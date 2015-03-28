@@ -9,6 +9,9 @@
 		<div class="small-5 medium-3 large-3 columns" data-equalizer-watch>
 			<a href="/vehicle/?vin={{ $result['vin'] }}">
 				<img src="{{ $result['image'] }}" title="{{ $result['year'] }} {{ $result['make'] }} {{ $result['model'] }}">
+				<p>
+					<a class="fa-icon save" data-reveal-id="{{ $save_vehicle_popup }}">Save</a>
+				</p>
 			</a>
 		</div>
 		<div class="small-7 medium-9 large-9 columns" data-equalizer-watch>

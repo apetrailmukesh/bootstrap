@@ -22,6 +22,7 @@
 						@endforeach
 					</ul>
 				</nav>
+				<a class="button radius" data-reveal-id="{{ $save_search_popup }}">Save Search</a>
 			</div>
 			<div class="filters">
 				<h3>Refine Results</h3>
