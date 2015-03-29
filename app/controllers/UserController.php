@@ -276,6 +276,22 @@ class UserController extends BaseController {
 	public function saveSearch()
 	{
 		$this->layout->body_class = 'user';
+
+		$title = Input::get('title', '');
+		$filter = Input::get('filter', '');
+		$location = Input::get('location', '');
+		$query = Input::get('query', '');
+
+		if (Auth::check()) {
+			$search = new SavedSearch;
+			$search->title = $title;
+			$search->filter = $filter;
+			$search->location = $location;
+			$search->query = $query;
+			$search->user =  Auth::user()->id;
+			$search->datetime = date("Y-m-d H:i:s");
+			$search->save();
+		}
 	}
 
 	public function removeSavedCar() {

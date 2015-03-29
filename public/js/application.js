@@ -86,7 +86,7 @@
 	});
 
 	$('[id*="save-vehicle-"]').click(function (event) {
-		var vin = event.target.id.replace("save-vehicle-", "");;
+		var vin = event.target.id.replace("save-vehicle-", "");
 		
 		$.ajax({
 			type: "POST",
@@ -106,6 +106,19 @@
 			success: function (data) {
   				window.location.href = document.URL;
 			}
+		});
+	});
+
+	$('.save-search').click(function (event) {
+		var title = $('#search_title').val();
+		var filter = $('#search_filter').val();
+		var location = $('#search_location').val();
+		var query = window.location.search;
+		
+		$.ajax({
+			type: "POST",
+			url: "/user/save/search",
+			data: {'title' : title, 'filter' : filter, 'location' : location, 'query' : query}
 		});
 	});
 

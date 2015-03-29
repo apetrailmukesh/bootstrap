@@ -90,6 +90,8 @@ class SearchController extends BaseController {
 			$title = substr($title, 0, -2);
 		}
 
+		$search_title = $title;
+
 		$search_text = '';
 		if (sizeof($makes) == 1 && sizeof($models) <= 1) {
 			$entities = Make::where('id' , '=', $makes[0]);
@@ -107,6 +109,7 @@ class SearchController extends BaseController {
 			}
 		}
 
+		$search_location = '';
 		$location_info = 'change location';
 		if (!empty($zip_code)) {
 			$locations = Location::where('zip_code' , '=', $zip_code);
@@ -116,8 +119,10 @@ class SearchController extends BaseController {
 				$state = $location->state;
 				if (!empty($city) && !empty($state)) {
 					if ($distance == 0) {
+						$search_location = 'Within ' . 'unlimited miles from ' . $city . ', ' . $state;
 						$location_info = 'unlimited miles from ' . $city . ', ' . $state . ' (change)';
 					} else {
+						$search_location = 'Within ' . $distance . ' miles from ' . $city . ', ' . $state;
 						$location_info = $distance . ' miles from ' . $city . ', ' . $state . ' (change)';
 					}
 
@@ -132,6 +137,14 @@ class SearchController extends BaseController {
 		$aggregations = $this->executeAggregations();
 		$selected_filters = $this->findSelectedFilters($aggregations);
 		$remaining_filters = $this->findRemainingFilters();
+
+		$search_filter = '';
+		foreach($selected_filters as $filter) {
+			$search_filter = $search_filter . '<strong -class->' . $filter['name'] . ':' . '</strong>';
+			foreach($filter['values'] as $value) {
+				$search_filter = $search_filter . $value['title'] . ' ';
+			}
+		}
 
 		$paid = $aggregations['paid'];
 		$page = Input::get('page', '1');
@@ -218,8 +231,11 @@ class SearchController extends BaseController {
 			'featured' => $featured,
 			'tab' => $tab,
 			'save_search_popup' => $save_search_popup,
-			'save_vehicle_popup' => $save_vehicle_popup
-			);
+			'save_vehicle_popup' => $save_vehicle_popup,
+			'search_title' => $search_title,
+			'search_location' => $search_location,
+			'search_filter' => $search_filter
+		);
 
 		$this->layout->contents = View::make('search/search', $data);
 	}

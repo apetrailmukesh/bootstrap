@@ -152,4 +152,7 @@
 		</div>
 	</div>
 </div>
+<input type="hidden" id="search_title" value="{{ $search_title }}">
+<input type="hidden" id="search_filter" value="{{ $search_filter }}">
+<input type="hidden" id="search_location" value="{{ $search_location }}">
 @stop
