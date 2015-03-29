@@ -122,6 +122,20 @@
 		});
 	});
 
+	$('[id*="saved-search-remove-"]').click(function (event) {
+		var id = event.target.id.replace("saved-search-remove-", "");;
+		
+		$.ajax({
+			type: "GET",
+			url: "/user/remove/search",
+			data: {'id' : id},
+			dataType: "json",
+			success: function (data) {
+  				window.location.href = document.URL;
+			}
+		});
+	});
+
 	$('#advanced-search-submit').click(function (event) {
 		var edited = location.protocol + '//' + location.hostname + '/search';
 		edited = updateQueryStringParameter(edited, 'page', '1');

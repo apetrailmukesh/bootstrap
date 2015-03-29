@@ -340,4 +340,14 @@ class UserController extends BaseController {
 
 		return Response::json(array('success' => true));
 	}
+
+	public function removeSavedSearch() {
+		$this->layout->body_class = 'user';
+		$id = Input::get('id', '');
+		if (Auth::check() && !empty($id)) {
+			DB::table('saved_search')->where('id' , '=', $id)->delete();
+		}
+
+		return Response::json(array('success' => true));
+	}
 }
