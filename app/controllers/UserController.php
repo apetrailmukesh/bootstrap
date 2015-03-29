@@ -77,11 +77,30 @@ class UserController extends BaseController {
 
 		$results = array();
 		if (Auth::check()) {
-			$cars = SavedCar::where('user' , '=', Auth::user()->id)->get();
-			$saved_car_count = count($cars);
-			foreach ($cars as $car) {
-				$vehicle = Vehicle::where('vin' , '=', $car->vehicle)->first();
+			$sort = Input::get('sort', '');
+			$sort_query = 'datetime DESC';
+			if ($sort == 'date-0') {
+				$sort_query = 'datetime ASC';
+			} else if ($sort == 'price-1') {
+				$sort_query = 'price DESC';
+			} else if ($sort == 'price-0') {
+				$sort_query = 'price ASC';
+			} else if ($sort == 'mileage-1') {
+				$sort_query = 'miles DESC';
+			} else if ($sort == 'mileage-0') {
+				$sort_query = 'miles ASC';
+			} else if ($sort == 'year-1') {
+				$sort_query = 'year DESC';
+			} else if ($sort == 'year-0') {
+				$sort_query = 'year ASC';
+			}
 
+			$cars = DB::select( DB::raw("SELECT * FROM saved_car s INNER JOIN vehicle v ON s.vehicle = v.vin WHERE s.user = :user ORDER by " . $sort_query), array(
+   				'user' => Auth::user()->id
+ 			));
+
+			$saved_car_count = count($cars);
+			foreach ($cars as $vehicle) {
 				$vin = $vehicle->vin;
 				$year = $vehicle->year;
 				$url = $vehicle->url;
@@ -91,7 +110,7 @@ class UserController extends BaseController {
 				$source['model'] = $vehicle->model;
 				$source['price'] = $vehicle->price;
 				$source['miles'] = $vehicle->miles;
-				$source['trim'] = $vehicle->trim;
+				$source['trim'] = $vehicle->feature;
 				$source['transmission'] = $vehicle->transmission;
 				$source['dealer'] = $vehicle->dealer;
 				$source['address'] = $vehicle->address;
