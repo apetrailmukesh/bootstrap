@@ -142,8 +142,9 @@ class SearchController extends BaseController {
 		foreach($selected_filters as $filter) {
 			$search_filter = $search_filter . '<strong -class->' . $filter['name'] . ':' . '</strong>';
 			foreach($filter['values'] as $value) {
-				$search_filter = $search_filter . $value['title'] . ' ';
+				$search_filter = $search_filter . $value['title'] . ',';
 			}
+			$search_filter = substr($search_filter, 0, -1) . ' ';
 		}
 
 		$paid = $aggregations['paid'];

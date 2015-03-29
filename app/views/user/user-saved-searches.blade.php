@@ -58,39 +58,39 @@
 			</div>
 		</div>
 		<div class="row" data-equalizer>
-			@for ($i = 0; $i < 5; $i++)
+			@foreach ($results as $result)
 			<div class="small-12 medium-6 columns card-wrapper" data-equalizer-watch>
 				<div class="search-card">
 					<div class="show-for-small row">
 						<div class="small-12 columns text-right">
-							<span class="fa-icon remove">Remove</span>
+							<span class="fa-icon remove" id="saved-search-remove-{{$result['id']}}">Remove</span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-12 medium-9 columns">
-							<h3><a href="#">{Search Criteria -- could be InvType, Make, Model, Bodystyle, Years, Color, etc}</a></h3>
+							<h3><a href="{{ $result['query'] }}">{{ $result['title'] }}</a></h3>
 						</div>
 						<div class="small-12 hide-for-small medium-3 text-right columns">
-							<span class="fa-icon remove">Remove</span>
+							<span class="fa-icon remove" id="saved-search-remove-{{$result['id']}}">Remove</span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-12 columns">
-							<p><strong class="fa-icon dot">{Filter}:</strong> {Filter Parameters} <strong class="fa-icon dot">{Filter}:</strong> {Filter Parameters} <strong class="fa-icon dot">{Filter}:</strong> {Filter Parameters} <strong class="fa-icon dot">{Filter}:</strong> {Filter Parameters}</p>
-							<p class="small secondary-text">Within {00} miles of {City}, {ST}</p>
+							<p>{{ $result['filter'] }}</p>
+							<p class="small secondary-text">{{ $result['location'] }}</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-12 medium-7 columns">
-							<a href="srp.html" class="button radius">Search</a>
+							<a href="{{ $result['query'] }}" class="button radius">Search</a>
 						</div>
 						<div class="small-12 medium-5 columns">
-							<p class="small secondary-text date">Saved on {MM}/{DD}/{YY}</p>
+							<p class="small secondary-text date">{{ $result['time'] }}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			@endfor
+			@endforeach
 		</div>
 	</div>
 </section>

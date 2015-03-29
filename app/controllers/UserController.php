@@ -95,11 +95,17 @@ class UserController extends BaseController {
 				$sort_query = 'year ASC';
 			}
 
-			$cars = DB::select( DB::raw("SELECT * FROM saved_car s INNER JOIN vehicle v ON s.vehicle = v.vin WHERE s.user = :user ORDER by " . $sort_query), array(
+			$cars = DB::select( DB::raw("SELECT * FROM saved_car s INNER JOIN vehicle v ON s.vehicle = v.vin WHERE s.user = :user ORDER BY " . $sort_query), array(
    				'user' => Auth::user()->id
  			));
 
+			$searches = DB::select( DB::raw("SELECT * FROM saved_search WHERE user = :user"), array(
+   				'user' => Auth::user()->id
+ 			)); 			
+
 			$saved_car_count = count($cars);
+			$saved_search_count = count($searches);
+
 			foreach ($cars as $vehicle) {
 				$vin = $vehicle->vin;
 				$year = $vehicle->year;
@@ -173,6 +179,37 @@ class UserController extends BaseController {
 		$saved_search_count = 0;
 
 		$results = array();
+		if (Auth::check()) {
+			$sort = Input::get('sort', '');
+			$sort_query = 'datetime DESC';
+			if ($sort == 'date-0') {
+				$sort_query = 'datetime ASC';
+			}
+
+			$cars = DB::select( DB::raw("SELECT * FROM saved_car WHERE user = :user"), array(
+   				'user' => Auth::user()->id
+ 			));
+
+			$searches = DB::select( DB::raw("SELECT * FROM saved_search WHERE user = :user ORDER BY " . $sort_query), array(
+   				'user' => Auth::user()->id
+ 			));			
+
+			$saved_car_count = count($cars);
+			$saved_search_count = count($searches);
+
+			foreach ($searches as $search) {
+				$result = array(
+					'id' => $search->id,
+					'title' => $search->title,
+					'filter' => str_replace("-class-", "class='fa-icon dot'", $search->filter),
+					'location' => $search->location,
+					'query' => '/search' . $search->query,
+					'time' => 'Saved on ' . date_format(date_create($search->datetime), 'd/m/Y')
+				);
+
+				array_push($results, $result);
+			}			
+		}
 
 		$data = array(
 			'search_text' => '',
