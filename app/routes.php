@@ -47,3 +47,8 @@ Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserContr
 Route::get('/suggest/vehicle', array('as' => 'get.suggest.vehicle', 'uses' => 'SuggestController@vehicle'));
 Route::get('/suggest/model', array('as' => 'get.suggest.model', 'uses' => 'SuggestController@model'));
 Route::get('/suggest/makemodel', array('as' => 'get.suggest.makemodel', 'uses' => 'SuggestController@makemodel'));
+
+Route::group(array('prefix' => 'api/v1'), function()
+{
+    Route::resource('car', 'CarController', array('only' => array('store')));
+});
