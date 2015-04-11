@@ -157,7 +157,7 @@ class CarController extends BaseController {
 				'record' => $make
 			));
 
-			if (count($records) > 0) {
+			if (count($records) == 0) {
 				$suggestion = new SearchSuggestion;
 			    $suggestion->suggestion = $make;
 			    $suggestion->make = $car->make;
@@ -172,7 +172,7 @@ class CarController extends BaseController {
 				'record' => $make_model
 			));
 
-			if (count($records) > 0) {
+			if (count($records) == 0) {
 				$suggestion = new SearchSuggestion;
 			    $suggestion->suggestion = $make_model;
 			    $suggestion->make = $car->make;
