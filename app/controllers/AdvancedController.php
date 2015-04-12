@@ -43,7 +43,7 @@ class AdvancedController extends BaseController {
 		$used_status_id = '';
 		$statuses = Status::all();
 		foreach ($statuses as $status) {
-			if ($status->status == 'PreOwned') {
+			if ($status->status == 'Used') {
 				$used_status_id = $status->id;
 			} else if ($status->status == 'New') {
 				$new_status_id = $status->id;
