@@ -4,6 +4,7 @@ Route::get('/', array('as' => 'get.home', 'uses' => 'HomeController@index'));
 Route::get('/search', array('as' => 'get.search', 'uses' => 'SearchController@index'));
 Route::get('/advanced', array('as' => 'get.advanced', 'uses' => 'AdvancedController@index'));
 Route::get('/vehicle', array('as' => 'get.vehicle', 'uses' => 'VehicleController@index'));
+Route::get('/vehicle/ads', array('as' => 'get.vehicle.ads', 'uses' => 'VehicleController@adsParameter'));
 
 Route::get('/browse/make', array('as' => 'get.browse.make', 'uses' => 'BrowseController@make'));
 Route::get('/browse/make/model/{id}', array('as' => 'get.browse.make.model', 'uses' => 'BrowseController@makeModel'));

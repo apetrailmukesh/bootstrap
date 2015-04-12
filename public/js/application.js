@@ -37,6 +37,7 @@
 				edited = updateQueryStringParameter(edited, 'search_text', search_text);
   				edited = updateQueryStringParameter(edited, 'page', '1');
   				edited = updateQueryStringParameter(edited, 'sort', 'price-1');
+  				edited = updateAdsParameter(edited);
   				window.location.href = edited;
 			}
 		});
@@ -81,6 +82,7 @@
 		var status = $(this).attr('id');
 	    var edited = updateQueryStringParameter(document.URL, 'status', status);
 	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    edited = updateAdsParameter(edited);
 	    window.location.href = edited;
   		event.preventDefault();
 	});
@@ -219,6 +221,8 @@
 			return $(this).attr('class');
 		}).get();
 		edited = updateQueryStringParameter(edited, 'cylinders', cylindersValues.join('-'));
+
+		edited = updateAdsParameter(edited);
 
   		window.location.href = edited;
   		event.preventDefault();
@@ -634,6 +638,8 @@
 	    	edited = updateQueryStringParameter(edited, 'page', '1');
 		}
 
+		edited = updateAdsParameter(edited);
+
   		window.location.href = edited;
   		event.preventDefault();
 	}
@@ -664,6 +670,8 @@
   		}
 
   		edited = updateQueryStringParameter(edited, 'page', '1');
+  		edited = updateAdsParameter(edited);
+
 	  	window.location.href = edited;
 	  	event.preventDefault();
 	}
@@ -672,6 +680,7 @@
 		var updated = removeItemFromList(getQueryStringParameter(property), id);
 		var edited = updateQueryStringParameter(document.URL, property, updated);
 	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    edited = updateAdsParameter(edited);
   		window.location.href = edited;
   		event.preventDefault();
 	}
@@ -679,8 +688,42 @@
 	function filterCustomRemoved(property) {
 		var edited = updateQueryStringParameter(document.URL, property, '');
 	    edited = updateQueryStringParameter(edited, 'page', '1');
+	    edited = updateAdsParameter(edited);
   		window.location.href = edited;
   		event.preventDefault();
+	}
+
+	function updateAdsParameter(query) {
+		var edited = query;
+
+		if (edited.split('?').length > 1) {
+			var query_string = '?' + edited.split('?')[1];
+			var make = getAdsParameter('make', query_string);
+			var model = getAdsParameter('model', query_string);
+			var body = getAdsParameter('body', query_string);
+			var status = getAdsParameter('status', query_string);
+
+			$.ajax({
+				async: false,
+				type: "GET",
+				url: "/vehicle/ads",
+				data: {'make':make, 'model':model, 'body':body, 'status':status},
+				dataType: "json",
+				success: function (data) {
+					edited = updateQueryStringParameter(edited, 'ads', data.ads);
+				}
+			});		
+		}
+
+		return edited;
+	}
+
+	function getAdsParameter(name, query) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+	    var results = regex.exec(query);
+
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 
 })(jQuery);

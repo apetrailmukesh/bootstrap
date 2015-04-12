@@ -33,4 +33,81 @@ class VehicleController extends BaseController {
 
 		return Redirect::to($vehicle->url);
 	}
+
+	public function adsParameter()
+	{
+		$make_input = Input::get('make', '');
+		$model_input = Input::get('model', '');
+		$body_input = Input::get('body', '');
+		$status_input = Input::get('status', '');
+
+		$statuses = '';
+		$makes = '';
+		$models = '';
+		$bodies = '';
+
+		$new_status_id = '';
+		$used_status_id = '';
+		$status_values = Status::all();
+		foreach ($status_values as $status) {
+			if ($status->status == 'PreOwned') {
+				$used_status_id = $status->id;
+			} else if ($status->status == 'New') {
+				$new_status_id = $status->id;
+			}
+		}
+
+		if ($status_input == $new_status_id) {
+			$statuses = 'New-';
+		} else if ($status_input == $used_status_id) {
+			$statuses = 'Used-';
+		}
+
+		foreach (explode("-", $make_input) as $make) {
+			$entities = Make::where('id' , '=', $make);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$makes = $makes . $entity->make . '-';
+			}
+		}
+
+		foreach (explode("-", $model_input) as $model) {
+			$entities = Model::where('id' , '=', $model);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$models = $models . $entity->model . '-';
+			}
+		}
+
+		foreach (explode("-", $body_input) as $body) {
+			$entities = Body::where('id' , '=', $body);
+			if ($entities->count()) {
+				$entity = $entities->first();
+				$bodies = $bodies . $entity->body . '-';
+			}
+		}
+
+		$ads = '';
+		if (!empty($statuses)) {
+			$ads = $ads . $statuses;
+		}
+
+		if (!empty($makes)) {
+			$ads = $ads . $makes;
+		}
+
+		if (!empty($models)) {
+			$ads = $ads . $models;
+		}
+
+		if (!empty($bodies)) {
+			$ads = $ads . $bodies;
+		}
+
+		if (!empty($ads)) {
+			$ads = substr($ads, 0, -1);
+		}
+
+		return Response::json(array('ads' => $ads));
+	}
 }
