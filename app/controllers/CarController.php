@@ -60,6 +60,7 @@ class CarController extends BaseController {
 
 				        $car->paid = 0;
 				        $car->modified = 1;
+				        $car->deleted = 0;
 
 				        $car->save();	
 					}		
