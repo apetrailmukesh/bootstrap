@@ -9,6 +9,7 @@
 				@if(Auth::check())
 					@if(Auth::user()->role == 1)
 						<li>{{ HTML::linkRoute('get.admin.upload', 'Upload' ) }}</li>
+						<li>{{ HTML::linkRoute('get.admin.settings', 'Settings' ) }}</li>
 						<li>{{ HTML::linkRoute('get.admin.dealers', 'Dealers' ) }}</li>
 						<li>{{ HTML::linkRoute('get.admin.clicks', 'Clicks' ) }}</li>
 					@endif

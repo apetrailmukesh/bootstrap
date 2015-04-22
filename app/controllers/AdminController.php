@@ -25,6 +25,16 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-dealers', $data);
 	}
 
+	public function getSettings()
+	{
+		$this->layout->body_class = 'user';
+		$data = array(
+			'settings' => Setting::all()
+		);
+
+		$this->layout->contents = View::make('admin/admin-settings', $data);
+	}
+
 	public function getClicks()
 	{
 		$this->layout->body_class = 'user';
@@ -78,6 +88,21 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-dealers-edit', $data);
 	}
 
+	public function getEditSettings($id)
+	{
+		$this->layout->body_class = 'user';
+
+		$setting = Setting::find($id);
+
+		$data = array(
+			'id' => $setting->id,
+			'key' => $setting->setting_key,
+			'value' => $setting->setting_value
+		);
+
+		$this->layout->contents = View::make('admin/admin-settings-edit', $data);
+	}
+
 	public function editDealer()
 	{
 		$dealer = Dealer::find(Input::get('id'));
@@ -111,6 +136,15 @@ class AdminController extends BaseController {
 		$dealer->save();
 
     	return Redirect::route('get.admin.dealers');
+	}
+
+	public function editSetting()
+	{
+		$setting = Setting::find(Input::get('id'));
+		$setting->setting_value = Input::get('value');
+		$setting->save();
+
+    	return Redirect::route('get.admin.settings');
 	}
 
 	public function upload()

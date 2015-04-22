@@ -35,13 +35,16 @@ Route::post('/user/save/car', array('as' => 'post.user.save.car', 'uses' => 'Use
 Route::post('/user/save/search', array('as' => 'post.user.save.search', 'uses' => 'UserController@saveSearch'));
 
 Route::get('/admin/upload', array('as' => 'get.admin.upload', 'uses' => 'AdminController@getUpload'))->before('admin');
-Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'AdminController@getDealers'))->before('admin');
 Route::get('/admin/clicks', array('as' => 'get.admin.clicks', 'uses' => 'AdminController@getClicks'))->before('admin');
+Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'AdminController@getDealers'))->before('admin');
 Route::get('/admin/dealers/edit/{id}', array('as' => 'get.admin.dealers.edit', 'uses' => 'AdminController@getEditDealers'))->before('admin');
+Route::get('/admin/settings', array('as' => 'get.admin.settings', 'uses' => 'AdminController@getSettings'))->before('admin');
+Route::get('/admin/settings/edit/{id}', array('as' => 'get.admin.settings.edit', 'uses' => 'AdminController@getEditSettings'))->before('admin');
 
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');
 Route::post('/admin/clicks', array('as' => 'post.admin.clicks', 'uses' => 'AdminController@downloadClicks'))->before('admin');
 Route::post('/admin/dealers/edit/{id}', array('as' => 'post.admin.dealers.edit', 'uses' => 'AdminController@editDealer'))->before('admin');
+Route::post('/admin/settings/edit/{id}', array('as' => 'post.admin.settings.edit', 'uses' => 'AdminController@editSetting'))->before('admin');
 
 Route::get('/user/logout', array('as' => 'get.user.logout', 'uses' => 'UserController@logout'))->before('auth');
 
