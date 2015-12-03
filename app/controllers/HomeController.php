@@ -78,24 +78,9 @@ class HomeController extends BaseController {
 	{
 		$location_searched = Session::get('location_searched', '');
 		if (empty($location_searched)) {
-			$ip_address = $_SERVER['REMOTE_ADDR'];
-
-			if(!empty($ip_address) && filter_var($ip_address, FILTER_VALIDATE_IP)) {
-				$url = 'http://www.telize.com/geoip/'. $ip_address;
-				$curl = curl_init($url);
-				curl_setopt($curl, CURLOPT_HEADER, false);
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-				$json_response = curl_exec($curl);
-				curl_close($curl);
-				Session::put('location_searched', 'true');
-
-				$location = json_decode($json_response, true);
-				
-				if (array_key_exists('postal_code', $location)) {
-					$zip_code = $location['postal_code'];
-					Session::put('zip_code', $zip_code);
-				}
-			}
+			$zip_code = 90001;
+			Session::put('zip_code', $zip_code);
+			Session::put('location_searched', 'true');
 		}
 	}
 }
