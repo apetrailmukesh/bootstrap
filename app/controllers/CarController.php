@@ -25,10 +25,10 @@ class CarController extends BaseController {
 
 						if ($car->price != $this->getDouble($input, 'price')) {
 							$data['message'] = 'Existing vehicle with new price';
-			    			$data['code'] = 255;	
+			    			$data['code'] = 203;	
 						}  else if ($car->miles != $this->getInt($input, 'miles')) {
 							$data['message'] = 'Existing vehicle with new mileage';
-			    			$data['code'] = 256;	
+			    			$data['code'] = 202;	
 						} else {
 							$data['message'] = 'Existing vehicle with no change';
 			    			$data['code'] = 200;	
@@ -76,12 +76,12 @@ class CarController extends BaseController {
 				}
 			} else {
 				$data['message'] = 'Missing required parameters';
-	    		$data['code'] = 455;
+	    		$data['code'] = 401;
 			}
 	    }
 	    catch(Illuminate\Database\QueryException $sql_exception) {
 	    	$data['message'] = 'Invalid data found';
-	    	$data['code'] = 456;
+	    	$data['code'] = 402;
 	    }
 	    catch(Exception $exception) {
 	    	$data['message'] = 'Internal server error';
