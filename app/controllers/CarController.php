@@ -6,7 +6,7 @@ class CarController extends BaseController {
 
 	public function store()
 	{
-		$data = array('message' => 'Vehicle added successfully', 'success' => true);
+		$data = array('message' => 'Vehicle added successfully', 'code' => 200);
 
 		try {
 			$input = Input::json();
@@ -17,73 +17,78 @@ class CarController extends BaseController {
 			if (!empty($vin) && !empty($sign)) {
 				$hash = hash('sha256', $vin . '-' . $this->secret);
 				if ($hash == $sign) {
+					$car = new Vehicle;
+
 					$cars = Vehicle::where('vin' , '=', $vin);
 					if ($cars->count() > 0) {
-						$data['message'] = 'Vehicle already exists';
-			    		$data['success'] = false;
+						$car = $cars->first();
+
+						if ($car->price != $this->getDouble($input, 'price')) {
+							$data['message'] = 'Existing vehicle with new price';
+			    			$data['code'] = 255;	
+						}  else if ($car->miles != $this->getInt($input, 'miles')) {
+							$data['message'] = 'Existing vehicle with new mileage';
+			    			$data['code'] = 256;	
+						} else {
+							$data['message'] = 'Existing vehicle with no change';
+			    			$data['code'] = 200;	
+						}
 					} else {
-						$car = new Vehicle;
+						$data['message'] = 'New vehicle';
+			    		$data['code'] = 201;
+			    	}
 
-						$car->vin = $vin;
-						$car->url = $input->get('url', '');
-						$car->address = $input->get('address', '');
-						$car->city = $input->get('city', '');
-						$car->state = $input->get('state', '');
-						$car->photo = $input->get('photo', '');
+					$car->vin = $vin;
+					$car->url = $input->get('url', '');
+					$car->address = $input->get('address', '');
+					$car->city = $input->get('city', '');
+					$car->state = $input->get('state', '');
+					$car->photo = $input->get('photo', '');
+					$car->certified = $this->getBoolean($input, 'certified');
+					$car->year = $this->getInt($input, 'year');
+					$car->miles = $this->getInt($input, 'miles');
+					$car->zip = $this->getInt($input, 'zip');
+					$car->doors = $this->getInt($input, 'doors');
+					$car->cylinders = $this->getInt($input, 'cylinders');
+					$car->price = $this->getDouble($input, 'price');
+					$car->latitude = $this->getDouble($input, 'latitude');
+					$car->longitude = $this->getDouble($input, 'longitude');
+					$car->make = $this->getPropertyId($input, 'make');
+					$car->model = $this->getPropertyId($input, 'model');
+					$car->feature = $this->getPropertyId($input, 'feature');
+					$car->status = $this->getPropertyId($input, 'status');
+					$car->body = $this->getPropertyId($input, 'body');
+					$car->fuel = $this->getPropertyId($input, 'fuel');
+					$car->drive = $this->getPropertyId($input, 'drive');
+					$car->interior = $this->getPropertyId($input, 'interior');
+					$car->exterior = $this->getPropertyId($input, 'exterior');
+					$car->transmission = $this->getPropertyId($input, 'transmission');
+					$this->setSuggestions($car, $input->get('make', ''), $input->get('model', ''));        
+			        $car = $this->setDealerProperties($car, $input, 'dealer');  
+			        $car->paid = 0;
+			        $car->modified = 1;
+			        $car->deleted = 0;
 
-						$car->certified = $this->getBoolean($input, 'certified');
-
-						$car->year = $this->getInt($input, 'year');
-						$car->miles = $this->getInt($input, 'miles');
-						$car->zip = $this->getInt($input, 'zip');
-						$car->doors = $this->getInt($input, 'doors');
-						$car->cylinders = $this->getInt($input, 'cylinders');
-
-						$car->price = $this->getDouble($input, 'price');
-						$car->latitude = $this->getDouble($input, 'latitude');
-						$car->longitude = $this->getDouble($input, 'longitude');
-
-						$car->make = $this->getPropertyId($input, 'make');
-						$car->model = $this->getPropertyId($input, 'model');
-						$car->feature = $this->getPropertyId($input, 'feature');
-						$car->status = $this->getPropertyId($input, 'status');
-						$car->body = $this->getPropertyId($input, 'body');
-						$car->fuel = $this->getPropertyId($input, 'fuel');
-						$car->drive = $this->getPropertyId($input, 'drive');
-						$car->interior = $this->getPropertyId($input, 'interior');
-						$car->exterior = $this->getPropertyId($input, 'exterior');
-						$car->transmission = $this->getPropertyId($input, 'transmission');
-
-						$this->setSuggestions($car, $input->get('make', ''), $input->get('model', ''));
-				        
-				        $car = $this->setDealerProperties($car, $input, 'dealer');  
-
-				        $car->paid = 0;
-				        $car->modified = 1;
-				        $car->deleted = 0;
-
-				        $car->save();	
-					}		
+			        $car->save();			
 				} else {
 					$data['message'] = 'Authentication failed';
-	    			$data['success'] = false;
+	    			$data['code'] = 403;
 				}
 			} else {
-				$data['message'] = 'Required parameters missing';
-	    		$data['success'] = false;
+				$data['message'] = 'Missing required parameters';
+	    		$data['code'] = 455;
 			}
 	    }
 	    catch(Illuminate\Database\QueryException $sql_exception) {
 	    	$data['message'] = 'Invalid data found';
-	    	$data['success'] = false;
+	    	$data['code'] = 456;
 	    }
 	    catch(Exception $exception) {
-	    	$data['message'] = 'Unknown error occurred';
-	    	$data['message'] = $exception->getMessage();
-	    	$data['success'] = false;
+	    	$data['message'] = 'Internal server error';
+	    	$data['code'] = 500;
 	    }
 
-		return Response::json($data);
+		return Response::json(['message' => $data['message']], $data['code']);
 	}
 
 	public function getBoolean($input, $property) {
