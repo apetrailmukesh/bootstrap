@@ -384,6 +384,10 @@ class SearchController extends BaseController {
 			$and = $this->utility_exterior->buildFilterQuery($and, Input::get('exterior', ''));
 		}
 
+		if ($exclude != 'dealer') {
+			$and = $this->utility_dealer->buildFilterQuery($and, Input::get('dealer', ''));
+		}
+
 		$filter = array();
 		if (sizeof($and) > 0) {
 			$filter['and'] = $and;
@@ -591,6 +595,13 @@ class SearchController extends BaseController {
 		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
 		$sub_query = json_encode($search_query);
 		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
+
+		$filter = $this->buildFilterQuery('dealer');
+		$query = $this->buildSearchQuery($filter);
+		$aggs = $this->utility_dealer->buildAggregationQuery();
+		$search_query = array("size" => 0, "query" => $query, "aggs" => $aggs);
+		$sub_query = json_encode($search_query);
+		$content = $content . "{}" . PHP_EOL. $sub_query . PHP_EOL;
 		
 		$url = "http://localhost:9200/vehicles/vehicle/_msearch";
 		$curl = curl_init($url);
@@ -622,7 +633,8 @@ class SearchController extends BaseController {
 			"cylinders" => $this->utility_cylinders->decodeAggregation($results['responses'][13]),
 			"photo" => $this->utility_photo->decodeAggregation($results['responses'][14], $results['responses'][15]),
 			"certified" => $this->utility_certified->decodeAggregation($results['responses'][16], $results['responses'][17]),
-			"paid" => $results['responses'][18]['aggregations']['paid']['doc_count']
+			"paid" => $results['responses'][18]['aggregations']['paid']['doc_count'],
+			"dealer" => $this->utility_dealer->decodeAggregation($results['responses'][19])
 		);
 
 		return $aggregations;
@@ -647,6 +659,7 @@ class SearchController extends BaseController {
 		$filters = $this->utility_fuel->findSelectedFilter($filters, $aggregations, Input::get('fuel', ''));
 		$filters = $this->utility_doors->findSelectedFilter($filters, $aggregations, Input::get('doors', ''));
 		$filters = $this->utility_photo->findSelectedFilter($filters, $aggregations, Input::get('photo', ''));
+		$filters = $this->utility_dealer->findSelectedFilter($filters, $aggregations, Input::get('dealer', ''));
 
 		return $filters;
 	}
@@ -670,6 +683,7 @@ class SearchController extends BaseController {
 		if (empty(Input::get('fuel', ''))) array_push($remaining, array('name' => "Fuel", "modal" => "fuel"));
 		if (empty(Input::get('doors', ''))) array_push($remaining, array('name' => "Door Count", "modal" => "doors"));
 		if (empty(Input::get('photo', ''))) array_push($remaining, array('name' => "Photos", "modal" => "photo"));
+		if (empty(Input::get('dealer', ''))) array_push($remaining, array('name' => "Dealer", "modal" => "dealer"));
 
 		return $remaining;
 	}

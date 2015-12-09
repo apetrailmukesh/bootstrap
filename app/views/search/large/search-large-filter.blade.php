@@ -49,6 +49,7 @@
 				@include('search/large/search-large-filter-doors')
 				@include('search/large/search-large-filter-status')
 				@include('search/large/search-large-filter-photo')
+				@include('search/large/search-large-filter-dealer')
 			</div>
 		</div>
 	</div>

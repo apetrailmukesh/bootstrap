@@ -222,6 +222,11 @@
 		}).get();
 		edited = updateQueryStringParameter(edited, 'cylinders', cylindersValues.join('-'));
 
+		var dealerValues = $('#advanced-dealer').find('input:checked').map(function() {
+			return $(this).attr('class');
+		}).get();
+		edited = updateQueryStringParameter(edited, 'dealer', dealerValues.join('-'));
+
 		edited = updateAdsParameter(edited);
 
   		window.location.href = edited;
@@ -392,6 +397,8 @@
 		selectCheckboxFilter($('div#mobileFuelModal'), 'fuel', 'mobile-');
 		selectCheckboxFilter($('div#driveModal'), 'drive', '');
 		selectCheckboxFilter($('div#mobileDriveModal'), 'drive', 'mobile-');
+		selectCheckboxFilter($('div#dealerModal'), 'dealer', '');
+		selectCheckboxFilter($('div#mobileDealerModal'), 'dealer', 'mobile-');
 
 		selectRadioFilter($('div#mileageModal'), 'mileage', '');
 		selectRadioFilter($('div#mobileMileageModal'), 'mileage', 'mobile-');
@@ -487,6 +494,7 @@
 	applyFilterFunctions('cylinders', 'Cylinders', 'checkbox');
 	applyFilterFunctions('fuel', 'Fuel', 'checkbox');
 	applyFilterFunctions('drive', 'Drive', 'checkbox');
+	applyFilterFunctions('dealer', 'Dealer', 'checkbox');
 
 	function applyFilterFunctions(large, mobile, type) {
 		if (type == 'checkbox') {
@@ -587,6 +595,7 @@
 	applyAdvancedFilterFunctions('doors', 'checkbox');
 	applyAdvancedFilterFunctions('cylinders', 'checkbox');
 	applyAdvancedFilterFunctions('fuel', 'checkbox');
+	applyAdvancedFilterFunctions('dealer', 'checkbox');
 
 	function applyAdvancedFilterFunctions(div, type) {
 		if (type == 'checkbox') {

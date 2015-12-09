@@ -63,6 +63,7 @@
 				@include('search/mobile/search-mobile-filter-doors')
 				@include('search/mobile/search-mobile-filter-status')
 				@include('search/mobile/search-mobile-filter-photo')
+				@include('search/mobile/search-mobile-filter-dealer')
 			</div>
 		</div>
 	</aside>
