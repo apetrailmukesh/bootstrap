@@ -420,13 +420,14 @@ class SearchController extends BaseController {
 
 	public function decodeResults($search_results)
 	{
+
 		$results = array();
 		foreach ($search_results['hits']['hits'] as $value) {
 			$source = $value['_source'];
 
 			$vin = $source['vin'];
-			$year = $source['year'];
-			$url = $source['url'];
+			$year = $this->getValue($source, 'year');
+			$url = $this->getValue($source, 'url');			
 
 			$make = $this->utility_make->getValue($source);
 			$model = $this->utility_model->getValue($source);
@@ -696,5 +697,17 @@ class SearchController extends BaseController {
 			Session::put('zip_code', $zip_code);
 			Session::put('location_searched', 'true');
 		}
+	}
+
+	private function getValue($source, $key)
+	{
+
+		$value = '';
+
+		if (array_key_exists($key, $source)) {
+			$value = $source[$key];
+		}
+
+		return $value;
 	}
 }
