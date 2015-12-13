@@ -103,6 +103,20 @@ class AdminController extends BaseController {
 		$this->layout->contents = View::make('admin/admin-settings-edit', $data);
 	}
 
+	public function getReportVehicle($id)
+	{
+		$filename = storage_path() . '/downloads/' . $id;
+
+		$headers = array(
+            'Content-Type' => 'application/zip'
+        );
+
+		$response = Response::download($filename, $id, $headers);
+		ob_end_clean();
+
+        return $response;
+	}
+
 	public function editDealer()
 	{
 		$dealer = Dealer::find(Input::get('id'));

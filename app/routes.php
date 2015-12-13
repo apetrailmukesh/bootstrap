@@ -40,6 +40,7 @@ Route::get('/admin/dealers', array('as' => 'get.admin.dealers', 'uses' => 'Admin
 Route::get('/admin/dealers/edit/{id}', array('as' => 'get.admin.dealers.edit', 'uses' => 'AdminController@getEditDealers'))->before('admin');
 Route::get('/admin/settings', array('as' => 'get.admin.settings', 'uses' => 'AdminController@getSettings'))->before('admin');
 Route::get('/admin/settings/edit/{id}', array('as' => 'get.admin.settings.edit', 'uses' => 'AdminController@getEditSettings'))->before('admin');
+Route::get('/admin/reports/vehicle/{id}', array('as' => 'get.admin.reports.vehicle', 'uses' => 'AdminController@getReportVehicle'))->before('admin');
 
 Route::post('/admin/upload', array('as' => 'post.admin.upload', 'uses' => 'AdminController@upload'))->before('admin');
 Route::post('/admin/clicks', array('as' => 'post.admin.clicks', 'uses' => 'AdminController@downloadClicks'))->before('admin');
