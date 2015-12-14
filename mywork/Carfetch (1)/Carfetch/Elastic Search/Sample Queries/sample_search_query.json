@@ -1,0 +1,96 @@
+{
+    "from": 0,
+    "size": 10,
+    "sort": [
+        {
+            "paid": {
+                "order": "desc"
+            }
+        },
+        {
+            "price": {
+                "order": "desc",
+                "mode": "min"
+            }
+        }
+    ],
+    "query": {
+        "constant_score": {
+            "filter": {
+                "and": [
+                    {
+                        "geo_distance": {
+                            "pin.location": {
+                                "lat": 37.669998168945,
+                                "lon": -122.08000183105
+                            },
+                            "distance": "80.4672km"
+                        }
+                    },
+                    {
+                        "or": [
+                            {
+                                "term": {
+                                    "make": "9"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "or": [
+                            {
+                                "term": {
+                                    "model": "11"
+                                }
+                            },
+                            {
+                                "term": {
+                                    "model": "12"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "range": {
+                            "miles": {
+                                "lte": 60000
+                            }
+                        }
+                    },
+                    {
+                        "or": [
+                            {
+                                "exists": {
+                                    "field": "photo"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "or": [
+                            {
+                                "term": {
+                                    "transmission": "1"
+                                }
+                            },
+                            {
+                                "term": {
+                                    "transmission": "3"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "or": [
+                            {
+                                "term": {
+                                    "doors": "2"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

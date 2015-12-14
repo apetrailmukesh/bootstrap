@@ -1,0 +1,5 @@
+// Run background task
+sudo nohup java -jar automotive-search-engine-loader.jar /var/www/automotive-search-engine/app/storage 2 root d3v1ls &
+
+// Sample API call
+curl -XPOST 'http://http://automotive-search-engine.com/api/v1/car?sign=c69c7c3c44ca3a7ac42bac841049d712992f2f1d7c6929cfb53a937b7c11bae1&vin=AA' -d @car.json

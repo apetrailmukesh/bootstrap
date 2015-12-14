@@ -1,0 +1,32 @@
+{
+    "vin": "19UUA56872A026263",
+    "url": "http://api.vinclicks.com/ppc/?request=AdLink&pubId=1814167469&ad=19UUA56872A026263",
+    "address": "6520 UNIVERSITY DRIVE NW",
+    "city": "Huntsville",
+    "state": "AL",
+    "photo": "http://images.vinclicks.com/19UUA56872A026263_1_img.jpg",
+    "year": 2002,
+    "make": 13,
+    "model": 26,
+    "feature": 669,
+    "status": 1,
+    "body": 3,
+    "fuel": 1,
+    "drive": 1,
+    "exterior": 95,
+    "miles": 125000,
+    "transmission": 1,
+    "zip": 35806,
+    "doors": 4,
+    "cylinders": 6,
+    "price": 6995,
+    "dealer": 278,
+    "certified": 0,
+    "paid": 1,
+    "pin": {
+        "location": {
+            "lat": 34.759,
+            "lon": -86.69
+        }
+    }
+}

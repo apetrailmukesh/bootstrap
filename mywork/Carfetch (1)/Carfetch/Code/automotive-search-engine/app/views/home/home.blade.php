@@ -1,0 +1,11 @@
+@section('contents')
+<header>
+	@include('header')
+</header>
+<section>
+	@include('logo')
+	@include('home/home-search')
+	@include('home/home-location')
+	@include('home/home-browse')
+</section>
+@stop

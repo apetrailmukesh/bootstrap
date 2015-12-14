@@ -1,0 +1,645 @@
+/* sitename main CSS file */
+/* foundation CSS overrides */
+body, p {
+	color:#2C3E50;
+	font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:300
+}
+	body {position:relative}
+h1, h2, h3, h4, h5, h6 {margin-top:0.75em}
+	h1, h2, h3 {
+		font-family:"Roboto Slab", serif;
+		font-weight:bold;
+	}
+	h4, h5, h6 {
+		font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight:500
+	}
+		h1 {font-size:2rem}
+		h2 {font-size:1.5rem}
+		h3 {font-size:1.125rem}
+		h4 {font-size:1.125rem}
+		h5 {font-size:1rem}
+.row {max-width:75em}
+.contain-to-grid, .top-bar, .top-bar ul li, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section li:not(.has-form) a:not(.button):hover {background:#ECF0F1}
+	.top-bar-section ul li > a {
+		font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:0.875em;
+		font-weight:300
+	}
+		.top-bar-section li:not(.has-form) a:not(.button) {
+			line-height:1.875rem;
+			padding:0 0.625rem;
+		}
+			.top-bar-section li:not(.has-form) a:not(.button):hover {
+				color:#3498DB; 
+				text-decoration:underline
+			}
+	.top-bar .toggle-topbar a {
+		font-size:0.875em;
+		font-weight:300;
+		text-transform: none
+	}
+		.top-bar.expanded .toggle-topbar a {color:#2E86C1}
+a, .top-bar-section ul li > a, .top-bar .toggle-topbar a, .reveal-modal .close-reveal-modal, dialog .close-reveal-modal, .side-nav li a:not(.button) {color:#3498DB}
+	a:hover, .close-reveal-modal:hover, .side-nav li a:not(.button):hover {
+		color:#2E86C1;
+		text-decoration: underline
+	}
+		.close-reveal-modal:hover, a.button:hover {text-decoration: none}
+	a:active, a:focus, .close-reveal-modal:active, .close-reveal-modal:focus, .side-nav li a:not(.button):focus {color:#2875A8}
+button, .button {
+	background-color:#3498DB;
+	border-color:#3498DB
+}
+	button:hover, .button:hover {background-color:#2E86C1}
+	button:focus, .button:focus {background-color:#2875A8}
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea, .prefix,
+.postfix, select {
+	font-size:1.125rem;
+	font-weight:300;
+	height:3.125rem;
+}
+	.postfix {line-height:3.125rem}
+select {
+	background-color:#fff;
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height:normal
+}
+	select:hover {background-color:#fff}
+label {font-size:1rem}
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="color"]:focus, textarea:focus, select:focus {
+	background:#fff;
+	border-color:#3498DB;
+	box-shadow: none;
+	outline:0
+}
+	button:focus, .button:focus {outline:none}
+
+.location-modal .small-6.large-4:first-child {padding-left:0}
+ul.pagination li a, ul.pagination li button {font-weight:300}
+.side-nav {
+	font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding:0.25rem 0 0.875rem 0;
+}
+	.side-nav li {
+		font-size:1rem;
+		font-weight:200
+	}
+		.side-nav li a:not(.button) {padding:0.4375rem 0}
+			.side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {background:none}
+label.inline {padding-top:0.4rem}
+.left-off-canvas-menu {background:#F4F8F9}
+.move-right .exit-off-canvas {box-shadow: -4px 0 4px rgba(0, 0, 0, 0.1), 2px 0 2px rgba(0, 0, 0, 0.1)}
+.reveal-modal-bg {position:fixed}
+.tabs {
+	border-left:1px solid #CCD1D1;
+	border-bottom:1px solid #CCD1D1;
+	margin-top:1rem
+}
+	.tabs dd > a, .tabs .tab-title > a {
+		background-color:#F4F8F9;
+		border:1px solid #CCD1D1;
+		border-left-width:0;
+		color:#3498DB;
+		font-family: "Roboto Medium", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:1.125em;
+		margin-bottom:-1px;
+	}
+		.tabs dd > a .count, .tabs .tab-title > a .count {
+			color:#9ea7af;
+			font-size:0.875em;
+			font-weight:300;
+		}
+		.tabs dd > a:hover, .tabs .tab-title > a:hover {
+			background-color: #ECF0F1;
+			text-decoration:none 
+		}
+	.tabs dd.active a, .tabs .tab-title.active a {
+		background-color: #FFFFFF;
+		border-bottom:1px solid #fff;
+		color: #222222;
+		font-weight:500;
+	}
+.sub-nav {
+	background-color:#f2f2f2;
+	border:0;
+	font-family:"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif''
+	margin-top:0.5em;
+	padding:0.625em 0.625em 0.625em 0
+}
+	.sub-nav dd > a {
+		background:none;
+		border:0;
+		color:#999;
+		display:inline;
+		font-size:0.875rem;
+		font-weight:300;
+	}
+	.sub-nav dd.active a {
+		background:#3498DB;
+		border:0;
+		color:#fff;
+		font-weight:300
+	}
+.breadcrumbs {
+	background:none;
+	border-width:0;
+	border-bottom:1px solid #DEE2E2;
+	border-radius:0;
+	padding:1.25rem 0 1rem 0
+}
+	.breadcrumbs > * {
+		color:#3498DB;
+		font-size:0.875rem;
+		line-height:1.75rem
+	}
+		.breadcrumbs > *.current {color:#222222}
+		.breadcrumbs > *:before {display:inline-block}
+fieldset {
+	border:0;
+	border-top:1px solid #DEE2E2;
+	padding:1.25rem 0 0 0
+}
+	fieldset:first-child {
+		border-top:0;
+		padding-top:0
+	}
+	fieldset legend {
+		font-size:1.5rem;
+		margin-bottom:0.5em
+	}
+	fieldset input[type="checkbox"] ~ label, fieldset input[type="radio"] ~ label {font-weight:300}
+	fieldset button[type="submit"] {margin-top:0.75em}
+/* typeahead CSS settings */
+.twitter-typeahead {width:100%} /* force input box to be 100% width */
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top:0;
+  padding:0.5rem 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  max-height:275px;
+  overflow-y:auto
+}
+.tt-suggestion {
+  padding:0.25rem 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.6
+}
+	.tt-suggestion.tt-cursor {background-color:#3498DB}
+		.tt-suggestion.tt-cursor p {color:#fff}
+	.tt-suggestion p {margin: 0}
+.gist {font-size: 0.875rem}
+.tt-dropdown-menu {
+  width: 100%;
+  margin-top: 0rem;
+  padding:0.25rem 0rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2)
+}
+/* sitename custom CSS */
+.secondary-text {color:#9EA7AF}
+.hint-text {color:#DEE2E2}
+::-webkit-input-placeholder {font-style: italic} :-moz-placeholder {font-style: italic}  ::-moz-placeholder {font-style: italic} :-ms-input-placeholder {font-style: italic}
+strong {font-weight:500}
+.not-visible {display:none}
+.column.no-left-pad, .columns.no-left-pad {padding-left:0}
+/* make the footer stick to the bottom of the window */
+.sticky {
+	bottom:0;
+	position:absolute;
+	width:100%
+}
+/* logo/tagline styles */
+.logo {
+	margin:0;
+	padding-top:0.3em
+}
+	.logo:before {
+		display:inline-block;
+		height: 91px;
+		margin-right:0.25em;
+		margin-top:-0.35em;
+		vertical-align:middle;
+		width: 62px
+	}
+	.logo-link:hover, .logo-link:focus {text-decoration:none}
+	.logo span:nth-child(1) {color:#98B548}
+	.logo span:nth-child(2) {
+		color:#3498DB;
+		font-weight:300;
+	}
+	.logo span:nth-child(3) {
+		color:#3498DB;
+		font-size:0.593em;
+		font-weight:100
+	}
+	.logo:before {
+		background:url(../images/fido.svg) no-repeat;
+		content:""
+	}		
+/* home page logo font size and positioning */
+.home .logo {
+	font-size:2.75rem;
+	margin-top:2rem;
+	position:relative;
+}
+	.home .logo:before {
+		display:block;
+		height:112px;
+		margin:0 auto;
+		padding-right:2em;
+		position:relative;
+		width:78px
+	}
+/* home page search options */
+.search-options {
+	font-size:0.875rem;
+	margin-top:3rem;
+}
+/* srp page */
+.search-bkgrd {
+	background:#F4F8F9;
+	padding-top:1.5em
+}
+.mobile-search-box {margin-top:1em}
+.subhead {margin:1.5rem 0 0 0}
+select.small {
+	font-size:1em;
+	height:2rem;
+	padding:0.25rem
+}
+.srp section[role="main"] > .row {margin-top:-1rem}
+.vehicle {
+	border-bottom:1px solid #DEE2E2;
+	padding:0.5rem 0 1rem 0
+}
+	.vehicle img {
+		margin-bottom:0.75rem;
+		width:100% /* setup for responsive images */
+	} 
+	.vehicle .row + .row {margin-top:0.5rem}
+		.vehicle .row:nth-child(2) > .columns:nth-child(1) {padding-right:0}
+	.vehicle h2 {
+		font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:1.250rem;
+		font-weight:500;
+		margin-bottom:0.15rem
+	}
+	.vehicle .small {
+		font-size:0.750rem;
+		font-style:italic
+	}
+	.vehicle p {margin-bottom:0.6rem}
+	.vehicle .price {
+		color:#98B548;
+		font-size:1.5rem;
+		line-height:0;
+		margin-right:0.5em
+	}
+	.vehicle .detailed-description, .fa-icon.email-alerts + .secondary-text {font-size:0.875rem}
+	.vehicle .fa-icon.save, .vehicle .fa-icon.saved {margin-right:1.5rem}
+.pagination {margin:2rem 0}
+.sidebar {
+	background:#F4F8F9;
+	margin-top:1rem;
+	padding:0 1.25rem
+}
+	.sidebar > div:first-child > h3 {padding-top:1.25rem}
+		.sidebar h3 {margin:0}
+	.sidebar p {line-height:1.2}
+	.filters-selected {padding-bottom:1rem}
+	.fa-icon.email-alerts {display:block}
+	/* selected section */
+	.side-nav li > ul {
+		list-style:none;
+		margin-left:0
+	}
+		.side-nav li > ul span {font-weight:500}
+		.side-nav li > ul .edit {
+			display:inline-block;
+			font-size:0.750em
+		}
+/* filter modals */
+.filter-modal label {font-weight:300}
+.filter-modal p {margin-bottom:0.5rem}
+.filter-modal .border {
+	border-bottom:1px solid #DEE2E2;
+	margin:1rem 0;
+	padding-bottom:0.25rem
+}
+.filter-modal button {margin-top:0.75rem}
+.reveal-modal .close-reveal-modal.cancel, dialog .close-reveal-modal.cancel {
+	font-size: 1rem;
+	position: inherit;
+	top: 0rem;
+	right:0rem;
+	margin-left:1.75rem;
+	font-weight: 300;
+}
+/* no results page */
+.no-results {padding-top:1.5rem}
+	.no-results h1 {margin-bottom:0}
+	.no-results p {margin-bottom:0.75em}
+/* SEO pages */
+.block-list a {
+	display:block;
+	font-size:0.875rem;
+	padding:1em 0 0 0
+}
+/* favourites section */
+.favourite-sort {padding-top:1.25em}
+/* saved vehicles/searches */
+.card-wrapper {
+	display:table;
+	margin-bottom:1.75em
+}
+	.vehicle-card, .search-card {
+		border:1px solid #DEE2E2;
+		display:table-cell;
+		height:100%;
+		padding:1em 1em 0.5em 1em
+	}
+		.vehicle-card h3, .search-card h3 {margin:0 0 0.75em 0}
+		.vehicle-card .fa-icon, .search-card .fa-icon.remove {font-size:0.875em}
+			.vehicle-card .fa-icon.remove, .search-card .fa-icon.remove {color:#3498DB}
+				.vehicle-card .fa-icon.remove:hover, .search-card .fa-icon.remove:hover {
+					color:#2E86C1;
+					cursor:pointer;
+					text-decoration:underline
+				}
+		.vehicle-card img {
+			border:1px solid #9EA7AF;
+			display:block;
+			width:100% /* responsive images */
+		}
+		.vehicle-card .badge.sold {
+			background:#98B548;
+			color:#fff;
+			display:block;
+			font-weight:bold;
+			margin-top:-2rem;
+			padding:0.25em 0;
+			position:relative;
+			text-align:center;
+			text-transform:uppercase;
+		}
+		.vehicle-card p, .search-card p {margin-bottom:0.5em}
+		.vehicle-card .price {
+			color:#98B548;
+			font-size:1.5rem;
+			line-height:0;
+			margin-right:0.5em
+		}
+		.vehicle-card .small, .search-card .small {font-size:0.875rem}
+		.search-card .fa-icon:before {
+			font-size:0.25em;
+			vertical-align:middle
+		}
+			.search-card .fa-icon.dot:first-child:before {
+				content:"";
+				margin-right:0
+			}
+		.search-card .button {margin-top:0.75em}
+/* save modal */
+.save-modal .close-reveal-modal.small {
+	display:block;
+	font-size:1rem;
+	font-weight:300;
+	position:relative;
+	right:0
+}
+/* footer section */
+footer {
+	border-top:1px solid #DEE2E2;
+	font-size:0.857em;
+	margin-top:2rem;
+	padding:1.5em 0
+}
+	footer span {display:block}
+	footer a:after, .search-options a:after {
+		color:#2C3E50;
+		content:"|";
+		display:inline-block;
+		padding:0 0.5em
+	}
+		footer a:last-child:after, .search-options a:last-child:after {
+			content:"";
+			padding:0
+		}
+/* bodystyle icons */
+.icon-wrapper {margin-top:1.75em}
+	.icon {
+		display:block;
+		fill:#98B548;
+		height:53px;
+		margin:0 auto
+	}
+		.icon-convertible {width:101px}
+		.icon-coupe {width:102px}
+		.icon-van {width:85px}
+		.icon-hatchback {width:66px}
+		.icon-minivan {width:100px}
+		.icon-suv {width:92px}
+		.icon-sedan {width:90px}
+		.icon-truck {width:102px}
+		.icon-wagon {width:90px}
+/* font icons */
+.fa-icon:before, .fa-icon:after {
+	display:inline-block;
+	font:normal normal normal 14px/1 FontAwesome;
+	font-size:inherit;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale
+}
+	.top-bar .toggle-topbar a.fa-icon:after {
+		content:"\f0d7";
+		margin-left:0.25em
+	}
+		.top-bar.expanded .toggle-topbar a.fa-icon:after {content:"\f0d8"}
+	.fa-icon.location:before {
+		content:"\f041";
+		margin-right:0.5em;
+	}
+	.fa-icon.search:before {
+		color:#3498DB;
+		content:"\f002";
+		font-size:1.75rem;
+		margin-top:0.75rem
+	}
+	.fa-icon.save:before {
+		content:"\f097";
+		margin-right:0.5em
+	}
+	.fa-icon.saved:before {
+		content:"\f02e";
+		margin-right:0.5em
+	}
+	.fa-icon.share:before {
+		content:"\f064";
+		margin-right:0.5em
+	}
+	.fa-icon.close:after, .fa-icon.plus:after {
+		content:"\f00d";
+		font-size:0.857em;
+		margin-left:0.5em;
+	}
+		.fa-icon.plus:after {content:"\f067"}
+	.fa-icon.email-alerts:before {
+		content:"\f0f3";
+		margin-right:0.25em
+	}
+	.fa-icon.home:before {
+		content:"\f015";
+		color:#3498DB;
+		top:0	
+	}
+	.fa-icon.remove:after {
+		content:"\f00d";
+		margin-left:0.5em
+	}
+	.fa-icon.dot:before {
+		content:"\f111";
+		margin-right:0.5em
+	}
+/* media queries */
+@media only screen and (max-width:40em) { /* MOBILE ONLY */
+	/* logo overrides */
+	.logo:before {
+		height:52px;
+		width:36px
+	}
+	/* home page overrides */
+	a.location > span, .search-options > span {display:block}
+	.location-modal .small-12 {
+		margin-top:-1rem;
+		padding-left:0
+	}
+	.home .logo:before {padding-right:2.35em}
+	/* srp overrides */
+	.tabs dd > a, .tabs .tab-title > a {padding:0.75rem 1.9rem}
+	.search-bkgrd {padding-top:0em}
+	.srp section[role="main"] header {margin-top:1.5rem}
+		.srp section[role="main"] h1 {margin-top:0}
+	.subhead {margin:0.75rem 0 0 0}
+	.vehicle {padding-top:0}
+		.vehicle h2 {font-size:1rem}
+		.vehicle p, .location-change {font-size:0.875rem}
+			.location-change a {display:block}
+		.vehicle .price {
+			font-size:1.125rem;
+			line-height:0;
+			margin-right:0.25em
+		}
+		.vehicle .fa-icon.save, .vehicle .fa-icon.saved {
+			display:block;
+			margin-bottom:0.5rem
+		}
+	.pagination {margin:1rem 0}
+		ul.pagination li a, ul.pagination li button {padding:0.0625rem 0.5rem}
+	.mobile-sort p {margin-bottom:0.75rem}
+	.sidebar h3 {padding-top:0.5rem}
+	.side-nav li a:not(.button) {padding:0.25em 0}
+	.reveal-modal .close-reveal-modal.cancel, dialog .close-reveal-modal.cancel {
+		display:block;
+		margin-left:0
+	}
+	.reveal-modal .tabs-content {margin-bottom:0}
+	/* no results overrides */
+	.no-results h1 {font-size:1.5rem !important}
+	/* SEO page overrides */
+	section[role="main"] h1 {font-size:1.125rem}
+	section[role="main"] h2 {font-size:1rem}
+	.block-list a {padding: 0.25em 0 1em 0}
+	.sub-nav dt a, .sub-nav dd a, .sub-nav li a, .sub-nav dt.active a, .sub-nav dd.active a, .sub-nav li.active a {padding:0.1875rem 1rem}
+	/* saved vehicles/searches */ 
+	.vehicle-card .show-for-small, .search-card .show-for-small {display:block !important}
+	.vehicle-card h3, .search-card h3 {margin-top:0.5em}
+	.vehicle-card p:first-child {margin-top:1em}
+	/* login page */
+	.login section[role="main"] h1 {
+		font-size:1.5rem;
+		margin-top:3rem
+	}
+	/* save modal */
+	.save-modal img {margin-bottom:1.25rem}
+	.save-modal .row .columns + .columns {padding-left:0}
+}
+@media only screen and (min-width: 40.063em) { /* MEDIUM AND UP */
+	/* logo overrides */
+	.logo {
+		font-size:2.7rem;
+		margin-top:-0.5em
+	}
+	/* home page overrides */
+	.home .logo {
+		font-size:3.375rem;
+		margin-top:4rem
+	}
+	.tagline {font-size:1.125rem}
+	.contain-to-grid .top-bar {max-width:75em}
+		.top-bar, .top-bar-section ul {height:1.875rem !important}
+	/* srp overrides */
+	.tabs dd > a .hide-for-small-only, .tabs .tab-title > a .hide-for-small-only {display:inline !important}
+	/* saved vehicles/searches */
+	.vehicle-card .fa-icon.share {padding-top:0.75em}
+	.vehicle-card > .row > .medium-4 + .medium-8 {padding-left:0}
+	.search-card .date {
+		margin-top:20%;
+		position:relative;
+		text-align:right
+	}
+	/* login page */
+	.login section[role="main"] h1 {margin-top:4rem}
+}
+@media only screen and (min-width:40.063em) and (max-width: 64.063em) { /* MEDIUM ONLY */
+	/* logo overrides */
+	.logo {padding-top:0.5em}
+		.logo:before {margin-top:-0.5em}
+	/* save modal */
+	.save-modal {width:50%}
+}
+@media only screen and (min-width:40.063em) and (max-width:64.063em) and (orientation:portrait) { /* MEDIUM PORTRAIT ONLY */
+	/* search header overrides/ home page overrides */
+	.search-bkgrd > .row > .small-4 {width:41.66667%}
+	.search-bkgrd > .row > .small-8 {width:58.33333%}
+		.home section[role="main"] form .medium-11, .search-bkgrd > .row > .small-8 .medium-11 {width:83.33333%}
+		.home section[role="main"] form .medium-1, .search-bkgrd > .row > .small-8 .medium-1 {width:16.66667%}
+	.logo {font-size:2.45rem}
+		.logo:before {
+			height:89px;
+			margin-top:-0.55em;
+			width:60px
+		}
+	/* srp overrides */
+	.tabs dd > a > span.hide-for-small-only, .tabs .tab-title > a > span.hide-for-small-only {display:none !important}
+	.vehicle .fa-icon.save {
+		display:block;
+		margin-bottom:0.5rem
+	}
+	/* modal overrides */
+	.reveal-modal.medium, dialog.medium, .save-modal {width:70%}
+}
+@media only screen and (min-width:64.063em) { /* LARGE AND UP */
+	/* logo overrides */
+	.logo {
+		font-size:3.125rem;
+		margin-top:-0.45em
+	}
+	/* login page */
+	.login section[role="main"] h1 {margin-top:6rem}
+	/* modal overrides */
+	.reveal-modal.medium, dialog.medium, .save-modal {width:40%}
+}
+
+

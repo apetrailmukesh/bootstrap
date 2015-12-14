@@ -1,0 +1,11 @@
+automotive-search-engine (The website)
+
+Language: PHP + Javascript
+Framework: Laravel
+Location: /var/www/automotive-search-engine
+Repository: https://bitbucket.org/dilshanatwork/automotive-search-engine
+
+automotive-search-engine-loader (The background task)
+
+Language: Java
+Repository: https://bitbucket.org/dilshanatwork/automotive-search-engine-loader
