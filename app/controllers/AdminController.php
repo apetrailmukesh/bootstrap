@@ -107,14 +107,20 @@ class AdminController extends BaseController {
 	{
 		$filename = storage_path() . '/downloads/' . $id;
 
-		$headers = array(
+		if (File::exists($filename))
+		{
+   
+			$headers = array(
             'Content-Type' => 'application/zip'
-        );
+        	);
 
-		$response = Response::download($filename, $id, $headers);
-		ob_end_clean();
+			$response = Response::download($filename, $id, $headers);
+			ob_end_clean();
 
-        return $response;
+        	return $response;
+    	} else {
+    		return Redirect::route('get.admin.error')->with('message', 'File not found');
+    	}
 	}
 
 	public function editDealer()
@@ -219,5 +225,16 @@ class AdminController extends BaseController {
         );
 
         return Response::download($filename, 'VehicleClicksDetails.csv', $headers);
+	}
+
+	public function getError()
+	{
+		$this->layout->body_class = 'user';
+
+		$data = array(
+			'message' => Session::get('message', 'Unknown error')
+		);
+
+		$this->layout->contents = View::make('admin/admin-error', $data);
 	}
 }
